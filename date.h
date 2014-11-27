@@ -6,6 +6,7 @@ class Date
 public:
     Date();
     Date(unsigned int d, unsigned int m, int y);
+    bool validate();
 private:
     unsigned int day;
     unsigned int month;

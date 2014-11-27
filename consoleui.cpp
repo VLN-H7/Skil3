@@ -17,20 +17,37 @@ void ConsoleUI::start(){
     cin >> input;
     if (input == "add"){
         Scientist s;
-        QString date;
+        int d, y, m;
         cout << "First Name: ";
         cin >> s.firstName;
         cout << "Last Name: ";
         cin >> s.lastName;
-        cout << "Gender (M/F): ";
-        cin >> s.gender;
+        do{
+            cout << "Gender (M/F): ";
+            cin >> s.gender;
+            if(s.gender != 'M' && s.gender != 'F')
+                cout << "STOPIT, DO IT RIGHT!!!" << endl;
+        } while(s.gender != 'M' && s.gender != 'F');
+        do{
+            cout << "Birthday: ";
+            cin >> d;
+            cin >> m;
+            cin >> y;
+            s.birthday = Date(d, m, y);
+            if (!s.birthday.validate())
+                cout << "STOPIT, DO IT RIGHT!" << endl;
+        } while(!s.birthday.validate());
 
-        cout << "Birthday: ";
-        cin >> date;
-        s.birthday = QDate::fromString(date,"dd.MM.yyyy");
-        cout << "Deathday: ";
-        cin >> date;
-        s.deathday = QDate::fromString(date,"dd.MM.yyyy");
+        do{
+            cout << "Deathday: ";
+            cin >> d;
+            cin >> m;
+            cin >> y;
+            s.deathday = Date(d, m, y);
+            if (!s.deathday.validate())
+                cout << "STOPIT, DO IT RIGHT!" << endl;
+        } while(!s.deathday.validate());
+        scientistService.add(s);
     } else if (input == "list") {
 
     } else if (input == "search"){
