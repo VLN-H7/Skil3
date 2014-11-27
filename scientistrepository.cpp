@@ -24,20 +24,45 @@ void ScientistRepository::read(){
 
 vector<Scientist> ScientistRepository::list(SortField field, SortOrder order){
     vector<Scientist> ret = scientistVector;
-    auto cmp = [ ]( const Scientist& lhs, const Scientist& rhs )
-    {
-       return lhs.firstName < rhs.firstName;
-    };
     switch(field){
         case FIRST_NAME:
-
+            if(order == ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.firstName < b.firstName; });
+            } else {
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.firstName > b.firstName; });
+            }
+            break;
         case LAST_NAME:
-
+            if(order == ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.lastName < b.lastName; });
+            } else {
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.lastName > b.lastName; });
+            }
+            break;
         case GENDER:
+            if(order == ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.gender < b.gender; });
+            } else {
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.gender > b.gender; });
+            }
+            break;
         case BIRTHDATE:
+            if(order == ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.birthday < b.birthday; });
+            } else {
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.birthday > b.birthday; });
+            }
+            break;
         case DEATHDATE:
+            if(order == ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.deathday < b.deathday; });
+            } else {
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.deathday > b.deathday; });
+            }
+            break;
+        default:
+            sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.firstName < b.firstName; });
+            break;
     }
-
-    sort(ret.begin(), ret.end(), cmp);
     return ret;
 }

@@ -16,6 +16,7 @@ public:
     friend ostream &operator<<( ostream &output, const Date &D );
     friend bool operator<(const Date &d1, const Date &d2);
     friend bool operator==(const Date &d1, const Date &d2);
+    friend bool operator>(const Date &d1, const Date &d2);
 private:
     unsigned int day;
     unsigned int month;

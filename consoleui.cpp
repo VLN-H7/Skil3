@@ -61,7 +61,7 @@ void ConsoleUI::start(){
              << "\tAscending (1)" << endl
              << "\tDescending (2)" << endl;
         do {
-            cin >> "How would you like to order the list? (Default 1)" << endl;
+            cout << "How would you like to order the list? (Default 1)" << endl;
             cin >> cOrder;
         } while(cOrder <= 0 || cOrder > 2);
 

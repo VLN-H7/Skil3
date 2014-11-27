@@ -54,6 +54,10 @@ bool operator==(const Date &d1, const Date &d2){
     return false;
 }
 
+bool operator>(const Date &d1, const Date &d2){
+    return !(d1 < d2 || d1 == d2);
+}
+
 istream &operator>>( istream  &input, Date &D ){
         input >> D.day >> D.month >> D.year;
         return input;

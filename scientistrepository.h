@@ -4,7 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <functional>
 #include "scientist.h"
+#include "scientistsort.h"
 
 using namespace std;
 
