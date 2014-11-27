@@ -1,6 +1,5 @@
 #ifndef SCIENTISTSERVICE_H
 #define SCIENTISTSERVICE_H
-#include <algorithm>
 #include <vector>
 #include "scientistrepository.h"
 #include "scientist.h"

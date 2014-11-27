@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 #include "scientist.h"
 #include "scientistsort.h"
 

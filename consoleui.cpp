@@ -33,7 +33,6 @@ void ConsoleUI::menu() {
 
 void ConsoleUI::add(){
     Scientist s;
-    int d, y, m;
     cout << "First Name: ";
     cin >> s.firstName;
     cout << "Last Name: ";
@@ -44,18 +43,16 @@ void ConsoleUI::add(){
         if(s.gender != 'M' && s.gender != 'F')
             cout << "STOPIT, DO IT RIGHT!!!" << endl;
     } while(s.gender != 'M' && s.gender != 'F');
-    s.birthdate = Date();
-    s.deathdate = Date();
 
     do{
-        cout << "Birthday: ";
+        cout << "Birth date: ";
         cin >> s.birthdate;
         if (!s.birthdate.validate())
             cout << "STOPIT, DO IT RIGHT!" << endl;
     } while(!s.birthdate.validate());
 
     do{
-        cout << "Deathday: ";
+        cout << "Death date: ";
         cin >> s.deathdate;
         if (!s.deathdate.validate())
             cout << "STOPIT, DO IT RIGHT!" << endl;
@@ -68,7 +65,7 @@ void ConsoleUI::list(){
     char sort = 'N';
     stringstream ss;
     cout << "The default sort order is by the first name, ascending" << endl;
-    cout << "Would you like to sort the list? Default N (Y/N): ";
+    cout << "Would you like to sort the list? (Y/N) (Default N): ";
     if(readline(ss))
         ss >> sort;
     if(sort == 'Y') {
@@ -82,6 +79,8 @@ void ConsoleUI::list(){
             cout << "How would you like to sort the list? (Default 1): ";
             if(readline(ss))
                 ss >> field;
+            else
+                order = 1;
         } while(field <= 0 || field > 5);
 
         cout << "Available orderings:" << endl
@@ -91,6 +90,8 @@ void ConsoleUI::list(){
             cout << "How would you like to order the list? (Default 1): ";
             if(readline(ss))
                 ss >> order;
+            else
+                order = 1;
         } while(order <= 0 || order > 2);
     }
 
@@ -101,9 +102,11 @@ void ConsoleUI::list(){
 }
 
 bool ConsoleUI::readline(stringstream &ss){
+    // A function to read a line and return a stringstream to it, or return false otherwise.
+    // This is useful for example to read
     string s;
     ss.str("");
-    if(cin.peek() == '\n') getline(cin, s);
+    if(cin.peek() == '\n') getline(cin, s); // Discard the empty line
     getline(cin, s);
     if(s.empty()) return false;
     ss.str(s);

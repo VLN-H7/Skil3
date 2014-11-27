@@ -31,6 +31,8 @@ bool Date::validate(){
     return year != 0;
 }
 
+
+
 bool operator<(const Date &d1, const Date &d2){
     if(d1.year < d2.year)
         return true;
