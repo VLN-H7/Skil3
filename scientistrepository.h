@@ -1,6 +1,8 @@
 #ifndef SCIENTISTREPOSITORY_H
 #define SCIENTISTREPOSITORY_H
 
+#include <iostream>
+#include <fstream>
 #include <vector>
 #include "scientist.h"
 

@@ -54,3 +54,13 @@ bool operator==(const Date &d1, const Date &d2){
     return false;
 }
 
+istream &operator>>( istream  &input, Date &D ){
+        input >> D.day >> D.month >> D.year;
+        return input;
+}
+
+ostream &operator<<( ostream &output, const Date &D){
+        output << D.day << "." << D.month << "." << D.year << endl;
+        return output;
+}
+
