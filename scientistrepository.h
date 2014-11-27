@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <functional>
+#include <sstream>
 #include "scientist.h"
 #include "scientistsort.h"
 
@@ -15,7 +15,7 @@ class ScientistRepository
 public:
     ScientistRepository();
     void add(Scientist s);
-    vector<Scientist> list(SortField field, SortOrder order);
+    vector<Scientist> list(ScientistSort::SortField field, ScientistSort::SortOrder order);
 private:
     vector<Scientist> scientistVector;
 

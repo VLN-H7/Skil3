@@ -2,6 +2,9 @@
 #define SCIENTIST_H
 
 #include <string>
+#include <sstream>
+#include <string>
+#include <iostream>
 #include "date.h"
 
 using namespace std;
@@ -13,8 +16,9 @@ public:
     string firstName;
     string lastName;
     char gender;
-    Date birthday;
-    Date deathday;
+    Date birthdate;
+    Date deathdate;
+    static Scientist fromString(string s, char delim);
 };
 
 #endif // SCIENTIST_H

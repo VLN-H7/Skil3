@@ -14,7 +14,7 @@ class ScientistService
 public:
     ScientistService();
     void add(Scientist s);
-    vector<Scientist> list(SortField field, SortOrder order);
+    vector<Scientist> list(ScientistSort::SortField field, ScientistSort::SortOrder order);
 private:
     ScientistRepository scientistRepository;
 };

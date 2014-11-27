@@ -64,7 +64,7 @@ istream &operator>>( istream  &input, Date &D ){
 }
 
 ostream &operator<<( ostream &output, const Date &D){
-        output << D.day << "." << D.month << "." << D.year << endl;
+        output << D.day << "." << D.month << "." << D.year;
         return output;
 }
 

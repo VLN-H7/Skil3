@@ -3,13 +3,14 @@
 ScientistRepository::ScientistRepository()
 {
     scientistVector = vector<Scientist>();
+    read();
 }
 
 void ScientistRepository::add(Scientist s){
     scientistVector.push_back(s);
     ofstream write;
-    write.open("database.txt");
-    write << s.firstName << ";" << s.lastName << ";" << s.gender << ";" << s.birthday << ";" << s.deathday << "\n";
+    write.open("database.txt", ios::out | ios::app);
+    write << s.firstName << ";" << s.lastName << ";" << s.gender << ";" << s.birthdate << ";" << s.deathdate << "\n";
     write.close();
 }
 
@@ -17,48 +18,50 @@ void ScientistRepository::read(){
     ifstream read;
     read.open("database.txt");
     string s;
+
     while(read >> s){
-        split(s,';', scientistVector);
+        scientistVector.push_back(Scientist::fromString(s,';'));
     }
     read.close();
 }
 
-vector<Scientist> ScientistRepository::list(SortField field, SortOrder order){
-    vector<Scientist> ret = scientistVector;
+vector<Scientist> ScientistRepository::list(ScientistSort::SortField field, ScientistSort::SortOrder order){
+    vector<Scientist> ret(scientistVector);
+
     switch(field){
-        case FIRST_NAME:
-            if(order == ASC){
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.firstName < b.firstName; });
+        case ScientistSort::FIRST_NAME:
+            if(order == ScientistSort::ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.firstName < b.firstName; });
             } else {
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.firstName > b.firstName; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.firstName > b.firstName; });
             }
             break;
-        case LAST_NAME:
-            if(order == ASC){
+        case ScientistSort::LAST_NAME:
+            if(order == ScientistSort::ASC){
                 sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.lastName < b.lastName; });
             } else {
                 sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.lastName > b.lastName; });
             }
             break;
-        case GENDER:
-            if(order == ASC){
+        case ScientistSort::GENDER:
+            if(order == ScientistSort::ASC){
                 sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.gender < b.gender; });
             } else {
                 sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.gender > b.gender; });
             }
             break;
-        case BIRTHDATE:
-            if(order == ASC){
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.birthday < b.birthday; });
+        case ScientistSort::BIRTH_DATE:
+            if(order == ScientistSort::ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.birthdate < b.birthdate; });
             } else {
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.birthday > b.birthday; });
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.birthdate > b.birthdate; });
             }
             break;
-        case DEATHDATE:
-            if(order == ASC){
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.deathday < b.deathday; });
+        case ScientistSort::DEATH_DATE:
+            if(order == ScientistSort::ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.deathdate < b.deathdate; });
             } else {
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.deathday > b.deathday; });
+                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.deathdate > b.deathdate; });
             }
             break;
         default:
@@ -66,14 +69,5 @@ vector<Scientist> ScientistRepository::list(SortField field, SortOrder order){
             break;
     }
     return ret;
-}
-
-vector<string> &split(const string &s, char delim, vector<string> &elems) {
-    stringstream ss(s);
-    string item;
-    while (getline(ss, item, delim)) {
-        elems.push_back(item);
-    }
-    return elems;
 }
 
