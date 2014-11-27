@@ -21,14 +21,10 @@ Scientist Scientist::fromString(string s, char delim){
                 sci.gender = item[0];
                 break;
             case 3:
-                dateStream.str("");
-                dateStream << item;
-                dateStream >> sci.birthdate;
+                sci.birthdate = Date::fromString(item);
                 break;
             case 4:
-                dateStream.str("");
-                dateStream << item;
-                dateStream >> sci.deathdate;
+                sci.deathdate = Date::fromString(item);
                 break;
             default:
                 break;

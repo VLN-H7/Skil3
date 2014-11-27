@@ -16,7 +16,7 @@ class ScientistRepository
 public:
     ScientistRepository();
     void add(Scientist s);
-    vector<Scientist> list(ScientistSort::SortField field, ScientistSort::SortOrder order);
+    vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
 private:
     vector<Scientist> scientistVector;
 

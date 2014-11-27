@@ -17,7 +17,7 @@ void ConsoleUI::start(){
 void ConsoleUI::menu() {
     string input;
     cout << "Please enter a command: ";
-    cin >> input;
+    getline(cin,input);
     if (input == "add"){
         add();
     } else if (input == "list") {
@@ -53,16 +53,16 @@ void ConsoleUI::add(){
     do{
         cout << "Birth date: ";
         cin >> s.birthdate;
-        if (!s.birthdate.validate())
+        if (!s.birthdate.isValid())
             cout << "STOPIT, DO IT RIGHT!" << endl;
-    } while(!s.birthdate.validate());
+    } while(!s.birthdate.isValid());
 
     do{
         cout << "Death date: ";
         cin >> s.deathdate;
-        if (!s.deathdate.validate())
+        if (!s.deathdate.isValid())
             cout << "STOPIT, DO IT RIGHT!" << endl;
-    } while(!s.deathdate.validate());
+    } while(!s.deathdate.isValid());
     scientistService.add(s);
 }
 
@@ -71,7 +71,7 @@ void ConsoleUI::list(){
     char sort = 'N';
     stringstream ss;
     cout << "The default sort order is by the first name, ascending" << endl;
-    cout << "Would you like to sort the list? (Y/N) (Default N): ";
+    cout << "Would you like to change the sort order of the list? (Y/N) (Default N): ";
     if(readline(ss))
         ss >> sort;
     if(sort == 'Y') {
@@ -101,13 +101,39 @@ void ConsoleUI::list(){
         } while(order <= 0 || order > 2);
     }
 
-    vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::SortField>(field), static_cast<ScientistSort::SortOrder>(order));
+    vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
+
     for(auto i = vec.begin(); i != vec.end(); i++){
         cout << (*i).firstName << "\t" << (*i).lastName << "\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
     }
 }
 
 void ConsoleUI::search(){
+    stringstream ss;
+    int field = 1, rows = 1;
+    string query;
+    cout << "Available fields:" << endl
+         << "\tFirst Name (1)" << endl
+         << "\tLast Name (2)" << endl
+         << "\tGender (3)" << endl
+         << "\tBirthdate (4)" << endl
+         << "\tDeathdate (5)" << endl;
+    do{
+        cout << "What would you like to search by? (Default 1): ";
+        if(readline(ss))
+            ss >> field;
+        else
+            field = 1;
+    } while(field <= 0 || field > 5);
+
+    cout << "What is the maximum number of entries you want? (Default 1)";
+    if(readline(ss))
+        ss >> rows;
+    if(rows < 0) rows = 0;
+    if(rows == 0) return; // Why go through a search if the user doesnt want results?
+    cout << "Enter your query: ";
+    getline(cin, query);
+//    vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query );
 
 }
 
@@ -116,7 +142,7 @@ bool ConsoleUI::readline(stringstream &ss){
     // This is useful for example to read
     string s;
     ss.str("");
-    if(cin.peek() == '\n') getline(cin, s); // Discard the empty line
+//    if(cin.peek() == '\n') getline(cin, s); // Discard the empty line
     getline(cin, s);
     if(s.empty()) return false;
     ss.str(s);

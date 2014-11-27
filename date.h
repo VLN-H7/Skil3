@@ -3,25 +3,19 @@
 
 #include <fstream>
 #include <iostream>
+#include <QDate>
+#include <QString>
 
 using namespace std;
 
-class Date
+class Date : public QDate
 {
 public:
     Date();
-    Date(unsigned int d, unsigned int m, int y);
-    bool validate();
+    Date(const QDate& D);
+    static Date fromString(string date);
     friend istream &operator>>( istream  &input, Date &D );
     friend ostream &operator<<( ostream &output, const Date &D );
-    friend bool operator<(const Date &d1, const Date &d2);
-    friend bool operator==(const Date &d1, const Date &d2);
-    friend bool operator>(const Date &d1, const Date &d2);
-private:
-    unsigned int day;
-    unsigned int month;
-    int year;
-
 };
 
 #endif // DATE_H

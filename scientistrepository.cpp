@@ -25,9 +25,9 @@ void ScientistRepository::read(){
     read.close();
 }
 
-vector<Scientist> ScientistRepository::list(ScientistSort::SortField field, ScientistSort::SortOrder order){
+vector<Scientist> ScientistRepository::list(ScientistSort::Field field, ScientistSort::Order order){
     vector<Scientist> ret(scientistVector);
-
+    // SELECT * FROM scientists ORDER BY field,order
     switch(field){
         case ScientistSort::FIRST_NAME:
             if(order == ScientistSort::ASC){
