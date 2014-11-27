@@ -18,8 +18,9 @@ void ScientistRepository::read(){
     read.open("database.txt");
     string s;
     while(read >> s){
-
+        split(s,';', scientistVector);
     }
+    read.close();
 }
 
 vector<Scientist> ScientistRepository::list(SortField field, SortOrder order){
@@ -66,3 +67,13 @@ vector<Scientist> ScientistRepository::list(SortField field, SortOrder order){
     }
     return ret;
 }
+
+vector<string> &split(const string &s, char delim, vector<string> &elems) {
+    stringstream ss(s);
+    string item;
+    while (getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
