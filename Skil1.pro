@@ -27,4 +27,5 @@ HEADERS += \
     scientistservice.h \
     scientist.h \
     scientistrepository.h \
-    date.h
+    date.h \
+    scientistsort.h
