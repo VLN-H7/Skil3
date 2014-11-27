@@ -65,7 +65,7 @@ void ConsoleUI::start(){
             cin >> cOrder;
         } while(cOrder <= 0 || cOrder > 2);
 
-        vector<Scientist> vec = scientistService.list((SortField)cField, (SortOrder)cOrder);
+        vector<Scientist> vec = scientistService.list(static_cast<SortField>(cField), static_cast<SortOrder>(cOrder));
         for(auto i = vec.begin(); i != vec.end(); i++){
             cout << (*i).firstName << endl;
         }
