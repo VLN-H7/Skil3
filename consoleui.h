@@ -19,6 +19,7 @@ private:
     void search();
     void menu();
     bool readline(stringstream &ss);
+    void help();
 };
 
 #endif // CONSOLEUI_H

@@ -38,34 +38,34 @@ vector<Scientist> ScientistRepository::list(ScientistSort::SortField field, Scie
             break;
         case ScientistSort::LAST_NAME:
             if(order == ScientistSort::ASC){
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.lastName < b.lastName; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.lastName < b.lastName; });
             } else {
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.lastName > b.lastName; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.lastName > b.lastName; });
             }
             break;
         case ScientistSort::GENDER:
             if(order == ScientistSort::ASC){
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.gender < b.gender; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.gender < b.gender; });
             } else {
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.gender > b.gender; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.gender > b.gender; });
             }
             break;
         case ScientistSort::BIRTH_DATE:
             if(order == ScientistSort::ASC){
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.birthdate < b.birthdate; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.birthdate < b.birthdate; });
             } else {
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.birthdate > b.birthdate; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.birthdate > b.birthdate; });
             }
             break;
         case ScientistSort::DEATH_DATE:
             if(order == ScientistSort::ASC){
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.deathdate < b.deathdate; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.deathdate < b.deathdate; });
             } else {
-                sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.deathdate > b.deathdate; });
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.deathdate > b.deathdate; });
             }
             break;
         default:
-            sort(ret.begin(), ret.end(), [](const Scientist& a, const Scientist &b) { return a.firstName < b.firstName; });
+            sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.firstName < b.firstName; });
             break;
     }
     return ret;

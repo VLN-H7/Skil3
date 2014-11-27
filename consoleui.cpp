@@ -8,7 +8,7 @@ ConsoleUI::ConsoleUI()
 
 void ConsoleUI::start(){
     cout << "Welcome to an awesome computer scientist program!" << endl;
-
+    help();
     do{
         menu();
     } while(1);
@@ -16,27 +16,33 @@ void ConsoleUI::start(){
 
 void ConsoleUI::menu() {
     string input;
-    cout << "The available commands are: " << endl <<
-            "\t list - List all computer scientists" << endl <<
-            "\t add - Add a computer scientist" << endl <<
-            "\t search - Search for a computer scientist" << endl;
     cout << "Please enter a command: ";
     cin >> input;
     if (input == "add"){
         add();
     } else if (input == "list") {
         list();
+    } else if (input == "help") {
+        help();
     } else if (input == "search"){
-
+        search();
     }
+}
+
+void ConsoleUI::help(){
+
+    cout << "The available commands are: " << endl <<
+            "\t list - List all computer scientists" << endl <<
+            "\t add - Add a computer scientist" << endl <<
+            "\t search - Search for a computer scientist" << endl;
 }
 
 void ConsoleUI::add(){
     Scientist s;
     cout << "First Name: ";
-    cin >> s.firstName;
+    getline(cin,s.firstName);
     cout << "Last Name: ";
-    cin >> s.lastName;
+    getline(cin, s.lastName);
     do{
         cout << "Gender (M/F): ";
         cin >> s.gender;
@@ -99,6 +105,10 @@ void ConsoleUI::list(){
     for(auto i = vec.begin(); i != vec.end(); i++){
         cout << (*i).firstName << "\t" << (*i).lastName << "\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
     }
+}
+
+void ConsoleUI::search(){
+
 }
 
 bool ConsoleUI::readline(stringstream &ss){
