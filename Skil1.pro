@@ -19,10 +19,12 @@ SOURCES += main.cpp \
     consoleui.cpp \
     scientistservice.cpp \
     scientist.cpp \
-    scientistrepository.cpp
+    scientistrepository.cpp \
+    date.cpp
 
 HEADERS += \
     consoleui.h \
     scientistservice.h \
     scientist.h \
-    scientistrepository.h
+    scientistrepository.h \
+    date.h

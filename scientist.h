@@ -2,7 +2,7 @@
 #define SCIENTIST_H
 
 #include <string>
-#include <QDate>
+#include "date.h"
 
 using namespace std;
 
@@ -13,8 +13,8 @@ public:
     string firstName;
     string lastName;
     char gender;
-    QDate birthday;
-    QDate deathday;
+    Date birthday;
+    Date deathday;
 };
 
 #endif // SCIENTIST_H

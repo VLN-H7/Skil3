@@ -17,16 +17,20 @@ void ConsoleUI::start(){
     cin >> input;
     if (input == "add"){
         Scientist s;
+        QString date;
         cout << "First Name: ";
         cin >> s.firstName;
         cout << "Last Name: ";
         cin >> s.lastName;
         cout << "Gender (M/F): ";
         cin >> s.gender;
+
         cout << "Birthday: ";
-        cin >> s.birthday;
+        cin >> date;
+        s.birthday = QDate::fromString(date,"dd.MM.yyyy");
         cout << "Deathday: ";
-        cin >> s.deathday;
+        cin >> date;
+        s.deathday = QDate::fromString(date,"dd.MM.yyyy");
     } else if (input == "list") {
 
     } else if (input == "search"){
