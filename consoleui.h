@@ -4,6 +4,7 @@
 #include<string>
 #include<iostream>
 #include "scientistservice.h"
+#include "scientistsort.h"
 
 class ConsoleUI
 {
