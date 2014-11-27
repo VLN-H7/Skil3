@@ -71,3 +71,41 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     return ret;
 }
 
+vector<Scientist> ScientistRepository::search(ScientistSort::Field field, int rows, string query){
+    vector<Scientist> ret;
+    for(auto it = scientistVector.begin(); it != scientistVector.end(); it++){
+        switch(field){
+            case ScientistSort::FIRST_NAME:
+                if((*it).firstName == query)
+                    ret.push_back((*it));
+                break;
+            case ScientistSort::LAST_NAME:
+
+                if((*it).lastName == query)
+                    ret.push_back((*it));
+                break;
+            case ScientistSort::GENDER:
+
+                if((*it).gender == query[0])
+                    ret.push_back((*it));
+                break;
+            case ScientistSort::BIRTH_DATE:
+
+                if((*it).birthdate == Date::fromString(query))
+                    ret.push_back((*it));
+                break;
+            case ScientistSort::DEATH_DATE:
+                if((*it).deathdate == Date::fromString(query))
+                    ret.push_back((*it));
+                break;
+            default:
+                if((*it).firstName == query)
+                    ret.push_back((*it));
+                break;
+        }
+        if(ret.size() > rows)
+            break;
+    }
+    return ret;
+}
+

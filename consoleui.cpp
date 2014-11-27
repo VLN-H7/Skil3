@@ -133,8 +133,10 @@ void ConsoleUI::search(){
     if(rows == 0) return; // Why go through a search if the user doesnt want results?
     cout << "Enter your query: ";
     getline(cin, query);
-//    vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query );
-
+    vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
+    for(auto i = vec.begin(); i != vec.end(); i++){
+        cout << (*i).firstName << "\t" << (*i).lastName << "\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
+    }
 }
 
 bool ConsoleUI::readline(stringstream &ss){
