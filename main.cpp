@@ -4,6 +4,8 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     ConsoleUI ui = ConsoleUI();
-    ui.start();
+    do{
+        ui.start();
+    } while(1);
     return a.exec();
 }

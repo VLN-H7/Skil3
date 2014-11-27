@@ -9,7 +9,7 @@ class ScientistService
 
 public:
     ScientistService();
-    void add();
+    void add(Scientist s);
 private:
     ScientistRepository scientistRepository;
 };

@@ -50,6 +50,7 @@ void ConsoleUI::start(){
         scientistService.add(s);
     } else if (input == "list") {
 
+
     } else if (input == "search"){
 
     }

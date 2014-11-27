@@ -10,6 +10,7 @@ class ScientistRepository
 {
 public:
     ScientistRepository();
+    void add(Scientist s);
 private:
     vector<Scientist> scientistVector;
 

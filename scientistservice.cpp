@@ -8,3 +8,5 @@ ScientistService::ScientistService()
 void ScientistService::add(Scientist s) {
     scientistRepository.add(s);
 }
+
+
