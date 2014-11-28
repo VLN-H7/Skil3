@@ -18,10 +18,11 @@ public:
     void add(Scientist s);
     vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
     vector<Scientist> search(ScientistSort::Field field, int rows, string query);
+
 private:
     vector<Scientist> scientistVector;
-
     void read();
+
 };
 
 #endif // SCIENTISTREPOSITORY_H

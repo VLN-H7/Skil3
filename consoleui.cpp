@@ -46,19 +46,19 @@ void ConsoleUI::add(){
     do{
         cout << "Gender (M/F): ";
         cin >> s.gender;
-        if(s.gender != 'M' && s.gender != 'F')
+        if(toupper(s.gender) != 'M' && toupper(s.gender) != 'F')
             cout << "STOPIT, DO IT RIGHT!!!" << endl;
     } while(s.gender != 'M' && s.gender != 'F');
 
     do{
-        cout << "Birth date: ";
+        cout << "Birth date(DD MM YYYY): ";
         cin >> s.birthdate;
         if (!s.birthdate.isValid())
             cout << "STOPIT, DO IT RIGHT!" << endl;
     } while(!s.birthdate.isValid());
 
     do{
-        cout << "Death date: ";
+        cout << "Death date(DD MM YYYY): ";
         cin >> s.deathdate;
         if (!s.deathdate.isValid())
             cout << "STOPIT, DO IT RIGHT!" << endl;
@@ -74,7 +74,7 @@ void ConsoleUI::list(){
     cout << "Would you like to change the sort order of the list? (Y/N) (Default N): ";
     if(readline(ss))
         ss >> sort;
-    if(sort == 'Y') {
+    if(toupper(sort) == 'Y') {
         cout << "Available fields:" << endl
              << "\tFirst Name (1)" << endl
              << "\tLast Name (2)" << endl
@@ -100,7 +100,7 @@ void ConsoleUI::list(){
                 order = 1;
         } while(order <= 0 || order > 2);
     }
-
+    header();
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
     for(auto i = vec.begin(); i != vec.end(); i++){
@@ -134,6 +134,7 @@ void ConsoleUI::search(){
     cout << "Enter your query: ";
     getline(cin, query);
     vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
+    header();
     for(auto i = vec.begin(); i != vec.end(); i++){
         cout << (*i).firstName << "\t" << (*i).lastName << "\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
     }
@@ -150,4 +151,12 @@ bool ConsoleUI::readline(stringstream &ss){
     ss.str(s);
     return true;
 
+}
+
+void ConsoleUI::header(){
+    cout << "First Name"
+         << "\tLast Name"
+         << "\tGender"
+         << "\tBirthdate"
+         << "\tDeathdate" << endl;
 }
