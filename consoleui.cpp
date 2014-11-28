@@ -104,7 +104,7 @@ void ConsoleUI::list(){
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
     for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << (*i).firstName << "\t" << (*i).lastName << "\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
+        cout << (*i).firstName << "\t\t" << (*i).lastName << "\t\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
     }
 }
 
@@ -136,7 +136,7 @@ void ConsoleUI::search(){
     vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
     header();
     for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << (*i).firstName << "\t" << (*i).lastName << "\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
+        cout << (*i).firstName << "\t\t" << (*i).lastName << "\t\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
     }
 }
 
