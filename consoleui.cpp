@@ -76,6 +76,7 @@ void ConsoleUI::add(){
             cout << "STOPIT, DO IT RIGHT!" << endl;
     } while(!s.deathdate.isValid());
 
+    cin.ignore();
     cout << "Country: ";
     getline(cin,s.country);
 
@@ -121,7 +122,7 @@ void ConsoleUI::list(){
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
     for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << (*i).firstName << "\t\t" << (*i).lastName << "\t\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << "\t" <<(*i).country << endl;
+        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(5) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) <<(*i).country << endl;
     }
 }
 
@@ -154,7 +155,7 @@ void ConsoleUI::search(){
     vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
     header();
     for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << (*i).firstName << "\t\t" << (*i).lastName << "\t\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << "\t" << (*i).country <<  endl;
+        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(5) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) << (*i).country <<  endl;
     }
 }
 
@@ -172,10 +173,10 @@ bool ConsoleUI::readline(stringstream &ss){
 }
 
 void ConsoleUI::header(){
-    cout << "First Name"
-         << "\tLast Name"
-         << "\tGender"
-         << "\tBirthdate"
-         << "\tDeathdate"
-         << "\tCountry" << endl;
+    cout << left << setw(15) << "First Name"
+         << setw(15) << "\tLast Name"
+         << setw(5)  << "\tGender"
+         << setw(15) << "\tBirthdate"
+         << setw(15) << "\tDeathdate"
+         << setw(15) << "\tCountry" << endl;
 }
