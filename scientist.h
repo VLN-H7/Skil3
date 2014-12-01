@@ -18,6 +18,7 @@ public:
     char gender;
     Date birthdate;
     Date deathdate;
+    string country;
     static Scientist fromString(string s, char delim);
 };
 

@@ -11,7 +11,7 @@ void ScientistRepository::add(Scientist s){
     scientistVector.push_back(s);
     ofstream write;
     write.open("database.txt", ios::out | ios::app);
-    write << s.firstName << delim << s.lastName << delim << s.gender << delim << s.birthdate << delim << s.deathdate << "\n";
+    write << s.firstName << delim << s.lastName << delim << s.gender << delim << s.birthdate << delim << s.deathdate << delim << s.country << "\n";
     write.close();
 }
 
@@ -71,6 +71,14 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
             }
             break;
 
+        case ScientistSort::COUNTRY:
+            if(order == ScientistSort::ASC){
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.country < b.country; });
+            } else {
+                sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.country > b.country; });
+            }
+            break;
+
         default:
             sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.firstName < b.firstName; });
             break;
@@ -107,6 +115,11 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, int ro
 
             case ScientistSort::DEATH_DATE:
                 if((*it).deathdate == Date::fromString(query))
+                    ret.push_back((*it));
+                break;
+
+            case ScientistSort::COUNTRY:
+                if((*it).country == query)
                     ret.push_back((*it));
                 break;
 

@@ -26,6 +26,9 @@ Scientist Scientist::fromString(string s, char delim){
             case 4:
                 sci.deathdate = Date::fromString(item);
                 break;
+            case 5:
+                sci.country = item;
+                break;
             default:
                 break;
 

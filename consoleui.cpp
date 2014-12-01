@@ -45,11 +45,15 @@ void ConsoleUI::help(){
 }
 
 void ConsoleUI::add(){
+
     Scientist s;
+
     cout << "First Name: ";
     getline(cin,s.firstName);
+
     cout << "Last Name: ";
     getline(cin, s.lastName);
+
     do{
         cout << "Gender (M/F): ";
         cin >> s.gender;
@@ -71,6 +75,10 @@ void ConsoleUI::add(){
         if (!s.deathdate.isValid())
             cout << "STOPIT, DO IT RIGHT!" << endl;
     } while(!s.deathdate.isValid());
+
+    cout << "Country: ";
+    getline(cin,s.country);
+
     scientistService.add(s);
 }
 
@@ -88,14 +96,15 @@ void ConsoleUI::list(){
              << "\tLast Name (2)" << endl
              << "\tGender (3)" << endl
              << "\tBirthdate (4)" << endl
-             << "\tDeathdate (5)" << endl;
+             << "\tDeathdate (5)" << endl
+             << "\tCountry (6)" << endl;
         do {
             cout << "How would you like to sort the list? (Default 1): ";
             if(readline(ss))
                 ss >> field;
             else
                 order = 1;
-        } while(field <= 0 || field > 5);
+        } while(field <= 0 || field > 6);
 
         cout << "Available orderings:" << endl
              << "\tAscending (1)" << endl
@@ -112,7 +121,7 @@ void ConsoleUI::list(){
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
     for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << (*i).firstName << "\t\t" << (*i).lastName << "\t\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
+        cout << (*i).firstName << "\t\t" << (*i).lastName << "\t\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << "\t" <<(*i).country << endl;
     }
 }
 
@@ -125,14 +134,15 @@ void ConsoleUI::search(){
          << "\tLast Name (2)" << endl
          << "\tGender (3)" << endl
          << "\tBirthdate (4)" << endl
-         << "\tDeathdate (5)" << endl;
+         << "\tDeathdate (5)" << endl
+         << "\tCountry (6)" << endl;
     do{
         cout << "What would you like to search by? (Default 1): ";
         if(readline(ss))
             ss >> field;
         else
             field = 1;
-    } while(field <= 0 || field > 5);
+    } while(field <= 0 || field > 6);
 
     cout << "What is the maximum number of entries you want? (Default 1)";
     if(readline(ss))
@@ -144,7 +154,7 @@ void ConsoleUI::search(){
     vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
     header();
     for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << (*i).firstName << "\t\t" << (*i).lastName << "\t\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << endl;
+        cout << (*i).firstName << "\t\t" << (*i).lastName << "\t\t" << (*i).gender << "\t" << (*i).birthdate << "\t" << (*i).deathdate << "\t" << (*i).country <<  endl;
     }
 }
 
@@ -166,5 +176,6 @@ void ConsoleUI::header(){
          << "\tLast Name"
          << "\tGender"
          << "\tBirthdate"
-         << "\tDeathdate" << endl;
+         << "\tDeathdate"
+         << "\tCountry" << endl;
 }
