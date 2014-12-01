@@ -38,7 +38,7 @@ void ConsoleUI::help(){
     cout << "The available commands are: " << endl <<
             "\t list - List all computer scientists" << endl <<
             "\t add - Add a computer scientist" << endl <<
-            "\t search - Search for a computer scientist" << endl
+            "\t search - Search for a computer scientist" << endl <<
             "\t quit - Quit the program" << endl;
 }
 
