@@ -2,8 +2,7 @@
 
 char delim  = ';';
 
-ScientistRepository::ScientistRepository()
-{
+ScientistRepository::ScientistRepository(){
     scientistVector = vector<Scientist>();
     read();
 }
@@ -31,6 +30,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     vector<Scientist> ret(scientistVector);
     // SELECT * FROM scientists ORDER BY field,order
     switch(field){
+
         case ScientistSort::FIRST_NAME:
             if(order == ScientistSort::ASC){
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.firstName < b.firstName; });
@@ -38,6 +38,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.firstName > b.firstName; });
             }
             break;
+
         case ScientistSort::LAST_NAME:
             if(order == ScientistSort::ASC){
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.lastName < b.lastName; });
@@ -45,6 +46,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.lastName > b.lastName; });
             }
             break;
+
         case ScientistSort::GENDER:
             if(order == ScientistSort::ASC){
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.gender < b.gender; });
@@ -52,6 +54,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.gender > b.gender; });
             }
             break;
+
         case ScientistSort::BIRTH_DATE:
             if(order == ScientistSort::ASC){
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.birthdate < b.birthdate; });
@@ -59,6 +62,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.birthdate > b.birthdate; });
             }
             break;
+
         case ScientistSort::DEATH_DATE:
             if(order == ScientistSort::ASC){
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.deathdate < b.deathdate; });
@@ -66,6 +70,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
                 sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.deathdate > b.deathdate; });
             }
             break;
+
         default:
             sort(ret.begin(), ret.end(), [](const Scientist &a, const Scientist &b) { return a.firstName < b.firstName; });
             break;
@@ -74,32 +79,37 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
 }
 
 vector<Scientist> ScientistRepository::search(ScientistSort::Field field, int rows, string query){
+
     vector<Scientist> ret;
+
     for(auto it = scientistVector.begin(); it != scientistVector.end(); it++){
         switch(field){
+
             case ScientistSort::FIRST_NAME:
                 if((*it).firstName == query)
                     ret.push_back((*it));
                 break;
-            case ScientistSort::LAST_NAME:
 
+            case ScientistSort::LAST_NAME:
                 if((*it).lastName == query)
                     ret.push_back((*it));
                 break;
-            case ScientistSort::GENDER:
 
+            case ScientistSort::GENDER:
                 if((*it).gender == query[0])
                     ret.push_back((*it));
                 break;
-            case ScientistSort::BIRTH_DATE:
 
+            case ScientistSort::BIRTH_DATE:
                 if((*it).birthdate == Date::fromString(query))
                     ret.push_back((*it));
                 break;
+
             case ScientistSort::DEATH_DATE:
                 if((*it).deathdate == Date::fromString(query))
                     ret.push_back((*it));
                 break;
+
             default:
                 if((*it).firstName == query)
                     ret.push_back((*it));
