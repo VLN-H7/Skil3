@@ -28,7 +28,7 @@ void ConsoleUI::menu() {
         search();
     } else if (input == "quit"){
         quit();
-    }
+   }
 }
 
 void ConsoleUI::quit(){
@@ -53,7 +53,8 @@ void ConsoleUI::add(){
     do{
         cout << "Gender (M/F): ";
         cin >> s.gender;
-        if(toupper(s.gender) != 'M' && toupper(s.gender) != 'F')
+        s.gender = toupper(s.gender);
+        if(s.gender != 'M' && s.gender != 'F')
             cout << "STOPIT, DO IT RIGHT!!!" << endl;
     } while(s.gender != 'M' && s.gender != 'F');
 
