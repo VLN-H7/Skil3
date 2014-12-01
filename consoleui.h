@@ -22,6 +22,7 @@ private:
     bool readline(stringstream &ss);
     void help();
     void header();
+    void quit();
 };
 
 #endif // CONSOLEUI_H
