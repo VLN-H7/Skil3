@@ -1,5 +1,7 @@
 #include "scientistrepository.h"
 
+char delim  = ';';
+
 ScientistRepository::ScientistRepository()
 {
     scientistVector = vector<Scientist>();
@@ -10,7 +12,7 @@ void ScientistRepository::add(Scientist s){
     scientistVector.push_back(s);
     ofstream write;
     write.open("database.txt", ios::out | ios::app);
-    write << s.firstName << ";" << s.lastName << ";" << s.gender << ";" << s.birthdate << ";" << s.deathdate << "\n";
+    write << s.firstName << delim << s.lastName << delim << s.gender << delim << s.birthdate << delim << s.deathdate << "\n";
     write.close();
 }
 
@@ -20,7 +22,7 @@ void ScientistRepository::read(){
     string s;
 
     while(read >> s){
-        scientistVector.push_back(Scientist::fromString(s,';'));
+        scientistVector.push_back(Scientist::fromString(s,delim));
     }
     read.close();
 }
