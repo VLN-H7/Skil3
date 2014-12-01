@@ -26,6 +26,8 @@ void ConsoleUI::menu() {
         help();
     } else if (input == "search"){
         search();
+    } else if (input == "quit"){
+        quit();
     }
 }
 
