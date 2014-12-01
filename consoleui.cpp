@@ -122,7 +122,7 @@ void ConsoleUI::list(){
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
     for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(5) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) <<(*i).country << endl;
+        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(8) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) <<(*i).country << endl;
     }
 }
 
@@ -155,7 +155,7 @@ void ConsoleUI::search(){
     vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
     header();
     for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(5) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) << (*i).country <<  endl;
+        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(8) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) << (*i).country <<  endl;
     }
 }
 
@@ -174,9 +174,9 @@ bool ConsoleUI::readline(stringstream &ss){
 
 void ConsoleUI::header(){
     cout << left << setw(15) << "First Name"
-         << setw(15) << "\tLast Name"
-         << setw(5)  << "\tGender"
-         << setw(15) << "\tBirthdate"
-         << setw(15) << "\tDeathdate"
-         << setw(15) << "\tCountry" << endl;
+         << setw(15) << "Last Name"
+         << setw(8)  << "Gender"
+         << setw(15) << "Birthdate"
+         << setw(15) << "Deathdate"
+         << setw(15) << "Country" << endl;
 }
