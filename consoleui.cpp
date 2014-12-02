@@ -7,9 +7,7 @@ ConsoleUI::ConsoleUI()
 }
 
 void ConsoleUI::start(){
-    ifstream welcome("Welcome.txt");
-    cout << welcome.rdbuf();
-
+    cout << "Welcome to an awesome computer scientist program!" << endl;
     help();
     do{
         menu();
