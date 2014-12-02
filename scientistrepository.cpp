@@ -1,6 +1,6 @@
 #include "scientistrepository.h"
 
-char delim  = ';';
+const char delim  = ';';
 
 ScientistRepository::ScientistRepository(){
     scientistVector = vector<Scientist>();
