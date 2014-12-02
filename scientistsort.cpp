@@ -1,5 +1,6 @@
 #include "scientistsort.h"
 
+//Comparer function that sorts Scientists
 bool ScientistSort::Comparer::operator()(const Scientist &a, const Scientist &b){
     switch(field){
 

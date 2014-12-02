@@ -3,11 +3,12 @@
 const char delim  = ';';
 const char* DATABASE = "database.txt";
 
+//Constructor that makes a new vector of Scientists and reads into it from a file
 ScientistRepository::ScientistRepository(){
     scientistVector = vector<Scientist>();
     read();
 }
-
+//Writes one instance of scientist to a file
 void ScientistRepository::write(Scientist s){
     ofstream write;
     write.open(DATABASE, ios::out | ios::app);
@@ -19,7 +20,7 @@ void ScientistRepository::write(Scientist s){
           << s.nationality << endl;
     write.close();
 }
-
+//Overwrites the database file with the vector
 void ScientistRepository::save(){
     ofstream write;
     write.open(DATABASE, ios::out);
@@ -36,12 +37,12 @@ void ScientistRepository::save(){
     write.close();
 
 }
-
+//Adds an instance of scientist to the vector and writes it to a file
 void ScientistRepository::add(Scientist s){
     scientistVector.push_back(s);
     write(s);
 }
-
+//Removes one instance of scientist from the vector
 void ScientistRepository::remove(Scientist s){
 
     //Searches for the name and removes it from the vector.
@@ -55,7 +56,7 @@ void ScientistRepository::remove(Scientist s){
     //Overwrites the database.txt with the new vector.
     save();
 }
-
+//Reads all scientist from a file
 void ScientistRepository::read(){
     ifstream read;
     read.open("database.txt");
@@ -66,7 +67,7 @@ void ScientistRepository::read(){
     }
     read.close();
 }
-
+//Sorts Scientists by selected field and order
 vector<Scientist> ScientistRepository::list(ScientistSort::Field field, ScientistSort::Order order){
     vector<Scientist> ret(scientistVector);
     // SELECT * FROM scientists ORDER BY field,order
@@ -74,10 +75,11 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     sort(ret.begin(), ret.end(), cmp);
     return ret;
 }
+//Searches for default amount of Scientists (1)
 vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, string query){
     return search(field, fuzzy, 1, query);
 }
-
+//Searches for Scientists after the parameters selected
 vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, size_t rows, string query){
 
     vector<Scientist> ret;

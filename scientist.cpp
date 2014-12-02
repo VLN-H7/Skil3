@@ -4,6 +4,7 @@ Scientist::Scientist()
 {
 }
 
+//Reads scientist from a delimited string
 Scientist Scientist::fromString(string s, char delim){
     stringstream ss(s), dateStream;
     string item;
@@ -37,6 +38,7 @@ Scientist Scientist::fromString(string s, char delim){
     }
     return sci;
 }
+
 bool operator ==(const Scientist &a, const Scientist &b){
     if(a.firstName != b.firstName) return false;
     else if (a.lastName != b.lastName) return false;
