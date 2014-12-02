@@ -9,7 +9,6 @@ ConsoleUI::ConsoleUI()
 void ConsoleUI::start(){
     ifstream welcome("/Users/saraarnadottir/Skil1/Welcome.txt");
     cout << welcome.rdbuf();
-
     help();
     do{
         menu();
