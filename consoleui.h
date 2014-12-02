@@ -24,6 +24,7 @@ private:
     void header();
     void quit();
     void remove();
+    void butiful();
 };
 
 #endif // CONSOLEUI_H

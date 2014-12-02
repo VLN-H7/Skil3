@@ -1,14 +1,25 @@
 #include "consoleui.h"
 
+
 using namespace std;
 ConsoleUI::ConsoleUI()
 {
     scientistService = ScientistService();
 }
+void ConsoleUI::butiful(){
+   cout << " ----------------------------------------------------- " << endl
+        << "|      __    __     _                                 |" << endl
+        << "|     / / /\\ \\ \\___| | ___ ___  _ __ ___   ___        |" << endl
+        << "|     \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\       |" << endl
+        << "|      \\  /\\  /  __/ | (_| (_) | | | | | |  __/       |" << endl
+        << "|       \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|       |" << endl
+        << "|  --- to an awesome computer scientist program! ---  |" << endl
+        << "|     						                          |" << endl
+        << " ----------------------------------------------------- " << endl;
+}
 
 void ConsoleUI::start(){
-    ifstream welcome("/Users/saraarnadottir/Skil1/Welcome.txt");
-    cout << welcome.rdbuf();
+    butiful();
     help();
     do{
         menu();

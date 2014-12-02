@@ -32,4 +32,4 @@ HEADERS += \
     date.h \
     scientistsort.h
 
-OTHER_FILES +=
+OTHER_FILES += Welcome.txt
