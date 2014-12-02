@@ -20,6 +20,7 @@ public:
     Date deathdate;
     string country;
     static Scientist fromString(string s, char delim);
+    friend bool operator ==(const Scientist &a, const Scientist &b);
 };
 
 #endif // SCIENTIST_H

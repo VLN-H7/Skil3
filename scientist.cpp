@@ -37,3 +37,12 @@ Scientist Scientist::fromString(string s, char delim){
     }
     return sci;
 }
+bool operator ==(const Scientist &a, const Scientist &b){
+    if(a.firstName != b.firstName) return false;
+    else if (a.lastName != b.lastName) return false;
+    else if (a.gender != b.gender) return false;
+    else if (a.birthdate != b.birthdate) return false;
+    else if (a.deathdate != b.deathdate) return false;
+    else if (a.country != b.country) return false;
+    return true;
+}

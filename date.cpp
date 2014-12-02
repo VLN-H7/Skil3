@@ -8,6 +8,10 @@ Date::Date(const QDate& D){
     this->setDate(D.year(), D.month(), D.day());
 }
 
+Date Date::now(){
+    return QDate::currentDate();
+}
+
 Date Date::fromString(string date){
     QDate d = QDate::fromString(QString::fromUtf8(date.c_str()), "dd.MM.yyyy");
     Date n = d;

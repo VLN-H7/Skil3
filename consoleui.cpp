@@ -192,8 +192,7 @@ void ConsoleUI::search(){
     cout << "What is the maximum number of entries you want? (Default 1)";
     if(readline(ss))
         ss >> rows;
-    if(rows < 0) rows = 0;
-    if(rows == 0) return; // Why go through a search if the user doesnt want results?
+    if(rows <= 0) return; // Why go through a search if the user doesnt want results?
     cout << "Enter your query: ";
     getline(cin, query);
     vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
