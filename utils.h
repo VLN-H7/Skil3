@@ -1,19 +1,45 @@
 #ifndef UTILS_H
 #define UTILS_H
-template <class T> unsigned int edit_distance(const T& s1, const T& s2)
+template <class T>
+size_t levenshtein_distance(const T &s1, const T &s2)
 {
-    const size_t len1 = s1.size(), len2 = s2.size();
-    vector<vector<unsigned int> > d(len1 + 1, vector<unsigned int>(len2 + 1));
+  const size_t m(s1.size());
+  const size_t n(s2.size());
 
-    d[0][0] = 0;
-    for(unsigned int i = 1; i <= len1; ++i) d[i][0] = i;
-    for(unsigned int i = 1; i <= len2; ++i) d[0][i] = i;
+  if( m==0 ) return n;
+  if( n==0 ) return m;
 
-    for(unsigned int i = 1; i <= len1; ++i)
-        for(unsigned int j = 1; j <= len2; ++j)
+  size_t *costs = new size_t[n + 1];
 
-                      d[i][j] = std::min( std::min(d[i - 1][j] + 1,d[i][j - 1] + 1),
-                                          d[i - 1][j - 1] + (s1[i - 1] == s2[j - 1] ? 0 : 1) );
-    return d[len1][len2];
+  for( size_t k=0; k<=n; k++ ) costs[k] = k;
+
+  size_t i = 0;
+  for ( std::string::const_iterator it1 = s1.begin(); it1 != s1.end(); ++it1, ++i )
+  {
+    costs[0] = i+1;
+    size_t corner = i;
+
+    size_t j = 0;
+    for ( std::string::const_iterator it2 = s2.begin(); it2 != s2.end(); ++it2, ++j )
+    {
+      size_t upper = costs[j+1];
+      if( *it1 == *it2 )
+      {
+          costs[j+1] = corner;
+      }
+      else
+      {
+        size_t t(upper<corner?upper:corner);
+        costs[j+1] = (costs[j]<t?costs[j]:t)+1;
+      }
+
+      corner = upper;
+    }
+  }
+
+  size_t result = costs[n];
+  delete [] costs;
+
+  return result;
 }
 #endif // UTILS_H
