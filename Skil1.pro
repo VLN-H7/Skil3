@@ -31,3 +31,6 @@ HEADERS += \
     scientistrepository.h \
     date.h \
     scientistsort.h
+
+OTHER_FILES += \
+    Welcome.txt

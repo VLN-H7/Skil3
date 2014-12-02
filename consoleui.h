@@ -5,6 +5,7 @@
 #include<iostream>
 #include<sstream>
 #include<iomanip>
+#include<fstream>
 #include "scientistservice.h"
 #include "scientistsort.h"
 
