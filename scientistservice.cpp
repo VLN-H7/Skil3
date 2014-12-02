@@ -13,18 +13,9 @@ void ScientistService::remove(Scientist s){
     scientistRepository.remove(s);
 }
 
-void ScientistService::edit(int index, ScientistSort::Field field, string change){
-    scientistRepository.edit(index, field, change);
+void ScientistService::update(Scientist& s, Scientist& replace){
+    scientistRepository.update(s, replace);
 }
-
-void ScientistService::print(string name){
-    scientistRepository.print(name);
-}
-
-int ScientistService::whoToEdit(string name){
-    return scientistRepository.whoToEdit(name);
-}
-
 
 vector<Scientist> ScientistService::list(ScientistSort::Field field, ScientistSort::Order order){
     return scientistRepository.list(field,order);

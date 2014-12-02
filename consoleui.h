@@ -27,6 +27,10 @@ private:
     void edit();
     void print();
     void butiful();
+    string readName();
+    void readBirthDate(Scientist &s);
+    void readDeathDate(Scientist &s);
+    string readNationality();
 };
 
 #endif // CONSOLEUI_H

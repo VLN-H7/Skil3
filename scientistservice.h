@@ -17,6 +17,7 @@ public:
     void remove(Scientist s);
     vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
     vector<Scientist> search(ScientistSort::Field field, bool fuzzy, int rows, string query);
+    void update(Scientist &s, Scientist &replace);
 private:
     ScientistRepository scientistRepository;
 };

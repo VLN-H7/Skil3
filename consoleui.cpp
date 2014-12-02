@@ -149,32 +149,33 @@ void ConsoleUI::remove(){
 }
 void ConsoleUI::edit(){
     string name;
-    int number = 0;
     stringstream element;
-    int index;
     string change;
-    int field = 1, order = 1;
+    int field = 1;
 
-    cout << "What computer scientist would you like to edit? ";
-    getline(cin, name);
-    number = scientistService.whoToEdit(name);
 
-    if(number == -2){
-        header();
-        scientistService.print(name);
-        cout << "Who would you like to pick? ";
-        cin >> index;
-        index = index - 1;
-    }
+    char inp = 'L';
+    stringstream ss;
+    vector<Scientist> vec;
+    int id = -1;
+    bool cont = true;
 
-    if(number >= 0){
-        index = index - 1;
-    }
+    cout << "Would you like to view a list of all the computer scientists or search for a specific one? (L/S): ";
+    if(readline(ss))
+        ss >> inp;
 
-    if(number == -1){
-        cout << "Name was not found on the list. " << endl;
-        return;
-    }
+    if(toupper(inp) == 'S') vec = search();
+    else vec = list();
+
+    do{
+        cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
+        cont = readline(ss);
+
+        if(cont && toupper(ss.str()[0]) == 'Q')
+            return;
+        ss >> id;
+    } while(!cont || id <= 0 || static_cast<size_t>(id) > vec.size());
+    id--;
 
     cout << "Available fields:" << endl
          << "\tFirst Name (1)" << endl
@@ -188,11 +189,90 @@ void ConsoleUI::edit(){
         if(readline(element))
             element >> field;
         else
-            order = 1;
+            field = 1;
     } while(field <= 0 || field > 6);
+    Scientist s = Scientist(vec[id]);
+    switch(field){
 
-    scientistService.edit(index, static_cast<ScientistSort::Field>(field), change);
+        case 1:
+            s.firstName = readName();
+            break;
+
+        case 2:
+            s.lastName = readName();
+            break;
+
+        case 3:
+            s.gender = s.gender ^ ( 'M' ^ 'F' );
+            break;
+
+        case 4:
+            readBirthDate(s);
+            break;
+
+        case 5:
+            readDeathDate(s);
+            break;
+
+        case 6:
+            s.nationality = readNationality();
+            break;
+
+        default:
+            break;
+    }
+
+    scientistService.update(vec[id], s);
 }
+
+string ConsoleUI::readName(){
+    string firstName;
+    do{
+        cout << "First Name: ";
+        getline(cin,firstName);
+    }while(firstName.empty());
+    return firstName;
+}
+
+void ConsoleUI::readBirthDate(Scientist& s){
+    string str;
+    do{
+        cout << "Date of birth(DD.MM.YYYY): ";
+        getline(cin, str);
+        s.birthdate = Date::fromString(str);
+        if (!s.birthdate.isValid())
+            cout << "Invalid Date." << endl;
+        else if (s.birthdate>Date::now())
+            cout << "Date of birth cannot be in the future." << endl;
+    } while(!s.birthdate.isValid() || s.birthdate>Date::now());
+}
+
+void ConsoleUI::readDeathDate(Scientist& s){
+    string str;
+    do{
+        cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
+        getline(cin, str);
+        if(str.empty()){
+            s.deathdate.setDate(0,1,1);
+            break;
+        }
+        s.deathdate = Date::fromString(str);
+        if (!s.deathdate.isValid())
+         cout << "Invalid Date." << endl;
+        else if (s.deathdate<s.birthdate)
+            cout << "Date of death needs to be after date of birth." << endl;
+    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
+}
+
+string ConsoleUI::readNationality(){
+    string nationality;
+    do{
+        cout << "Nationality: ";
+        getline(cin,nationality);
+    }while(nationality == "");
+    return nationality;
+}
+
 vector<Scientist> ConsoleUI::list(){
     int field = 1, order = 1;
     char sort = 'N';
