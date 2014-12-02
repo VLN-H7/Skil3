@@ -3,12 +3,11 @@
 const char delim  = ';';
 const char* DATABASE = "database.txt";
 
-//Constructor that makes a new vector of Scientists and reads into it from a file
 ScientistRepository::ScientistRepository(){
     scientistVector = vector<Scientist>();
     read();
 }
-//Writes one instance of scientist to a file
+
 void ScientistRepository::write(Scientist s){
     ofstream write;
     write.open(DATABASE, ios::out | ios::app);
@@ -17,10 +16,10 @@ void ScientistRepository::write(Scientist s){
           << s.gender << delim
           << s.birthdate << delim
           << s.deathdate << delim
-          << s.nationality << endl;
+          << s.country << endl;
     write.close();
 }
-//Overwrites the database file with the vector
+
 void ScientistRepository::save(){
     ofstream write;
     write.open(DATABASE, ios::out);
@@ -31,40 +30,93 @@ void ScientistRepository::save(){
               << scientistVector[i].gender << delim
               << scientistVector[i].birthdate << delim
               << scientistVector[i].deathdate << delim
-              << scientistVector[i].nationality << endl;
+              << scientistVector[i].country << endl;
     }
 
     write.close();
 
 }
-//Adds an instance of scientist to the vector and writes it to a file
+
 void ScientistRepository::add(Scientist s){
     scientistVector.push_back(s);
     write(s);
 }
 
+void ScientistRepository::edit(int index, ScientistSort::Field field, string change){
+switch(field){
+    case ScientistSort::FIRST_NAME:
+        scientistVector[index].firstName = change;
+        break;
 
-void ScientistRepository::update(Scientist &s, Scientist &replace){
-    //Searches for the name and removes it from the vector.
-    for(unsigned int i = 0; i < scientistVector.size() ; i++){
-        if(scientistVector[i] == s){
-            scientistVector[i] = replace;
-            break;
-        }
-    }
+    case ScientistSort::LAST_NAME:
+        scientistVector[index].lastName = change;
+        break;
+
+    case ScientistSort::GENDER:
+
+        break;
+
+    case ScientistSort::BIRTH_DATE:
+
+        break;
+
+    case ScientistSort::DEATH_DATE:
+
+        break;
+
+    case ScientistSort::COUNTRY:
+
+        break;
+
+    default:
+
+        break;
+
+}
+//        if(element == "first name")
+//            scientistVector[index].firstName = change;
+//        if(element == "last name")
+//            scientistVector[index].lastName = change;
+//    //    if(element == "gender"){
+//    //        if(scientistVector[index].gender == 'M' || scientistVector[index].gender == 'm')
+//    //            scientistVector[index].gender = 'F';
+//    //        if(scientistVector[index].gender == 'F' || scientistVector[index].gender == 'f')
+//    //            scientistVector[index].gender = 'M';
+//    //    }
+//    //    if(element == "birthdate")
+//    //        scientistVector[index].birthdate = change;
+//    //    if(element == "deathdate")
+//    //        scientistVector[index].deathdate = change;
+//    //    if(element == "country")
+//    //        scientistVector[index].country = change;
+
 
     //Overwrites the database.txt with the new vector.
     save();
 }
 
-//Removes one instance of scientist from the vector
-void ScientistRepository::remove(Scientist s){
+
+void ScientistRepository::print(string name){
+    int numb;
+    for(unsigned int i = 0; i < scientistVector.size() ; i++){
+        if(scientistVector[i].firstName == name || scientistVector[i].lastName == name)
+        cout << " ("<< numb ++ << ") "<< scientistVector[i].firstName << " "
+             << scientistVector[i].lastName << " "
+             << scientistVector[i].gender << " "
+             << scientistVector[i].birthdate << " "
+             << scientistVector[i].deathdate << " "
+             << scientistVector[i].country << endl;
+            }
+}
+
+void ScientistRepository::remove(string name, int& found){
 
     //Searches for the name and removes it from the vector.
     for(unsigned int i = 0; i < scientistVector.size() ; i++){
-        if(scientistVector[i] == s){
+        if(scientistVector[i].firstName == name || scientistVector[i].lastName == name){
+            found = i;
+
             scientistVector.erase(scientistVector.begin() + i);
-            break;
         }
     }
 
@@ -72,7 +124,6 @@ void ScientistRepository::remove(Scientist s){
     save();
 }
 
-//Reads all scientist from a file
 void ScientistRepository::read(){
     ifstream read;
     read.open("database.txt");
@@ -84,7 +135,6 @@ void ScientistRepository::read(){
     read.close();
 }
 
-//Sorts Scientists by selected field and order
 vector<Scientist> ScientistRepository::list(ScientistSort::Field field, ScientistSort::Order order){
     vector<Scientist> ret(scientistVector);
     // SELECT * FROM scientists ORDER BY field,order
@@ -92,15 +142,11 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     sort(ret.begin(), ret.end(), cmp);
     return ret;
 }
-
-//Searches for default amount of Scientists (1)
-vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, string query){
-    return search(field, fuzzy, 1, query);
+vector<Scientist> ScientistRepository::search(ScientistSort::Field field, string query){
+    return search(field, 1, query);
 }
 
-//Searches for Scientists after the parameters selected
-//If fuzzy is true then it finds everything that is within 2 Levenshtein distance from the original query
-vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, size_t rows, string query){
+vector<Scientist> ScientistRepository::search(ScientistSort::Field field, int rows, string query){
 
     vector<Scientist> ret;
 
@@ -108,16 +154,12 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
         switch(field){
 
             case ScientistSort::FIRST_NAME:
-                if(fuzzy && levenshtein_distance<string>((*it).firstName,query) < 3)
-                    ret.push_back((*it));
-                else if((*it).firstName == query)
+                if((*it).firstName == query)
                     ret.push_back((*it));
                 break;
 
             case ScientistSort::LAST_NAME:
-                if(fuzzy && levenshtein_distance<string>((*it).lastName,query) < 3)
-                    ret.push_back((*it));
-                else if((*it).lastName == query)
+                if((*it).lastName == query)
                     ret.push_back((*it));
                 break;
 
@@ -127,23 +169,17 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
                 break;
 
             case ScientistSort::BIRTH_DATE:
-                if(fuzzy && levenshtein_distance<string>((*it).birthdate.toDateString(),query) < 3)
-                    ret.push_back((*it));
-                else if((*it).birthdate == Date::fromString(query))
+                if((*it).birthdate == Date::fromString(query))
                     ret.push_back((*it));
                 break;
 
             case ScientistSort::DEATH_DATE:
-                if(fuzzy && levenshtein_distance<string>((*it).deathdate.toDateString(),query) < 3)
-                    ret.push_back((*it));
-                else if((*it).deathdate == Date::fromString(query))
+                if((*it).deathdate == Date::fromString(query))
                     ret.push_back((*it));
                 break;
 
-            case ScientistSort::NATIONALITY:
-                if(fuzzy && levenshtein_distance<string>((*it).nationality,query) < 3)
-                    ret.push_back((*it));
-                else if((*it).nationality == query)
+            case ScientistSort::COUNTRY:
+                if((*it).country == query)
                     ret.push_back((*it));
                 break;
 

@@ -40,6 +40,8 @@ void ConsoleUI::menu() {
         search();
     } else if (input == "remove"){
         remove();
+    } else if (input == "edit"){
+        edit();
     } else if (input == "quit"){
         quit();
    }
@@ -56,6 +58,7 @@ void ConsoleUI::help(){
             "\t add - Add a computer scientist" << endl <<
             "\t search - Search for a computer scientist" << endl <<
             "\t remove - Remove a computer scientist" << endl <<
+            "\t edit - Edit a computer scientist" << endl <<
             "\t quit - Quit the program" << endl;
 }
 
@@ -143,6 +146,131 @@ void ConsoleUI::remove(){
     scientistService.remove(vec[id]);
 
     cout << "The scientist " << vec[id].firstName << " " << vec[id].lastName << " was successfully removed from the list. " << endl;
+}
+void ConsoleUI::edit(){
+    string name;
+    stringstream element;
+    string change;
+    int field = 1;
+
+
+    char inp = 'L';
+    stringstream ss;
+    vector<Scientist> vec;
+    int id = -1;
+    bool cont = true;
+
+    cout << "Would you like to view a list of all the computer scientists or search for a specific one? (L/S): ";
+    if(readline(ss))
+        ss >> inp;
+
+    if(toupper(inp) == 'S') vec = search();
+    else vec = list();
+
+    do{
+        cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
+        cont = readline(ss);
+
+        if(cont && toupper(ss.str()[0]) == 'Q')
+            return;
+        ss >> id;
+    } while(!cont || id <= 0 || static_cast<size_t>(id) > vec.size());
+    id--;
+
+    cout << "Available fields:" << endl
+         << "\tFirst Name (1)" << endl
+         << "\tLast Name (2)" << endl
+         << "\tGender (3)" << endl
+         << "\tBirthdate (4)" << endl
+         << "\tDeathdate (5)" << endl
+         << "\tCountry (6)" << endl;
+    do {
+        cout << "What would you like to change? (Default 1): ";
+        if(readline(element))
+            element >> field;
+        else
+            field = 1;
+    } while(field <= 0 || field > 6);
+    Scientist s = Scientist(vec[id]);
+    switch(field){
+
+        case 1:
+            s.firstName = readName();
+            break;
+
+        case 2:
+            s.lastName = readName();
+            break;
+
+        case 3:
+            s.gender = s.gender ^ ( 'M' ^ 'F' );
+            break;
+
+        case 4:
+            readBirthDate(s);
+            break;
+
+        case 5:
+            readDeathDate(s);
+            break;
+
+        case 6:
+            s.nationality = readNationality();
+            break;
+
+        default:
+            break;
+    }
+
+    scientistService.update(vec[id], s);
+}
+
+string ConsoleUI::readName(){
+    string firstName;
+    do{
+        cout << "First Name: ";
+        getline(cin,firstName);
+    }while(firstName.empty());
+    return firstName;
+}
+
+void ConsoleUI::readBirthDate(Scientist& s){
+    string str;
+    do{
+        cout << "Date of birth(DD.MM.YYYY): ";
+        getline(cin, str);
+        s.birthdate = Date::fromString(str);
+        if (!s.birthdate.isValid())
+            cout << "Invalid Date." << endl;
+        else if (s.birthdate>Date::now())
+            cout << "Date of birth cannot be in the future." << endl;
+    } while(!s.birthdate.isValid() || s.birthdate>Date::now());
+}
+
+void ConsoleUI::readDeathDate(Scientist& s){
+    string str;
+    do{
+        cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
+        getline(cin, str);
+        if(str.empty()){
+            s.deathdate.setDate(0,1,1);
+            break;
+        }
+        s.deathdate = Date::fromString(str);
+        if (!s.deathdate.isValid())
+         cout << "Invalid Date." << endl;
+        else if (s.deathdate<s.birthdate)
+            cout << "Date of death needs to be after date of birth." << endl;
+    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
+}
+
+string ConsoleUI::readNationality(){
+    string nationality;
+    do{
+        cout << "Nationality: ";
+        getline(cin,nationality);
+    }while(nationality == "");
+    return nationality;
 }
 
 vector<Scientist> ConsoleUI::list(){

@@ -13,6 +13,10 @@ void ScientistService::remove(Scientist s){
     scientistRepository.remove(s);
 }
 
+void ScientistService::update(Scientist& s, Scientist& replace){
+    scientistRepository.update(s, replace);
+}
+
 vector<Scientist> ScientistService::list(ScientistSort::Field field, ScientistSort::Order order){
     return scientistRepository.list(field,order);
 }

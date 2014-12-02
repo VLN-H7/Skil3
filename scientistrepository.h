@@ -23,6 +23,7 @@ public:
     vector<Scientist> search(ScientistSort::Field field, bool fuzzy, string query);
     void save();
     void write(Scientist s);
+    void update(Scientist &s, Scientist &replace);
 private:
     vector<Scientist> scientistVector;
     void read();
