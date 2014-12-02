@@ -105,12 +105,16 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
                 break;
 
             case ScientistSort::BIRTH_DATE:
-                if((*it).birthdate == Date::fromString(query))
+                if(fuzzy && levenshtein_distance<string>((*it).birthdate.toDateString(),query) < 3)
+                    ret.push_back((*it));
+                else if((*it).birthdate == Date::fromString(query))
                     ret.push_back((*it));
                 break;
 
             case ScientistSort::DEATH_DATE:
-                if((*it).deathdate == Date::fromString(query))
+                if(fuzzy && levenshtein_distance<string>((*it).deathdate.toDateString(),query) < 3)
+                    ret.push_back((*it));
+                else if((*it).deathdate == Date::fromString(query))
                     ret.push_back((*it));
                 break;
 
