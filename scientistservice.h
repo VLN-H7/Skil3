@@ -14,6 +14,7 @@ class ScientistService
 public:
     ScientistService();
     void add(Scientist s);
+    void remove(string name);
     vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
     vector<Scientist> search(ScientistSort::Field field, int rows, string query);
 private:

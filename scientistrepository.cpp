@@ -15,6 +15,42 @@ void ScientistRepository::add(Scientist s){
     write.close();
 }
 
+void ScientistRepository::remove(string name){
+    unsigned int number = 0;
+
+    //Searches for the name and removes it from the vector.
+    for(unsigned int i = 0; i < scientistVector.size() ; i++){
+        if(scientistVector[i].firstName == name || scientistVector[i].lastName == name){
+            number = i;
+
+            for(unsigned int i = number; i < (scientistVector.size() - 1) ; i++){
+                scientistVector[i].firstName = scientistVector[i+1].firstName;
+                scientistVector[i].lastName = scientistVector[i+1].lastName;
+                scientistVector[i].gender = scientistVector[i+1].gender;
+                scientistVector[i].birthdate = scientistVector[i+1].birthdate;
+                scientistVector[i].deathdate = scientistVector[i+1].deathdate;
+                scientistVector[i].country = scientistVector[i+1].country;
+            }
+        scientistVector.pop_back();
+        }
+    }
+
+    //Overwrites the database.txt with the new vector.
+    ofstream write;
+    write.open("database.txt", ios::out);
+
+    for(unsigned int i = 0; i < scientistVector.size() ; i++){
+        write << scientistVector[i].firstName << delim
+              << scientistVector[i].lastName << delim
+              << scientistVector[i].gender << delim
+              << scientistVector[i].birthdate << delim
+              << scientistVector[i].deathdate << delim
+              << scientistVector[i].country << "\n";
+    }
+
+    write.close();
+}
+
 void ScientistRepository::read(){
     ifstream read;
     read.open("database.txt");
@@ -85,6 +121,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     }
     return ret;
 }
+
 
 vector<Scientist> ScientistRepository::search(ScientistSort::Field field, int rows, string query){
 

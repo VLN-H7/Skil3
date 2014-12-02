@@ -26,6 +26,8 @@ void ConsoleUI::menu() {
         help();
     } else if (input == "search"){
         search();
+    } else if (input == "remove"){
+        remove();
     } else if (input == "quit"){
         quit();
    }
@@ -41,6 +43,7 @@ void ConsoleUI::help(){
             "\t list - List all computer scientists" << endl <<
             "\t add - Add a computer scientist" << endl <<
             "\t search - Search for a computer scientist" << endl <<
+            "\t remove - Remove a computer scientist" << endl <<
             "\t quit - Quit the program" << endl;
 }
 
@@ -81,6 +84,15 @@ void ConsoleUI::add(){
     getline(cin,s.country);
 
     scientistService.add(s);
+}
+
+void ConsoleUI::remove(){
+    string firstName;
+
+    cout << "What computer scientist would you like to remove from the list? (firstName) ";
+    cin >> firstName;
+
+    scientistService.remove(firstName);
 }
 
 void ConsoleUI::list(){

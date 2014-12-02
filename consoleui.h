@@ -23,6 +23,7 @@ private:
     void help();
     void header();
     void quit();
+    void remove();
 };
 
 #endif // CONSOLEUI_H
