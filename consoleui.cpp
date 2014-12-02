@@ -90,7 +90,10 @@ void ConsoleUI::remove(){
     int id = -1;
     bool cont = true;
 
-    cout << "Would you like to view a list of all the computer scientists or search for a specific one? (L/S): ";
+    cout << "Would you either like to: "                <<endl<<
+            "\tList of all the computer scientists (L)"   <<endl<<
+            "\tSearch for a specific computer scientist? (S)"         <<endl<<
+            "(L/S): ";
     if(readline(ss))
         ss >> inp;
 
@@ -121,7 +124,10 @@ void ConsoleUI::edit(){
     int id = -1;
     bool cont = true;
 
-    cout << "Would you like to view a list of all the computer scientists or search for a specific one? (L/S): ";
+    cout << "Would you either like to: "                <<endl<<
+            "\tList of all the computer scientists (L)"   <<endl<<
+            "\tSearch for a specific computer scientist? (S)"         <<endl<<
+            "(L/S): ";
     if(readline(ss))
         ss >> inp;
 
@@ -144,7 +150,7 @@ void ConsoleUI::edit(){
          << "\tGender (3)" << endl
          << "\tBirthdate (4)" << endl
          << "\tDeathdate (5)" << endl
-         << "\tCountry (6)" << endl;
+         << "\tNationality (6)" << endl;
     do {
         cout << "What would you like to change? (Default 1): ";
         if(readline(ss))
@@ -208,7 +214,7 @@ vector<Scientist> ConsoleUI::list(){
              << "\tGender (3)" << endl
              << "\tBirthdate (4)" << endl
              << "\tDeathdate (5)" << endl
-             << "\tnationality (6)" << endl;
+             << "\tNationality (6)" << endl;
         do {
             cout << "How would you like to sort the list? (Default 1): ";
             if(readline(ss))
