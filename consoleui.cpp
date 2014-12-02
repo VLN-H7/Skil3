@@ -67,19 +67,19 @@ void ConsoleUI::add(){
     do{
         cout << "First Name: ";
         getline(cin,s.firstName);
-    }while(s.firstName == "");
+    }while(s.firstName.empty());
 
     do{
         cout << "Last Name: ";
         getline(cin, s.lastName);
-    }while (s.lastName == "");
+    }while (s.lastName.empty());
 
     do{
         cout << "Gender (M/F): ";
         cin >> s.gender;
         s.gender = toupper(s.gender);
         if(s.gender != 'M' && s.gender != 'F')
-            cout << "STOPIT, DO IT RIGHT!!!" << endl;
+            cout << "Invalid gender, please enter either M or F." << endl;
     } while(s.gender != 'M' && s.gender != 'F');
 
     cin.ignore();
@@ -89,15 +89,17 @@ void ConsoleUI::add(){
         getline(cin, str);
         s.birthdate = Date::fromString(str);
         if (!s.birthdate.isValid())
-            cout << "STOPIT, DO IT RIGHT!" << endl;
-    } while(!s.birthdate.isValid());
+            cout << "Invalid Date." << endl;
+        else if (s.birthdate>Date::now())
+            cout << "Date of birth cannot be in the future." << endl;
+    } while(!s.birthdate.isValid() || s.birthdate>Date::now());
 
     do{
         cout << "Date of death(DD.MM.YYYY): ";
         getline(cin, str);
         s.deathdate = Date::fromString(str);
         if (!s.deathdate.isValid())
-            cout << "STOPIT, DO IT RIGHT!" << endl;
+            cout << "Invalid Date." << endl;
         else if (s.deathdate<s.birthdate)
             cout << "Date of death needs to be after date of birth." << endl;
     } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
@@ -165,8 +167,15 @@ void ConsoleUI::list(){
     header();
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
-    for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(8) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) <<(*i).country << endl;
+    for(size_t i = 0; i < vec.size(); i++){
+        cout << left
+             << setw(4)  << (i+1)
+             << setw(15) << vec[i].firstName
+             << setw(15) << vec[i].lastName
+             << setw(8) << vec[i].gender
+             << setw(15) << vec[i].birthdate
+             << setw(15) << vec[i].deathdate
+             << setw(15) << vec[i].country << endl;
     }
 }
 
@@ -197,8 +206,15 @@ void ConsoleUI::search(){
     getline(cin, query);
     vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
     header();
-    for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(8) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) << (*i).country <<  endl;
+    for(size_t i = 0; i<vec.size(); i++){
+        cout << left 
+            << setw(4)  << (i+1) 
+            << setw(15) << vec[i].firstName 
+            << setw(15) << vec[i].lastName 
+            << setw(8)  << vec[i].gender 
+            << setw(15) << vec[i].birthdate 
+            << setw(15) << vec[i].deathdate 
+            << setw(15) << vec[i].country <<  endl;
     }
 }
 
@@ -216,7 +232,9 @@ bool ConsoleUI::readline(stringstream &ss){
 }
 
 void ConsoleUI::header(){
-    cout << left << setw(15) << "First Name"
+    cout << left 
+         << setw(4)  << "ID"
+         << setw(15) << "First Name"
          << setw(15) << "Last Name"
          << setw(8)  << "Gender"
          << setw(15) << "Birthdate"
