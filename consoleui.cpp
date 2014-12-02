@@ -222,7 +222,7 @@ vector<Scientist> ConsoleUI::search(){
     } while(field <= 0 || field > 12);
     if (field > 6) {
         if (field > 8) field++; // Shift before the modulo operation
-        field = (field % 6) + 1; // Bound the fuzzy choices
+        field = (field % 7) + 1; // Bound the fuzzy choices
         fuzzy = true;
     }
     cout << "What is the maximum number of entries you want? (Default 1)";
@@ -233,7 +233,7 @@ vector<Scientist> ConsoleUI::search(){
         return vec; // Why go through a  if the user doesnt want results?
     cout << "Enter your query: ";
     getline(cin, query);
-    vec = scientistService.(static_cast<ScientistSort::Field>(field), fuzzy, rows, query);
+    vec = scientistService.search(static_cast<ScientistSort::Field>(field), fuzzy, rows, query);
     header();
     for(size_t i = 0; i<vec.size(); i++){
         cout << left 
