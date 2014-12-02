@@ -44,7 +44,8 @@ void ConsoleUI::menu() {
         edit();
     } else if (input == "quit"){
         quit();
-   }
+    }
+    cout << endl;
 }
 
 void ConsoleUI::quit(){
@@ -67,54 +68,17 @@ void ConsoleUI::add(){
     Scientist s;
     string str;
 
-    do{
-        cout << "First Name: ";
-        getline(cin,s.firstName);
-    }while(s.firstName.empty());
+    readFirstName(s);
 
-    do{
-        cout << "Last Name: ";
-        getline(cin, s.lastName);
-    }while (s.lastName.empty());
+    readLastName(s);
 
-    do{
-        cout << "Gender (M/F): ";
-        cin >> s.gender;
-        s.gender = toupper(s.gender);
-        if(s.gender != 'M' && s.gender != 'F')
-            cout << "Invalid gender, please enter either M or F." << endl;
-    } while(s.gender != 'M' && s.gender != 'F');
+    readGender(s);
 
-    cin.ignore();
+    readBirthDate(s);
 
-    do{
-        cout << "Date of birth(DD.MM.YYYY): ";
-        getline(cin, str);
-        s.birthdate = Date::fromString(str);
-        if (!s.birthdate.isValid())
-            cout << "Invalid Date." << endl;
-        else if (s.birthdate>Date::now())
-            cout << "Date of birth cannot be in the future." << endl;
-    } while(!s.birthdate.isValid() || s.birthdate>Date::now());
+    readDeathDate(s);
 
-    do{
-        cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
-        getline(cin, str);
-        if(str.empty()){
-            s.deathdate.setDate(0,1,1);
-            break;
-        }
-        s.deathdate = Date::fromString(str);
-        if (!s.deathdate.isValid())
-            cout << "Invalid Date." << endl;
-        else if (s.deathdate<s.birthdate)
-            cout << "Date of death needs to be after date of birth." << endl;
-    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
-
-    do{
-        cout << "nationality: ";
-        getline(cin,s.nationality);
-    }while(s.nationality == "");
+    readNationality(s);
 
     scientistService.add(s);
 }
@@ -147,13 +111,10 @@ void ConsoleUI::remove(){
 
     cout << "The scientist " << vec[id].firstName << " " << vec[id].lastName << " was successfully removed from the list. " << endl;
 }
+
+
 void ConsoleUI::edit(){
-    string name;
-    stringstream element;
-    string change;
     int field = 1;
-
-
     char inp = 'L';
     stringstream ss;
     vector<Scientist> vec;
@@ -186,36 +147,42 @@ void ConsoleUI::edit(){
          << "\tCountry (6)" << endl;
     do {
         cout << "What would you like to change? (Default 1): ";
-        if(readline(element))
-            element >> field;
+        if(readline(ss))
+            ss >> field;
         else
             field = 1;
     } while(field <= 0 || field > 6);
     Scientist s = Scientist(vec[id]);
-    switch(field){
+    switch(static_cast<ScientistSort::Field>(field)){
 
-        case 1:
-            s.firstName = readName();
+        case ScientistSort::FIRST_NAME:
+            readFirstName(s);
+            cout << "Successfully changed the first name to " << s.firstName << endl;
             break;
 
-        case 2:
-            s.lastName = readName();
+        case ScientistSort::LAST_NAME:
+            readLastName(s);
+            cout << "Successfully changed the last name to " << s.lastName << endl;
             break;
 
-        case 3:
+        case ScientistSort::GENDER:
             s.gender = s.gender ^ ( 'M' ^ 'F' );
+            cout << "Successfully changed the gender to " << s.gender << endl;
             break;
 
-        case 4:
+        case ScientistSort::BIRTH_DATE:
             readBirthDate(s);
+            cout << "Successfully changed the birthdate to " << s.birthdate << endl;
             break;
 
-        case 5:
+        case ScientistSort::DEATH_DATE:
             readDeathDate(s);
+            cout << "Successfully changed the deathdate to " << s.deathdate << endl;
             break;
 
-        case 6:
-            s.nationality = readNationality();
+        case ScientistSort::NATIONALITY:
+            readNationality(s);
+            cout << "Successfully changed the nationality to " << s.nationality << endl;
             break;
 
         default:
@@ -225,53 +192,6 @@ void ConsoleUI::edit(){
     scientistService.update(vec[id], s);
 }
 
-string ConsoleUI::readName(){
-    string firstName;
-    do{
-        cout << "First Name: ";
-        getline(cin,firstName);
-    }while(firstName.empty());
-    return firstName;
-}
-
-void ConsoleUI::readBirthDate(Scientist& s){
-    string str;
-    do{
-        cout << "Date of birth(DD.MM.YYYY): ";
-        getline(cin, str);
-        s.birthdate = Date::fromString(str);
-        if (!s.birthdate.isValid())
-            cout << "Invalid Date." << endl;
-        else if (s.birthdate>Date::now())
-            cout << "Date of birth cannot be in the future." << endl;
-    } while(!s.birthdate.isValid() || s.birthdate>Date::now());
-}
-
-void ConsoleUI::readDeathDate(Scientist& s){
-    string str;
-    do{
-        cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
-        getline(cin, str);
-        if(str.empty()){
-            s.deathdate.setDate(0,1,1);
-            break;
-        }
-        s.deathdate = Date::fromString(str);
-        if (!s.deathdate.isValid())
-         cout << "Invalid Date." << endl;
-        else if (s.deathdate<s.birthdate)
-            cout << "Date of death needs to be after date of birth." << endl;
-    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
-}
-
-string ConsoleUI::readNationality(){
-    string nationality;
-    do{
-        cout << "Nationality: ";
-        getline(cin,nationality);
-    }while(nationality == "");
-    return nationality;
-}
 
 vector<Scientist> ConsoleUI::list(){
     int field = 1, order = 1;
@@ -309,6 +229,7 @@ vector<Scientist> ConsoleUI::list(){
         } while(order <= 0 || order > 2);
     }
     header();
+//    cout << field << " " << order << " " << static_cast<ScientistSort::Field>(field) << " " << static_cast<ScientistSort::Order>(order) << endl;
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
     for(size_t i = 0; i < vec.size(); i++){
@@ -389,6 +310,7 @@ bool ConsoleUI::readline(stringstream &ss){
 }
 
 void ConsoleUI::header(){
+    cout << endl;
     cout << left 
          << setw(4)  << "ID"
          << setw(12) << "First Name"
@@ -397,4 +319,69 @@ void ConsoleUI::header(){
          << setw(12) << "Birthdate"
          << setw(12) << "Deathdate"
          << setw(12) << "Nationality" << endl;
+    cout << "=======================================================================" << endl;
 }
+
+string ConsoleUI::readString(string msg){
+    string s;
+    do{
+        cout << msg;
+        getline(cin,s);
+    }while(s.empty());
+    return s;
+
+}
+
+void ConsoleUI::readFirstName(Scientist& s){
+    s.firstName = readString("First Name: ");
+}
+
+void ConsoleUI::readLastName(Scientist& s){
+    s.lastName = readString("Last Name: ");
+}
+
+void ConsoleUI::readGender(Scientist& s){
+    do{
+        cout << "Gender (M/F): ";
+        cin >> s.gender;
+        s.gender = toupper(s.gender);
+        if(s.gender != 'M' && s.gender != 'F')
+            cout << "Invalid gender, please enter either M or F." << endl;
+    } while(s.gender != 'M' && s.gender != 'F');
+    cin.ignore();
+}
+
+void ConsoleUI::readBirthDate(Scientist& s){
+    string str;
+    do{
+        cout << "Date of birth(DD.MM.YYYY): ";
+        getline(cin, str);
+        s.birthdate = Date::fromString(str);
+        if (!s.birthdate.isValid())
+            cout << "Invalid Date." << endl;
+        else if (s.birthdate>Date::now())
+            cout << "Date of birth cannot be in the future." << endl;
+    } while(!s.birthdate.isValid() || s.birthdate>Date::now());
+}
+
+void ConsoleUI::readDeathDate(Scientist& s){
+    string str;
+    do{
+        cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
+        getline(cin, str);
+        if(str.empty()){
+            s.deathdate.setDate(0,1,1);
+            break;
+        }
+        s.deathdate = Date::fromString(str);
+        if (!s.deathdate.isValid())
+         cout << "Invalid Date." << endl;
+        else if (s.deathdate<s.birthdate)
+            cout << "Date of death needs to be after date of birth." << endl;
+    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
+}
+
+void ConsoleUI::readNationality(Scientist& s){
+    s.nationality = readString("Nationality: ");
+}
+
