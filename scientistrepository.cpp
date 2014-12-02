@@ -42,14 +42,13 @@ void ScientistRepository::add(Scientist s){
     write(s);
 }
 
-void ScientistRepository::remove(string name, int& found){
+void ScientistRepository::remove(Scientist s){
 
     //Searches for the name and removes it from the vector.
     for(unsigned int i = 0; i < scientistVector.size() ; i++){
-        if(scientistVector[i].firstName == name || scientistVector[i].lastName == name){
-            found = i;
-
+        if(scientistVector[i] == s){
             scientistVector.erase(scientistVector.begin() + i);
+            break;
         }
     }
 
@@ -79,7 +78,7 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, string
     return search(field, 1, query);
 }
 
-vector<Scientist> ScientistRepository::search(ScientistSort::Field field, int rows, string query){
+vector<Scientist> ScientistRepository::search(ScientistSort::Field field, size_t rows, string query){
 
     vector<Scientist> ret;
 

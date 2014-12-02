@@ -117,23 +117,31 @@ void ConsoleUI::add(){
 }
 
 void ConsoleUI::remove(){
-    string name;
-    int found = -1;
+    char inp = 'S';
+    stringstream ss;
+    vector<Scientist> vec;
+    int id = -1;
+    bool cont = true;
 
-    cout << "What computer scientist would you like to remove from the list? ";
-    getline(cin, name);
+    cout << "Would you like to view a list of all the computer scientists or search for a specific one? (L/S): ";
+    if(readline(ss))
+        ss >> inp;
+    if(inp == 'L') vec = list();
+    else vec = search();
 
-    scientistService.remove(name, found);
+    do{
+        cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
+        cont = readline(ss);
+        if(ss.str()[0] == 'Q') return;
+    } while(!cont || !(ss >> id) || id == 0 || id >= (int)vec.size());
+    id--;
 
-    if(found == -1){
-        cout << "The scientist " << name << " could not be found in the list. " << endl;
-    }
-    else {
-        cout << "The scientist " << name << " was successfully removed from the list. " << endl;
-    }
+    scientistService.remove(vec[id]);
+
+    cout << "The scientist " << vec[id].firstName << " " << vec[id].lastName << " was successfully removed from the list. " << endl;
 }
 
-void ConsoleUI::list(){
+vector<Scientist> ConsoleUI::list(){
     int field = 1, order = 1;
     char sort = 'N';
     stringstream ss;
@@ -181,9 +189,10 @@ void ConsoleUI::list(){
              << setw(15) << vec[i].deathdate
              << setw(15) << vec[i].country << endl;
     }
+    return vec;
 }
 
-void ConsoleUI::search(){
+vector<Scientist> ConsoleUI::search(){
     stringstream ss;
     int field = 1, rows = 1;
     string query;
@@ -205,10 +214,12 @@ void ConsoleUI::search(){
     cout << "What is the maximum number of entries you want? (Default 1)";
     if(readline(ss))
         ss >> rows;
-    if(rows <= 0) return; // Why go through a search if the user doesnt want results?
+    vector<Scientist> vec;
+    if(rows <= 0)
+        return vec; // Why go through a search if the user doesnt want results?
     cout << "Enter your query: ";
     getline(cin, query);
-    vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
+    vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
     header();
     for(size_t i = 0; i<vec.size(); i++){
         cout << left 
@@ -220,6 +231,7 @@ void ConsoleUI::search(){
             << setw(15) << vec[i].deathdate 
             << setw(15) << vec[i].country <<  endl;
     }
+    return vec;
 }
 
 bool ConsoleUI::readline(stringstream &ss){

@@ -15,9 +15,9 @@ public:
     void start();
 private:
     ScientistService scientistService;
-    void list();
+    vector<Scientist> list();
     void add();
-    void search();
+    vector<Scientist> search();
     void menu();
     bool readline(stringstream &ss);
     void help();

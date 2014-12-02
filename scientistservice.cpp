@@ -9,8 +9,8 @@ void ScientistService::add(Scientist s) {
     scientistRepository.add(s);
 }
 
-void ScientistService::remove(string name, int& found){
-    scientistRepository.remove(name, found);
+void ScientistService::remove(Scientist s){
+    scientistRepository.remove(s);
 }
 
 vector<Scientist> ScientistService::list(ScientistSort::Field field, ScientistSort::Order order){
