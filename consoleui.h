@@ -24,6 +24,9 @@ private:
     void header();
     void quit();
     void remove();
+    void edit();
+    void print();
+    int whoToRemove();
 };
 
 #endif // CONSOLEUI_H

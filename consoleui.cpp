@@ -29,6 +29,8 @@ void ConsoleUI::menu() {
         search();
     } else if (input == "remove"){
         remove();
+    } else if (input == "edit"){
+        edit();
     } else if (input == "quit"){
         quit();
    }
@@ -45,6 +47,7 @@ void ConsoleUI::help(){
             "\t add - Add a computer scientist" << endl <<
             "\t search - Search for a computer scientist" << endl <<
             "\t remove - Remove a computer scientist" << endl <<
+            "\t edit - Edit a computer scientist" << endl <<
             "\t quit - Quit the program" << endl;
 }
 
@@ -102,6 +105,53 @@ void ConsoleUI::remove(){
     else {
         cout << "The scientist " << name << " was successfully removed from the list. " << endl;
     }
+}
+
+void ConsoleUI::edit(){
+    string name;
+    int number = 0;
+    stringstream element;
+    int index;
+    string change;
+    int field = 1, order = 1;
+
+    cout << "What computer scientist would you like to edit? ";
+    getline(cin, name);
+    number = scientistService.whoToEdit(name);
+
+    if(number == -2){
+        header();
+        scientistService.print(name);
+        cout << "Who would you like to pick? ";
+        cin >> index;
+        index = index - 1;
+    }
+
+    if(number >= 0){
+        index = index - 1;
+    }
+
+    if(number == -1){
+        cout << "Name was not found on the list. " << endl;
+        return;
+    }
+
+    cout << "Available fields:" << endl
+         << "\tFirst Name (1)" << endl
+         << "\tLast Name (2)" << endl
+         << "\tGender (3)" << endl
+         << "\tBirthdate (4)" << endl
+         << "\tDeathdate (5)" << endl
+         << "\tCountry (6)" << endl;
+    do {
+        cout << "What would you like to change? (Default 1): ";
+        if(readline(element))
+            element >> field;
+        else
+            order = 1;
+    } while(field <= 0 || field > 6);
+
+    scientistService.edit(index, static_cast<ScientistSort::Field>(field), change);
 }
 
 void ConsoleUI::list(){

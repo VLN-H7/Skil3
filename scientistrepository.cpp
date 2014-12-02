@@ -42,6 +42,95 @@ void ScientistRepository::add(Scientist s){
     write(s);
 }
 
+void ScientistRepository::edit(int index, ScientistSort::Field field, string change){
+switch(field){
+    case ScientistSort::FIRST_NAME:
+        scientistVector[index].firstName = change;
+        break;
+
+    case ScientistSort::LAST_NAME:
+        scientistVector[index].lastName = change;
+        break;
+
+    case ScientistSort::GENDER:
+
+        break;
+
+    case ScientistSort::BIRTH_DATE:
+
+        break;
+
+    case ScientistSort::DEATH_DATE:
+
+        break;
+
+    case ScientistSort::COUNTRY:
+
+        break;
+
+    default:
+
+        break;
+
+}
+//        if(element == "first name")
+//            scientistVector[index].firstName = change;
+//        if(element == "last name")
+//            scientistVector[index].lastName = change;
+//    //    if(element == "gender"){
+//    //        if(scientistVector[index].gender == 'M' || scientistVector[index].gender == 'm')
+//    //            scientistVector[index].gender = 'F';
+//    //        if(scientistVector[index].gender == 'F' || scientistVector[index].gender == 'f')
+//    //            scientistVector[index].gender = 'M';
+//    //    }
+//    //    if(element == "birthdate")
+//    //        scientistVector[index].birthdate = change;
+//    //    if(element == "deathdate")
+//    //        scientistVector[index].deathdate = change;
+//    //    if(element == "country")
+//    //        scientistVector[index].country = change;
+
+
+    //Overwrites the database.txt with the new vector.
+    save();
+}
+
+int ScientistRepository::whoToEdit(string name){
+    int count = 0;
+    int ret = -1;
+
+    for(unsigned int i = 0; i < scientistVector.size() ; i++){
+        if(scientistVector[i].firstName == name || scientistVector[i].lastName == name){
+            ret = i;
+            count ++;
+        }
+    }
+
+    if(count == 0)
+        return -1;
+
+    if(count >= 2)
+        return -2;
+
+    if(count == 1)
+        return ret;
+
+    return 0;
+}
+
+void ScientistRepository::print(string name){
+    int numb;
+    for(unsigned int i = 0; i < scientistVector.size() ; i++){
+        if(scientistVector[i].firstName == name || scientistVector[i].lastName == name)
+        cout << " ("<< numb ++ << ") "<< scientistVector[i].firstName << " "
+             << scientistVector[i].lastName << " "
+             << scientistVector[i].gender << " "
+             << scientistVector[i].birthdate << " "
+             << scientistVector[i].deathdate << " "
+             << scientistVector[i].country << endl;
+            }
+}
+
 void ScientistRepository::remove(string name, int& found){
 
     //Searches for the name and removes it from the vector.
