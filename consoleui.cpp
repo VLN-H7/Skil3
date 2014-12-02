@@ -109,9 +109,9 @@ void ConsoleUI::add(){
     } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
 
     do{
-        cout << "Country: ";
-        getline(cin,s.country);
-    }while(s.country == "");
+        cout << "nationality: ";
+        getline(cin,s.nationality);
+    }while(s.nationality == "");
 
     scientistService.add(s);
 }
@@ -156,7 +156,7 @@ vector<Scientist> ConsoleUI::list(){
              << "\tGender (3)" << endl
              << "\tBirthdate (4)" << endl
              << "\tDeathdate (5)" << endl
-             << "\tCountry (6)" << endl;
+             << "\tnationality (6)" << endl;
         do {
             cout << "How would you like to sort the list? (Default 1): ";
             if(readline(ss))
@@ -182,12 +182,12 @@ vector<Scientist> ConsoleUI::list(){
     for(size_t i = 0; i < vec.size(); i++){
         cout << left
              << setw(4)  << (i+1)
-             << setw(15) << vec[i].firstName
-             << setw(15) << vec[i].lastName
+             << setw(12) << vec[i].firstName
+             << setw(12) << vec[i].lastName
              << setw(8) << vec[i].gender
-             << setw(15) << vec[i].birthdate
-             << setw(15) << vec[i].deathdate
-             << setw(15) << vec[i].country << endl;
+             << setw(12) << vec[i].birthdate
+             << setw(12) << vec[i].deathdate
+             << setw(12) << vec[i].nationality << endl;
     }
     return vec;
 }
@@ -202,7 +202,7 @@ vector<Scientist> ConsoleUI::search(){
          << "\tGender (3)" << endl
          << "\tBirthdate (4)" << endl
          << "\tDeathdate (5)" << endl
-         << "\tCountry (6)" << endl;
+         << "\tNationality (6)" << endl;
     do{
         cout << "What would you like to search by? (Default 1): ";
         if(readline(ss))
@@ -224,12 +224,12 @@ vector<Scientist> ConsoleUI::search(){
     for(size_t i = 0; i<vec.size(); i++){
         cout << left 
             << setw(4)  << (i+1) 
-            << setw(15) << vec[i].firstName 
-            << setw(15) << vec[i].lastName 
+            << setw(12) << vec[i].firstName
+            << setw(12) << vec[i].lastName
             << setw(8)  << vec[i].gender 
-            << setw(15) << vec[i].birthdate 
-            << setw(15) << vec[i].deathdate 
-            << setw(15) << vec[i].country <<  endl;
+            << setw(12) << vec[i].birthdate
+            << setw(12) << vec[i].deathdate
+            << setw(12) << vec[i].nationality <<  endl;
     }
     return vec;
 }
@@ -250,10 +250,10 @@ bool ConsoleUI::readline(stringstream &ss){
 void ConsoleUI::header(){
     cout << left 
          << setw(4)  << "ID"
-         << setw(15) << "First Name"
-         << setw(15) << "Last Name"
+         << setw(12) << "First Name"
+         << setw(12) << "Last Name"
          << setw(8)  << "Gender"
-         << setw(15) << "Birthdate"
-         << setw(15) << "Deathdate"
-         << setw(15) << "Country" << endl;
+         << setw(12) << "Birthdate"
+         << setw(12) << "Deathdate"
+         << setw(12) << "Nationality" << endl;
 }
