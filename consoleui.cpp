@@ -283,8 +283,9 @@ vector<Scientist> ConsoleUI::search(){
         else
             field = 1;
     } while(field <= 0 || field > 12);
+
     if (field > 6) {
-        if (field > 8) field++; // Shift before the modulo operation
+        if (field > 8) field++; // Shift before the modulo operation (because gender cannot be fuzzy)
         field = (field % 7) + 1; // Bound the fuzzy choices
         fuzzy = true;
     }
@@ -293,7 +294,7 @@ vector<Scientist> ConsoleUI::search(){
         ss >> rows;
     vector<Scientist> vec;
     if(rows <= 0)
-        return vec; // Why go through a  if the user doesnt want results?
+        return vec; // Why go through a search if the user doesnt want results?
     cout << "Enter your query: ";
     getline(cin, query);
     vec = scientistService.search(static_cast<ScientistSort::Field>(field), fuzzy, rows, query);

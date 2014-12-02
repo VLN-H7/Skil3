@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include <vector>
+// Casually stolen from http://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#C.2B.2B
+// (because i am too lazy to write from scratch)
 template<class T>
 unsigned int levenshtein_distance(const T &s1, const T & s2) {
     const size_t len1 = s1.size(), len2 = s2.size();

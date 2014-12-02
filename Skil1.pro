@@ -35,3 +35,5 @@ HEADERS += \
     utils.h
 
 OTHER_FILES +=
+
+CONFIG+=static
