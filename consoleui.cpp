@@ -87,12 +87,20 @@ void ConsoleUI::add(){
 }
 
 void ConsoleUI::remove(){
-    string firstName;
+    string name;
+    int found = -1;
 
-    cout << "What computer scientist would you like to remove from the list? (firstName) ";
-    cin >> firstName;
+    cout << "What computer scientist would you like to remove from the list? ";
+    getline(cin, name);
 
-    scientistService.remove(firstName);
+    scientistService.remove(name, found);
+
+    if(found == -1){
+        cout << "The scientist " << name << " could not be found in the list. " << endl;
+    }
+    else {
+        cout << "The scientist " << name << " was successfully removed from the list. " << endl;
+    }
 }
 
 void ConsoleUI::list(){

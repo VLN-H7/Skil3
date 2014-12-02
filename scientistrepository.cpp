@@ -15,15 +15,14 @@ void ScientistRepository::add(Scientist s){
     write.close();
 }
 
-void ScientistRepository::remove(string name){
-    unsigned int number = 0;
+void ScientistRepository::remove(string name, int& found){
 
     //Searches for the name and removes it from the vector.
     for(unsigned int i = 0; i < scientistVector.size() ; i++){
         if(scientistVector[i].firstName == name || scientistVector[i].lastName == name){
-            number = i;
+            found = i;
 
-            for(unsigned int i = number; i < (scientistVector.size() - 1) ; i++){
+            for(unsigned int i = found; i < (scientistVector.size() - 1) ; i++){
                 scientistVector[i].firstName = scientistVector[i+1].firstName;
                 scientistVector[i].lastName = scientistVector[i+1].lastName;
                 scientistVector[i].gender = scientistVector[i+1].gender;
