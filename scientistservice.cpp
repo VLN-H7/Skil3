@@ -17,6 +17,6 @@ vector<Scientist> ScientistService::list(ScientistSort::Field field, ScientistSo
     return scientistRepository.list(field,order);
 }
 
-vector<Scientist> ScientistService::search(ScientistSort::Field field, int rows, string query){
-    return scientistRepository.search(field, rows, query);
+vector<Scientist> ScientistService::search(ScientistSort::Field field, bool fuzzy, int rows, string query){
+    return scientistRepository.search(field, fuzzy, rows, query);
 }

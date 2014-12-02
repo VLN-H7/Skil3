@@ -95,7 +95,7 @@ void ConsoleUI::add(){
     } while(!s.birthdate.isValid() || s.birthdate>Date::now());
 
     do{
-        cout << "Date of death(DD.MM.YYYY)(Press enter if he/she is still alive): ";
+        cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
         getline(cin, str);
         if(str.empty()){
             s.deathdate.setDate(0,1,1);
@@ -117,7 +117,7 @@ void ConsoleUI::add(){
 }
 
 void ConsoleUI::remove(){
-    char inp = 'S';
+    char inp = 'L';
     stringstream ss;
     vector<Scientist> vec;
     int id = -1;
@@ -126,14 +126,18 @@ void ConsoleUI::remove(){
     cout << "Would you like to view a list of all the computer scientists or search for a specific one? (L/S): ";
     if(readline(ss))
         ss >> inp;
-    if(inp == 'L') vec = list();
-    else vec = search();
+
+    if(toupper(inp) == 'S') vec = search();
+    else vec = list();
 
     do{
         cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
         cont = readline(ss);
-        if(ss.str()[0] == 'Q') return;
-    } while(!cont || !(ss >> id) || id == 0 || id >= (int)vec.size());
+
+        if(cont && toupper(ss.str()[0]) == 'Q')
+            return;
+        ss >> id;
+    } while(!cont || id <= 0 || static_cast<size_t>(id) > vec.size());
     id--;
 
     scientistService.remove(vec[id]);
@@ -195,6 +199,7 @@ vector<Scientist> ConsoleUI::list(){
 vector<Scientist> ConsoleUI::search(){
     stringstream ss;
     int field = 1, rows = 1;
+    bool fuzzy = false;
     string query;
     cout << "Available fields:" << endl
          << "\tFirst Name (1)" << endl
@@ -202,15 +207,24 @@ vector<Scientist> ConsoleUI::search(){
          << "\tGender (3)" << endl
          << "\tBirthdate (4)" << endl
          << "\tDeathdate (5)" << endl
-         << "\tCountry (6)" << endl;
+         << "\tCountry (6)" << endl
+         << "\tFirst Name (Fuzzy) (7)" << endl
+         << "\tLast Name (Fuzzy) (8)" << endl
+         << "\tBirthdate (Fuzzy) (9)" << endl
+         << "\tDeathdate (Fuzzy) (10)" << endl
+         << "\tCountry (Fuzzy) (11)" << endl;
     do{
         cout << "What would you like to search by? (Default 1): ";
         if(readline(ss))
             ss >> field;
         else
             field = 1;
-    } while(field <= 0 || field > 6);
-
+    } while(field <= 0 || field > 12);
+    if (field > 6) {
+        if (field > 8) field++; // Shift before the modulo operation
+        field = field % 7; // Bound the fuzzy choices
+        fuzzy = true;
+    }
     cout << "What is the maximum number of entries you want? (Default 1)";
     if(readline(ss))
         ss >> rows;
@@ -219,7 +233,7 @@ vector<Scientist> ConsoleUI::search(){
         return vec; // Why go through a search if the user doesnt want results?
     cout << "Enter your query: ";
     getline(cin, query);
-    vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
+    vec = scientistService.search(static_cast<ScientistSort::Field>(field), fuzzy, rows, query);
     header();
     for(size_t i = 0; i<vec.size(); i++){
         cout << left 
@@ -239,7 +253,6 @@ bool ConsoleUI::readline(stringstream &ss){
     // This is useful for example to read
     string s;
     ss.str("");
-//    if(cin.peek() == '\n') getline(cin, s); // Discard the empty line
     getline(cin, s);
     if(s.empty()) return false;
     ss.str(s);

@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include <consoleui.h>
+#include "consoleui.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);

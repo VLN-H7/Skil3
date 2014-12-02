@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "scientist.h"
 #include "scientistsort.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -18,8 +19,8 @@ public:
     void add(Scientist s);
     void remove(Scientist s);
     vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
-    vector<Scientist> search(ScientistSort::Field field, size_t rows, string query);
-    vector<Scientist> search(ScientistSort::Field field, string query);
+    vector<Scientist> search(ScientistSort::Field field, bool fuzzy, size_t rows, string query);
+    vector<Scientist> search(ScientistSort::Field field, bool fuzzy, string query);
     void save();
     void write(Scientist s);
 private:

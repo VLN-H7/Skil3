@@ -19,6 +19,10 @@ Date Date::fromString(string date){
 
 }
 
+string Date::toDateString() const{
+    return toString("dd.MM.yyyy").toStdString();
+}
+
 istream &operator>>( istream  &input, Date &D ){
         int d, m, y;
         input >> d >> m >> y;
@@ -27,6 +31,6 @@ istream &operator>>( istream  &input, Date &D ){
 }
 
 ostream &operator<<( ostream &output, const Date &D){
-        output << D.toString("dd.MM.yyyy").toStdString();
+        output << D.toDateString();
         return output;
 }

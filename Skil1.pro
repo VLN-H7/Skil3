@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     scientistservice.cpp \
     scientist.cpp \
     scientistrepository.cpp \
-    date.cpp
+    date.cpp \
+    scientistsort.cpp
 
 HEADERS += \
     consoleui.h \
@@ -30,6 +31,7 @@ HEADERS += \
     scientist.h \
     scientistrepository.h \
     date.h \
-    scientistsort.h
+    scientistsort.h \
+    utils.h
 
 OTHER_FILES +=

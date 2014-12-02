@@ -74,11 +74,11 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     sort(ret.begin(), ret.end(), cmp);
     return ret;
 }
-vector<Scientist> ScientistRepository::search(ScientistSort::Field field, string query){
-    return search(field, 1, query);
+vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, string query){
+    return search(field, fuzzy, 1, query);
 }
 
-vector<Scientist> ScientistRepository::search(ScientistSort::Field field, size_t rows, string query){
+vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, size_t rows, string query){
 
     vector<Scientist> ret;
 
@@ -86,12 +86,16 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, size_t
         switch(field){
 
             case ScientistSort::FIRST_NAME:
-                if((*it).firstName == query)
+                if(fuzzy && levenshtein_distance<string>((*it).firstName,query) < 3)
+                    ret.push_back((*it));
+                else if((*it).firstName == query)
                     ret.push_back((*it));
                 break;
 
             case ScientistSort::LAST_NAME:
-                if((*it).lastName == query)
+                if(fuzzy && levenshtein_distance<string>((*it).lastName,query) < 3)
+                    ret.push_back((*it));
+                else if((*it).lastName == query)
                     ret.push_back((*it));
                 break;
 
@@ -111,7 +115,9 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, size_t
                 break;
 
             case ScientistSort::COUNTRY:
-                if((*it).country == query)
+                if(fuzzy && levenshtein_distance<string>((*it).country,query) < 3)
+                    ret.push_back((*it));
+                else if((*it).country == query)
                     ret.push_back((*it));
                 break;
 
