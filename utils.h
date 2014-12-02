@@ -1,45 +1,20 @@
 #ifndef UTILS_H
 #define UTILS_H
-template <class T>
-size_t levenshtein_distance(const T &s1, const T &s2)
-{
-  const size_t m(s1.size());
-  const size_t n(s2.size());
+#include <vector>
+template<class T>
+unsigned int levenshtein_distance(const T &s1, const T & s2) {
+    const size_t len1 = s1.size(), len2 = s2.size();
+    vector<unsigned int> col(len2+1), prevCol(len2+1);
 
-  if( m==0 ) return n;
-  if( n==0 ) return m;
-
-  size_t *costs = new size_t[n + 1];
-
-  for( size_t k=0; k<=n; k++ ) costs[k] = k;
-
-  size_t i = 0;
-  for ( std::string::const_iterator it1 = s1.begin(); it1 != s1.end(); ++it1, ++i )
-  {
-    costs[0] = i+1;
-    size_t corner = i;
-
-    size_t j = 0;
-    for ( std::string::const_iterator it2 = s2.begin(); it2 != s2.end(); ++it2, ++j )
-    {
-      size_t upper = costs[j+1];
-      if( *it1 == *it2 )
-      {
-          costs[j+1] = corner;
-      }
-      else
-      {
-        size_t t(upper<corner?upper:corner);
-        costs[j+1] = (costs[j]<t?costs[j]:t)+1;
-      }
-
-      corner = upper;
+    for (unsigned int i = 0; i < prevCol.size(); i++)
+        prevCol[i] = i;
+    for (unsigned int i = 0; i < len1; i++) {
+        col[0] = i+1;
+        for (unsigned int j = 0; j < len2; j++)
+            col[j+1] = std::min( std::min(prevCol[1 + j] + 1, col[j] + 1),
+                                prevCol[j] + (s1[i]==s2[j] ? 0 : 1) );
+        col.swap(prevCol);
     }
-  }
-
-  size_t result = costs[n];
-  delete [] costs;
-
-  return result;
+    return prevCol[len2];
 }
 #endif // UTILS_H
