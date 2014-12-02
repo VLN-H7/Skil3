@@ -26,4 +26,3 @@ ostream &operator<<( ostream &output, const Date &D){
         output << D.toString("dd.MM.yyyy").toStdString();
         return output;
 }
-

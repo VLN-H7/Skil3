@@ -62,6 +62,7 @@ void ConsoleUI::help(){
 void ConsoleUI::add(){
 
     Scientist s;
+    string str;
 
     cout << "First Name: ";
     getline(cin,s.firstName);
@@ -77,21 +78,26 @@ void ConsoleUI::add(){
             cout << "STOPIT, DO IT RIGHT!!!" << endl;
     } while(s.gender != 'M' && s.gender != 'F');
 
+    cin.ignore();
+
     do{
-        cout << "Birth date(DD MM YYYY): ";
-        cin >> s.birthdate;
+        cout << "Date of birth(DD.MM.YYYY): ";
+        getline(cin, str);
+        s.birthdate = Date::fromString(str);
         if (!s.birthdate.isValid())
             cout << "STOPIT, DO IT RIGHT!" << endl;
     } while(!s.birthdate.isValid());
 
     do{
-        cout << "Death date(DD MM YYYY): ";
-        cin >> s.deathdate;
+        cout << "Date of death(DD.MM.YYYY): ";
+        getline(cin, str);
+        s.deathdate = Date::fromString(str);
         if (!s.deathdate.isValid())
             cout << "STOPIT, DO IT RIGHT!" << endl;
-    } while(!s.deathdate.isValid());
+        else if (s.deathdate<s.birthdate)
+            cout << "Date of death needs to be after date of birth." << endl;
+    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
 
-    cin.ignore();
     cout << "Country: ";
     getline(cin,s.country);
 
