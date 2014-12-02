@@ -225,7 +225,7 @@ vector<Scientist> ConsoleUI::search(){
         field = (field % 7) + 1; // Bound the fuzzy choices
         fuzzy = true;
     }
-    cout << "What is the maximum number of entries you want? (Default 1)";
+    cout << "What is the maximum number of entries you want? (Default 1): ";
     if(readline(ss))
         ss >> rows;
     vector<Scientist> vec;
