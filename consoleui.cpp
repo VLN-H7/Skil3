@@ -63,11 +63,15 @@ void ConsoleUI::add(){
 
     Scientist s;
 
+    do{
     cout << "First Name: ";
     getline(cin,s.firstName);
+    }while(cin,s.firstName == "");
 
+    do{
     cout << "Last Name: ";
     getline(cin, s.lastName);
+    }while (cin, s.lastName == "");
 
     do{
         cout << "Gender (M/F): ";
@@ -92,8 +96,11 @@ void ConsoleUI::add(){
     } while(!s.deathdate.isValid());
 
     cin.ignore();
+
+    do{
     cout << "Country: ";
     getline(cin,s.country);
+    }while(cin,s.country == "");
 
     scientistService.add(s);
 }
