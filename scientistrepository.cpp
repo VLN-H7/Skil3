@@ -115,7 +115,7 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
                 break;
 
             case ScientistSort::NATIONALITY:
-                if(fuzzy && levenshtein_distance<string>((*it).country,query) < 3)
+                if(fuzzy && levenshtein_distance<string>((*it).nationality,query) < 3)
                     ret.push_back((*it));
                 else if((*it).nationality == query)
                     ret.push_back((*it));

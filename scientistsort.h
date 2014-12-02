@@ -13,6 +13,7 @@ namespace ScientistSort {
 
         Comparer(Field field, Order order) : field(field), order(order) {}
         bool operator()(const Scientist &a, const Scientist &b);
+    };
 }
 
 #endif // SORT_H
