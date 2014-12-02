@@ -89,7 +89,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     vector<Scientist> ret(scientistVector);
     // SELECT * FROM scientists ORDER BY field,order
     auto cmp = ScientistSort::Comparer(field, order);
-    sort(ret.begin(), ret.end(), cmp);
+    stable_sort(ret.begin(), ret.end(), cmp);
     return ret;
 }
 
