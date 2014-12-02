@@ -95,8 +95,12 @@ void ConsoleUI::add(){
     } while(!s.birthdate.isValid() || s.birthdate>Date::now());
 
     do{
-        cout << "Date of death(DD.MM.YYYY): ";
+        cout << "Date of death(DD.MM.YYYY)(Press enter if he/she is still alive): ";
         getline(cin, str);
+        if(str.empty()){
+            s.deathdate.setDate(0,1,1);
+            break;
+        }
         s.deathdate = Date::fromString(str);
         if (!s.deathdate.isValid())
             cout << "Invalid Date." << endl;
