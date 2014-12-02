@@ -1,19 +1,19 @@
 #ifndef UTILS_H
 #define UTILS_H
-template<class T>
-unsigned int levenshtein_distance(const T &s1, const T & s2) {
+template <class T> unsigned int edit_distance(const T& s1, const T& s2)
+{
     const size_t len1 = s1.size(), len2 = s2.size();
-    vector<unsigned int> col(len2+1), prevCol(len2+1);
+    vector<vector<unsigned int> > d(len1 + 1, vector<unsigned int>(len2 + 1));
 
-    for (unsigned int i = 0; i < prevCol.size(); i++)
-        prevCol[i] = i;
-    for (unsigned int i = 0; i < len1; i++) {
-        col[0] = i+1;
-        for (unsigned int j = 0; j < len2; j++)
-            col[j+1] = std::min( std::min(prevCol[1 + j] + 1, col[j] + 1),
-                                prevCol[j] + (s1[i]==s2[j] ? 0 : 1) );
-        col.swap(prevCol);
-    }
-    return prevCol[len2];
+    d[0][0] = 0;
+    for(unsigned int i = 1; i <= len1; ++i) d[i][0] = i;
+    for(unsigned int i = 1; i <= len2; ++i) d[0][i] = i;
+
+    for(unsigned int i = 1; i <= len1; ++i)
+        for(unsigned int j = 1; j <= len2; ++j)
+
+                      d[i][j] = std::min( std::min(d[i - 1][j] + 1,d[i][j - 1] + 1),
+                                          d[i - 1][j - 1] + (s1[i - 1] == s2[j - 1] ? 0 : 1) );
+    return d[len1][len2];
 }
 #endif // UTILS_H
