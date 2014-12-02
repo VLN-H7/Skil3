@@ -43,11 +43,11 @@ bool ScientistSort::Comparer::operator()(const Scientist &a, const Scientist &b)
             }
             break;
 
-        case COUNTRY:
+        case NATIONALITY:
             if(order == ASC){
-                return a.country.compare(b.country) < 0;
+                return a.nationality.compare(b.nationality) < 0;
             } else {
-                return a.country.compare(b.country) > 0;
+                return a.nationality.compare(b.nationality) > 0;
             }
             break;
 
