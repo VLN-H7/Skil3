@@ -15,9 +15,9 @@ public:
     void start();
 private:
     ScientistService scientistService;
-    void list();
+    vector<Scientist> list();
     void add();
-    void search();
+    vector<Scientist> search();
     void menu();
     bool readline(stringstream &ss);
     void help();
@@ -26,7 +26,7 @@ private:
     void remove();
     void edit();
     void print();
-    int whoToRemove();
+    void butiful();
 };
 
 #endif // CONSOLEUI_H

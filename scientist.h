@@ -18,8 +18,9 @@ public:
     char gender;
     Date birthdate;
     Date deathdate;
-    string country;
+    string nationality;
     static Scientist fromString(string s, char delim);
+    friend bool operator ==(const Scientist &a, const Scientist &b);
 };
 
 #endif // SCIENTIST_H

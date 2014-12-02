@@ -9,8 +9,8 @@ void ScientistService::add(Scientist s) {
     scientistRepository.add(s);
 }
 
-void ScientistService::remove(string name, int& found){
-    scientistRepository.remove(name, found);
+void ScientistService::remove(Scientist s){
+    scientistRepository.remove(s);
 }
 
 void ScientistService::edit(int index, ScientistSort::Field field, string change){
@@ -30,6 +30,6 @@ vector<Scientist> ScientistService::list(ScientistSort::Field field, ScientistSo
     return scientistRepository.list(field,order);
 }
 
-vector<Scientist> ScientistService::search(ScientistSort::Field field, int rows, string query){
-    return scientistRepository.search(field, rows, query);
+vector<Scientist> ScientistService::search(ScientistSort::Field field, bool fuzzy, int rows, string query){
+    return scientistRepository.search(field, fuzzy, rows, query);
 }

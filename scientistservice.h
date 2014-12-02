@@ -14,12 +14,9 @@ class ScientistService
 public:
     ScientistService();
     void add(Scientist s);
-    void remove(string name, int& found);
-    void edit(int index, ScientistSort::Field field, string change);
-    void print(string name);
-    int whoToEdit(string name);
+    void remove(Scientist s);
     vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
-    vector<Scientist> search(ScientistSort::Field field, int rows, string query);
+    vector<Scientist> search(ScientistSort::Field field, bool fuzzy, int rows, string query);
 private:
     ScientistRepository scientistRepository;
 };

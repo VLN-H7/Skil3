@@ -1,14 +1,25 @@
 #include "consoleui.h"
 
+
 using namespace std;
 ConsoleUI::ConsoleUI()
 {
     scientistService = ScientistService();
 }
+void ConsoleUI::butiful(){
+   cout << " ----------------------------------------------------- " << endl
+        << "|      __    __     _                                 |" << endl
+        << "|     / / /\\ \\ \\___| | ___ ___  _ __ ___   ___        |" << endl
+        << "|     \\ \\/  \\/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\       |" << endl
+        << "|      \\  /\\  /  __/ | (_| (_) | | | | | |  __/       |" << endl
+        << "|       \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___|       |" << endl
+        << "|  --- to an awesome computer scientist program! ---  |" << endl
+        << "|                                                     |" << endl
+        << " ----------------------------------------------------- " << endl;
+}
 
 void ConsoleUI::start(){
-    ifstream welcome("/Users/saraarnadottir/Skil1/Welcome.txt");
-    cout << welcome.rdbuf();
+    butiful();
     help();
     do{
         menu();
@@ -54,59 +65,88 @@ void ConsoleUI::help(){
 void ConsoleUI::add(){
 
     Scientist s;
+    string str;
 
-    cout << "First Name: ";
-    getline(cin,s.firstName);
+    do{
+        cout << "First Name: ";
+        getline(cin,s.firstName);
+    }while(s.firstName.empty());
 
-    cout << "Last Name: ";
-    getline(cin, s.lastName);
+    do{
+        cout << "Last Name: ";
+        getline(cin, s.lastName);
+    }while (s.lastName.empty());
 
     do{
         cout << "Gender (M/F): ";
         cin >> s.gender;
         s.gender = toupper(s.gender);
         if(s.gender != 'M' && s.gender != 'F')
-            cout << "STOPIT, DO IT RIGHT!!!" << endl;
+            cout << "Invalid gender, please enter either M or F." << endl;
     } while(s.gender != 'M' && s.gender != 'F');
 
-    do{
-        cout << "Birth date(DD MM YYYY): ";
-        cin >> s.birthdate;
-        if (!s.birthdate.isValid())
-            cout << "STOPIT, DO IT RIGHT!" << endl;
-    } while(!s.birthdate.isValid());
-
-    do{
-        cout << "Death date(DD MM YYYY): ";
-        cin >> s.deathdate;
-        if (!s.deathdate.isValid())
-            cout << "STOPIT, DO IT RIGHT!" << endl;
-    } while(!s.deathdate.isValid());
-
     cin.ignore();
-    cout << "Country: ";
-    getline(cin,s.country);
+
+    do{
+        cout << "Date of birth(DD.MM.YYYY): ";
+        getline(cin, str);
+        s.birthdate = Date::fromString(str);
+        if (!s.birthdate.isValid())
+            cout << "Invalid Date." << endl;
+        else if (s.birthdate>Date::now())
+            cout << "Date of birth cannot be in the future." << endl;
+    } while(!s.birthdate.isValid() || s.birthdate>Date::now());
+
+    do{
+        cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
+        getline(cin, str);
+        if(str.empty()){
+            s.deathdate.setDate(0,1,1);
+            break;
+        }
+        s.deathdate = Date::fromString(str);
+        if (!s.deathdate.isValid())
+            cout << "Invalid Date." << endl;
+        else if (s.deathdate<s.birthdate)
+            cout << "Date of death needs to be after date of birth." << endl;
+    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
+
+    do{
+        cout << "nationality: ";
+        getline(cin,s.nationality);
+    }while(s.nationality == "");
 
     scientistService.add(s);
 }
 
 void ConsoleUI::remove(){
-    string name;
-    int found = -1;
+    char inp = 'L';
+    stringstream ss;
+    vector<Scientist> vec;
+    int id = -1;
+    bool cont = true;
 
-    cout << "What computer scientist would you like to remove from the list? ";
-    getline(cin, name);
+    cout << "Would you like to view a list of all the computer scientists or search for a specific one? (L/S): ";
+    if(readline(ss))
+        ss >> inp;
 
-    scientistService.remove(name, found);
+    if(toupper(inp) == 'S') vec = search();
+    else vec = list();
 
-    if(found == -1){
-        cout << "The scientist " << name << " could not be found in the list. " << endl;
-    }
-    else {
-        cout << "The scientist " << name << " was successfully removed from the list. " << endl;
-    }
+    do{
+        cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
+        cont = readline(ss);
+
+        if(cont && toupper(ss.str()[0]) == 'Q')
+            return;
+        ss >> id;
+    } while(!cont || id <= 0 || static_cast<size_t>(id) > vec.size());
+    id--;
+
+    scientistService.remove(vec[id]);
+
+    cout << "The scientist " << vec[id].firstName << " " << vec[id].lastName << " was successfully removed from the list. " << endl;
 }
-
 void ConsoleUI::edit(){
     string name;
     int number = 0;
@@ -153,8 +193,7 @@ void ConsoleUI::edit(){
 
     scientistService.edit(index, static_cast<ScientistSort::Field>(field), change);
 }
-
-void ConsoleUI::list(){
+vector<Scientist> ConsoleUI::list(){
     int field = 1, order = 1;
     char sort = 'N';
     stringstream ss;
@@ -169,7 +208,7 @@ void ConsoleUI::list(){
              << "\tGender (3)" << endl
              << "\tBirthdate (4)" << endl
              << "\tDeathdate (5)" << endl
-             << "\tCountry (6)" << endl;
+             << "\tnationality (6)" << endl;
         do {
             cout << "How would you like to sort the list? (Default 1): ";
             if(readline(ss))
@@ -192,14 +231,23 @@ void ConsoleUI::list(){
     header();
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
-    for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(8) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) <<(*i).country << endl;
+    for(size_t i = 0; i < vec.size(); i++){
+        cout << left
+             << setw(4)  << (i+1)
+             << setw(12) << vec[i].firstName
+             << setw(12) << vec[i].lastName
+             << setw(8) << vec[i].gender
+             << setw(12) << vec[i].birthdate
+             << setw(12) << vec[i].deathdate
+             << setw(12) << vec[i].nationality << endl;
     }
+    return vec;
 }
 
-void ConsoleUI::search(){
+vector<Scientist> ConsoleUI::search(){
     stringstream ss;
     int field = 1, rows = 1;
+    bool fuzzy = false;
     string query;
     cout << "Available fields:" << endl
          << "\tFirst Name (1)" << endl
@@ -207,27 +255,45 @@ void ConsoleUI::search(){
          << "\tGender (3)" << endl
          << "\tBirthdate (4)" << endl
          << "\tDeathdate (5)" << endl
-         << "\tCountry (6)" << endl;
+         << "\tNationality (6)" << endl
+         << "\tFirst Name (Fuzzy) (7)" << endl
+         << "\tLast Name (Fuzzy) (8)" << endl
+         << "\tBirthdate (Fuzzy) (9)" << endl
+         << "\tDeathdate (Fuzzy) (10)" << endl
+         << "\tNationality (Fuzzy) (11)" << endl;
     do{
-        cout << "What would you like to search by? (Default 1): ";
+        cout << "What would you like to  by? (Default 1): ";
         if(readline(ss))
             ss >> field;
         else
             field = 1;
-    } while(field <= 0 || field > 6);
-
-    cout << "What is the maximum number of entries you want? (Default 1)";
+    } while(field <= 0 || field > 12);
+    if (field > 6) {
+        if (field > 8) field++; // Shift before the modulo operation
+        field = (field % 7) + 1; // Bound the fuzzy choices
+        fuzzy = true;
+    }
+    cout << "What is the maximum number of entries you want? (Default 1): ";
     if(readline(ss))
         ss >> rows;
-    if(rows < 0) rows = 0;
-    if(rows == 0) return; // Why go through a search if the user doesnt want results?
+    vector<Scientist> vec;
+    if(rows <= 0)
+        return vec; // Why go through a  if the user doesnt want results?
     cout << "Enter your query: ";
     getline(cin, query);
-    vector<Scientist> vec = scientistService.search(static_cast<ScientistSort::Field>(field), rows, query);
+    vec = scientistService.search(static_cast<ScientistSort::Field>(field), fuzzy, rows, query);
     header();
-    for(auto i = vec.begin(); i != vec.end(); i++){
-        cout << left << setw(15) << (*i).firstName << setw(15) << (*i).lastName << setw(8) << (*i).gender << setw(15) << (*i).birthdate << setw(15) << (*i).deathdate << setw(15) << (*i).country <<  endl;
+    for(size_t i = 0; i<vec.size(); i++){
+        cout << left 
+            << setw(4)  << (i+1) 
+            << setw(12) << vec[i].firstName
+            << setw(12) << vec[i].lastName
+            << setw(8)  << vec[i].gender 
+            << setw(12) << vec[i].birthdate
+            << setw(12) << vec[i].deathdate
+            << setw(12) << vec[i].nationality <<  endl;
     }
+    return vec;
 }
 
 bool ConsoleUI::readline(stringstream &ss){
@@ -235,7 +301,6 @@ bool ConsoleUI::readline(stringstream &ss){
     // This is useful for example to read
     string s;
     ss.str("");
-//    if(cin.peek() == '\n') getline(cin, s); // Discard the empty line
     getline(cin, s);
     if(s.empty()) return false;
     ss.str(s);
@@ -244,10 +309,12 @@ bool ConsoleUI::readline(stringstream &ss){
 }
 
 void ConsoleUI::header(){
-    cout << left << setw(15) << "First Name"
-         << setw(15) << "Last Name"
+    cout << left 
+         << setw(4)  << "ID"
+         << setw(12) << "First Name"
+         << setw(12) << "Last Name"
          << setw(8)  << "Gender"
-         << setw(15) << "Birthdate"
-         << setw(15) << "Deathdate"
-         << setw(15) << "Country" << endl;
+         << setw(12) << "Birthdate"
+         << setw(12) << "Deathdate"
+         << setw(12) << "Nationality" << endl;
 }
