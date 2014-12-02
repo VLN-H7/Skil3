@@ -19,7 +19,7 @@ public:
     void remove(string name, int& found);
     vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
     vector<Scientist> search(ScientistSort::Field field, int rows, string query);
-
+    vector<Scientist> search(ScientistSort::Field field, string query);
 private:
     vector<Scientist> scientistVector;
     void read();

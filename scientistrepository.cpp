@@ -22,15 +22,7 @@ void ScientistRepository::remove(string name, int& found){
         if(scientistVector[i].firstName == name || scientistVector[i].lastName == name){
             found = i;
 
-            for(unsigned int i = found; i < (scientistVector.size() - 1) ; i++){
-                scientistVector[i].firstName = scientistVector[i+1].firstName;
-                scientistVector[i].lastName = scientistVector[i+1].lastName;
-                scientistVector[i].gender = scientistVector[i+1].gender;
-                scientistVector[i].birthdate = scientistVector[i+1].birthdate;
-                scientistVector[i].deathdate = scientistVector[i+1].deathdate;
-                scientistVector[i].country = scientistVector[i+1].country;
-            }
-        scientistVector.pop_back();
+            scientistVector.erase(scientistVector.begin() + i);
         }
     }
 
@@ -120,7 +112,9 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     }
     return ret;
 }
-
+vector<Scientist> ScientistRepository::search(ScientistSort::Field field, string query){
+    return search(field, 1, query);
+}
 
 vector<Scientist> ScientistRepository::search(ScientistSort::Field field, int rows, string query){
 
