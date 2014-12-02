@@ -80,6 +80,7 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
     return search(field, fuzzy, 1, query);
 }
 //Searches for Scientists after the parameters selected
+//If fuzzy is true then it finds everything that is within 2 Levenshtein distance from the original query
 vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, size_t rows, string query){
 
     vector<Scientist> ret;
