@@ -1,18 +1,45 @@
 #include "scientistrepository.h"
 
 const char delim  = ';';
+const char* DATABASE = "database.txt";
 
 ScientistRepository::ScientistRepository(){
     scientistVector = vector<Scientist>();
     read();
 }
 
+void ScientistRepository::write(Scientist s){
+    ofstream write;
+    write.open(DATABASE, ios::out | ios::app);
+    write << s.firstName << delim
+          << s.lastName << delim
+          << s.gender << delim
+          << s.birthdate << delim
+          << s.deathdate << delim
+          << s.country << endl;
+    write.close();
+}
+
+void ScientistRepository::save(){
+    ofstream write;
+    write.open(DATABASE, ios::out);
+
+    for(unsigned int i = 0; i < scientistVector.size() ; i++){
+        write << scientistVector[i].firstName << delim
+              << scientistVector[i].lastName << delim
+              << scientistVector[i].gender << delim
+              << scientistVector[i].birthdate << delim
+              << scientistVector[i].deathdate << delim
+              << scientistVector[i].country << endl;
+    }
+
+    write.close();
+
+}
+
 void ScientistRepository::add(Scientist s){
     scientistVector.push_back(s);
-    ofstream write;
-    write.open("database.txt", ios::out | ios::app);
-    write << s.firstName << delim << s.lastName << delim << s.gender << delim << s.birthdate << delim << s.deathdate << delim << s.country << "\n";
-    write.close();
+    write(s);
 }
 
 void ScientistRepository::remove(string name, int& found){
@@ -27,19 +54,7 @@ void ScientistRepository::remove(string name, int& found){
     }
 
     //Overwrites the database.txt with the new vector.
-    ofstream write;
-    write.open("database.txt", ios::out);
-
-    for(unsigned int i = 0; i < scientistVector.size() ; i++){
-        write << scientistVector[i].firstName << delim
-              << scientistVector[i].lastName << delim
-              << scientistVector[i].gender << delim
-              << scientistVector[i].birthdate << delim
-              << scientistVector[i].deathdate << delim
-              << scientistVector[i].country << "\n";
-    }
-
-    write.close();
+    save();
 }
 
 void ScientistRepository::read(){

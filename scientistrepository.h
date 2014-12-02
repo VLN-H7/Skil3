@@ -20,6 +20,8 @@ public:
     vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
     vector<Scientist> search(ScientistSort::Field field, int rows, string query);
     vector<Scientist> search(ScientistSort::Field field, string query);
+    void save();
+    void write(Scientist s);
 private:
     vector<Scientist> scientistVector;
     void read();
