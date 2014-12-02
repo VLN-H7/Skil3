@@ -99,6 +99,10 @@ void ConsoleUI::remove(){
 
     if(toupper(inp) == 'S') vec = search();
     else vec = list();
+    if(vec.empty()){
+        cout << "No results found." << endl;
+        return;
+    }
 
     do{
         cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
@@ -133,6 +137,10 @@ void ConsoleUI::edit(){
 
     if(toupper(inp) == 'S') vec = search();
     else vec = list();
+    if(vec.empty()){
+        cout << "No results found." << endl;
+        return;
+    }
 
     do{
         cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
@@ -269,7 +277,7 @@ vector<Scientist> ConsoleUI::search(){
          << "\tDeathdate (Fuzzy) (10)" << endl
          << "\tNationality (Fuzzy) (11)" << endl;
     do{
-        cout << "What would you like to  by? (Default 1): ";
+        cout << "What would you like to search by? (Default 1): ";
         if(readline(ss))
             ss >> field;
         else
