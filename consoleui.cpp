@@ -214,7 +214,7 @@ vector<Scientist> ConsoleUI::list(){
             if(readline(ss))
                 ss >> field;
             else
-                order = 1;
+                field = 1;
         } while(field <= 0 || field > 6);
 
         cout << "Available orderings:" << endl
@@ -229,7 +229,7 @@ vector<Scientist> ConsoleUI::list(){
         } while(order <= 0 || order > 2);
     }
     header();
-//    cout << field << " " << order << " " << static_cast<ScientistSort::Field>(field) << " " << static_cast<ScientistSort::Order>(order) << endl;
+
     vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
 
     for(size_t i = 0; i < vec.size(); i++){
@@ -301,7 +301,8 @@ bool ConsoleUI::readline(stringstream &ss){
     // A function to read a line and return a stringstream to it, or return false otherwise.
     // This is useful for example to read
     string s;
-    ss.str("");
+    ss.str(string());
+    ss.clear();
     getline(cin, s);
     if(s.empty()) return false;
     ss.str(s);
