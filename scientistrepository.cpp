@@ -16,7 +16,7 @@ void ScientistRepository::write(Scientist s){
           << s.gender << delim
           << s.birthdate << delim
           << s.deathdate << delim
-          << s.country << endl;
+          << s.nationality << endl;
     write.close();
 }
 
@@ -30,7 +30,7 @@ void ScientistRepository::save(){
               << scientistVector[i].gender << delim
               << scientistVector[i].birthdate << delim
               << scientistVector[i].deathdate << delim
-              << scientistVector[i].country << endl;
+              << scientistVector[i].nationality << endl;
     }
 
     write.close();
@@ -114,10 +114,10 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
                     ret.push_back((*it));
                 break;
 
-            case ScientistSort::COUNTRY:
+            case ScientistSort::NATIONALITY:
                 if(fuzzy && levenshtein_distance<string>((*it).country,query) < 3)
                     ret.push_back((*it));
-                else if((*it).country == query)
+                else if((*it).nationality == query)
                     ret.push_back((*it));
                 break;
 

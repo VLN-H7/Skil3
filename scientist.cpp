@@ -27,7 +27,7 @@ Scientist Scientist::fromString(string s, char delim){
                 sci.deathdate = Date::fromString(item);
                 break;
             case 5:
-                sci.country = item;
+                sci.nationality = item;
                 break;
             default:
                 break;
@@ -43,6 +43,6 @@ bool operator ==(const Scientist &a, const Scientist &b){
     else if (a.gender != b.gender) return false;
     else if (a.birthdate != b.birthdate) return false;
     else if (a.deathdate != b.deathdate) return false;
-    else if (a.country != b.country) return false;
+    else if (a.nationality != b.nationality) return false;
     return true;
 }
