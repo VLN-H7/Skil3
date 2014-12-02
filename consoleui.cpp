@@ -7,7 +7,7 @@ ConsoleUI::ConsoleUI()
 }
 
 void ConsoleUI::start(){
-    ifstream welcome("Welcome.txt");
+    ifstream welcome("/Users/saraarnadottir/Skil1/Welcome.txt");
     cout << welcome.rdbuf();
 
     help();
