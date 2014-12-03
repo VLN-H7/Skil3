@@ -5,6 +5,9 @@
 #include <sstream>
 #include <string>
 #include <iostream>
+#include <QSqlQuery>
+#include <QVariant>
+#include <QChar>
 #include "date.h"
 
 using namespace std;
@@ -13,6 +16,7 @@ class Scientist
 {
 public:
     Scientist();
+    int id;
     string firstName;
     string lastName;
     char gender;
@@ -20,6 +24,7 @@ public:
     Date deathdate;
     string nationality;
     static Scientist fromString(string s, char delim);
+    static Scientist fromQuery(const QSqlQuery query);
     friend bool operator ==(const Scientist &a, const Scientist &b);
 };
 

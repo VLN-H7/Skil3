@@ -10,6 +10,8 @@
 #include "scientistsort.h"
 #include "utils.h"
 
+#include "sqlconnection.h"
+
 using namespace std;
 
 class ScientistRepository
@@ -17,16 +19,13 @@ class ScientistRepository
 public:
     ScientistRepository();
     void add(Scientist s);
-    void remove(Scientist s);
+    void remove(Scientist &s);
     vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
     vector<Scientist> search(ScientistSort::Field field, bool fuzzy, size_t rows, string query);
     vector<Scientist> search(ScientistSort::Field field, bool fuzzy, string query);
-    void save();
-    void write(Scientist s);
     void update(Scientist &s, Scientist &replace);
 private:
     vector<Scientist> scientistVector;
-    void read();
 
 };
 

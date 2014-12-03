@@ -39,6 +39,39 @@ Scientist Scientist::fromString(string s, char delim){
     return sci;
 }
 
+Scientist Scientist::fromQuery(const QSqlQuery query){
+    Scientist sci;
+    for(int i = 0; i < 7; i++) {
+        switch(i){
+            case 0:
+                sci.id = query.value(i).toInt();
+                break;
+            case 1:
+                sci.firstName = query.value(i).toString().toStdString();
+                break;
+            case 2:
+                sci.lastName = query.value(i).toString().toStdString();
+                break;
+            case 3:
+                sci.gender = query.value(i).toString().toStdString()[0];
+                break;
+            case 4:
+                sci.birthdate = query.value(i).toDate();
+                break;
+            case 5:
+                sci.deathdate = query.value(i).toDate();
+                break;
+            case 6:
+                sci.nationality = query.value(i).toString().toStdString();
+                break;
+            default:
+                break;
+
+        }
+    }
+    return sci;
+}
+
 bool operator ==(const Scientist &a, const Scientist &b){
     if(a.firstName != b.firstName) return false;
     else if (a.lastName != b.lastName) return false;

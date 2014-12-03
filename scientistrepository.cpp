@@ -5,91 +5,94 @@ const char* DATABASE = "database.txt";
 
 //Constructor that makes a new vector of Scientists and reads into it from a file
 ScientistRepository::ScientistRepository(){
-    scientistVector = vector<Scientist>();
-    read();
+//    scientistVector = vector<Scientist>();
 }
-//Writes one instance of scientist to a file
-void ScientistRepository::write(Scientist s){
-    ofstream write;
-    write.open(DATABASE, ios::out | ios::app);
-    write << s.firstName << delim
-          << s.lastName << delim
-          << s.gender << delim
-          << s.birthdate << delim
-          << s.deathdate << delim
-          << s.nationality << endl;
-    write.close();
-}
-//Overwrites the database file with the vector
-void ScientistRepository::save(){
-    ofstream write;
-    write.open(DATABASE, ios::out);
 
-    for(unsigned int i = 0; i < scientistVector.size() ; i++){
-        write << scientistVector[i].firstName << delim
-              << scientistVector[i].lastName << delim
-              << scientistVector[i].gender << delim
-              << scientistVector[i].birthdate << delim
-              << scientistVector[i].deathdate << delim
-              << scientistVector[i].nationality << endl;
-    }
-
-    write.close();
-
-}
 //Adds an instance of scientist to the vector and writes it to a file
 void ScientistRepository::add(Scientist s){
-    scientistVector.push_back(s);
-    write(s);
+    //scientistVector.push_back(s);
+    auto connection = SQLConnection::getInstance();
+    auto query = connection->getQuery();
+    query->prepare("insert into scientists (first_name, last_name, gender, birth_date, death_date, nationality) values (?,?,?,?,?,?)");
+    query->addBindValue(QString::fromStdString(s.firstName));
+    query->addBindValue(QString::fromStdString(s.lastName));
+    query->addBindValue(QString() + s.gender);
+    query->addBindValue(s.birthdate);
+    query->addBindValue(s.deathdate);
+    query->addBindValue(QString::fromStdString(s.nationality));
+    query->exec();
 }
 
 
 void ScientistRepository::update(Scientist &s, Scientist &replace){
     //Searches for the name and removes it from the vector.
-    for(unsigned int i = 0; i < scientistVector.size() ; i++){
-        if(scientistVector[i] == s){
-            scientistVector[i] = replace;
-            break;
-        }
-    }
-
-    //Overwrites the database.txt with the new vector.
-    save();
+    // UPDATE scientists SET ...
+    auto connection = SQLConnection::getInstance();
+    auto query = connection->getQuery();
+    query->prepare("update scientists set first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? where id = ?");
+    query->addBindValue(QString::fromStdString(replace.firstName));
+    query->addBindValue(QString::fromStdString(replace.lastName));
+    query->addBindValue(QString() + replace.gender);
+    query->addBindValue(replace.birthdate);
+    query->addBindValue(replace.deathdate);
+    query->addBindValue(QString::fromStdString(replace.nationality));
+    query->addBindValue(s.id);
+    query->exec();
 }
 
 //Removes one instance of scientist from the vector
-void ScientistRepository::remove(Scientist s){
+void ScientistRepository::remove(Scientist &s){
+    // DELETE FROM ... WHERE
 
-    //Searches for the name and removes it from the vector.
-    for(unsigned int i = 0; i < scientistVector.size() ; i++){
-        if(scientistVector[i] == s){
-            scientistVector.erase(scientistVector.begin() + i);
-            break;
-        }
-    }
-
-    //Overwrites the database.txt with the new vector.
-    save();
-}
-
-//Reads all scientist from a file
-void ScientistRepository::read(){
-    ifstream read;
-    read.open("database.txt");
-    string s;
-
-    while(read >> s){
-        scientistVector.push_back(Scientist::fromString(s,delim));
-    }
-    read.close();
+    auto connection = SQLConnection::getInstance();
+    auto query = connection->getQuery();
+    query->prepare("delete from scientists where id = ?");
+    query->addBindValue(s.id);
+    query->exec();
 }
 
 //Sorts Scientists by selected field and order
 vector<Scientist> ScientistRepository::list(ScientistSort::Field field, ScientistSort::Order order){
-    vector<Scientist> ret(scientistVector);
+    vector<Scientist> ret;
     // SELECT * FROM scientists ORDER BY field,order
-    auto cmp = ScientistSort::Comparer(field, order);
-    stable_sort(ret.begin(), ret.end(), cmp);
+    auto connection = SQLConnection::getInstance();
+    auto query = connection->getQuery();
+    QString sort_field, order_by;
+    switch(field){
+        case ScientistSort::FIRST_NAME:
+            sort_field = "first_name";
+            break;
+        case ScientistSort::LAST_NAME:
+            sort_field = "last_name";
+            break;
+        case ScientistSort::GENDER:
+            sort_field = "gender";
+            break;
+        case ScientistSort::BIRTH_DATE:
+            sort_field = "birth_date";
+            break;
+
+        case ScientistSort::DEATH_DATE:
+            sort_field = "death_date";
+            break;
+
+        case ScientistSort::NATIONALITY:
+            sort_field = "nationality";
+            break;
+        default:
+            sort_field = "first_name";
+            break;
+    }
+    if(order == ScientistSort::ASC){
+        order_by = "asc";
+    } else {
+        order_by = "desc";
+    }
+    if(!query->exec("SELECT * FROM scientists ORDER BY " + sort_field + " " + order_by))
+        cout << query->lastError().text().toStdString();
+    while(query->next()){
+        ret.push_back(Scientist::fromQuery(*query));
+    }
     return ret;
 }
 
@@ -100,60 +103,45 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
 
 //Searches for Scientists after the parameters selected
 //If fuzzy is true then it finds everything that is within 2 Levenshtein distance from the original query
-vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, size_t rows, string query){
+vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, size_t rows, string search){
 
     vector<Scientist> ret;
-
-    for(auto it = scientistVector.begin(); it != scientistVector.end(); it++){
-        switch(field){
-
-            case ScientistSort::FIRST_NAME:
-                if(fuzzy && levenshtein_distance<string>((*it).firstName,query) < 3)
-                    ret.push_back((*it));
-                else if((*it).firstName == query)
-                    ret.push_back((*it));
-                break;
-
-            case ScientistSort::LAST_NAME:
-                if(fuzzy && levenshtein_distance<string>((*it).lastName,query) < 3)
-                    ret.push_back((*it));
-                else if((*it).lastName == query)
-                    ret.push_back((*it));
-                break;
-
-            case ScientistSort::GENDER:
-                if((*it).gender == query[0])
-                    ret.push_back((*it));
-                break;
-
-            case ScientistSort::BIRTH_DATE:
-                if(fuzzy && levenshtein_distance<string>((*it).birthdate.toDateString(),query) < 3)
-                    ret.push_back((*it));
-                else if((*it).birthdate == Date::fromString(query))
-                    ret.push_back((*it));
-                break;
-
-            case ScientistSort::DEATH_DATE:
-                if(fuzzy && levenshtein_distance<string>((*it).deathdate.toDateString(),query) < 3)
-                    ret.push_back((*it));
-                else if((*it).deathdate == Date::fromString(query))
-                    ret.push_back((*it));
-                break;
-
-            case ScientistSort::NATIONALITY:
-                if(fuzzy && levenshtein_distance<string>((*it).nationality,query) < 3)
-                    ret.push_back((*it));
-                else if((*it).nationality == query)
-                    ret.push_back((*it));
-                break;
-
-            default:
-                if((*it).firstName == query)
-                    ret.push_back((*it));
-                break;
-        }
-        if(ret.size() > rows)
+    // SELECT * FROM scientists ORDER BY field,order
+    auto connection = SQLConnection::getInstance();
+    auto query = connection->getQuery();
+    QString search_field;
+    switch(field){
+        case ScientistSort::FIRST_NAME:
+            search_field = "first_name";
             break;
+        case ScientistSort::LAST_NAME:
+            search_field = "last_name";
+            break;
+        case ScientistSort::GENDER:
+            search_field = "gender";
+            break;
+        case ScientistSort::BIRTH_DATE:
+            search_field = "birth_date";
+            break;
+
+        case ScientistSort::DEATH_DATE:
+            search_field = "death_date";
+            break;
+
+        case ScientistSort::NATIONALITY:
+            search_field = "nationality";
+            break;
+        default:
+            search_field = "first_name";
+            break;
+    }
+    query->prepare("SELECT * FROM scientists WHERE " + search_field + " = ? LIMIT " + rows);
+    query->addBindValue(QString::fromStdString(search));
+    if(!query->exec())
+        cout << query->lastError().text().toStdString();
+
+    while(query->next()){
+        ret.push_back(Scientist::fromQuery(*query));
     }
     return ret;
 }

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core
+QT       += core sql
 
 QT       -= gui
 
@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     scientist.cpp \
     scientistrepository.cpp \
     date.cpp \
-    scientistsort.cpp
+    scientistsort.cpp \
+    sqlconnection.cpp
 
 HEADERS += \
     consoleui.h \
@@ -32,8 +33,16 @@ HEADERS += \
     scientistrepository.h \
     date.h \
     scientistsort.h \
-    utils.h
+    utils.h \
+    sqlconnection.h
 
-OTHER_FILES +=
+OTHER_FILES += data/tables.sql
 
-CONFIG+=static
+copydata.commands = $(COPY_DIR) $$PWD/data $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata
+
+
+#CONFIG+=static
