@@ -57,32 +57,8 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     // SELECT * FROM scientists ORDER BY field,order
     auto connection = SQLConnection::getInstance();
     auto query = connection->getQuery();
-    QString sort_field, order_by;
-    switch(field){
-        case ScientistSort::FIRST_NAME:
-            sort_field = "first_name";
-            break;
-        case ScientistSort::LAST_NAME:
-            sort_field = "last_name";
-            break;
-        case ScientistSort::GENDER:
-            sort_field = "gender";
-            break;
-        case ScientistSort::BIRTH_DATE:
-            sort_field = "birth_date";
-            break;
+    QString sort_field = ScientistSort::toField(field), order_by;
 
-        case ScientistSort::DEATH_DATE:
-            sort_field = "death_date";
-            break;
-
-        case ScientistSort::NATIONALITY:
-            sort_field = "nationality";
-            break;
-        default:
-            sort_field = "first_name";
-            break;
-    }
     if(order == ScientistSort::ASC){
         order_by = "asc";
     } else {
@@ -109,32 +85,7 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
     // SELECT * FROM scientists ORDER BY field,order
     auto connection = SQLConnection::getInstance();
     auto query = connection->getQuery();
-    QString search_field;
-    switch(field){
-        case ScientistSort::FIRST_NAME:
-            search_field = "first_name";
-            break;
-        case ScientistSort::LAST_NAME:
-            search_field = "last_name";
-            break;
-        case ScientistSort::GENDER:
-            search_field = "gender";
-            break;
-        case ScientistSort::BIRTH_DATE:
-            search_field = "birth_date";
-            break;
-
-        case ScientistSort::DEATH_DATE:
-            search_field = "death_date";
-            break;
-
-        case ScientistSort::NATIONALITY:
-            search_field = "nationality";
-            break;
-        default:
-            search_field = "first_name";
-            break;
-    }
+    QString search_field = ScientistSort::toField(field);
     query->prepare("SELECT * FROM scientists WHERE " + search_field + " = ? LIMIT " + rows);
     query->addBindValue(QString::fromStdString(search));
     if(!query->exec())

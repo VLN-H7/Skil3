@@ -1,59 +1,20 @@
 #include "scientistsort.h"
 
-//Comparer function that sorts Scientists
-bool ScientistSort::Comparer::operator()(const Scientist &a, const Scientist &b){
-    switch(field){
-
+QString ScientistSort::toField(Field f){
+    switch(f){
         case FIRST_NAME:
-            if(order == ASC){
-                return a.firstName.compare(b.firstName) < 0;
-            } else {
-                return a.firstName.compare(b.firstName) > 0;
-            }
-            break;
-
-        case LAST_NAME:
-            if(order == ASC){
-                return a.lastName.compare(b.lastName) < 0;
-            } else {
-                return a.lastName.compare(b.lastName) > 0;
-            }
-            break;
-
-        case GENDER:
-            if(order == ASC){
-                return a.gender < b.gender;
-            } else {
-                return a.gender > b.gender;
-            }
-            break;
-
-        case BIRTH_DATE:
-            if(order == ASC){
-                return a.birthdate < b.birthdate;
-            } else {
-                return a.birthdate > b.birthdate;
-            }
-            break;
-
-        case DEATH_DATE:
-            if(order == ASC){
-                return a.deathdate < b.deathdate;
-            } else {
-                return a.deathdate > b.deathdate;
-            }
-            break;
-
-        case NATIONALITY:
-            if(order == ASC){
-                return a.nationality.compare(b.nationality) < 0;
-            } else {
-                return a.nationality.compare(b.nationality) > 0;
-            }
-            break;
-
+            return "first_name";
+        case ScientistSort::LAST_NAME:
+            return "last_name";
+        case ScientistSort::GENDER:
+            return "gender";
+        case ScientistSort::BIRTH_DATE:
+            return "birth_date";
+        case ScientistSort::DEATH_DATE:
+            return "death_date";
+        case ScientistSort::NATIONALITY:
+            return "nationality";
         default:
-            return true;
-            break;
+            return "first_name";
     }
 }

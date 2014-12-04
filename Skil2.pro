@@ -23,8 +23,8 @@ SOURCES += main.cpp \
     scientist.cpp \
     scientistrepository.cpp \
     date.cpp \
-    scientistsort.cpp \
-    sqlconnection.cpp
+    sqlconnection.cpp \
+    scientistsort.cpp
 
 HEADERS += \
     consoleui.h \

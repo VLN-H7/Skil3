@@ -328,7 +328,7 @@ bool ConsoleUI::readline(stringstream &ss){
 void ConsoleUI::header(){
     cout << endl;
     cout << left 
-         << setw(4)  << "ID"
+         << setw(4)  << "No."
          << setw(12) << "First Name"
          << setw(12) << "Last Name"
          << setw(8)  << "Gender"
