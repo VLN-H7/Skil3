@@ -55,7 +55,11 @@ void ConsoleUI::quit(){
 }
 
 void ConsoleUI::clear(){
+#ifdef Q_OS_WIN32
     system("cls");
+#else
+    system("clear");
+#endif
     help();
 }
 
