@@ -13,11 +13,11 @@ CREATE TABLE IF NOT EXISTS computers (
         name varchar(25),
         build_year integer,
         type varchar(25),
-        was_built bool
+        was_built boolean
 );
 
 
 CREATE TABLE IF NOT EXISTS scientist_computer (
-        computer_id integer foreign key,
-        scientist_id integer foreign key
+    FOREIGN KEY(scientist_id) REFERENCES scientists(id),
+    FOREIGN KEY(computer_id) REFERENCES computers(id)
 );
