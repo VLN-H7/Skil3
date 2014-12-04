@@ -7,3 +7,17 @@ CREATE TABLE IF NOT EXISTS scientists (
         death_date date,
         nationality varchar(255)
 );
+
+CREATE TABLE IF NOT EXISTS computers (
+        id integer primary key,
+        name varchar(25),
+        build_year integer,
+        type varchar(25),
+        was_built bool
+);
+
+
+CREATE TABLE IF NOT EXISTS scientist_computer (
+        computer_id integer foreign key,
+        scientist_id integer foreign key
+);
