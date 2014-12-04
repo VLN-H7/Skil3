@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     scientistrepository.cpp \
     date.cpp \
     sqlconnection.cpp \
-    scientistsort.cpp
+    scientistsort.cpp \
+    computer.cpp
 
 HEADERS += \
     consoleui.h \
@@ -34,7 +35,8 @@ HEADERS += \
     date.h \
     scientistsort.h \
     utils.h \
-    sqlconnection.h
+    sqlconnection.h \
+    computer.h
 
 OTHER_FILES += data/tables.sql
 
