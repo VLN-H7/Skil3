@@ -5,6 +5,18 @@
 ScientistRepository::ScientistRepository(){
 }
 
+Scientist ScientistRepository::getScientist(const QSqlQuery* query){
+    Scientist sci;
+    sci.id = query->value("id").toInt();
+    sci.firstName = query->value("first_name").toString().toStdString();
+    sci.lastName = query->value("last_name").toString().toStdString();
+    sci.gender = query->value("gender").toString().toStdString()[0];
+    sci.birthdate = query->value("birth_date").toDate();
+    sci.deathdate = query->value("death_date").toDate();
+    sci.nationality = query->value("nationality").toString().toStdString();
+    return sci;
+}
+
 //Adds an instance of scientist to the vector and writes it to a file
 void ScientistRepository::add(Scientist s){
     //scientistVector.push_back(s);
@@ -61,7 +73,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     if(!query->exec("SELECT * FROM scientists ORDER BY " + sort_field + " " + order_by))
         cout << query->lastError().text().toStdString();
     while(query->next()){
-        ret.push_back(Scientist::fromQuery(query));
+        ret.push_back(getScientist(query));
     }
     return ret;
 }
@@ -83,7 +95,7 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
         cout << query->lastError().text().toStdString();
 
     while(query->next()){
-        ret.push_back(Scientist::fromQuery(query));
+        ret.push_back(getScientist(query));
     }
     return ret;
 }

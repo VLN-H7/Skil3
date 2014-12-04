@@ -6,7 +6,6 @@
 #include <iostream>
 #include <QSqlQuery>
 #include <QVariant>
-#include <QChar>
 
 using namespace std;
 

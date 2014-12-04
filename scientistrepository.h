@@ -25,8 +25,7 @@ public:
     vector<Scientist> search(ScientistSort::Field field, bool fuzzy, string query);
     void update(Scientist &s, Scientist &replace);
 private:
-    vector<Scientist> scientistVector;
-
+    Scientist getScientist(const QSqlQuery *query);
 };
 
 #endif // SCIENTISTREPOSITORY_H
