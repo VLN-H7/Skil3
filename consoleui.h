@@ -5,7 +5,10 @@
 #include<iostream>
 #include<sstream>
 #include<iomanip>
-#include "scientistservice.h"
+#include "scientistui.h"
+#include "utils.h"
+
+using namespace std;
 
 class ConsoleUI
 {
@@ -13,29 +16,20 @@ public:
     ConsoleUI();
     void start();
 private:
-    ScientistService scientistService;
-    vector<Scientist> list();
-    void add();
-    vector<Scientist> search();
+    ScientistUI scientistUI;
+    void butiful();
     void menu();
-    bool readline(stringstream &ss);
+
+
     void help();
-    void header();
     void quit();
     void clear();
-    void remove();
-    void edit();
-    void print();
-    void butiful();
 
-
-    string readString(string msg);
-    void readFirstName(Scientist &s);
-    void readLastName(Scientist &s);
-    void readBirthDate(Scientist &s);
-    void readDeathDate(Scientist &s);
-    void readNationality(Scientist &s);
-    void readGender(Scientist &s);
+    void add(vector<string> &arguments);
+    void list(vector<string> &arguments);
+    void search(vector<string> &arguments);
+    void edit(vector<string> &arguments);
+    void remove(vector<string> &arguments);
 };
 
 #endif // CONSOLEUI_H

@@ -26,7 +26,9 @@ SOURCES += main.cpp \
     sqlconnection.cpp \
     computer.cpp \
     computerservice.cpp \
-    computerrepository.cpp
+    computerrepository.cpp \
+    scientistui.cpp \
+    utils.cpp
 
 HEADERS += \
     consoleui.h \
@@ -39,7 +41,8 @@ HEADERS += \
     computer.h \
     computerservice.h \
     computerrepository.h \
-    sort.h
+    sort.h \
+    scientistui.h
 
 OTHER_FILES += data/tables.sql
 
