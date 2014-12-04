@@ -25,3 +25,4 @@ public:
     friend bool operator == (const Computer &a, const Computer &b);
 };
 
+#endif // COMPUTER_H
