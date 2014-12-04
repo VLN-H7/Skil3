@@ -67,7 +67,7 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     if(!query->exec("SELECT * FROM scientists ORDER BY " + sort_field + " " + order_by))
         cout << query->lastError().text().toStdString();
     while(query->next()){
-        ret.push_back(Scientist::fromQuery(*query));
+        ret.push_back(Scientist::fromQuery(query));
     }
     return ret;
 }
@@ -92,7 +92,7 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
         cout << query->lastError().text().toStdString();
 
     while(query->next()){
-        ret.push_back(Scientist::fromQuery(*query));
+        ret.push_back(Scientist::fromQuery(query));
     }
     return ret;
 }

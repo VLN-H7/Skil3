@@ -24,7 +24,7 @@ public:
     Date deathdate;
     string nationality;
     static Scientist fromString(string s, char delim);
-    static Scientist fromQuery(const QSqlQuery query);
+    static Scientist fromQuery(const QSqlQuery* query);
     friend bool operator ==(const Scientist &a, const Scientist &b);
 };
 
