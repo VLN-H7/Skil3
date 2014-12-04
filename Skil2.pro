@@ -54,10 +54,10 @@ win32 {
 
 }
 macx {
-    copyfiles.commands = cp -r $$PWD/data/* $$OUT_PWD
+    copyfiles.commands = cp -rf $$PWD/data/* $$OUT_PWD
 }
 linux {
-    copyfiles.commands = cp -r $$PWD/data/* $$OUT_PWD
+    copyfiles.commands = cp -rf $$PWD/data/* $$OUT_PWD
 }
 QMAKE_EXTRA_TARGETS += copyfiles
 POST_TARGETDEPS += copyfiles
