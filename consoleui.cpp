@@ -44,12 +44,19 @@ void ConsoleUI::menu() {
         edit();
     } else if (input == "quit"){
         quit();
+    } else if (input == "clear"){
+        clear();
     }
     cout << endl;
 }
 
 void ConsoleUI::quit(){
     exit(1);
+}
+
+void ConsoleUI::clear(){
+    system("cls");
+    help();
 }
 
 void ConsoleUI::help(){
@@ -60,7 +67,8 @@ void ConsoleUI::help(){
             "\t search - Search for a computer scientist" << endl <<
             "\t remove - Remove a computer scientist" << endl <<
             "\t edit - Edit a computer scientist" << endl <<
-            "\t quit - Quit the program" << endl;
+            "\t quit - Quit the program" << endl <<
+            "\t clear - Clear screen"<< endl;
 }
 
 void ConsoleUI::add(){

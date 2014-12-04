@@ -23,6 +23,7 @@ private:
     void help();
     void header();
     void quit();
+    void clear();
     void remove();
     void edit();
     void print();
