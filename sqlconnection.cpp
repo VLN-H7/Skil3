@@ -56,7 +56,7 @@ bool SQLConnection::setup() {
     cout << "stuff" << endl;
     if (!db.isOpen()) return false;
     QSqlQuery query;
-    QFile file("./data/tables.sql");
+    QFile file("tables.sql");
     file.open(QFile::ReadOnly|QFile::Text);
     if(!query.exec(file.readAll()))
         return false;
