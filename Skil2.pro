@@ -50,7 +50,7 @@ win32 {
     PWD_WIN ~= s,/,\\,g
     DESTDIR_WIN ~= s,/,\\,g
 
-    copyfiles.commands = $$quote(cmd /c xcopy /S /I $${PWD_WIN}\\data $${DESTDIR_WIN})
+    copyfiles.commands = $$quote(cmd /c xcopy /S /Q /Y /I $${PWD_WIN}\\data $${DESTDIR_WIN})
 
 }
 macx {
