@@ -2,12 +2,8 @@
 #define SCIENTISTREPOSITORY_H
 
 #include <iostream>
-#include <fstream>
 #include <vector>
-#include <sstream>
-#include <algorithm>
 #include "scientist.h"
-#include "scientistsort.h"
 #include "utils.h"
 
 #include "sqlconnection.h"
@@ -20,9 +16,9 @@ public:
     ScientistRepository();
     void add(Scientist s);
     void remove(Scientist &s);
-    vector<Scientist> list(ScientistSort::Field field, ScientistSort::Order order);
-    vector<Scientist> search(ScientistSort::Field field, bool fuzzy, size_t rows, string query);
-    vector<Scientist> search(ScientistSort::Field field, bool fuzzy, string query);
+    vector<Scientist> list(ScientistFields::Field field, Order order);
+    vector<Scientist> search(ScientistFields::Field field, size_t rows, string query);
+    vector<Scientist> search(ScientistFields::Field field, string query);
     void update(Scientist &s, Scientist &replace);
 private:
     Scientist getScientist(const QSqlQuery *query);

@@ -6,7 +6,6 @@
 #include<sstream>
 #include<iomanip>
 #include "scientistservice.h"
-#include "scientistsort.h"
 
 class ConsoleUI
 {

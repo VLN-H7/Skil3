@@ -179,34 +179,34 @@ void ConsoleUI::edit(){
             field = 1;
     } while(field <= 0 || field > 6);
     Scientist s = Scientist(vec[id]);
-    switch(static_cast<ScientistSort::Field>(field)){
+    switch(static_cast<ScientistFields::Field>(field)){
 
-        case ScientistSort::FIRST_NAME:
+        case ScientistFields::FIRST_NAME:
             readFirstName(s);
             cout << "Successfully changed the first name to " << s.firstName << endl;
             break;
 
-        case ScientistSort::LAST_NAME:
+        case ScientistFields::LAST_NAME:
             readLastName(s);
             cout << "Successfully changed the last name to " << s.lastName << endl;
             break;
 
-        case ScientistSort::GENDER:
+        case ScientistFields::GENDER:
             s.gender = s.gender ^ ( 'M' ^ 'F' );
             cout << "Successfully changed the gender to " << s.gender << endl;
             break;
 
-        case ScientistSort::BIRTH_DATE:
+        case ScientistFields::BIRTH_DATE:
             readBirthDate(s);
             cout << "Successfully changed the birthdate to " << s.birthdate << endl;
             break;
 
-        case ScientistSort::DEATH_DATE:
+        case ScientistFields::DEATH_DATE:
             readDeathDate(s);
             cout << "Successfully changed the deathdate to " << s.deathdate << endl;
             break;
 
-        case ScientistSort::NATIONALITY:
+        case ScientistFields::NATIONALITY:
             readNationality(s);
             cout << "Successfully changed the nationality to " << s.nationality << endl;
             break;
@@ -256,7 +256,7 @@ vector<Scientist> ConsoleUI::list(){
     }
     header();
 
-    vector<Scientist> vec = scientistService.list(static_cast<ScientistSort::Field>(field), static_cast<ScientistSort::Order>(order));
+    vector<Scientist> vec = scientistService.list(static_cast<ScientistFields::Field>(field), static_cast<Order>(order));
 
     for(size_t i = 0; i < vec.size(); i++){
         cout << left
@@ -274,7 +274,6 @@ vector<Scientist> ConsoleUI::list(){
 vector<Scientist> ConsoleUI::search(){
     stringstream ss;
     int field = 1, rows = 1;
-    bool fuzzy = false;
     string query;
     cout << "Available fields:" << endl
          << "\tFirst Name (1)" << endl
@@ -282,25 +281,14 @@ vector<Scientist> ConsoleUI::search(){
          << "\tGender (3)" << endl
          << "\tBirthdate (4)" << endl
          << "\tDeathdate (5)" << endl
-         << "\tNationality (6)" << endl
-         << "\tFirst Name (Fuzzy) (7)" << endl
-         << "\tLast Name (Fuzzy) (8)" << endl
-         << "\tBirthdate (Fuzzy) (9)" << endl
-         << "\tDeathdate (Fuzzy) (10)" << endl
-         << "\tNationality (Fuzzy) (11)" << endl;
+         << "\tNationality (6)" << endl;
     do{
         cout << "What would you like to search by? (Default 1): ";
         if(readline(ss))
             ss >> field;
         else
             field = 1;
-    } while(field <= 0 || field > 12);
-
-    if (field > 6) {
-        if (field > 8) field++; // Shift before the modulo operation (because gender cannot be fuzzy)
-        field = (field % 7) + 1; // Bound the fuzzy choices
-        fuzzy = true;
-    }
+    } while(field <= 0 || field > 6);
     cout << "What is the maximum number of entries you want? (Default 1): ";
     if(readline(ss))
         ss >> rows;
@@ -309,7 +297,7 @@ vector<Scientist> ConsoleUI::search(){
         return vec; // Why go through a search if the user doesnt want results?
     cout << "Enter your query: ";
     getline(cin, query);
-    vec = scientistService.search(static_cast<ScientistSort::Field>(field), fuzzy, rows, query);
+    vec = scientistService.search(static_cast<ScientistFields::Field>(field), rows, query);
     header();
     for(size_t i = 0; i<vec.size(); i++){
         cout << left 

@@ -1,7 +1,7 @@
 #include "scientistrepository.h"
 
 
-//Constructor that makes a new vector of Scientists and reads into it from a file
+
 ScientistRepository::ScientistRepository(){
 }
 
@@ -21,7 +21,7 @@ Scientist ScientistRepository::getScientist(const QSqlQuery* query){
 void ScientistRepository::add(Scientist s){
     //scientistVector.push_back(s);
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("insert into scientists (first_name, last_name, gender, birth_date, death_date, nationality) values (?,?,?,?,?,?)");
+    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) VALUES (?,?,?,?,?,?)");
     query->addBindValue(QString::fromStdString(s.firstName));
     query->addBindValue(QString::fromStdString(s.lastName));
     query->addBindValue(QString() + s.gender);
@@ -29,6 +29,7 @@ void ScientistRepository::add(Scientist s){
     query->addBindValue(s.deathdate);
     query->addBindValue(QString::fromStdString(s.nationality));
     query->exec();
+    delete query;
 }
 
 
@@ -36,7 +37,7 @@ void ScientistRepository::update(Scientist &s, Scientist &replace){
     //Searches for the name and removes it from the vector.
     // UPDATE scientists SET ...
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("update scientists set first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? where id = ?");
+    query->prepare("UPDATE scientists SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? WHERE id = ?");
     query->addBindValue(QString::fromStdString(replace.firstName));
     query->addBindValue(QString::fromStdString(replace.lastName));
     query->addBindValue(QString() + replace.gender);
@@ -45,27 +46,28 @@ void ScientistRepository::update(Scientist &s, Scientist &replace){
     query->addBindValue(QString::fromStdString(replace.nationality));
     query->addBindValue(s.id);
     query->exec();
+    delete query;
 }
 
 //Removes one instance of scientist from the vector
 void ScientistRepository::remove(Scientist &s){
     // DELETE FROM ... WHERE
 
-    auto connection = SQLConnection::getInstance();
-    auto query = connection->getQuery();
-    query->prepare("delete from scientists where id = ?");
+    auto query = SQLConnection::getInstance()->getQuery();
+    query->prepare("DELETE FROM scientists WHERE id = ?");
     query->addBindValue(s.id);
     query->exec();
+    delete query;
 }
 
 //Sorts Scientists by selected field and order
-vector<Scientist> ScientistRepository::list(ScientistSort::Field field, ScientistSort::Order order){
+vector<Scientist> ScientistRepository::list(ScientistFields::Field field, Order order){
     vector<Scientist> ret;
     // SELECT * FROM scientists ORDER BY field,order
     auto query = SQLConnection::getInstance()->getQuery();
-    QString sort_field = ScientistSort::toField(field), order_by;
+    QString sort_field = ScientistFields::toField(field), order_by;
 
-    if(order == ScientistSort::ASC){
+    if(order == ASC){
         order_by = "asc";
     } else {
         order_by = "desc";
@@ -75,20 +77,20 @@ vector<Scientist> ScientistRepository::list(ScientistSort::Field field, Scientis
     while(query->next()){
         ret.push_back(getScientist(query));
     }
+    delete query;
     return ret;
 }
 
 //Searches for default amount of Scientists (1)
-vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, string query){
-    return search(field, fuzzy, 1, query);
+vector<Scientist> ScientistRepository::search(ScientistFields::Field field, string query){
+    return search(field, 1, query);
 }
 
 //Searches for Scientists after the parameters selected
-//If fuzzy is true then it finds everything that is within 2 Levenshtein distance from the original query
-vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool fuzzy, size_t rows, string search){
+vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size_t rows, string search){
     vector<Scientist> ret;
     auto query = SQLConnection::getInstance()->getQuery();
-    QString search_field = ScientistSort::toField(field);
+    QString search_field = ScientistFields::toField(field);
     query->prepare("SELECT * FROM scientists WHERE " + search_field + " = ? LIMIT " + rows);
     query->addBindValue(QString::fromStdString(search));
     if(!query->exec())
@@ -97,6 +99,7 @@ vector<Scientist> ScientistRepository::search(ScientistSort::Field field, bool f
     while(query->next()){
         ret.push_back(getScientist(query));
     }
+    delete query;
     return ret;
 }
 

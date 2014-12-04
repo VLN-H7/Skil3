@@ -4,16 +4,6 @@ Computer::Computer()
 {
 }
 
-Computer Computer::fromQuery(const QSqlQuery* query){
-    Computer comp;
-    comp.id = query->value("id").toInt();
-    comp.name = query->value("name").toString().toStdString();
-    comp.type = query->value("type").toString().toStdString();
-    comp.buildyear = query->value("build_year").toInt();
-    comp.built = query->value("was_built").toBool();
-    return comp;
-}
-
 bool operator ==(const Computer &a, const Computer &b){
     if(a.name != b.name) return false;
     else if (a.type != b.type) return false;
@@ -21,4 +11,21 @@ bool operator ==(const Computer &a, const Computer &b){
     else if (a.built != b.built) return false;
 
     return true;
+}
+
+QString ComputerFields::toField(Field f){
+    switch(f){
+        case ID:
+            return "id";
+        case NAME:
+            return "name";
+        case TYPE:
+            return "type";
+        case BUILD_YEAR:
+            return "build_year";
+        case BUILT:
+            return "built";
+        default:
+            return "name";
+    }
 }

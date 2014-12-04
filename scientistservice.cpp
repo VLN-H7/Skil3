@@ -17,10 +17,10 @@ void ScientistService::update(Scientist& s, Scientist& replace){
     scientistRepository.update(s, replace);
 }
 
-vector<Scientist> ScientistService::list(ScientistSort::Field field, ScientistSort::Order order){
+vector<Scientist> ScientistService::list(ScientistFields::Field field, Order order){
     return scientistRepository.list(field,order);
 }
 
-vector<Scientist> ScientistService::search(ScientistSort::Field field, bool fuzzy, int rows, string query){
-    return scientistRepository.search(field, fuzzy, rows, query);
+vector<Scientist> ScientistService::search(ScientistFields::Field field, int rows, string query){
+    return scientistRepository.search(field, rows, query);
 }

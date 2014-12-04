@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS scientists (
 
 CREATE TABLE IF NOT EXISTS computers (
         id integer primary key,
-        name varchar(25),
+        name varchar(255),
         build_year integer,
-        type varchar(25),
-        was_built boolean
+        type varchar(255),
+        built boolean
 );
 
 
