@@ -80,11 +80,11 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     QString search_field = ComputerFields::toField(field);
-    query->prepare("SELECT * FROM computers WHERE " + search_field + " = ? LIMIT " + rows);
+    // TODO: figure out why appending rows straight to the query does not work
+    query->prepare("SELECT * FROM computers WHERE " + search_field + "= ? LIMIT " + QString::fromStdString(to_string(rows)));
     query->addBindValue(QString::fromStdString(search));
     if(!query->exec())
         cout << query->lastError().text().toStdString();
-
     while(query->next()){
         ret.push_back(getComputer(query));
     }

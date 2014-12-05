@@ -24,6 +24,7 @@ public:
     void header();
     void remove();
     void edit();
+    bool select(Scientist &s);
 private:
     ScientistService scientistService;
 

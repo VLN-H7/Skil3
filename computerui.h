@@ -24,6 +24,7 @@ public:
     void header();
     void remove();
     void edit();
+    bool select(Computer &comp);
 private:
     ComputerService computerService;
 

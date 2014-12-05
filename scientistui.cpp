@@ -28,71 +28,24 @@ void ScientistUI::add(){
 }
 
 void ScientistUI::remove(){
-    char inp = 'L';
-    stringstream ss;
-    vector<Scientist> vec;
-    int id = -1;
-    bool cont = true;
-
-    cout << "Would you either like to: "                <<endl<<
-            "\tList of all the computer scientists (L)"   <<endl<<
-            "\tSearch for a specific computer scientist? (S)"         <<endl<<
-            "(L/S): ";
-    Utils::readline(ss) >> inp;
-
-    if(toupper(inp) == 'S') vec = search();
-    else vec = list();
-    if(vec.empty()){
-        cout << "No results found." << endl;
+    Scientist sci;
+    if (!select(sci))
         return;
-    }
 
-    do{
-        cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
-        Utils::readline(ss);
 
-        if(cont && toupper(ss.str()[0]) == 'Q')
-            return;
-        cont = !!(ss >> id);
-    } while(!cont || id <= 0 || static_cast<size_t>(id) > vec.size());
-    id--;
+    scientistService.remove(sci);
 
-    scientistService.remove(vec[id]);
-
-    cout << "The scientist " << vec[id].firstName << " " << vec[id].lastName << " was successfully removed from the list. " << endl;
+    cout << "The scientist " << sci.firstName << " " << sci.lastName << " was successfully removed from the list. " << endl;
 }
 
 
 void ScientistUI::edit(){
     int field = 1;
-    char inp = 'L';
     stringstream ss;
-    vector<Scientist> vec;
-    int id = -1;
-    bool cont = true;
+    Scientist sci;
 
-    cout << "Would you either like to: "                <<endl<<
-            "\tList of all the computer scientists (L)"   <<endl<<
-            "\tSearch for a specific computer scientist? (S)"         <<endl<<
-            "(L/S): ";
-    Utils::readline(ss) >> inp;
-
-    if(toupper(inp) == 'S') vec = search();
-    else vec = list();
-    if(vec.empty()){
-        cout << "No results found." << endl;
+    if(!select(sci))
         return;
-    }
-
-    do{
-        cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
-        Utils::readline(ss);
-
-        if(cont && toupper(ss.str()[0]) == 'Q')
-            return;
-        cont = !!(ss >> id);
-    } while(!cont || id <= 0 || static_cast<size_t>(id) > vec.size());
-    id--;
 
     cout << "Available fields:" << endl
          << "\tFirst Name (1)" << endl
@@ -106,7 +59,7 @@ void ScientistUI::edit(){
         if(!(Utils::readline(ss) >> field))
             field = 1;
     } while(field <= 0 || field > 6);
-    Scientist s = Scientist(vec[id]);
+    Scientist s = Scientist(sci);
     switch(static_cast<ScientistFields::Field>(field)){
 
         case ScientistFields::FIRST_NAME:
@@ -143,7 +96,40 @@ void ScientistUI::edit(){
             break;
     }
 
-    scientistService.update(vec[id], s);
+    scientistService.update(sci, s);
+}
+
+bool ScientistUI::select(Scientist &s){
+
+    vector<Scientist> vec;
+    int id = 0;
+    char inp = 'L';
+    stringstream ss;
+    cout << "Would you either like to: " << endl <<
+            "\tList of all the computer scientists (L)" << endl <<
+            "\tSearch for a specific computer scientist? (S)" << endl <<
+            "(L/S): ";
+    Utils::readline(ss) >> inp;
+    id = -1;
+
+    if(toupper(inp) == 'S') vec = search();
+    else vec = list();
+
+    if(vec.empty()){
+        cout << "No results found." << endl;
+        return false;
+    }
+
+    do{
+        cout << "Enter the ID of the scientist you would like to select or Q to cancel: ";
+        Utils::readline(ss);
+
+        if(ss && toupper(ss.str()[0]) == 'Q')
+            return false;
+    } while(!(ss >> id) || id <= 0 || static_cast<size_t>(id) > vec.size());
+    id--;
+    s = vec[id];
+    return true;
 }
 
 

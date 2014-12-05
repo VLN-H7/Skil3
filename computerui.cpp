@@ -18,71 +18,22 @@ void ComputerUI::add(){
 }
 
 void ComputerUI::remove(){
-    char inp = 'L';
-    stringstream ss;
-    vector<Computer> vec;
-    int id = -1;
-    bool cont = true;
-
-    cout << "Would you either like to: "                <<endl<<
-            "\tList of all the computers (L)"   <<endl<<
-            "\tSearch for a specific computer? (S)"         <<endl<<
-            "(L/S): ";
-    Utils::readline(ss) >> inp;
-
-    if(toupper(inp) == 'S') vec = search();
-    else vec = list();
-    if(vec.empty()){
-        cout << "No results found." << endl;
+    Computer comp;
+    if (!select(comp))
         return;
-    }
 
-    do{
-        cout << "Enter the ID of the computer you would like to remove or Q to cancel: ";
-        Utils::readline(ss);
+    computerService.remove(comp);
 
-        if(cont && toupper(ss.str()[0]) == 'Q')
-            return;
-        cont = !!(ss >> id);
-    } while(!cont || id <= 0 || static_cast<size_t>(id) > vec.size());
-    id--;
-
-    computerService.remove(vec[id]);
-
-    cout << "The computer " << vec[id].name << " was successfully removed from the list. " << endl;
+    cout << "The computer " << comp.name << " was successfully removed from the list. " << endl;
 }
 
 
 void ComputerUI::edit(){
     int field = 1;
-    char inp = 'L';
     stringstream ss;
-    vector<Computer> vec;
-    int id = -1;
-    bool cont = true;
-
-    cout << "Would you either like to: "                <<endl<<
-            "\tList of all the computers (L)"   <<endl<<
-            "\tSearch for a specific computer? (S)"         <<endl<<
-            "(L/S): ";
-    Utils::readline(ss) >> inp;
-
-    if(toupper(inp) == 'S') vec = search();
-    else vec = list();
-    if(vec.empty()){
-        cout << "No results found." << endl;
+    Computer comp;
+    if(!select(comp))
         return;
-    }
-
-    do{
-        cout << "Enter the ID of the computer you would like to edit or Q to cancel: ";
-        Utils::readline(ss);
-
-        if(cont && toupper(ss.str()[0]) == 'Q')
-            return;
-        cont = !!(ss >> id);
-    } while(!cont || id <= 0 || static_cast<size_t>(id) > vec.size());
-    id--;
 
     cout << "Available fields:" << endl
          << "\tName (1)" << endl
@@ -94,7 +45,7 @@ void ComputerUI::edit(){
         if(!(Utils::readline(ss) >> field))
             field = 1;
     } while(field <= 0 || field > 6);
-    Computer s = Computer(vec[id]);
+    Computer s = Computer(comp);
     switch(static_cast<ComputerFields::Field>(field)){
 
         case ComputerFields::NAME:
@@ -121,7 +72,40 @@ void ComputerUI::edit(){
             break;
     }
 
-    computerService.update(vec[id], s);
+    computerService.update(comp, s);
+}
+
+bool ComputerUI::select(Computer &comp){
+
+    vector<Computer> vec;
+    int id = -1;
+    char inp = 'L';
+    stringstream ss;
+    id = -1;
+
+    cout << "Would you either like to: "                <<endl<<
+            "\tList of all the computers (L)"   <<endl<<
+            "\tSearch for a specific computer? (S)"         <<endl<<
+            "(L/S): ";
+    Utils::readline(ss) >> inp;
+
+    if(toupper(inp) == 'S') vec = search();
+    else vec = list();
+    if(vec.empty()){
+        cout << "No results found." << endl;
+        return false;
+    }
+
+    do{
+        cout << "Enter the ID of the computer you would like to edit or Q to cancel: ";
+        Utils::readline(ss);
+
+        if(ss && toupper(ss.str()[0]) == 'Q')
+            return false;
+    } while(!(ss >> id) || id <= 0 || static_cast<size_t>(id) > vec.size());
+    id--;
+    comp = vec[id];
+    return true;
 }
 
 
