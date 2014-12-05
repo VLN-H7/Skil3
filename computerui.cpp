@@ -185,8 +185,10 @@ vector<Computer> ComputerUI::search(){
     cout << "What is the maximum number of entries you want? (Default 1): ";
     Utils::readline(ss) >> rows;
     vector<Computer> vec;
-    if(rows <= 0)
+    if(rows <= 0){
+        cout << "Invalid number of entries." << endl;
         return vec; // Why go through a search if the user doesnt want results?
+    }
     cout << "Enter your query: ";
     getline(cin, query);
     vec = computerService.search(static_cast<ComputerFields::Field>(field), rows, query);
