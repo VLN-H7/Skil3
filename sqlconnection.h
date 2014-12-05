@@ -6,6 +6,9 @@
 #include <QFile>
 #include <QVariant>
 #include <QSqlError>
+#include <QTextStream>
+#include <iostream>
+using namespace std;
 
 class SQLConnection
 {

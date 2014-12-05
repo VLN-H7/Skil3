@@ -1,6 +1,4 @@
 #include "sqlconnection.h"
-#include <iostream>
-using namespace std;
 const char* SQL_DATABASE = "database.sqlite3";
 
 SQLConnection* SQLConnection::_instance = 0;
@@ -55,11 +53,29 @@ bool SQLConnection::drop() {
 bool SQLConnection::setup() {
     cout << "stuff" << endl;
     if (!db.isOpen()) return false;
-    QSqlQuery query;
-    QFile file("tables.sql");
-    file.open(QFile::ReadOnly|QFile::Text);
-    if(!query.exec(file.readAll()))
+    QSqlQuery query(db);
+    QFile scriptFile("tables.sql");
+    if (scriptFile.open(QIODevice::ReadOnly))
+    {
+        // The SQLite driver executes only a single (the first) query in the QSqlQuery
+        //  if the script contains more queries, it needs to be splitted.
+        QStringList scriptQueries = QTextStream(&scriptFile).readAll().split(';');
+
+        foreach (QString queryTxt, scriptQueries)
+        {
+            if (queryTxt.trimmed().isEmpty()) {
+                continue;
+            }
+            if (!query.exec(queryTxt))
+            {
+                qFatal(QString("One of the query failed to execute."
+                            " Error detail: " + query.lastError().text()).toLocal8Bit());
+            }
+            query.finish();
+        }
+    } else {
         return false;
+    }
     return true;
 }
 

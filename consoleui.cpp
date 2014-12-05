@@ -88,7 +88,8 @@ void ConsoleUI::add(vector<string> &arguments){
     }
     if (arguments[0] == "scientist" || arguments[0] == "s")
         scientistUI.add();
-    //else // TODO
+    else if (arguments[0] == "computer" || arguments[0] == "c")
+        computerUI.add();
 }
 
 void ConsoleUI::remove(vector<string> &arguments){
@@ -98,7 +99,8 @@ void ConsoleUI::remove(vector<string> &arguments){
     }
     if (arguments[0] == "scientist" || arguments[0] == "s")
         scientistUI.remove();
-    //else // TODO
+    else if (arguments[0] == "computer" || arguments[0] == "c")
+        computerUI.remove();
 }
 
 void ConsoleUI::edit(vector<string> &arguments){
@@ -108,7 +110,8 @@ void ConsoleUI::edit(vector<string> &arguments){
     }
     if (arguments[0] == "scientist" || arguments[0] == "s")
         scientistUI.edit();
-    //else // TODO
+    else if (arguments[0] == "computer" || arguments[0] == "c")
+        computerUI.edit();
 }
 
 void ConsoleUI::list(vector<string> &arguments){
@@ -118,7 +121,8 @@ void ConsoleUI::list(vector<string> &arguments){
     }
     if (arguments[0] == "scientists" || arguments[0] == "s")
         scientistUI.list();
-    //else // TODO
+    else if (arguments[0] == "computers" || arguments[0] == "c")
+        computerUI.list();
 }
 
 void ConsoleUI::search(vector<string> &arguments){
@@ -128,7 +132,8 @@ void ConsoleUI::search(vector<string> &arguments){
     }
     if (arguments[0] == "scientists" || arguments[0] == "s")
         scientistUI.search();
-    //else // TODO
+    else if (arguments[0] == "computers" || arguments[0] == "c")
+        computerUI.search();
 }
 
 

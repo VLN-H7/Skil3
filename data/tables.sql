@@ -18,6 +18,9 @@ CREATE TABLE IF NOT EXISTS computers (
 
 
 CREATE TABLE IF NOT EXISTS scientist_computer (
+    id integer primary key,
+    scientist_id integer,
+    computer_id integer,
     FOREIGN KEY(scientist_id) REFERENCES scientists(id),
     FOREIGN KEY(computer_id) REFERENCES computers(id)
 );

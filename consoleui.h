@@ -6,6 +6,7 @@
 #include<sstream>
 #include<iomanip>
 #include "scientistui.h"
+#include "computerui.h"
 #include "utils.h"
 
 using namespace std;
@@ -17,6 +18,7 @@ public:
     void start();
 private:
     ScientistUI scientistUI;
+    ComputerUI computerUI;
     void butiful();
     void menu();
 

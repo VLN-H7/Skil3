@@ -28,7 +28,8 @@ SOURCES += main.cpp \
     computerservice.cpp \
     computerrepository.cpp \
     scientistui.cpp \
-    utils.cpp
+    utils.cpp \
+    computerui.cpp
 
 HEADERS += \
     consoleui.h \
@@ -42,7 +43,8 @@ HEADERS += \
     computerservice.h \
     computerrepository.h \
     sort.h \
-    scientistui.h
+    scientistui.h \
+    computerui.h
 
 OTHER_FILES += data/tables.sql
 
