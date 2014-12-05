@@ -7,6 +7,7 @@
 #include<iomanip>
 #include "scientistui.h"
 #include "computerui.h"
+#include "scientistcomputerservice.h"
 #include "utils.h"
 
 using namespace std;
@@ -19,6 +20,7 @@ public:
 private:
     ScientistUI scientistUI;
     ComputerUI computerUI;
+    ScientistComputerService scientistComputerService;
     void butiful();
     void menu();
 
@@ -32,6 +34,8 @@ private:
     void search(vector<string> &arguments);
     void edit(vector<string> &arguments);
     void remove(vector<string> &arguments);
+    void link(vector<string> &arguments);
+    void view(vector<string> &arguments);
 };
 
 #endif // CONSOLEUI_H

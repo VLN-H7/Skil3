@@ -163,20 +163,10 @@ vector<Scientist> ScientistUI::list(){
                 order = 1;
         } while(order <= 0 || order > 2);
     }
-    header();
 
     vector<Scientist> vec = scientistService.list(static_cast<ScientistFields::Field>(field), static_cast<Order>(order));
 
-    for(size_t i = 0; i < vec.size(); i++){
-        cout << left
-             << setw(4)  << (i+1)
-             << setw(12) << vec[i].firstName
-             << setw(12) << vec[i].lastName
-             << setw(8) << vec[i].gender
-             << setw(12) << vec[i].birthdate
-             << setw(12) << vec[i].deathdate
-             << setw(12) << vec[i].nationality << endl;
-    }
+    display(vec);
     return vec;
 }
 
@@ -206,6 +196,11 @@ vector<Scientist> ScientistUI::search(){
     cout << "Enter your query: ";
     getline(cin, query);
     vec = scientistService.search(static_cast<ScientistFields::Field>(field), rows, query);
+    display(vec);
+    return vec;
+}
+
+void ScientistUI::display(vector<Scientist> &vec){
     header();
     for(size_t i = 0; i<vec.size(); i++){
         cout << left
@@ -217,7 +212,6 @@ vector<Scientist> ScientistUI::search(){
             << setw(12) << vec[i].deathdate
             << setw(12) << vec[i].nationality <<  endl;
     }
-    return vec;
 }
 
 void ScientistUI::header(){

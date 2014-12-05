@@ -25,6 +25,7 @@ public:
     void remove();
     void edit();
     bool select(Scientist &s);
+    void display(vector<Scientist> &vec);
 private:
     ScientistService scientistService;
 

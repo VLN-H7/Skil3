@@ -1,8 +1,6 @@
 #include "computerrepository.h"
 
 
-ComputerRepository::ComputerRepository(){
-}
 
 Computer ComputerRepository::getComputer(const QSqlQuery* query){
     Computer comp;
@@ -12,6 +10,9 @@ Computer ComputerRepository::getComputer(const QSqlQuery* query){
     comp.buildyear = query->value("build_year").toInt();
     comp.built = query->value("built").toBool();
     return comp;
+}
+
+ComputerRepository::ComputerRepository(){
 }
 
 

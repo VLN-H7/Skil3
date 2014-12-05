@@ -97,7 +97,7 @@ bool ComputerUI::select(Computer &comp){
     }
 
     do{
-        cout << "Enter the ID of the computer you would like to edit or Q to cancel: ";
+        cout << "Enter the ID of the computer you would like to select or Q to cancel: ";
         Utils::readline(ss);
 
         if(ss && toupper(ss.str()[0]) == 'Q')
@@ -137,18 +137,9 @@ vector<Computer> ComputerUI::list(){
                 order = 1;
         } while(order <= 0 || order > 2);
     }
-    header();
-
     vector<Computer> vec = computerService.list(static_cast<ComputerFields::Field>(field), static_cast<Order>(order));
 
-    for(size_t i = 0; i < vec.size(); i++){
-        cout << left
-             << setw(4)  << (i+1)
-             << setw(24) << vec[i].name
-             << setw(12) << vec[i].type
-             << setw(12) << (vec[i].buildyear == 0 ? "" : to_string(vec[i].buildyear))
-             << setw(8) << (vec[i].built ? "YES" : "NO") << endl;
-    }
+    display(vec);
     return vec;
 }
 
@@ -176,8 +167,13 @@ vector<Computer> ComputerUI::search(){
     cout << "Enter your query: ";
     getline(cin, query);
     vec = computerService.search(static_cast<ComputerFields::Field>(field), rows, query);
+    display(vec);
+    return vec;
+}
+
+void ComputerUI::display(vector<Computer> &vec){
     header();
-    for(size_t i = 0; i<vec.size(); i++){
+    for(size_t i = 0; i < vec.size(); i++){
         cout << left
              << setw(4)  << (i+1)
              << setw(24) << vec[i].name
@@ -185,7 +181,6 @@ vector<Computer> ComputerUI::search(){
              << setw(12) << (vec[i].buildyear == 0 ? "" : to_string(vec[i].buildyear))
              << setw(8) << (vec[i].built ? "YES" : "NO") << endl;
     }
-    return vec;
 }
 
 void ComputerUI::header(){

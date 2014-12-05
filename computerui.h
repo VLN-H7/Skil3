@@ -25,6 +25,7 @@ public:
     void remove();
     void edit();
     bool select(Computer &comp);
+    void display(vector<Computer> &vec);
 private:
     ComputerService computerService;
 

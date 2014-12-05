@@ -1,6 +1,6 @@
 #include "consoleui.h"
 
-const int COMMANDS_N = 8;
+const int COMMANDS_N = 10;
 const char* COMMANDS[] = {
     "help",
     "quit",
@@ -9,12 +9,16 @@ const char* COMMANDS[] = {
     "list",
     "search",
     "remove",
-    "edit"
+    "edit",
+    "link",
+    "view"
 };
 
 ConsoleUI::ConsoleUI()
 {
     scientistUI = ScientistUI();
+    computerUI = ComputerUI();
+    scientistComputerService = ScientistComputerService();
 }
 void ConsoleUI::butiful(){
    cout << " ----------------------------------------------------- " << endl
@@ -83,6 +87,10 @@ void ConsoleUI::menu() {
         remove(arguments);
     } else if (command == "edit"){
         edit(arguments);
+    } else if (command == "link") {
+        link(arguments);
+    } else if (command == "view") {
+        view(arguments);
     } else {
         cout << "Unknown command \"" << command << "\"." << endl;
     }
@@ -110,6 +118,8 @@ void ConsoleUI::help(){
             "\t search (computers|scientists) - Search for a computer/scientist" << endl <<
             "\t remove (computer|scientist) - Remove a computer/scientist" << endl <<
             "\t edit (computer|scientist) - Edit a computer/scientist" << endl <<
+            "\t view (computer|scientist) - View a computer/scientist" << endl <<
+            "\t link - Link a scientist and a computer" << endl <<
             "\t quit - Quit the program" << endl <<
             "\t clear - Clear screen"<< endl <<
             "\t help - View help" << endl;
@@ -168,6 +178,39 @@ void ConsoleUI::search(vector<string> &arguments){
         scientistUI.search();
     else if (arguments[0] == "computers" || arguments[0] == "c")
         computerUI.search();
+}
+
+void ConsoleUI::link(vector<string> &arguments){
+    cout << "Please select a scientist" << endl;
+    Scientist sci;
+    Computer comp;
+    if(!scientistUI.select(sci))
+        return;
+    cout << endl << "Please select a computer" << endl;
+    if(!computerUI.select(comp))
+        return;
+    scientistComputerService.link(sci,comp);
+
+}
+
+void ConsoleUI::view(vector<string> &arguments){
+    if (arguments.size() == 0){
+        cout << "Usage: search ([s]cientist|[c]omputer)" << endl;
+        return;
+    }
+    if(arguments[0] == "scientist" || arguments[0] == "s"){
+        Scientist s;
+        if(!scientistUI.select(s)) return;
+
+        vector<Computer> computers = scientistComputerService.listComputers(s);
+        computerUI.display(computers);
+    } else if(arguments[0] == "computer" || arguments[0] == "c"){
+        Computer c;
+        if(!computerUI.select(c)) return;
+
+        vector<Scientist> scientists = scientistComputerService.listScientists(c);
+        scientistUI.display(scientists);
+    }
 }
 
 

@@ -1,10 +1,5 @@
 #include "scientistrepository.h"
 
-
-
-ScientistRepository::ScientistRepository(){
-}
-
 Scientist ScientistRepository::getScientist(const QSqlQuery* query){
     Scientist sci;
     sci.id = query->value("id").toInt();
@@ -16,6 +11,11 @@ Scientist ScientistRepository::getScientist(const QSqlQuery* query){
     sci.nationality = query->value("nationality").toString().toStdString();
     return sci;
 }
+
+ScientistRepository::ScientistRepository(){
+}
+
+
 
 //Adds an instance of scientist to the vector and writes it to a file
 void ScientistRepository::add(Scientist s){
