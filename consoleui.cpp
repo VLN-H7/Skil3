@@ -1,5 +1,17 @@
 #include "consoleui.h"
 
+const int COMMANDS_N = 8;
+const char* COMMANDS[] = {
+    "help",
+    "quit",
+    "clear",
+    "add",
+    "list",
+    "search",
+    "remove",
+    "edit"
+};
+
 ConsoleUI::ConsoleUI()
 {
     scientistUI = ScientistUI();
@@ -25,33 +37,55 @@ void ConsoleUI::start(){
 }
 
 void ConsoleUI::menu() {
-    string input;
+    string command;
     cout << "Please enter a command: ";
-    getline(cin,input);
-    auto commands = Utils::split(input, ' ');
+    getline(cin,command);
+
+    // Split the input into command and argument, trim each segment, and then remove all empty strings.
+    auto commands = Utils::split(command, ' ');
     for_each(commands.begin(), commands.end(), Utils::trim);
     Utils::vtrim(commands);
-    input = commands[0];
+
+    command = commands[0];
     vector<string> arguments(next(commands.begin()), commands.end());
-//    for(auto i=commands.begin();i!=commands.end();i++)
-//        cout << *i << ".";
-//    cout << endl;
-    if (input == "help") {
+    // Check if the command exists, this is done before handling them,
+    // because if it doesn't exist, we might want to replace it with one that does.
+    bool found = false;
+    for(int i=0;i<COMMANDS_N;i++){
+        if(command == COMMANDS[i]) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        for(int i=0;i<COMMANDS_N;i++){
+            if(Utils::levenshtein_distance<string>(command,COMMANDS[i]) < 3) {
+                found = true;
+                command = COMMANDS[i];
+                break;
+            }
+        }
+        if(!found)
+            cout << "Unknown command \"" << command << "\"." << endl;
+    }
+    if (command == "help") {
         help();
-    } else if (input == "quit"){
+    } else if (command == "quit"){
         quit();
-    } else if (input == "clear"){
+    } else if (command == "clear"){
         clear();
-    } else if (input == "add"){
+    } else if (command == "add"){
         add(arguments);
-    } else if (input == "list") {
+    } else if (command == "list") {
         list(arguments);
-    } else if (input == "search"){
+    } else if (command == "search"){
         search(arguments);
-    } else if (input == "remove"){
+    } else if (command == "remove"){
         remove(arguments);
-    } else if (input == "edit"){
+    } else if (command == "edit"){
         edit(arguments);
+    } else {
+        cout << "Unknown command \"" << command << "\"." << endl;
     }
     cout << endl;
 }
@@ -72,13 +106,14 @@ void ConsoleUI::clear(){
 void ConsoleUI::help(){
 
     cout << "The available commands are: " << endl <<
-            "\t list - List all computer scientists" << endl <<
-            "\t add - Add a computer scientist" << endl <<
-            "\t search - Search for a computer scientist" << endl <<
-            "\t remove - Remove a computer scientist" << endl <<
-            "\t edit - Edit a computer scientist" << endl <<
+            "\t list (computers|scientists) - List all computers/scientists" << endl <<
+            "\t add (computer|scientist) - Add a computer/scientist" << endl <<
+            "\t search (computers|scientists) - Search for a computer/scientist" << endl <<
+            "\t remove (computer|scientist) - Remove a computer/scientist" << endl <<
+            "\t edit (computer|scientist) - Edit a computer/scientist" << endl <<
             "\t quit - Quit the program" << endl <<
-            "\t clear - Clear screen"<< endl;
+            "\t clear - Clear screen"<< endl <<
+            "\t help - View help" << endl;
 }
 
 void ConsoleUI::add(vector<string> &arguments){
