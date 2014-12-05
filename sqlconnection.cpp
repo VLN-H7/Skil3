@@ -55,6 +55,7 @@ bool SQLConnection::setup() {
     if (!db.isOpen()) return false;
     QSqlQuery query(db);
     QFile scriptFile("tables.sql");
+    // from http://stackoverflow.com/questions/3736984/multiple-sql-statements-in-qsqlquery-using-the-sqlite3-driver
     if (scriptFile.open(QIODevice::ReadOnly))
     {
         // The SQLite driver executes only a single (the first) query in the QSqlQuery

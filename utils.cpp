@@ -1,10 +1,10 @@
 #include "utils.h"
 
-std::stringstream Utils::readline(){
+std::stringstream &Utils::readline(std::stringstream &ss){
     std::string s;
     std::getline(std::cin, s);
-
-    std::stringstream ss(s);
+    ss.clear();
+    ss.str(s);
     return ss;
 }
 

@@ -38,7 +38,7 @@ void ScientistUI::remove(){
             "\tList of all the computer scientists (L)"   <<endl<<
             "\tSearch for a specific computer scientist? (S)"         <<endl<<
             "(L/S): ";
-    Utils::readline() >> inp;
+    Utils::readline(ss) >> inp;
 
     if(toupper(inp) == 'S') vec = search();
     else vec = list();
@@ -49,7 +49,7 @@ void ScientistUI::remove(){
 
     do{
         cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
-        ss = Utils::readline();
+        Utils::readline(ss);
 
         if(cont && toupper(ss.str()[0]) == 'Q')
             return;
@@ -75,7 +75,7 @@ void ScientistUI::edit(){
             "\tList of all the computer scientists (L)"   <<endl<<
             "\tSearch for a specific computer scientist? (S)"         <<endl<<
             "(L/S): ";
-    Utils::readline() >> inp;
+    Utils::readline(ss) >> inp;
 
     if(toupper(inp) == 'S') vec = search();
     else vec = list();
@@ -86,7 +86,7 @@ void ScientistUI::edit(){
 
     do{
         cout << "Enter the ID of the scientist you would like to remove or Q to cancel: ";
-        ss = Utils::readline();
+        Utils::readline(ss);
 
         if(cont && toupper(ss.str()[0]) == 'Q')
             return;
@@ -103,7 +103,7 @@ void ScientistUI::edit(){
          << "\tNationality (6)" << endl;
     do {
         cout << "What would you like to change? (Default 1): ";
-        if(!(Utils::readline() >> field))
+        if(!(Utils::readline(ss) >> field))
             field = 1;
     } while(field <= 0 || field > 6);
     Scientist s = Scientist(vec[id]);
@@ -149,10 +149,11 @@ void ScientistUI::edit(){
 
 vector<Scientist> ScientistUI::list(){
     int field = 1, order = 1;
+    stringstream ss;
     char sort = 'N';
     cout << "The default sort order is by the first name, ascending" << endl;
     cout << "Would you like to change the sort order of the list? (Y/N) (Default N): ";
-    Utils::readline() >> sort;
+    Utils::readline(ss) >> sort;
     if(toupper(sort) == 'Y') {
         cout << "Available fields:" << endl
              << "\tFirst Name (1)" << endl
@@ -163,7 +164,7 @@ vector<Scientist> ScientistUI::list(){
              << "\tNationality (6)" << endl;
         do {
             cout << "How would you like to sort the list? (Default 1): ";
-            if(!(Utils::readline() >> field))
+            if(!(Utils::readline(ss) >> field))
                 field = 1;
         } while(field <= 0 || field > 6);
 
@@ -172,7 +173,7 @@ vector<Scientist> ScientistUI::list(){
              << "\tDescending (2)" << endl;
         do {
             cout << "How would you like to order the list? (Default 1): ";
-            if(!(Utils::readline() >> order))
+            if(!(Utils::readline(ss) >> order))
                 order = 1;
         } while(order <= 0 || order > 2);
     }
@@ -196,6 +197,7 @@ vector<Scientist> ScientistUI::list(){
 vector<Scientist> ScientistUI::search(){
     int field = 1, rows = 1;
     string query;
+    stringstream ss;
     cout << "Available fields:" << endl
          << "\tFirst Name (1)" << endl
          << "\tLast Name (2)" << endl
@@ -205,11 +207,11 @@ vector<Scientist> ScientistUI::search(){
          << "\tNationality (6)" << endl;
     do{
         cout << "What would you like to search by? (Default 1): ";
-        if(!(Utils::readline() >> field))
+        if(!(Utils::readline(ss) >> field))
             field = 1;
     } while(field <= 0 || field > 6);
     cout << "What is the maximum number of entries you want? (Default 1): ";
-    Utils::readline() >> rows;
+    Utils::readline(ss) >> rows;
     vector<Scientist> vec;
     if(rows <= 0)
         return vec; // Why go through a search if the user doesnt want results?

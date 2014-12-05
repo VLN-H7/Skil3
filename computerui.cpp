@@ -28,7 +28,7 @@ void ComputerUI::remove(){
             "\tList of all the computers (L)"   <<endl<<
             "\tSearch for a specific computer? (S)"         <<endl<<
             "(L/S): ";
-    Utils::readline() >> inp;
+    Utils::readline(ss) >> inp;
 
     if(toupper(inp) == 'S') vec = search();
     else vec = list();
@@ -39,7 +39,7 @@ void ComputerUI::remove(){
 
     do{
         cout << "Enter the ID of the computer you would like to remove or Q to cancel: ";
-        ss = Utils::readline();
+        Utils::readline(ss);
 
         if(cont && toupper(ss.str()[0]) == 'Q')
             return;
@@ -65,7 +65,7 @@ void ComputerUI::edit(){
             "\tList of all the computers (L)"   <<endl<<
             "\tSearch for a specific computer? (S)"         <<endl<<
             "(L/S): ";
-    Utils::readline() >> inp;
+    Utils::readline(ss) >> inp;
 
     if(toupper(inp) == 'S') vec = search();
     else vec = list();
@@ -76,7 +76,7 @@ void ComputerUI::edit(){
 
     do{
         cout << "Enter the ID of the computer you would like to edit or Q to cancel: ";
-        ss = Utils::readline();
+        Utils::readline(ss);
 
         if(cont && toupper(ss.str()[0]) == 'Q')
             return;
@@ -91,7 +91,7 @@ void ComputerUI::edit(){
          << "\tBuilt? (4)" << endl;
     do {
         cout << "What would you like to change? (Default 1): ";
-        if(!(Utils::readline() >> field))
+        if(!(Utils::readline(ss) >> field))
             field = 1;
     } while(field <= 0 || field > 6);
     Computer s = Computer(vec[id]);
@@ -127,10 +127,11 @@ void ComputerUI::edit(){
 
 vector<Computer> ComputerUI::list(){
     int field = 1, order = 1;
+    stringstream ss;
     char sort = 'N';
     cout << "The default sort order is by the first name, ascending" << endl;
     cout << "Would you like to change the sort order of the list? (Y/N) (Default N): ";
-    Utils::readline() >> sort;
+    Utils::readline(ss) >> sort;
     if(toupper(sort) == 'Y') {
         cout << "Available fields:" << endl
              << "\tName (1)" << endl
@@ -139,7 +140,7 @@ vector<Computer> ComputerUI::list(){
              << "\tBuilt? (4)" << endl;
         do {
             cout << "How would you like to sort the list? (Default 1): ";
-            if(!(Utils::readline() >> field))
+            if(!(Utils::readline(ss) >> field))
                 field = 1;
         } while(field <= 0 || field > 6);
 
@@ -148,7 +149,7 @@ vector<Computer> ComputerUI::list(){
              << "\tDescending (2)" << endl;
         do {
             cout << "How would you like to order the list? (Default 1): ";
-            if(!(Utils::readline() >> order))
+            if(!(Utils::readline(ss) >> order))
                 order = 1;
         } while(order <= 0 || order > 2);
     }
@@ -169,6 +170,7 @@ vector<Computer> ComputerUI::list(){
 
 vector<Computer> ComputerUI::search(){
     int field = 1, rows = 1;
+    stringstream ss;
     string query;
     cout << "Available fields:" << endl
          << "\tName (1)" << endl
@@ -177,11 +179,11 @@ vector<Computer> ComputerUI::search(){
          << "\tBuilt? (4)" << endl;
     do{
         cout << "What would you like to search by? (Default 1): ";
-        if(!(Utils::readline() >> field))
+        if(!(Utils::readline(ss) >> field))
             field = 1;
     } while(field <= 0 || field > 6);
     cout << "What is the maximum number of entries you want? (Default 1): ";
-    Utils::readline() >> rows;
+    Utils::readline(ss) >> rows;
     vector<Computer> vec;
     if(rows <= 0)
         return vec; // Why go through a search if the user doesnt want results?
@@ -231,8 +233,9 @@ void ComputerUI::readType(Computer& s){
 
 void ComputerUI::readBuildYear(Computer& s){
     s.buildyear = 0;
+    stringstream ss;
     cout << "Build Year (leave empty for no value): ";
-    Utils::readline() >> s.buildyear;
+    Utils::readline(ss) >> s.buildyear;
 }
 
 void ComputerUI::readBuilt(Computer& s){
