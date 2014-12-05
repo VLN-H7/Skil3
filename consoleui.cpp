@@ -42,12 +42,11 @@ void ConsoleUI::menu() {
     getline(cin,command);
 
     // Split the input into command and argument, trim each segment, and then remove all empty strings.
-    auto commands = Utils::split(command, ' ');
-    for_each(commands.begin(), commands.end(), Utils::trim);
-    Utils::vtrim(commands);
+    auto input = Utils::split(command, ' ');
+    Utils::vtrim(input);
 
-    command = commands[0];
-    vector<string> arguments(next(commands.begin()), commands.end());
+    command = input[0];
+    vector<string> arguments(next(input.begin()), input.end());
     // Check if the command exists, this is done before handling them,
     // because if it doesn't exist, we might want to replace it with one that does.
     bool found = false;
