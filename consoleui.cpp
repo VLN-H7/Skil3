@@ -113,16 +113,16 @@ void ConsoleUI::clear(){
 void ConsoleUI::help(){
 
     cout << "The available commands are: " << endl <<
-            "\t list (computers|scientists) - List all computers/scientists" << endl <<
-            "\t add (computer|scientist) - Add a computer/scientist" << endl <<
-            "\t search (computers|scientists) - Search for a computer/scientist" << endl <<
-            "\t remove (computer|scientist) - Remove a computer/scientist" << endl <<
-            "\t edit (computer|scientist) - Edit a computer/scientist" << endl <<
-            "\t view (computer|scientist) - View a computer/scientist" << endl <<
-            "\t link - Link a scientist and a computer" << endl <<
-            "\t quit - Quit the program" << endl <<
-            "\t clear - Clear screen"<< endl <<
-            "\t help - View help" << endl;
+            "\t list   - List all computers/scientists" << endl <<
+            "\t add    - Add a computer/scientist" << endl <<
+            "\t search - Search for a computer/scientist" << endl <<
+            "\t remove - Remove a computer/scientist" << endl <<
+            "\t edit   - Edit a computer/scientist" << endl <<
+            "\t view   - View a computer/scientist" << endl <<
+            "\t link   - Link together a scientist and a computer" << endl <<
+            "\t quit   - Quit the program" << endl <<
+            "\t clear  - Clear screen"<< endl <<
+            "\t help   - View help" << endl;
 }
 
 void ConsoleUI::add(vector<string> &arguments){
