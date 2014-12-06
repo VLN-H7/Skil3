@@ -139,7 +139,9 @@ void ConsoleUI::help(){
 
 void ConsoleUI::add(vector<string> &arguments){
     if (arguments.size() == 0){
-        cout << "Usage: add ([s]cientist|[c]omputer)" << endl;
+        cout << endl <<"The available 'add' commands are: " << endl << endl <<
+                "\tcomputer  (c) - Add a computer" << endl <<
+                "\tscientist (s) - Add a scientist" << endl << endl;
         return;
     }
     if (arguments[0] == "scientist" || arguments[0] == "s")
