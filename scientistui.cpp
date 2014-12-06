@@ -283,7 +283,9 @@ void ScientistUI::readDeathDate(Scientist& s){
          cout << "Invalid Date." << endl;
         else if (s.deathdate<s.birthdate)
             cout << "Date of death needs to be after date of birth." << endl;
-    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate);
+        else if (s.deathdate>Date::now())
+            cout << "Date of death cannot be in the future." << endl;
+    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate||s.deathdate>Date::now());
 }
 
 void ScientistUI::readNationality(Scientist& s){

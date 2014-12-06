@@ -129,8 +129,8 @@ void ConsoleUI::help(){
             "\t edit c  - Edit a scientist" << endl <<
             "\t edit s  - Edit a computer" << endl << endl <<
             "    VIEW"<< endl <<
-            "\t view c   - View a computer/scientist" << endl <<
-            "\t view s   - View a computer/scientist" << endl << endl <<
+            "\t view c   - View a computer" << endl <<
+            "\t view s   - View a scientist" << endl << endl <<
             "\t link    - Link together a scientist and a computer" << endl <<
             "\t quit    - Quit the program" << endl <<
             "\t clear   - Clear screen"<< endl <<
