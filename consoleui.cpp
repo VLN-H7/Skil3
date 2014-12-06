@@ -112,17 +112,29 @@ void ConsoleUI::clear(){
 
 void ConsoleUI::help(){
 
-    cout << "The available commands are: " << endl <<
-            "\t list   - List all computers/scientists" << endl <<
-            "\t add    - Add a computer/scientist" << endl <<
-            "\t search - Search for a computer/scientist" << endl <<
-            "\t remove - Remove a computer/scientist" << endl <<
-            "\t edit   - Edit a computer/scientist" << endl <<
-            "\t view   - View a computer/scientist" << endl <<
-            "\t link   - Link together a scientist and a computer" << endl <<
-            "\t quit   - Quit the program" << endl <<
-            "\t clear  - Clear screen"<< endl <<
-            "\t help   - View help" << endl;
+    cout << "The available commands are: " << endl << endl <<
+            "    LIST"<< endl <<
+            "\t list c  - List all computers" << endl <<
+            "\t list s  - List all scientists" << endl << endl <<
+            "    ADD"<< endl <<
+            "\t add c    - Add a computer" << endl <<
+            "\t add s    - Add a scientist" << endl << endl <<
+            "    SEARCH"<< endl <<
+            "\t search c - Search for a scientist" << endl <<
+            "\t search s - Search for a computer" << endl << endl <<
+            "    REMOVE"<< endl <<
+            "\t remove c - Remove a scientist" << endl <<
+            "\t remove s - Remove a computer" << endl << endl <<
+            "    EDIT"<< endl <<
+            "\t edit c  - Edit a scientist" << endl <<
+            "\t edit s  - Edit a computer" << endl << endl <<
+            "    VIEW"<< endl <<
+            "\t view c   - View a computer/scientist" << endl <<
+            "\t view s   - View a computer/scientist" << endl << endl <<
+            "\t link    - Link together a scientist and a computer" << endl <<
+            "\t quit    - Quit the program" << endl <<
+            "\t clear   - Clear screen"<< endl <<
+            "\t help    - View help" << endl << endl;
 }
 
 void ConsoleUI::add(vector<string> &arguments){
