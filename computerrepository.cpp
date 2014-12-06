@@ -2,7 +2,7 @@
 
 
 
-Computer ComputerRepository::getComputer(const QSqlQuery* query){
+Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query){
     Computer comp;
     comp.id = query->value("id").toInt();
     comp.name = query->value("name").toString().toStdString();
@@ -24,7 +24,6 @@ void ComputerRepository::add(Computer comp){
     query->addBindValue(comp.buildyear);
     query->addBindValue(comp.built);
     query->exec();
-    delete query;
 }
 
 
@@ -37,7 +36,6 @@ void ComputerRepository::update(Computer &comp, Computer &replace){
     query->addBindValue(replace.built);
     query->addBindValue(comp.id);
     query->exec();
-    delete query;
 }
 
 
@@ -47,7 +45,6 @@ void ComputerRepository::remove(Computer &comp){
     query->prepare("DELETE FROM computers WHERE id = ?");
     query->addBindValue(comp.id);
     query->exec();
-    delete query;
 }
 
 //Sorts Computers by selected field and order
@@ -67,7 +64,6 @@ vector<Computer> ComputerRepository::list(ComputerFields::Field field, Order ord
     while(query->next()){
         ret.push_back(getComputer(query));
     }
-    delete query;
     return ret;
 }
 
@@ -89,7 +85,5 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
     while(query->next()){
         ret.push_back(getComputer(query));
     }
-    delete query;
     return ret;
 }
-

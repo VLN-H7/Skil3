@@ -10,7 +10,6 @@ void ScientistComputerRepository::link(Scientist &s, Computer &c){
     query->addBindValue(s.id);
     query->addBindValue(c.id);
     if(!query->exec());
-    delete query;
 }
 
 void ScientistComputerRepository::unlink(Scientist &s, Computer &c){
@@ -19,7 +18,6 @@ void ScientistComputerRepository::unlink(Scientist &s, Computer &c){
     query->addBindValue(s.id);
     query->addBindValue(c.id);
     if(!query->exec());
-    delete query;
 }
 
 vector<Scientist> ScientistComputerRepository::listScientists(Computer &c){
@@ -33,7 +31,6 @@ vector<Scientist> ScientistComputerRepository::listScientists(Computer &c){
     while(query->next()){
         ret.push_back(ScientistRepository::getScientist(query));
     }
-    delete query;
     return ret;
 }
 
@@ -48,6 +45,5 @@ vector<Computer> ScientistComputerRepository::listComputers(Scientist &s){
     while(query->next()){
         ret.push_back(ComputerRepository::getComputer(query));
     }
-    delete query;
     return ret;
 }

@@ -1,6 +1,6 @@
 #include "scientistrepository.h"
 
-Scientist ScientistRepository::getScientist(const QSqlQuery* query){
+Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query){
     Scientist sci;
     sci.id = query->value("id").toInt();
     sci.firstName = query->value("first_name").toString().toStdString();
@@ -29,7 +29,6 @@ void ScientistRepository::add(Scientist s){
     query->addBindValue(s.deathdate);
     query->addBindValue(QString::fromStdString(s.nationality));
     query->exec();
-    delete query;
 }
 
 
@@ -46,7 +45,6 @@ void ScientistRepository::update(Scientist &s, Scientist &replace){
     query->addBindValue(QString::fromStdString(replace.nationality));
     query->addBindValue(s.id);
     query->exec();
-    delete query;
 }
 
 //Removes one instance of scientist from the vector
@@ -57,7 +55,6 @@ void ScientistRepository::remove(Scientist &s){
     query->prepare("DELETE FROM scientists WHERE id = ?");
     query->addBindValue(s.id);
     query->exec();
-    delete query;
 }
 
 //Sorts Scientists by selected field and order
@@ -77,7 +74,6 @@ vector<Scientist> ScientistRepository::list(ScientistFields::Field field, Order 
     while(query->next()){
         ret.push_back(getScientist(query));
     }
-    delete query;
     return ret;
 }
 
@@ -99,7 +95,6 @@ vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size
     while(query->next()){
         ret.push_back(getScientist(query));
     }
-    delete query;
     return ret;
 }
 

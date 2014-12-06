@@ -8,6 +8,7 @@
 #include <QSqlError>
 #include <QTextStream>
 #include <iostream>
+#include <memory>
 using namespace std;
 
 class SQLConnection
@@ -26,7 +27,7 @@ class SQLConnection
     bool connected();
     bool drop();
     bool disconnect();
-    QSqlQuery* getQuery();
+    unique_ptr<QSqlQuery> getQuery();
   private:
     bool connect();
     bool exists();

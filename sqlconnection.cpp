@@ -26,8 +26,8 @@ SQLConnection::SQLConnection() {
    }
 }
 
-QSqlQuery* SQLConnection::getQuery(){
-    return new QSqlQuery(db);
+unique_ptr<QSqlQuery> SQLConnection::getQuery(){
+    return unique_ptr<QSqlQuery>(new QSqlQuery(db));
 }
 
 bool SQLConnection::connect() {

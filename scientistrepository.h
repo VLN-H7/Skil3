@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "scientist.h"
 #include "utils.h"
 
@@ -15,7 +16,7 @@ class ScientistRepository
 public:
     ScientistRepository();
 
-    static Scientist getScientist(const QSqlQuery *query);
+    static Scientist getScientist(const unique_ptr<QSqlQuery> &query);
 
     void add(Scientist s);
     void remove(Scientist &s);

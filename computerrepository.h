@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "computer.h"
 
 #include "sqlconnection.h"
@@ -14,7 +15,7 @@ class ComputerRepository
 public:
     ComputerRepository();
 
-    static Computer getComputer(const QSqlQuery *query);
+    static Computer getComputer(const unique_ptr<QSqlQuery> &query);
 
     void add(Computer s);
     void remove(Computer &s);
