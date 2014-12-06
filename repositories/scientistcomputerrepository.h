@@ -1,9 +1,9 @@
 #ifndef SCIENTISTCOMPUTERREPOSITORY_H
 #define SCIENTISTCOMPUTERREPOSITORY_H
 
-#include "sqlconnection.h"
-#include "scientist.h"
-#include "computer.h"
+#include "../sqlconnection.h"
+#include "../models/scientist.h"
+#include "../models/computer.h"
 #include "computerrepository.h"
 #include "scientistrepository.h"
 

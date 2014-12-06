@@ -2,8 +2,8 @@
 #define SCIENTISTSERVICE_H
 #include <vector>
 #include <string>
-#include "scientistrepository.h"
-#include "scientist.h"
+#include "../repositories/scientistrepository.h"
+#include "../models/scientist.h"
 
 using namespace std;
 

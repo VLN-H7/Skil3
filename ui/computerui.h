@@ -7,9 +7,9 @@
 #include <iostream>
 #include <iomanip>
 
-#include "computer.h"
-#include "computerservice.h"
-#include "utils.h"
+#include "../models/computer.h"
+#include "../services/computerservice.h"
+#include "../utils.h"
 
 using namespace std;
 

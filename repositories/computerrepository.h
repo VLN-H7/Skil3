@@ -4,9 +4,9 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "computer.h"
+#include "../models/computer.h"
 
-#include "sqlconnection.h"
+#include "../sqlconnection.h"
 
 using namespace std;
 

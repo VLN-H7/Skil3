@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "scientist.h"
-#include "utils.h"
+#include "../models/scientist.h"
+#include "../utils.h"
 
 #include "sqlconnection.h"
 

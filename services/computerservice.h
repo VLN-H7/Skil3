@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <string>
-#include "computerrepository.h"
-#include "computer.h"
+#include "../repositories/computerrepository.h"
+#include "../models/computer.h"
 
 using namespace std;
 

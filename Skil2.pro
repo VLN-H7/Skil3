@@ -18,37 +18,37 @@ QMAKE_CXXFLAGS += -std=c++11
 
 
 SOURCES += main.cpp \
-    consoleui.cpp \
-    scientistservice.cpp \
-    scientist.cpp \
-    scientistrepository.cpp \
+    ui/consoleui.cpp \
+    services/scientistservice.cpp \
+    models/scientist.cpp \
+    repositories/scientistrepository.cpp \
     date.cpp \
     sqlconnection.cpp \
-    computer.cpp \
-    computerservice.cpp \
-    computerrepository.cpp \
-    scientistui.cpp \
+    models/computer.cpp \
+    services/computerservice.cpp \
+    repositories/computerrepository.cpp \
+    ui/scientistui.cpp \
     utils.cpp \
-    computerui.cpp \
-    scientistcomputerservice.cpp \
-    scientistcomputerrepository.cpp
+    ui/computerui.cpp \
+    services/scientistcomputerservice.cpp \
+    repositories/scientistcomputerrepository.cpp
 
 HEADERS += \
-    consoleui.h \
-    scientistservice.h \
-    scientist.h \
-    scientistrepository.h \
+    ui/consoleui.h \
+    services/scientistservice.h \
+    models/scientist.h \
+    repositories/scientistrepository.h \
     date.h \
     utils.h \
     sqlconnection.h \
-    computer.h \
-    computerservice.h \
-    computerrepository.h \
+    models/computer.h \
+    services/computerservice.h \
+    repositories/computerrepository.h \
     sort.h \
-    scientistui.h \
-    computerui.h \
-    scientistcomputerservice.h \
-    scientistcomputerrepository.h
+    ui/scientistui.h \
+    ui/computerui.h \
+    services/scientistcomputerservice.h \
+    repositories/scientistcomputerrepository.h
 
 OTHER_FILES += data/tables.sql
 

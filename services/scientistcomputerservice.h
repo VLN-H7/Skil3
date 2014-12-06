@@ -1,9 +1,9 @@
 #ifndef SCIENTISTCOMPUTERSERVICE_H
 #define SCIENTISTCOMPUTERSERVICE_H
 
-#include "scientist.h"
-#include "computer.h"
-#include "scientistcomputerrepository.h"
+#include "../models/scientist.h"
+#include "../models/computer.h"
+#include "../repositories/scientistcomputerrepository.h"
 
 class ScientistComputerService
 {

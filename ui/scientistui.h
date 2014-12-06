@@ -7,9 +7,9 @@
 #include <iostream>
 #include <iomanip>
 
-#include "scientist.h"
-#include "scientistservice.h"
-#include "utils.h"
+#include "../models/scientist.h"
+#include "../services/scientistservice.h"
+#include "../utils.h"
 
 using namespace std;
 

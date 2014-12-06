@@ -7,8 +7,8 @@
 #include<iomanip>
 #include "scientistui.h"
 #include "computerui.h"
-#include "scientistcomputerservice.h"
-#include "utils.h"
+#include "../services/scientistcomputerservice.h"
+#include "../utils.h"
 
 using namespace std;
 
