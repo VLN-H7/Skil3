@@ -12,7 +12,7 @@ const char* COMMANDS[] = {
     "remove",
     "edit",
     "link",
-    "view"
+    "view",
 };
 
 ConsoleUI::ConsoleUI()
