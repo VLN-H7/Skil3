@@ -47,8 +47,10 @@ void ConsoleUI::start(){
 
 void ConsoleUI::menu() {
     string command;
-    cout << "Please enter a command: ";
-    getline(cin,command);
+    do {
+        cout << "Please enter a command: ";
+        getline(cin,command);
+    } while(command=="");
 
     // Split the input into command and argument, trim each segment, and then remove all empty strings.
     auto input = Utils::split(command, ' ');
