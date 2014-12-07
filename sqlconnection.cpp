@@ -1,23 +1,34 @@
 #include "sqlconnection.h"
 const char* SQL_DATABASE = "database.sqlite3";
 
-SQLConnection* SQLConnection::_instance = 0;
+// Future note: this is not thread safe at all -.-
+SQLConnection* SQLConnection::_instance = NULL;
 SQLConnection* SQLConnection::getInstance() {
-    if (_instance == 0)
+    if (_instance == NULL)
     {
-        _instance = new SQLConnection;
+        _instance = new SQLConnection(SQL_DATABASE);
     }
     return _instance;
+}
+
+bool SQLConnection::drop() {
+    if(_instance->db.isOpen())
+        _instance->disconnect();
+    bool flag = QFile::remove(SQL_DATABASE);
+    delete _instance;
+    _instance = NULL;
+    return flag;
 }
 
 SQLConnection::~SQLConnection() {
     disconnect();
 }
 
-SQLConnection::SQLConnection() {
+SQLConnection::SQLConnection(const char* dbName) {
    db = QSqlDatabase::addDatabase("QSQLITE");
    bool db_exists = exists();
-   db.setDatabaseName(SQL_DATABASE);
+   database = QString(dbName);
+   db.setDatabaseName(database);
    connect();
 
    if (!db_exists)
@@ -37,17 +48,14 @@ bool SQLConnection::connect() {
 
 
 bool SQLConnection::disconnect() {
-    db.close();
+    if(db.isOpen())
+        db.close();
     return !db.isOpen();
 }
 
 
 bool SQLConnection::exists() {
-    return QFile::exists(SQL_DATABASE);
-}
-
-bool SQLConnection::drop() {
-    return QFile::remove(SQL_DATABASE);
+    return QFile::exists(database);
 }
 
 
