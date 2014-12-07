@@ -156,7 +156,9 @@ void ConsoleUI::add(vector<string> &arguments){
 
 void ConsoleUI::remove(vector<string> &arguments){
     if (arguments.size() == 0){
-        cout << "Usage: remove ([s]cientist|[c]omputer)" << endl;
+        cout << endl <<"The available 'remove' commands are: " << endl << endl <<
+                "\tcomputer  (c) - Remove a computer" << endl <<
+                "\tscientist (s) - Remove a scientist" << endl << endl;
         return;
     }
     if (arguments[0] == "scientist" || arguments[0] == "s")
@@ -167,7 +169,9 @@ void ConsoleUI::remove(vector<string> &arguments){
 
 void ConsoleUI::edit(vector<string> &arguments){
     if (arguments.size() == 0){
-        cout << "Usage: edit ([s]cientist|[c]omputer)" << endl;
+        cout << endl <<"The available 'edit' commands are: " << endl << endl <<
+                "\tcomputer  (c) - Edit a computer" << endl <<
+                "\tscientist (s) - Edit a scientist" << endl << endl;
         return;
     }
     if (arguments[0] == "scientist" || arguments[0] == "s")
@@ -178,7 +182,9 @@ void ConsoleUI::edit(vector<string> &arguments){
 
 void ConsoleUI::list(vector<string> &arguments){
     if (arguments.size() == 0){
-        cout << "Usage: list ([s]cientists|[c]omputers)" << endl;
+        cout << endl <<"The available 'list' commands are: " << endl << endl <<
+                "\tcomputer  (c) - List a computer" << endl <<
+                "\tscientist (s) - List a scientist" << endl << endl;
         return;
     }
     if (arguments[0] == "scientists" || arguments[0] == "s")
@@ -189,7 +195,9 @@ void ConsoleUI::list(vector<string> &arguments){
 
 void ConsoleUI::search(vector<string> &arguments){
     if (arguments.size() == 0){
-        cout << "Usage: search ([s]cientists|[c]omputers)" << endl;
+        cout << endl <<"The available 'search' commands are: " << endl << endl <<
+                "\tcomputer  (c) - Search a computer" << endl <<
+                "\tscientist (s) - Search a scientist" << endl << endl;
         return;
     }
     if (arguments[0] == "scientists" || arguments[0] == "s")
@@ -210,7 +218,9 @@ void ConsoleUI::link(vector<string> &arguments){
 
 void ConsoleUI::view(vector<string> &arguments){
     if (arguments.size() == 0){
-        cout << "Usage: search ([s]cientist|[c]omputer)" << endl;
+        cout << endl <<"The available 'view' commands are: " << endl << endl <<
+                "\tcomputer  (c) - View a computer" << endl <<
+                "\tscientist (s) - Search a scientist" << endl << endl;
         return;
     }
     if(arguments[0] == "scientist" || arguments[0] == "s"){
