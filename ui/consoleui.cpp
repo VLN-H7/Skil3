@@ -5,6 +5,7 @@ const char* COMMANDS[] = {
     "help",
     "quit",
     "clear",
+    "about",
     "add",
     "list",
     "search",
@@ -81,6 +82,8 @@ void ConsoleUI::menu() {
         quit();
     } else if (command == "clear"){
         clear();
+    } else if (command == "about"){
+        about();
     } else if (command == "add"){
         add(arguments);
     } else if (command == "list") {
@@ -114,6 +117,23 @@ void ConsoleUI::clear(){
     help();
 }
 
+void ConsoleUI::about(){
+    cout << endl <<"     ABOUT" << endl <<
+            "\tName of program: Computer Scientists and there Computers" << endl <<
+            "\tVersion: 1.2.0" << endl <<
+            "\tYear: 2014" << endl <<
+            "\tObjectice: -To store and to work with a SQlite based database" << endl <<
+            "\t            for Computer Scientists and computers."<< endl <<
+            "\t           -To be able to connect Computer scientist"<< endl <<
+            "\t            to any computer and vise vera."<< endl <<
+            "\tCreated by: Groupe 7" << endl <<
+            "\tMembers of production: Ari Thorlacius Sigurdsson"<< endl <<
+            "\t                       Egill Anton Hlodversson"<< endl <<
+            "\t                       James Elias Sigurdarson"<< endl <<
+            "\t                       Sara Arnadottir"<< endl <<
+            "\t                       Unnar Freyr Erlendsson"<< endl << endl;
+}
+
 void ConsoleUI::help(){
 
     cout << "The available commands are: " << endl << endl <<
@@ -140,6 +160,7 @@ void ConsoleUI::help(){
             "    OTHER"<< endl <<
             "\t quit              - Quit the program" << endl <<
             "\t clear             - Clear screen"<< endl <<
+            "\t about             - About the program"<< endl <<
             "\t help              - View help" << endl << endl;
 }
 

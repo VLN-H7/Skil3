@@ -27,6 +27,7 @@ private:
     void help();
     void quit();
     void clear();
+    void about();
 
     void add(vector<string> &arguments);
     void list(vector<string> &arguments);
@@ -35,6 +36,7 @@ private:
     void remove(vector<string> &arguments);
     void link(vector<string> &arguments);
     void view(vector<string> &arguments);
+
 };
 
 #endif // CONSOLEUI_H
