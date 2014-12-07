@@ -118,29 +118,29 @@ void ConsoleUI::help(){
 
     cout << "The available commands are: " << endl << endl <<
             "    LIST"<< endl <<
-            "\t list scientists  - List all scientists" << endl <<
-            "\t list computers  - List all computers" << endl << endl <<
+            "\t list scientists   - List all scientists" << endl <<
+            "\t list computers    - List all computers" << endl << endl <<
             "    ADD"<< endl <<
-            "\t add scientist    - Add a scientist" << endl <<
-            "\t add computer    - Add a computer" << endl << endl <<
+            "\t add scientist     - Add a scientist" << endl <<
+            "\t add computer      - Add a computer" << endl << endl <<
             "    SEARCH"<< endl <<
             "\t search scientists - Search for a scientist" << endl <<
-            "\t search computers - Search for a computer" << endl << endl <<
+            "\t search computers  - Search for a computer" << endl << endl <<
             "    REMOVE"<< endl <<
-            "\t remove scientist - Remove a scientist" << endl <<
-            "\t remove computer - Remove a computer" << endl << endl <<
+            "\t remove scientist  - Remove a scientist" << endl <<
+            "\t remove computer   - Remove a computer" << endl << endl <<
             "    EDIT"<< endl <<
-            "\t edit scientist  - Edit a scientist" << endl <<
-            "\t edit computer  - Edit a computer" << endl << endl <<
+            "\t edit scientist    - Edit a scientist" << endl <<
+            "\t edit computer     - Edit a computer" << endl << endl <<
             "    VIEW"<< endl <<
-            "\t view computer   - View a computer" << endl <<
-            "\t view scientist   - View a scientist" << endl << endl <<
+            "\t view computer     - View a computer" << endl <<
+            "\t view scientist    - View a scientist" << endl << endl <<
             "    LINK"<< endl <<
-            "\t link    - Link a scientist and a computer" << endl << endl <<
+            "\t link              - Link a scientist and a computer" << endl << endl <<
             "    OTHER"<< endl <<
-            "\t quit    - Quit the program" << endl <<
-            "\t clear   - Clear screen"<< endl <<
-            "\t help    - View help" << endl << endl;
+            "\t quit              - Quit the program" << endl <<
+            "\t clear             - Clear screen"<< endl <<
+            "\t help              - View help" << endl << endl;
 }
 
 void ConsoleUI::add(vector<string> &arguments){
