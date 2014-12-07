@@ -52,7 +52,6 @@ bool SQLConnection::drop() {
 
 
 bool SQLConnection::setup() {
-    cout << "stuff" << endl;
     if (!db.isOpen()) return false;
     QSqlQuery query(db);
     QFile scriptFile("tables.sql");
