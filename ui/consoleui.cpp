@@ -1,9 +1,7 @@
 #include "consoleui.h"
 
-const int COMMANDS_N = 11;
-const char* COMMANDS[] = {
+const vector<const char*> COMMANDS = {
     "help",
-    "quit",
     "clear",
     "about",
     "add",
@@ -13,6 +11,8 @@ const char* COMMANDS[] = {
     "edit",
     "link",
     "view",
+    "exit",
+    "quit"
 };
 
 ConsoleUI::ConsoleUI()
@@ -61,14 +61,14 @@ void ConsoleUI::menu() {
     // Check if the command exists, this is done before handling them,
     // because if it doesn't exist, we might want to replace it with one that does.
     bool found = false;
-    for(int i=0;i<COMMANDS_N;i++){
+    for(size_t i = 0; i < COMMANDS.size(); i++){
         if(command == COMMANDS[i]) {
             found = true;
             break;
         }
     }
     if (!found) {
-        for(int i=0;i<COMMANDS_N;i++){
+        for(size_t i = 0; i < COMMANDS.size(); i++){
             if(Utils::levenshtein_distance<string>(command,COMMANDS[i]) < 3) {
                 found = true;
                 command = COMMANDS[i];
@@ -80,7 +80,7 @@ void ConsoleUI::menu() {
     }
     if (command == "help") {
         help();
-    } else if (command == "quit"){
+    } else if (command == "quit" || command == "exit"){
         quit();
     } else if (command == "clear"){
         clear();
@@ -121,14 +121,14 @@ void ConsoleUI::clear(){
 
 void ConsoleUI::about(){
     cout << endl <<"     ABOUT" << endl <<
-            "\tName of program: Computer Scientists and there Computers" << endl <<
+            "\tName of program: An Awesome Computer Scientist Program ( AACSP for short )" << endl <<
             "\tVersion: 1.2.0" << endl <<
             "\tYear: 2014" << endl <<
-            "\tObjectice: -To store and to work with a SQlite based database" << endl <<
-            "\t            for Computer Scientists and computers."<< endl <<
+            "\tObjective: -To store and to work with a SQlite based database" << endl <<
+            "\t            for Computer Scientists and Computers."<< endl <<
             "\t           -To be able to connect Computer scientist"<< endl <<
             "\t            to any computer and vise versa."<< endl <<
-            "\tCreated by: Groupe 7" << endl <<
+            "\tCreated by: Group 7" << endl <<
             "\tMembers of production: Ari Thorlacius Sigurdsson"<< endl <<
             "\t                       Egill Anton Hlodversson"<< endl <<
             "\t                       James Elias Sigurdarson"<< endl <<
