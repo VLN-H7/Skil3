@@ -4,7 +4,7 @@
 #include <string>
 #include <QString>
 
-#include "sort.h"
+#include "../sort.h"
 
 using namespace std;
 

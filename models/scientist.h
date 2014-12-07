@@ -2,8 +2,8 @@
 #define SCIENTIST_H
 
 #include <QString>
-#include "date.h"
-#include "sort.h"
+#include "../date.h"
+#include "../sort.h"
 
 using namespace std;
 
