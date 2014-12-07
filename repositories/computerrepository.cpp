@@ -23,7 +23,8 @@ void ComputerRepository::add(Computer comp){
     query->addBindValue(QString::fromStdString(comp.type));
     query->addBindValue(comp.buildyear);
     query->addBindValue(comp.built);
-    query->exec();
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 }
 
 
@@ -35,7 +36,8 @@ void ComputerRepository::update(Computer &comp, Computer &replace){
     query->addBindValue(replace.buildyear);
     query->addBindValue(replace.built);
     query->addBindValue(comp.id);
-    query->exec();
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 }
 
 
@@ -44,7 +46,16 @@ void ComputerRepository::remove(Computer &comp){
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("DELETE FROM computers WHERE id = ?");
     query->addBindValue(comp.id);
-    query->exec();
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
+
+    query->clear();
+
+    // Also clean all relations to other computers
+    query->prepare("DELETE FROM scientist_computer WHERE computer_id = ?");
+    query->addBindValue(comp.id);
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 }
 
 //Sorts Computers by selected field and order
@@ -60,7 +71,7 @@ vector<Computer> ComputerRepository::list(ComputerFields::Field field, Order ord
         order_by = "desc";
     }
     if(!query->exec("SELECT * FROM computers ORDER BY " + sort_field + " " + order_by))
-        cout << query->lastError().text().toStdString();
+        throw std::runtime_error(query->lastError().text().toStdString());
     while(query->next()){
         ret.push_back(getComputer(query));
     }
@@ -81,7 +92,7 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
     query->prepare("SELECT * FROM computers WHERE " + search_field + "= ? LIMIT " + QString::fromStdString(to_string(rows)));
     query->addBindValue(QString::fromStdString(search));
     if(!query->exec())
-        cout << query->lastError().text().toStdString();
+        throw std::runtime_error(query->lastError().text().toStdString());
     while(query->next()){
         ret.push_back(getComputer(query));
     }
@@ -96,7 +107,7 @@ vector<Computer> ComputerRepository::byScientist(Scientist &s){
                    "WHERE scientist_id = ?");
     query->addBindValue(s.id);
     if(!query->exec())
-        cout << query->lastError().text().toStdString();
+        throw std::runtime_error(query->lastError().text().toStdString());
 
     while(query->next()){
         ret.push_back(getComputer(query)); // TODO: fix this, the id has the possibility of being incorrect
@@ -109,7 +120,8 @@ void ComputerRepository::link(Computer &c, Scientist &s){
     query->prepare("INSERT INTO scientist_computer (scientist_id, computer_id) VALUES (?,?)");
     query->addBindValue(s.id);
     query->addBindValue(c.id);
-    if(!query->exec());
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 }
 
 void ComputerRepository::unlink(Computer &c, Scientist &s){
@@ -117,5 +129,6 @@ void ComputerRepository::unlink(Computer &c, Scientist &s){
     query->prepare("DELETE FROM scientist_computer WHERE scientist_id = ? AND computer_id = ?");
     query->addBindValue(s.id);
     query->addBindValue(c.id);
-    if(!query->exec());
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 }

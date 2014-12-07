@@ -1,9 +1,9 @@
 #ifndef COMPUTERREPOSITORY_H
 #define COMPUTERREPOSITORY_H
 
-#include <iostream>
 #include <vector>
 #include <memory>
+#include <stdexcept>
 #include "../models/computer.h"
 #include "../models/scientist.h"
 #include "../sqlconnection.h"

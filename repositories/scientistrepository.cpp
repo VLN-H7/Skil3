@@ -29,7 +29,8 @@ void ScientistRepository::add(Scientist s){
     query->addBindValue(s.birthdate);
     query->addBindValue(s.deathdate);
     query->addBindValue(QString::fromStdString(s.nationality));
-    query->exec();
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 }
 
 
@@ -47,7 +48,8 @@ void ScientistRepository::update(Scientist &s, Scientist &replace){
     query->addBindValue(replace.deathdate);
     query->addBindValue(QString::fromStdString(replace.nationality));
     query->addBindValue(s.id);
-    query->exec();
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 }
 
 //Removes one instance of scientist from the vector
@@ -57,14 +59,16 @@ void ScientistRepository::remove(Scientist &s){
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("DELETE FROM scientists WHERE id = ?");
     query->addBindValue(s.id);
-    query->exec();
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 
     query->clear();
 
     // Also clean all relations to other computers
     query->prepare("DELETE FROM scientist_computer WHERE scientist_id = ?");
     query->addBindValue(s.id);
-    query->exec();
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
 }
 
 //Sorts Scientists by selected field and order
@@ -80,7 +84,7 @@ vector<Scientist> ScientistRepository::list(ScientistFields::Field field, Order 
         order_by = "desc";
     }
     if(!query->exec("SELECT * FROM scientists ORDER BY " + sort_field + " " + order_by))
-        cout << query->lastError().text().toStdString();
+        throw std::runtime_error(query->lastError().text().toStdString());
     while(query->next()){
         ret.push_back(getScientist(query));
     }
@@ -100,7 +104,7 @@ vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size
     query->prepare("SELECT * FROM scientists WHERE " + search_field + " = ? LIMIT " + QString::fromStdString(to_string(rows)));
     query->addBindValue(QString::fromStdString(search));
     if(!query->exec())
-        cout << query->lastError().text().toStdString();
+        throw std::runtime_error(query->lastError().text().toStdString());
 
     while(query->next()){
         ret.push_back(getScientist(query));
@@ -116,7 +120,7 @@ vector<Scientist> ScientistRepository::byComputer(Computer &c){
                    "WHERE computer_id = ?");
     query->addBindValue(c.id);
     if(!query->exec())
-        cout << query->lastError().text().toStdString();
+        throw std::runtime_error(query->lastError().text().toStdString());
 
     while(query->next()){
         ret.push_back(getScientist(query)); // TODO: fix same problem

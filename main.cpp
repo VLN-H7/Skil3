@@ -3,8 +3,9 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    //QCoreApplication a(argc, argv); // Is this neccessary?
     ConsoleUI ui = ConsoleUI();
     ui.start();
-    return a.exec();
+    //return a.exec();
+    return 0;
 }

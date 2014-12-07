@@ -35,7 +35,12 @@ void ConsoleUI::start(){
     butiful();
     help();
     do{
-        menu();
+        try{
+            menu();
+        } catch (runtime_error &e) {
+            cout << "Command caused an error: " << e.what() << endl;
+            cout << "Please either report this to your nearest monkey or try another command " << endl;
+        }
     } while(1);
 }
 
@@ -131,7 +136,7 @@ void ConsoleUI::help(){
             "\t view computer   - View a computer" << endl <<
             "\t view scientist   - View a scientist" << endl << endl <<
             "    LINK"<< endl <<
-            "\t link    - Link a scientist and a computer" << endl <<
+            "\t link    - Link a scientist and a computer" << endl << endl <<
             "    OTHER"<< endl <<
             "\t quit    - Quit the program" << endl <<
             "\t clear   - Clear screen"<< endl <<
@@ -140,9 +145,7 @@ void ConsoleUI::help(){
 
 void ConsoleUI::add(vector<string> &arguments){
     if (arguments.size() == 0){
-        cout << endl <<"The available 'add' commands are: " << endl << endl <<
-                "\tcomputer  (c) - Add a computer" << endl <<
-                "\tscientist (s) - Add a scientist" << endl << endl;
+        cout << "Usage: add ([s]cientist|[c]omputer)" << endl;
         return;
     }
     if (arguments[0] == "scientist" || arguments[0] == "s")

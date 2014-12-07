@@ -70,8 +70,8 @@ bool SQLConnection::setup() {
             }
             if (!query.exec(queryTxt))
             {
-                qFatal(QString("One of the query failed to execute."
-                            " Error detail: " + query.lastError().text()).toLocal8Bit());
+                throw std::runtime_error("One of the setup queries failed to execute."
+                                         "Error detail:" + query.lastError().text().toStdString());
             }
             query.finish();
         }

@@ -5,6 +5,7 @@
 #include<iostream>
 #include<sstream>
 #include<iomanip>
+#include<stdexcept>
 #include "scientistui.h"
 #include "computerui.h"
 #include "../utils.h"

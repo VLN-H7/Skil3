@@ -1,9 +1,9 @@
 #ifndef SCIENTISTREPOSITORY_H
 #define SCIENTISTREPOSITORY_H
 
-#include <iostream>
 #include <vector>
 #include <memory>
+#include <stdexcept>
 #include "../models/scientist.h"
 #include "../models/computer.h"
 #include "../utils.h"

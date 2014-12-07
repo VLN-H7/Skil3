@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <iostream>
 #include <memory>
+#include <stdexcept>
 using namespace std;
 
 class SQLConnection
