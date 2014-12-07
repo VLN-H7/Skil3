@@ -24,3 +24,15 @@ vector<Computer> ComputerService::list(ComputerFields::Field field, Order order)
 vector<Computer> ComputerService::search(ComputerFields::Field field, int rows, string query){
     return computerRepository.search(field, rows, query);
 }
+
+vector<Computer> ComputerService::byScientist(Scientist &s){
+    return computerRepository.byScientist(s);
+}
+
+void ComputerService::link(Computer &c, Scientist &s){
+    computerRepository.link(c,s);
+}
+
+void ComputerService::unlink(Computer &c, Scientist &s){
+    computerRepository.unlink(c,s);
+}

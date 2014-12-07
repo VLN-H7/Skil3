@@ -29,9 +29,7 @@ SOURCES += main.cpp \
     repositories/computerrepository.cpp \
     ui/scientistui.cpp \
     utils.cpp \
-    ui/computerui.cpp \
-    services/scientistcomputerservice.cpp \
-    repositories/scientistcomputerrepository.cpp
+    ui/computerui.cpp
 
 HEADERS += \
     ui/consoleui.h \
@@ -46,9 +44,7 @@ HEADERS += \
     repositories/computerrepository.h \
     sort.h \
     ui/scientistui.h \
-    ui/computerui.h \
-    services/scientistcomputerservice.h \
-    repositories/scientistcomputerrepository.h
+    ui/computerui.h
 
 OTHER_FILES += data/tables.sql
 

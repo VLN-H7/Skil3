@@ -183,6 +183,19 @@ void ComputerUI::display(vector<Computer> &vec){
     }
 }
 
+void ComputerUI::listComputers(Scientist &s){
+    auto vec = computerService.byScientist(s);
+    display(vec);
+}
+
+void ComputerUI::link(Scientist &s){
+    Computer comp;
+    cout << endl << "Please select a computer" << endl;
+    if(!select(comp))
+        return;
+    computerService.link(comp, s);
+}
+
 void ComputerUI::header(){
     cout << endl;
     cout << left
@@ -231,6 +244,7 @@ void ComputerUI::readBuilt(Computer& s){
     s.built = (c == 'Y');
     cin.ignore();
 }
+
 
 
 

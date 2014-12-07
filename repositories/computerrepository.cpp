@@ -87,3 +87,35 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
     }
     return ret;
 }
+
+vector<Computer> ComputerRepository::byScientist(Scientist &s){
+    vector<Computer> ret;
+    auto query = SQLConnection::getInstance()->getQuery();
+    query->prepare("SELECT * FROM scientist_computer"
+                   "INNER JOIN computers ON computers.id = scientist_computer.computer_id"
+                   "WHERE scientist_id = ?");
+    query->addBindValue(s.id);
+    if(!query->exec())
+        cout << query->lastError().text().toStdString();
+
+    while(query->next()){
+        ret.push_back(getComputer(query)); // TODO: fix this, the id has the possibility of being incorrect
+    }
+    return ret;
+}
+
+void ComputerRepository::link(Computer &c, Scientist &s){
+    auto query = SQLConnection::getInstance()->getQuery();
+    query->prepare("INSERT INTO scientist_computer (scientist_id, computer_id) VALUES (?,?)");
+    query->addBindValue(s.id);
+    query->addBindValue(c.id);
+    if(!query->exec());
+}
+
+void ComputerRepository::unlink(Computer &c, Scientist &s){
+    auto query = SQLConnection::getInstance()->getQuery();
+    query->prepare("DELETE FROM scientist_computer WHERE scientist_id = ? AND computer_id = ?");
+    query->addBindValue(s.id);
+    query->addBindValue(c.id);
+    if(!query->exec());
+}

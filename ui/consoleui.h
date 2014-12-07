@@ -7,7 +7,6 @@
 #include<iomanip>
 #include "scientistui.h"
 #include "computerui.h"
-#include "../services/scientistcomputerservice.h"
 #include "../utils.h"
 
 using namespace std;
@@ -20,7 +19,6 @@ public:
 private:
     ScientistUI scientistUI;
     ComputerUI computerUI;
-    ScientistComputerService scientistComputerService;
     void butiful();
     void menu();
 

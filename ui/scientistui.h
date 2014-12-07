@@ -26,6 +26,7 @@ public:
     void edit();
     bool select(Scientist &s);
     void display(vector<Scientist> &vec);
+    void listScientists(Computer &c);
 private:
     ScientistService scientistService;
 

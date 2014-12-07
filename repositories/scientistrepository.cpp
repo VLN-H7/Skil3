@@ -21,7 +21,8 @@ ScientistRepository::ScientistRepository(){
 void ScientistRepository::add(Scientist s){
     //scientistVector.push_back(s);
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) VALUES (?,?,?,?,?,?)");
+    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality)"
+                   "VALUES (?,?,?,?,?,?)");
     query->addBindValue(QString::fromStdString(s.firstName));
     query->addBindValue(QString::fromStdString(s.lastName));
     query->addBindValue(QString() + s.gender);
@@ -36,7 +37,9 @@ void ScientistRepository::update(Scientist &s, Scientist &replace){
     //Searches for the name and removes it from the vector.
     // UPDATE scientists SET ...
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("UPDATE scientists SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? WHERE id = ?");
+    query->prepare("UPDATE scientists "
+                   "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ?"
+                   "WHERE id = ?");
     query->addBindValue(QString::fromStdString(replace.firstName));
     query->addBindValue(QString::fromStdString(replace.lastName));
     query->addBindValue(QString() + replace.gender);
@@ -53,6 +56,13 @@ void ScientistRepository::remove(Scientist &s){
 
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("DELETE FROM scientists WHERE id = ?");
+    query->addBindValue(s.id);
+    query->exec();
+
+    query->clear();
+
+    // Also clean all relations to other computers
+    query->prepare("DELETE FROM scientist_computer WHERE scientist_id = ?");
     query->addBindValue(s.id);
     query->exec();
 }
@@ -94,6 +104,22 @@ vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size
 
     while(query->next()){
         ret.push_back(getScientist(query));
+    }
+    return ret;
+}
+
+vector<Scientist> ScientistRepository::byComputer(Computer &c){
+    vector<Scientist> ret;
+    auto query = SQLConnection::getInstance()->getQuery();
+    query->prepare("SELECT * FROM scientist_computer"
+                   "INNER JOIN scientists ON scientists.id = scientist_computer.scientist_id"
+                   "WHERE computer_id = ?");
+    query->addBindValue(c.id);
+    if(!query->exec())
+        cout << query->lastError().text().toStdString();
+
+    while(query->next()){
+        ret.push_back(getScientist(query)); // TODO: fix same problem
     }
     return ret;
 }

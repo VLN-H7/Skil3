@@ -24,3 +24,7 @@ vector<Scientist> ScientistService::list(ScientistFields::Field field, Order ord
 vector<Scientist> ScientistService::search(ScientistFields::Field field, int rows, string query){
     return scientistRepository.search(field, rows, query);
 }
+
+vector<Scientist> ScientistService::byComputer(Computer &c){
+    return scientistRepository.byComputer(c);
+}

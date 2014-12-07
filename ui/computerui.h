@@ -16,6 +16,7 @@ using namespace std;
 
 class ComputerUI
 {
+
 public:
     ComputerUI();
     vector<Computer> list();
@@ -26,6 +27,8 @@ public:
     void edit();
     bool select(Computer &comp);
     void display(vector<Computer> &vec);
+    void listComputers(Scientist &s);
+    void link(Scientist &s);
 private:
     ComputerService computerService;
 

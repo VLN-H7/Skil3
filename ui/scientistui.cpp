@@ -214,6 +214,11 @@ void ScientistUI::display(vector<Scientist> &vec){
     }
 }
 
+void ScientistUI::listScientists(Computer &c){
+    auto vec = scientistService.byComputer(c);
+    display(vec);
+}
+
 void ScientistUI::header(){
     cout << endl;
     cout << left

@@ -18,7 +18,6 @@ ConsoleUI::ConsoleUI()
 {
     scientistUI = ScientistUI();
     computerUI = ComputerUI();
-    scientistComputerService = ScientistComputerService();
 }
 void ConsoleUI::butiful(){
    cout << " ----------------------------------------------------- " << endl
@@ -114,24 +113,26 @@ void ConsoleUI::help(){
 
     cout << "The available commands are: " << endl << endl <<
             "    LIST"<< endl <<
-            "\t list c  - List all computers" << endl <<
-            "\t list s  - List all scientists" << endl << endl <<
+            "\t list scientists  - List all scientists" << endl <<
+            "\t list computers  - List all computers" << endl << endl <<
             "    ADD"<< endl <<
-            "\t add c    - Add a computer" << endl <<
-            "\t add s    - Add a scientist" << endl << endl <<
+            "\t add scientist    - Add a scientist" << endl <<
+            "\t add computer    - Add a computer" << endl << endl <<
             "    SEARCH"<< endl <<
-            "\t search c - Search for a scientist" << endl <<
-            "\t search s - Search for a computer" << endl << endl <<
+            "\t search scientists - Search for a scientist" << endl <<
+            "\t search computers - Search for a computer" << endl << endl <<
             "    REMOVE"<< endl <<
-            "\t remove c - Remove a scientist" << endl <<
-            "\t remove s - Remove a computer" << endl << endl <<
+            "\t remove scientist - Remove a scientist" << endl <<
+            "\t remove computer - Remove a computer" << endl << endl <<
             "    EDIT"<< endl <<
-            "\t edit c  - Edit a scientist" << endl <<
-            "\t edit s  - Edit a computer" << endl << endl <<
+            "\t edit scientist  - Edit a scientist" << endl <<
+            "\t edit computer  - Edit a computer" << endl << endl <<
             "    VIEW"<< endl <<
-            "\t view c   - View a computer" << endl <<
-            "\t view s   - View a scientist" << endl << endl <<
-            "\t link    - Link together a scientist and a computer" << endl <<
+            "\t view computer   - View a computer" << endl <<
+            "\t view scientist   - View a scientist" << endl << endl <<
+            "    LINK"<< endl <<
+            "\t link    - Link a scientist and a computer" << endl <<
+            "    OTHER"<< endl <<
             "\t quit    - Quit the program" << endl <<
             "\t clear   - Clear screen"<< endl <<
             "\t help    - View help" << endl << endl;
@@ -195,15 +196,12 @@ void ConsoleUI::search(vector<string> &arguments){
 }
 
 void ConsoleUI::link(vector<string> &arguments){
+    // Handle selecting a scientist first, then pass it to the computer UI for further processing
     cout << "Please select a scientist" << endl;
     Scientist sci;
-    Computer comp;
     if(!scientistUI.select(sci))
         return;
-    cout << endl << "Please select a computer" << endl;
-    if(!computerUI.select(comp))
-        return;
-    scientistComputerService.link(sci,comp);
+    computerUI.link(sci);
 
 }
 
@@ -216,14 +214,11 @@ void ConsoleUI::view(vector<string> &arguments){
         Scientist s;
         if(!scientistUI.select(s)) return;
 
-        vector<Computer> computers = scientistComputerService.listComputers(s);
-        computerUI.display(computers);
+        computerUI.listComputers(s);
     } else if(arguments[0] == "computer" || arguments[0] == "c"){
         Computer c;
         if(!computerUI.select(c)) return;
-
-        vector<Scientist> scientists = scientistComputerService.listScientists(c);
-        scientistUI.display(scientists);
+        scientistUI.listScientists(c);
     }
 }
 
