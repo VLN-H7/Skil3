@@ -102,8 +102,8 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
 vector<Computer> ComputerRepository::byScientist(Scientist &s){
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("SELECT * FROM scientist_computer"
-                   "INNER JOIN computers ON computers.id = scientist_computer.computer_id"
+    query->prepare("SELECT * FROM scientist_computer "
+                   "INNER JOIN computers ON computers.id = scientist_computer.computer_id "
                    "WHERE scientist_id = ?");
     query->addBindValue(s.id);
     if(!query->exec())

@@ -21,7 +21,7 @@ ScientistRepository::ScientistRepository(){
 void ScientistRepository::add(Scientist s){
     //scientistVector.push_back(s);
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality)"
+    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) "
                    "VALUES (?,?,?,?,?,?)");
     query->addBindValue(QString::fromStdString(s.firstName));
     query->addBindValue(QString::fromStdString(s.lastName));
@@ -39,7 +39,7 @@ void ScientistRepository::update(Scientist &s, Scientist &replace){
     // UPDATE scientists SET ...
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("UPDATE scientists "
-                   "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ?"
+                   "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? "
                    "WHERE id = ?");
     query->addBindValue(QString::fromStdString(replace.firstName));
     query->addBindValue(QString::fromStdString(replace.lastName));
@@ -115,8 +115,8 @@ vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size
 vector<Scientist> ScientistRepository::byComputer(Computer &c){
     vector<Scientist> ret;
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("SELECT * FROM scientist_computer"
-                   "INNER JOIN scientists ON scientists.id = scientist_computer.scientist_id"
+    query->prepare("SELECT * FROM scientist_computer "
+                   "INNER JOIN scientists ON scientists.id = scientist_computer.scientist_id "
                    "WHERE computer_id = ?");
     query->addBindValue(c.id);
     if(!query->exec())
