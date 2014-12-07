@@ -1,6 +1,6 @@
 #include "consoleui.h"
 
-const int COMMANDS_N = 10;
+const int COMMANDS_N = 11;
 const char* COMMANDS[] = {
     "help",
     "quit",
@@ -50,7 +50,7 @@ void ConsoleUI::menu() {
     do {
         cout << "Please enter a command: ";
         getline(cin,command);
-    } while(command=="");
+    } while(command.empty());
 
     // Split the input into command and argument, trim each segment, and then remove all empty strings.
     auto input = Utils::split(command, ' ');
