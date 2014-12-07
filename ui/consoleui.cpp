@@ -127,7 +127,7 @@ void ConsoleUI::about(){
             "\tObjectice: -To store and to work with a SQlite based database" << endl <<
             "\t            for Computer Scientists and computers."<< endl <<
             "\t           -To be able to connect Computer scientist"<< endl <<
-            "\t            to any computer and vise vera."<< endl <<
+            "\t            to any computer and vise versa."<< endl <<
             "\tCreated by: Groupe 7" << endl <<
             "\tMembers of production: Ari Thorlacius Sigurdsson"<< endl <<
             "\t                       Egill Anton Hlodversson"<< endl <<
