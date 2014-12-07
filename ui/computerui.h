@@ -14,8 +14,7 @@
 using namespace std;
 
 
-class ComputerUI
-{
+class ComputerUI {
 
 public:
     ComputerUI();

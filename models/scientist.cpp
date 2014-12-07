@@ -1,10 +1,9 @@
 #include "scientist.h"
 
-Scientist::Scientist()
-{
+Scientist::Scientist() {
 }
 
-bool operator ==(const Scientist &a, const Scientist &b){
+bool operator ==(const Scientist &a, const Scientist &b) {
     if(a.firstName != b.firstName) return false;
     else if (a.lastName != b.lastName) return false;
     else if (a.gender != b.gender) return false;
@@ -14,8 +13,8 @@ bool operator ==(const Scientist &a, const Scientist &b){
     return true;
 }
 
-QString ScientistFields::toField(Field f){
-    switch(f){
+QString ScientistFields::toField(Field f) {
+    switch(f) {
         case ID:
             return "id";
         case FIRST_NAME:

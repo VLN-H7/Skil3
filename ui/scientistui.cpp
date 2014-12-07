@@ -7,7 +7,7 @@ ScientistUI::ScientistUI()
     scientistService = ScientistService();
 }
 
-void ScientistUI::add(){
+void ScientistUI::add() {
 
     Scientist s;
     string str;
@@ -27,7 +27,7 @@ void ScientistUI::add(){
     scientistService.add(s);
 }
 
-void ScientistUI::remove(){
+void ScientistUI::remove() {
     Scientist sci;
     if (!select(sci))
         return;
@@ -39,7 +39,7 @@ void ScientistUI::remove(){
 }
 
 
-void ScientistUI::edit(){
+void ScientistUI::edit() {
     int field = 1;
     stringstream ss;
     Scientist sci;
@@ -60,7 +60,7 @@ void ScientistUI::edit(){
             field = 1;
     } while(field <= 0 || field > 6);
     Scientist s = Scientist(sci);
-    switch(static_cast<ScientistFields::Field>(field)){
+    switch(static_cast<ScientistFields::Field>(field)) {
 
         case ScientistFields::FIRST_NAME:
             readFirstName(s);
@@ -99,7 +99,7 @@ void ScientistUI::edit(){
     scientistService.update(sci, s);
 }
 
-bool ScientistUI::select(Scientist &s){
+bool ScientistUI::select(Scientist &s) {
 
     vector<Scientist> vec;
     int id = 0;
@@ -115,7 +115,7 @@ bool ScientistUI::select(Scientist &s){
     if(toupper(inp) == 'S') vec = search();
     else vec = list();
 
-    if(vec.empty()){
+    if(vec.empty()) {
         cout << "No results found." << endl;
         return false;
     }
@@ -133,7 +133,7 @@ bool ScientistUI::select(Scientist &s){
 }
 
 
-vector<Scientist> ScientistUI::list(){
+vector<Scientist> ScientistUI::list() {
     int field = 1, order = 1;
     stringstream ss;
     char sort = 'N';
@@ -170,7 +170,7 @@ vector<Scientist> ScientistUI::list(){
     return vec;
 }
 
-vector<Scientist> ScientistUI::search(){
+vector<Scientist> ScientistUI::search() {
     int field = 1, rows = 1;
     string query;
     stringstream ss;
@@ -189,7 +189,7 @@ vector<Scientist> ScientistUI::search(){
     cout << "What is the maximum number of entries you want? (Default 1): ";
     Utils::readline(ss) >> rows;
     vector<Scientist> vec;
-    if(rows <= 0){
+    if(rows <= 0) {
         cout << "Invalid number of entries." << endl;
         return vec; // Why go through a search if the user doesnt want results?
     }
@@ -200,9 +200,9 @@ vector<Scientist> ScientistUI::search(){
     return vec;
 }
 
-void ScientistUI::display(vector<Scientist> &vec){
+void ScientistUI::display(vector<Scientist> &vec) {
     header();
-    for(size_t i = 0; i<vec.size(); i++){
+    for(size_t i = 0; i<vec.size(); i++) {
         cout << left
             << setw(4)  << (i+1)
             << setw(12) << vec[i].firstName
@@ -214,12 +214,12 @@ void ScientistUI::display(vector<Scientist> &vec){
     }
 }
 
-void ScientistUI::listScientists(Computer &c){
+void ScientistUI::listScientists(Computer &c) {
     auto vec = scientistService.byComputer(c);
     display(vec);
 }
 
-void ScientistUI::header(){
+void ScientistUI::header() {
     cout << endl;
     cout << left
          << setw(4)  << "No."
@@ -232,7 +232,7 @@ void ScientistUI::header(){
     cout << "=======================================================================" << endl;
 }
 
-string ScientistUI::readString(string msg){
+string ScientistUI::readString(string msg) {
     string s;
     do{
         cout << msg;
@@ -242,15 +242,15 @@ string ScientistUI::readString(string msg){
 
 }
 
-void ScientistUI::readFirstName(Scientist& s){
+void ScientistUI::readFirstName(Scientist& s) {
     s.firstName = readString("First Name: ");
 }
 
-void ScientistUI::readLastName(Scientist& s){
+void ScientistUI::readLastName(Scientist& s) {
     s.lastName = readString("Last Name: ");
 }
 
-void ScientistUI::readGender(Scientist& s){
+void ScientistUI::readGender(Scientist& s) {
     do{
         cout << "Gender (M/F): ";
         cin >> s.gender;
@@ -261,7 +261,7 @@ void ScientistUI::readGender(Scientist& s){
     cin.ignore();
 }
 
-void ScientistUI::readBirthDate(Scientist& s){
+void ScientistUI::readBirthDate(Scientist& s) {
     string str;
     do{
         cout << "Date of birth(DD.MM.YYYY): ";
@@ -274,12 +274,12 @@ void ScientistUI::readBirthDate(Scientist& s){
     } while(!s.birthdate.isValid() || s.birthdate>Date::now());
 }
 
-void ScientistUI::readDeathDate(Scientist& s){
+void ScientistUI::readDeathDate(Scientist& s) {
     string str;
     do{
         cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
         getline(cin, str);
-        if(str.empty()){
+        if(str.empty()) {
             s.deathdate.setDate(0,1,1);
             break;
         }
@@ -293,7 +293,7 @@ void ScientistUI::readDeathDate(Scientist& s){
     } while(!s.deathdate.isValid()||s.deathdate<s.birthdate||s.deathdate>Date::now());
 }
 
-void ScientistUI::readNationality(Scientist& s){
+void ScientistUI::readNationality(Scientist& s) {
     s.nationality = readString("Nationality: ");
 }
 

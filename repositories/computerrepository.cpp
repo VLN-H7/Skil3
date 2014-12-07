@@ -2,7 +2,7 @@
 
 
 
-Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query){
+Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query) {
     Computer comp;
     comp.id = query->value("id").toInt();
     comp.name = query->value("name").toString().toStdString();
@@ -12,11 +12,11 @@ Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query){
     return comp;
 }
 
-ComputerRepository::ComputerRepository(){
+ComputerRepository::ComputerRepository() {
 }
 
 
-void ComputerRepository::add(Computer &comp){
+void ComputerRepository::add(Computer &comp) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO computers (name, type, build_year, built) VALUES (?,?,?,?)");
     query->addBindValue(QString::fromStdString(comp.name));
@@ -28,7 +28,7 @@ void ComputerRepository::add(Computer &comp){
 }
 
 
-void ComputerRepository::update(Computer &comp, Computer &replace){
+void ComputerRepository::update(Computer &comp, Computer &replace) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("UPDATE computers SET name = ?, type = ?, build_year = ?, built = ? WHERE id = ?");
     query->addBindValue(QString::fromStdString(replace.name));
@@ -41,7 +41,7 @@ void ComputerRepository::update(Computer &comp, Computer &replace){
 }
 
 
-void ComputerRepository::remove(Computer &comp){
+void ComputerRepository::remove(Computer &comp) {
 
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("DELETE FROM computers WHERE id = ?");
@@ -59,32 +59,32 @@ void ComputerRepository::remove(Computer &comp){
 }
 
 //Sorts Computers by selected field and order
-vector<Computer> ComputerRepository::list(ComputerFields::Field field, Order order){
+vector<Computer> ComputerRepository::list(ComputerFields::Field field, Order order) {
     vector<Computer> ret;
     // SELECT * FROM Computers ORDER BY field,order
     auto query = SQLConnection::getInstance()->getQuery();
     QString sort_field = ComputerFields::toField(field), order_by;
 
-    if(order == ASC){
+    if(order == ASC) {
         order_by = "asc";
     } else {
         order_by = "desc";
     }
     if(!query->exec("SELECT * FROM computers ORDER BY " + sort_field + " " + order_by))
         throw std::runtime_error(query->lastError().text().toStdString());
-    while(query->next()){
+    while(query->next()) {
         ret.push_back(getComputer(query));
     }
     return ret;
 }
 
 //Searches for default amount of Computers (1)
-vector<Computer> ComputerRepository::search(ComputerFields::Field field, string query){
+vector<Computer> ComputerRepository::search(ComputerFields::Field field, string query) {
     return search(field, 1, query);
 }
 
 //Searches for Computers after the parameters selected
-vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t rows, string search){
+vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t rows, string search) {
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     QString search_field = ComputerFields::toField(field);
@@ -93,13 +93,13 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
     query->addBindValue(QString::fromStdString(search));
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
-    while(query->next()){
+    while(query->next()) {
         ret.push_back(getComputer(query));
     }
     return ret;
 }
 
-vector<Computer> ComputerRepository::byScientist(Scientist &s){
+vector<Computer> ComputerRepository::byScientist(Scientist &s) {
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("SELECT * FROM scientist_computer "
@@ -109,13 +109,13 @@ vector<Computer> ComputerRepository::byScientist(Scientist &s){
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 
-    while(query->next()){
+    while(query->next()) {
         ret.push_back(getComputer(query)); // TODO: fix this, the id has the possibility of being incorrect
     }
     return ret;
 }
 
-void ComputerRepository::link(Computer &c, Scientist &s){
+void ComputerRepository::link(Computer &c, Scientist &s) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO scientist_computer (scientist_id, computer_id) VALUES (?,?)");
     query->addBindValue(s.id);
@@ -124,7 +124,7 @@ void ComputerRepository::link(Computer &c, Scientist &s){
         throw std::runtime_error(query->lastError().text().toStdString());
 }
 
-void ComputerRepository::unlink(Computer &c, Scientist &s){
+void ComputerRepository::unlink(Computer &c, Scientist &s) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("DELETE FROM scientist_computer WHERE scientist_id = ? AND computer_id = ?");
     query->addBindValue(s.id);

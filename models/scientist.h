@@ -7,8 +7,7 @@
 
 using namespace std;
 
-class Scientist
-{
+class Scientist {
 public:
     Scientist();
     int id;

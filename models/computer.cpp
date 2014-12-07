@@ -1,10 +1,9 @@
 #include "computer.h"
 
-Computer::Computer()
-{
+Computer::Computer() {
 }
 
-bool operator ==(const Computer &a, const Computer &b){
+bool operator ==(const Computer &a, const Computer &b) {
     if(a.name != b.name) return false;
     else if (a.type != b.type) return false;
     else if (a.buildyear != b.buildyear) return false;
@@ -13,8 +12,8 @@ bool operator ==(const Computer &a, const Computer &b){
     return true;
 }
 
-QString ComputerFields::toField(Field f){
-    switch(f){
+QString ComputerFields::toField(Field f) {
+    switch(f) {
         case ID:
             return "id";
         case NAME:

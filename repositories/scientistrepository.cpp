@@ -1,6 +1,6 @@
 #include "scientistrepository.h"
 
-Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query){
+Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query) {
     Scientist sci;
     sci.id = query->value("id").toInt();
     sci.firstName = query->value("first_name").toString().toStdString();
@@ -12,13 +12,13 @@ Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query){
     return sci;
 }
 
-ScientistRepository::ScientistRepository(){
+ScientistRepository::ScientistRepository() {
 }
 
 
 
 //Adds an instance of scientist to the vector and writes it to a file
-void ScientistRepository::add(Scientist &s){
+void ScientistRepository::add(Scientist &s) {
     //scientistVector.push_back(s);
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) "
@@ -34,7 +34,7 @@ void ScientistRepository::add(Scientist &s){
 }
 
 
-void ScientistRepository::update(Scientist &s, Scientist &replace){
+void ScientistRepository::update(Scientist &s, Scientist &replace) {
     //Searches for the name and removes it from the vector.
     // UPDATE scientists SET ...
     auto query = SQLConnection::getInstance()->getQuery();
@@ -53,7 +53,7 @@ void ScientistRepository::update(Scientist &s, Scientist &replace){
 }
 
 //Removes one instance of scientist from the vector
-void ScientistRepository::remove(Scientist &s){
+void ScientistRepository::remove(Scientist &s) {
     // DELETE FROM ... WHERE
 
     auto query = SQLConnection::getInstance()->getQuery();
@@ -72,32 +72,32 @@ void ScientistRepository::remove(Scientist &s){
 }
 
 //Sorts Scientists by selected field and order
-vector<Scientist> ScientistRepository::list(ScientistFields::Field field, Order order){
+vector<Scientist> ScientistRepository::list(ScientistFields::Field field, Order order) {
     vector<Scientist> ret;
     // SELECT * FROM scientists ORDER BY field,order
     auto query = SQLConnection::getInstance()->getQuery();
     QString sort_field = ScientistFields::toField(field), order_by;
 
-    if(order == ASC){
+    if(order == ASC) {
         order_by = "asc";
     } else {
         order_by = "desc";
     }
     if(!query->exec("SELECT * FROM scientists ORDER BY " + sort_field + " " + order_by))
         throw std::runtime_error(query->lastError().text().toStdString());
-    while(query->next()){
+    while(query->next()) {
         ret.push_back(getScientist(query));
     }
     return ret;
 }
 
 //Searches for default amount of Scientists (1)
-vector<Scientist> ScientistRepository::search(ScientistFields::Field field, string query){
+vector<Scientist> ScientistRepository::search(ScientistFields::Field field, string query) {
     return search(field, 1, query);
 }
 
 //Searches for Scientists after the parameters selected
-vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size_t rows, string search){
+vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size_t rows, string search) {
     vector<Scientist> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     QString search_field = ScientistFields::toField(field);
@@ -106,13 +106,13 @@ vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 
-    while(query->next()){
+    while(query->next()) {
         ret.push_back(getScientist(query));
     }
     return ret;
 }
 
-vector<Scientist> ScientistRepository::byComputer(Computer &c){
+vector<Scientist> ScientistRepository::byComputer(Computer &c) {
     vector<Scientist> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("SELECT * FROM scientist_computer "
@@ -122,7 +122,7 @@ vector<Scientist> ScientistRepository::byComputer(Computer &c){
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 
-    while(query->next()){
+    while(query->next()) {
         ret.push_back(getScientist(query)); // TODO: fix same problem
     }
     return ret;

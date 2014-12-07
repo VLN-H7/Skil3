@@ -10,8 +10,7 @@
 
 using namespace std;
 
-class ComputerRepository
-{
+class ComputerRepository {
 public:
     ComputerRepository();
 

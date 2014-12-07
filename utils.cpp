@@ -1,6 +1,6 @@
 #include "utils.h"
 
-std::stringstream &Utils::readline(std::stringstream &ss){
+std::stringstream &Utils::readline(std::stringstream &ss) {
     std::string s;
     std::getline(std::cin, s);
     ss.clear();
@@ -46,7 +46,7 @@ std::string& Utils::trim(std::string &s) {
 void Utils::vtrim(std::vector<std::string>& strings)
 {
     std::for_each(strings.begin(), strings.end(), Utils::trim);
-    auto it = std::remove_if(strings.begin(), strings.end(), [](std::string& a){ return a.empty(); });
+    auto it = std::remove_if(strings.begin(), strings.end(), [](std::string& a) { return a.empty(); });
     // erase the removed elements
     strings.erase(it, strings.end());
 }

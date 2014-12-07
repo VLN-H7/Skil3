@@ -37,7 +37,7 @@ SQLConnection::SQLConnection(const char* dbName) {
    }
 }
 
-unique_ptr<QSqlQuery> SQLConnection::getQuery(){
+unique_ptr<QSqlQuery> SQLConnection::getQuery() {
     // Use unique_ptr because by using it the caller is freed from the contract of having to free the pointer after use.
     return unique_ptr<QSqlQuery>(new QSqlQuery(db));
 }

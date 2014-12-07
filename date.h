@@ -9,8 +9,7 @@
 
 using namespace std;
 
-class Date : public QDate
-{
+class Date : public QDate {
 public:
     Date();
     Date(const QDate& D);

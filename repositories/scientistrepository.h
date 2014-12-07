@@ -11,8 +11,7 @@
 
 using namespace std;
 
-class ScientistRepository
-{
+class ScientistRepository {
 public:
     ScientistRepository();
 

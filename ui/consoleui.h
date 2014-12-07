@@ -12,8 +12,7 @@
 
 using namespace std;
 
-class ConsoleUI
-{
+class ConsoleUI {
 public:
     ConsoleUI();
     void start();

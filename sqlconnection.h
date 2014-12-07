@@ -11,8 +11,7 @@
 #include <stdexcept>
 using namespace std;
 // A singleton to manage sql connections
-class SQLConnection
-{
+class SQLConnection {
   private:
     static SQLConnection* _instance;
 

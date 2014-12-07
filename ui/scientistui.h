@@ -14,8 +14,7 @@
 using namespace std;
 
 
-class ScientistUI
-{
+class ScientistUI {
 public:
     ScientistUI();
     vector<Scientist> list();

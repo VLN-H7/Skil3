@@ -5,7 +5,7 @@ ComputerUI::ComputerUI()
     computerService = ComputerService();
 }
 
-void ComputerUI::add(){
+void ComputerUI::add() {
 
     Computer s;
 
@@ -17,7 +17,7 @@ void ComputerUI::add(){
     computerService.add(s);
 }
 
-void ComputerUI::remove(){
+void ComputerUI::remove() {
     Computer comp;
     if (!select(comp))
         return;
@@ -28,7 +28,7 @@ void ComputerUI::remove(){
 }
 
 
-void ComputerUI::edit(){
+void ComputerUI::edit() {
     int field = 1;
     stringstream ss;
     Computer comp;
@@ -46,7 +46,7 @@ void ComputerUI::edit(){
             field = 1;
     } while(field <= 0 || field > 6);
     Computer s = Computer(comp);
-    switch(static_cast<ComputerFields::Field>(field)){
+    switch(static_cast<ComputerFields::Field>(field)) {
 
         case ComputerFields::NAME:
             readName(s);
@@ -75,7 +75,7 @@ void ComputerUI::edit(){
     computerService.update(comp, s);
 }
 
-bool ComputerUI::select(Computer &comp){
+bool ComputerUI::select(Computer &comp) {
 
     vector<Computer> vec;
     int id = -1;
@@ -91,7 +91,7 @@ bool ComputerUI::select(Computer &comp){
 
     if(toupper(inp) == 'S') vec = search();
     else vec = list();
-    if(vec.empty()){
+    if(vec.empty()) {
         cout << "No results found." << endl;
         return false;
     }
@@ -109,7 +109,7 @@ bool ComputerUI::select(Computer &comp){
 }
 
 
-vector<Computer> ComputerUI::list(){
+vector<Computer> ComputerUI::list() {
     int field = 1, order = 1;
     stringstream ss;
     char sort = 'N';
@@ -143,7 +143,7 @@ vector<Computer> ComputerUI::list(){
     return vec;
 }
 
-vector<Computer> ComputerUI::search(){
+vector<Computer> ComputerUI::search() {
     int field = 1, rows = 1;
     stringstream ss;
     string query;
@@ -160,7 +160,7 @@ vector<Computer> ComputerUI::search(){
     cout << "What is the maximum number of entries you want? (Default 1): ";
     Utils::readline(ss) >> rows;
     vector<Computer> vec;
-    if(rows <= 0){
+    if(rows <= 0) {
         cout << "Invalid number of entries." << endl;
         return vec; // Why go through a search if the user doesnt want results?
     }
@@ -171,9 +171,9 @@ vector<Computer> ComputerUI::search(){
     return vec;
 }
 
-void ComputerUI::display(vector<Computer> &vec){
+void ComputerUI::display(vector<Computer> &vec) {
     header();
-    for(size_t i = 0; i < vec.size(); i++){
+    for(size_t i = 0; i < vec.size(); i++) {
         cout << left
              << setw(4)  << (i+1)
              << setw(24) << vec[i].name
@@ -183,12 +183,12 @@ void ComputerUI::display(vector<Computer> &vec){
     }
 }
 
-void ComputerUI::listComputers(Scientist &s){
+void ComputerUI::listComputers(Scientist &s) {
     auto vec = computerService.byScientist(s);
     display(vec);
 }
 
-void ComputerUI::link(Scientist &s){
+void ComputerUI::link(Scientist &s) {
     Computer comp;
     cout << endl << "Please select a computer" << endl;
     if(!select(comp))
@@ -196,7 +196,7 @@ void ComputerUI::link(Scientist &s){
     computerService.link(comp, s);
 }
 
-void ComputerUI::header(){
+void ComputerUI::header() {
     cout << endl;
     cout << left
          << setw(4)  << "No."
@@ -207,7 +207,7 @@ void ComputerUI::header(){
     cout << "=======================================================================" << endl;
 }
 
-string ComputerUI::readString(string msg){
+string ComputerUI::readString(string msg) {
     string s;
     do{
         cout << msg;
@@ -217,22 +217,22 @@ string ComputerUI::readString(string msg){
 
 }
 
-void ComputerUI::readName(Computer& s){
+void ComputerUI::readName(Computer& s) {
     s.name = readString("Name: ");
 }
 
-void ComputerUI::readType(Computer& s){
+void ComputerUI::readType(Computer& s) {
     s.type = readString("Type: ");
 }
 
-void ComputerUI::readBuildYear(Computer& s){
+void ComputerUI::readBuildYear(Computer& s) {
     s.buildyear = 0;
     stringstream ss;
     cout << "Build Year (leave empty for no value): ";
     Utils::readline(ss) >> s.buildyear;
 }
 
-void ComputerUI::readBuilt(Computer& s){
+void ComputerUI::readBuilt(Computer& s) {
     char c;
     do{
         cout << "Built? (Y/N): ";

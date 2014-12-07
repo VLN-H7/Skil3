@@ -8,8 +8,7 @@
 
 using namespace std;
 
-class ComputerService
-{
+class ComputerService {
 
 public:
     ComputerService();

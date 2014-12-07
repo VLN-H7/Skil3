@@ -20,7 +20,7 @@ ConsoleUI::ConsoleUI()
     scientistUI = ScientistUI();
     computerUI = ComputerUI();
 }
-void ConsoleUI::butiful(){
+void ConsoleUI::butiful() {
    cout << " ----------------------------------------------------- " << endl
         << "|      __    __     _                                 |" << endl
         << "|     / / /\\ \\ \\___| | ___ ___  _ __ ___   ___        |" << endl
@@ -32,7 +32,7 @@ void ConsoleUI::butiful(){
         << " ----------------------------------------------------- " << endl;
 }
 
-void ConsoleUI::start(){
+void ConsoleUI::start() {
     butiful();
     help();
     do{
@@ -61,14 +61,14 @@ void ConsoleUI::menu() {
     // Check if the command exists, this is done before handling them,
     // because if it doesn't exist, we might want to replace it with one that does.
     bool found = false;
-    for(size_t i = 0; i < COMMANDS.size(); i++){
+    for(size_t i = 0; i < COMMANDS.size(); i++) {
         if(command == COMMANDS[i]) {
             found = true;
             break;
         }
     }
     if (!found) {
-        for(size_t i = 0; i < COMMANDS.size(); i++){
+        for(size_t i = 0; i < COMMANDS.size(); i++) {
             if(Utils::levenshtein_distance<string>(command,COMMANDS[i]) < 3) {
                 found = true;
                 command = COMMANDS[i];
@@ -80,21 +80,21 @@ void ConsoleUI::menu() {
     }
     if (command == "help") {
         help();
-    } else if (command == "quit" || command == "exit"){
+    } else if (command == "quit" || command == "exit") {
         quit();
-    } else if (command == "clear"){
+    } else if (command == "clear") {
         clear();
-    } else if (command == "about"){
+    } else if (command == "about") {
         about();
-    } else if (command == "add"){
+    } else if (command == "add") {
         add(arguments);
     } else if (command == "list") {
         list(arguments);
-    } else if (command == "search"){
+    } else if (command == "search") {
         search(arguments);
-    } else if (command == "remove"){
+    } else if (command == "remove") {
         remove(arguments);
-    } else if (command == "edit"){
+    } else if (command == "edit") {
         edit(arguments);
     } else if (command == "link") {
         link(arguments);
@@ -106,11 +106,11 @@ void ConsoleUI::menu() {
     cout << endl;
 }
 
-void ConsoleUI::quit(){
+void ConsoleUI::quit() {
     exit(1);
 }
 
-void ConsoleUI::clear(){
+void ConsoleUI::clear() {
 #ifdef Q_OS_WIN32
     system("cls");
 #else
@@ -119,7 +119,7 @@ void ConsoleUI::clear(){
     help();
 }
 
-void ConsoleUI::about(){
+void ConsoleUI::about() {
     cout << endl <<"     ABOUT" << endl <<
             "\tName of program: An Awesome Computer Scientist Program ( AACSP for short )" << endl <<
             "\tVersion: 1.2.0" << endl <<
@@ -136,7 +136,7 @@ void ConsoleUI::about(){
             "\t                       Unnar Freyr Erlendsson"<< endl << endl;
 }
 
-void ConsoleUI::help(){
+void ConsoleUI::help() {
 
     cout << "The available commands are: " << endl << endl <<
             "    LIST"<< endl <<
@@ -166,8 +166,8 @@ void ConsoleUI::help(){
             "\t help              - View help" << endl << endl;
 }
 
-void ConsoleUI::add(vector<string> &arguments){
-    if (arguments.size() == 0){
+void ConsoleUI::add(vector<string> &arguments) {
+    if (arguments.size() == 0) {
         cout << endl <<"The available 'add' commands are: " << endl << endl <<
                        "\tadd computer  - Add a computer" << endl <<
                        "\tadd scientist - Add a scientist" << endl << endl;
@@ -179,8 +179,8 @@ void ConsoleUI::add(vector<string> &arguments){
         computerUI.add();
 }
 
-void ConsoleUI::remove(vector<string> &arguments){
-    if (arguments.size() == 0){
+void ConsoleUI::remove(vector<string> &arguments) {
+    if (arguments.size() == 0) {
         cout << endl <<"The available 'remove' commands are: " << endl << endl <<
                 "\tremove computer   - Remove a computer" << endl <<
                 "\tremove scientist  - Remove a scientist" << endl << endl;
@@ -192,8 +192,8 @@ void ConsoleUI::remove(vector<string> &arguments){
         computerUI.remove();
 }
 
-void ConsoleUI::edit(vector<string> &arguments){
-    if (arguments.size() == 0){
+void ConsoleUI::edit(vector<string> &arguments) {
+    if (arguments.size() == 0) {
         cout << endl <<"The available 'edit' commands are: " << endl << endl <<
                 "\tedit computer  - Edit a computer" << endl <<
                 "\tedit scientist - Edit a scientist" << endl << endl;
@@ -205,8 +205,8 @@ void ConsoleUI::edit(vector<string> &arguments){
         computerUI.edit();
 }
 
-void ConsoleUI::list(vector<string> &arguments){
-    if (arguments.size() == 0){
+void ConsoleUI::list(vector<string> &arguments) {
+    if (arguments.size() == 0) {
         cout << endl <<"The available 'list' commands are: " << endl << endl <<
                 "\tlist computer  - List all computers" << endl <<
                 "\tlist scientist - List all scientists" << endl << endl;
@@ -218,8 +218,8 @@ void ConsoleUI::list(vector<string> &arguments){
         computerUI.list();
 }
 
-void ConsoleUI::search(vector<string> &arguments){
-    if (arguments.size() == 0){
+void ConsoleUI::search(vector<string> &arguments) {
+    if (arguments.size() == 0) {
         cout << endl <<"The available 'search' commands are: " << endl << endl <<
                 "\tsearch computer  - Search a computer" << endl <<
                 "\tsearch scientist - Search a scientist" << endl << endl;
@@ -231,7 +231,7 @@ void ConsoleUI::search(vector<string> &arguments){
         computerUI.search();
 }
 
-void ConsoleUI::link(vector<string> &arguments){
+void ConsoleUI::link(vector<string> &arguments) {
     // Handle selecting a scientist first, then pass it to the computer UI for further processing
     cout << "Please select a scientist" << endl;
     Scientist sci;
@@ -241,19 +241,19 @@ void ConsoleUI::link(vector<string> &arguments){
 
 }
 
-void ConsoleUI::view(vector<string> &arguments){
-    if (arguments.size() == 0){
+void ConsoleUI::view(vector<string> &arguments) {
+    if (arguments.size() == 0) {
         cout << endl <<"The available 'view' commands are: " << endl << endl <<
                 "\tview computer  - View a computer" << endl <<
                 "\tview scientist - View a scientist" << endl << endl;
         return;
     }
-    if(arguments[0] == "scientist" || arguments[0] == "s"){
+    if(arguments[0] == "scientist" || arguments[0] == "s") {
         Scientist s;
         if(!scientistUI.select(s)) return;
 
         computerUI.listComputers(s);
-    } else if(arguments[0] == "computer" || arguments[0] == "c"){
+    } else if(arguments[0] == "computer" || arguments[0] == "c") {
         Computer c;
         if(!computerUI.select(c)) return;
         scientistUI.listScientists(c);

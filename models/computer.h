@@ -8,9 +8,7 @@
 
 using namespace std;
 
-class Computer
-
-{
+class Computer {
 public:
     Computer();
     int id;
@@ -22,8 +20,7 @@ public:
     friend bool operator == (const Computer &a, const Computer &b);
 };
 
-namespace ComputerFields
-{
+namespace ComputerFields {
     enum Field {
         ID = 0, NAME = 1, TYPE = 2, BUILD_YEAR = 3, BUILT = 4
     };
