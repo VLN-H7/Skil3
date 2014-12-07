@@ -17,7 +17,7 @@ public:
 
 
 
-    void add(Computer s);
+    void add(Computer &s);
     void remove(Computer &s);
     vector<Computer> list(ComputerFields::Field field, Order order);
     vector<Computer> search(ComputerFields::Field field, size_t rows, string query);

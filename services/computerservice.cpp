@@ -5,11 +5,11 @@ ComputerService::ComputerService()
     computerRepository = ComputerRepository();
 }
 
-void ComputerService::add(Computer s) {
+void ComputerService::add(Computer &s) {
     computerRepository.add(s);
 }
 
-void ComputerService::remove(Computer s){
+void ComputerService::remove(Computer &s){
     computerRepository.remove(s);
 }
 

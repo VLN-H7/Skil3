@@ -5,11 +5,11 @@ ScientistService::ScientistService()
     scientistRepository = ScientistRepository();
 }
 
-void ScientistService::add(Scientist s) {
+void ScientistService::add(Scientist &s) {
     scientistRepository.add(s);
 }
 
-void ScientistService::remove(Scientist s){
+void ScientistService::remove(Scientist &s){
     scientistRepository.remove(s);
 }
 

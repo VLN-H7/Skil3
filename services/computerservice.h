@@ -13,8 +13,8 @@ class ComputerService
 
 public:
     ComputerService();
-    void add(Computer s);
-    void remove(Computer s);
+    void add(Computer &s);
+    void remove(Computer &s);
     vector<Computer> list(ComputerFields::Field field, Order order);
     vector<Computer> search(ComputerFields::Field field, int rows, string query);
     void update(Computer &s, Computer &replace);

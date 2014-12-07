@@ -18,7 +18,7 @@ ScientistRepository::ScientistRepository(){
 
 
 //Adds an instance of scientist to the vector and writes it to a file
-void ScientistRepository::add(Scientist s){
+void ScientistRepository::add(Scientist &s){
     //scientistVector.push_back(s);
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) "

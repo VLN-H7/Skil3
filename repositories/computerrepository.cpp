@@ -16,7 +16,7 @@ ComputerRepository::ComputerRepository(){
 }
 
 
-void ComputerRepository::add(Computer comp){
+void ComputerRepository::add(Computer &comp){
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO computers (name, type, build_year, built) VALUES (?,?,?,?)");
     query->addBindValue(QString::fromStdString(comp.name));

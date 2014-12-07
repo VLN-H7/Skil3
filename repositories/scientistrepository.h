@@ -16,7 +16,7 @@ class ScientistRepository
 public:
     ScientistRepository();
 
-    void add(Scientist s);
+    void add(Scientist &s);
     void remove(Scientist &s);
     vector<Scientist> list(ScientistFields::Field field, Order order);
     vector<Scientist> search(ScientistFields::Field field, size_t rows, string query);
