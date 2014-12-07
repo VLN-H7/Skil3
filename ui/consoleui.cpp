@@ -185,8 +185,8 @@ void ConsoleUI::edit(vector<string> &arguments){
 void ConsoleUI::list(vector<string> &arguments){
     if (arguments.size() == 0){
         cout << endl <<"The available 'list' commands are: " << endl << endl <<
-                "\tlist computer  - List a computer" << endl <<
-                "\tlist scientist - List a scientist" << endl << endl;
+                "\tlist computer  - List all computers" << endl <<
+                "\tlist scientist - List all scientists" << endl << endl;
         return;
     }
     if (arguments[0] == "scientists" || arguments[0] == "s")
