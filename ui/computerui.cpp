@@ -194,6 +194,14 @@ void ComputerUI::link(Scientist &s) {
     computerService.link(comp, s);
 }
 
+void ComputerUI::unlink(Scientist &s) {
+    Computer comp;
+    cout << endl << "Please select a computer" << endl;
+    if(!select(comp))
+        return;
+    computerService.unlink(comp, s);
+}
+
 void ComputerUI::header() {
     cout << endl;
     cout << left

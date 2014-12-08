@@ -34,6 +34,7 @@ private:
     void edit(vector<string> &arguments);
     void remove(vector<string> &arguments);
     void link(vector<string> &arguments);
+    void unlink(vector<string> &arguments);
     void view(vector<string> &arguments);
 
 };

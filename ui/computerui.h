@@ -28,6 +28,7 @@ public:
     void display(vector<Computer> &vec);
     void listComputers(Scientist &s);
     void link(Scientist &s);
+    void unlink(Scientist &s);
 private:
     ComputerService computerService;
 

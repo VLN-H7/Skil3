@@ -10,6 +10,7 @@ const vector<const char*> COMMANDS = {
     "remove",
     "edit",
     "link",
+    "unlink",
     "view",
     "exit",
     "quit"
@@ -99,6 +100,8 @@ void ConsoleUI::menu() {
         edit(arguments);
     } else if (command == "link") {
         link(arguments);
+    } else if (command == "unlink") {
+        unlink(arguments);
     } else if (command == "view") {
         view(arguments);
     } else {
@@ -159,7 +162,8 @@ void ConsoleUI::help() {
          << "\t view computer     - View a computer and its connections" << endl
          << "\t view scientist    - View a scientist and its connections" << endl << endl
          << "    LINK" << endl
-         << "\t link              - Link a scientist and a computer" << endl << endl
+         << "\t link              - Link a scientist and a computer" << endl
+         << "\t unlink            - Unlink a scientist and a computer" << endl << endl
          << "    OTHER" << endl
          << "\t quit              - Quit the program" << endl
          << "\t clear             - Clear screen" << endl
@@ -239,6 +243,16 @@ void ConsoleUI::link(vector<string> &arguments) {
     if(!scientistUI.select(sci))
         return;
     computerUI.link(sci);
+
+}
+
+void ConsoleUI::unlink(vector<string> &arguments) {
+    // Handle selecting a scientist first, then pass it to the computer UI for further processing
+    cout << "Please select a scientist" << endl;
+    Scientist sci;
+    if(!scientistUI.select(sci))
+        return;
+    computerUI.unlink(sci);
 
 }
 
