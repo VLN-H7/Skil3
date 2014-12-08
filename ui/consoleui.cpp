@@ -126,10 +126,10 @@ void ConsoleUI::about() {
          << "\tName of program: An Awesome Computer Scientist Program ( AACSP for short )" << endl
          << "\tVersion: 1.2.0" << endl
          << "\tYear: 2014" << endl
-         << "\tObjective: -To store and to work with a SQlite based database" << endl
-         << "\t            for Computer Scientists and Computers." << endl
-         << "\t           -To be able to connect Computer scientist" << endl
-         << "\t            to any computer and vise versa." << endl
+         << "\tObjective: -To store and work with a SQlite based database" << endl
+         << "\t            for computer scientists and computers." << endl
+         << "\t           -To be able to connect a computer scientist" << endl
+         << "\t            to a computer and vice versa." << endl
          << "\tCreated by: Group 7" << endl
          << "\tMembers of production: Ari Thorlacius Sigurdsson" << endl
          << "\t                       Egill Anton Hlodversson" << endl
