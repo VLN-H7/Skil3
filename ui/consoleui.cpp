@@ -77,8 +77,6 @@ void ConsoleUI::menu() {
                 break;
             }
         }
-        if(!found)
-            cout << "Unknown command \"" << command << "\"." << endl;
     }
     if (command == "help") {
         help();
