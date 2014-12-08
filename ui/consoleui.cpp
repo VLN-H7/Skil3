@@ -245,8 +245,8 @@ void ConsoleUI::link(vector<string> &arguments) {
 void ConsoleUI::view(vector<string> &arguments) {
     if (arguments.size() == 0) {
         cout << endl <<"The available 'view' commands are: " << endl << endl <<
-                "\tview computer  - View a computer" << endl <<
-                "\tview scientist - View a scientist" << endl << endl;
+                "\tview computer  - View a computer and its connections" << endl <<
+                "\tview scientist - View a scientist and its connections" << endl << endl;
         return;
     }
     if(arguments[0] == "scientist" || arguments[0] == "s") {
