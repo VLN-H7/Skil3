@@ -27,7 +27,6 @@ void ComputerUI::remove() {
     cout << "The computer " << comp.name << " was successfully removed from the list. " << endl;
 }
 
-
 void ComputerUI::edit() {
     int field = 1;
     stringstream ss;
@@ -83,10 +82,10 @@ bool ComputerUI::select(Computer &comp) {
     stringstream ss;
     id = -1;
 
-    cout << "Would you either like to: "                <<endl<<
-            "\tList of all the computers (L)"   <<endl<<
-            "\tSearch for a specific computer? (S)"         <<endl<<
-            "(L/S): ";
+    cout << "Would you either like to: " << endl
+         << "\tList of all the computers (L)" << endl
+         << "\tSearch for a specific computer? (S)" << endl
+         << "(L/S): ";
     Utils::readline(ss) >> inp;
 
     if(toupper(inp) == 'S') vec = search();
@@ -107,7 +106,6 @@ bool ComputerUI::select(Computer &comp) {
     comp = vec[id];
     return true;
 }
-
 
 vector<Computer> ComputerUI::list() {
     int field = 1, order = 1;
@@ -179,7 +177,7 @@ void ComputerUI::display(vector<Computer> &vec) {
              << setw(24) << vec[i].name
              << setw(12) << vec[i].type
              << setw(12) << (vec[i].buildyear == 0 ? "" : to_string(vec[i].buildyear))
-             << setw(8) << (vec[i].built ? "YES" : "NO") << endl;
+             << setw(8)  << (vec[i].built ? "YES" : "NO") << endl;
     }
 }
 
@@ -202,8 +200,8 @@ void ComputerUI::header() {
          << setw(4)  << "No."
          << setw(24) << "Name"
          << setw(12) << "Type"
-         << setw(12)  << "Built Year"
-         << setw(8) << "Built?" << endl;
+         << setw(12) << "Built Year"
+         << setw(8)  << "Built?" << endl;
     cout << "=======================================================================" << endl;
 }
 

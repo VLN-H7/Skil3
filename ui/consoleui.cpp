@@ -20,6 +20,7 @@ ConsoleUI::ConsoleUI()
     scientistUI = ScientistUI();
     computerUI = ComputerUI();
 }
+
 void ConsoleUI::butiful() {
    cout << " ----------------------------------------------------- " << endl
         << "|      __    __     _                                 |" << endl
@@ -120,50 +121,50 @@ void ConsoleUI::clear() {
 }
 
 void ConsoleUI::about() {
-    cout << endl <<"     ABOUT" << endl <<
-            "\tName of program: An Awesome Computer Scientist Program ( AACSP for short )" << endl <<
-            "\tVersion: 1.2.0" << endl <<
-            "\tYear: 2014" << endl <<
-            "\tObjective: -To store and to work with a SQlite based database" << endl <<
-            "\t            for Computer Scientists and Computers."<< endl <<
-            "\t           -To be able to connect Computer scientist"<< endl <<
-            "\t            to any computer and vise versa."<< endl <<
-            "\tCreated by: Group 7" << endl <<
-            "\tMembers of production: Ari Thorlacius Sigurdsson"<< endl <<
-            "\t                       Egill Anton Hlodversson"<< endl <<
-            "\t                       James Elias Sigurdarson"<< endl <<
-            "\t                       Sara Arnadottir"<< endl <<
-            "\t                       Unnar Freyr Erlendsson"<< endl << endl;
+    cout << endl <<"     ABOUT" << endl
+         << "\tName of program: An Awesome Computer Scientist Program ( AACSP for short )" << endl
+         << "\tVersion: 1.2.0" << endl
+         << "\tYear: 2014" << endl
+         << "\tObjective: -To store and to work with a SQlite based database" << endl
+         << "\t            for Computer Scientists and Computers." << endl
+         << "\t           -To be able to connect Computer scientist" << endl
+         << "\t            to any computer and vise versa." << endl
+         << "\tCreated by: Group 7" << endl
+         << "\tMembers of production: Ari Thorlacius Sigurdsson" << endl
+         << "\t                       Egill Anton Hlodversson" << endl
+         << "\t                       James Elias Sigurdarson" << endl
+         << "\t                       Sara Arnadottir" << endl
+         << "\t                       Unnar Freyr Erlendsson"<< endl << endl;
 }
 
 void ConsoleUI::help() {
 
-    cout << "The available commands are: " << endl << endl <<
-            "    LIST"<< endl <<
-            "\t list scientists   - List all scientists" << endl <<
-            "\t list computers    - List all computers" << endl << endl <<
-            "    ADD"<< endl <<
-            "\t add scientist     - Add a scientist" << endl <<
-            "\t add computer      - Add a computer" << endl << endl <<
-            "    SEARCH"<< endl <<
-            "\t search scientists - Search for a scientist" << endl <<
-            "\t search computers  - Search for a computer" << endl << endl <<
-            "    REMOVE"<< endl <<
-            "\t remove scientist  - Remove a scientist" << endl <<
-            "\t remove computer   - Remove a computer" << endl << endl <<
-            "    EDIT"<< endl <<
-            "\t edit scientist    - Edit a scientist" << endl <<
-            "\t edit computer     - Edit a computer" << endl << endl <<
-            "    VIEW"<< endl <<
-            "\t view computer     - View a computer" << endl <<
-            "\t view scientist    - View a scientist" << endl << endl <<
-            "    LINK"<< endl <<
-            "\t link              - Link a scientist and a computer" << endl << endl <<
-            "    OTHER"<< endl <<
-            "\t quit              - Quit the program" << endl <<
-            "\t clear             - Clear screen"<< endl <<
-            "\t about             - About the program"<< endl <<
-            "\t help              - View help" << endl << endl;
+    cout << "The available commands are: " << endl << endl
+         << "    LIST"<< endl
+         << "\t list scientists   - List all scientists" << endl
+         << "\t list computers    - List all computers" << endl << endl
+         << "    ADD"<< endl
+         << "\t add scientist     - Add a scientist" << endl
+         << "\t add computer      - Add a computer" << endl << endl
+         << "    SEARCH"<< endl
+         << "\t search scientists - Search for a scientist" << endl
+         << "\t search computers  - Search for a computer" << endl << endl
+         << "    REMOVE"<< endl
+         << "\t remove scientist  - Remove a scientist" << endl
+         << "\t remove computer   - Remove a computer" << endl << endl
+         << "    EDIT"<< endl
+         << "\t edit scientist    - Edit a scientist" << endl
+         << "\t edit computer     - Edit a computer" << endl << endl
+         << "    VIEW"<< endl
+         << "\t view computer     - View a computer" << endl
+         << "\t view scientist    - View a scientist" << endl << endl
+         << "    LINK" << endl
+         << "\t link              - Link a scientist and a computer" << endl << endl
+         << "    OTHER" << endl
+         << "\t quit              - Quit the program" << endl
+         << "\t clear             - Clear screen" << endl
+         << "\t about             - About the program"<< endl
+         << "\t help              - View help" << endl << endl;
 }
 
 void ConsoleUI::add(vector<string> &arguments) {

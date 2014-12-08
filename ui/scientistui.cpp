@@ -38,7 +38,6 @@ void ScientistUI::remove() {
     cout << "The scientist " << sci.firstName << " " << sci.lastName << " was successfully removed from the list. " << endl;
 }
 
-
 void ScientistUI::edit() {
     int field = 1;
     stringstream ss;
@@ -131,7 +130,6 @@ bool ScientistUI::select(Scientist &s) {
     s = vec[id];
     return true;
 }
-
 
 vector<Scientist> ScientistUI::list() {
     int field = 1, order = 1;
