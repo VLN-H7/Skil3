@@ -156,8 +156,8 @@ void ConsoleUI::help() {
          << "\t edit scientist    - Edit a scientist" << endl
          << "\t edit computer     - Edit a computer" << endl << endl
          << "    VIEW"<< endl
-         << "\t view computer     - View a computer" << endl
-         << "\t view scientist    - View a scientist" << endl << endl
+         << "\t view computer     - View a computer and its connections" << endl
+         << "\t view scientist    - View a scientist and its connections" << endl << endl
          << "    LINK" << endl
          << "\t link              - Link a scientist and a computer" << endl << endl
          << "    OTHER" << endl
