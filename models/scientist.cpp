@@ -1,6 +1,7 @@
 #include "scientist.h"
 
 Scientist::Scientist() {
+    id = -1;
 }
 
 bool operator ==(const Scientist &a, const Scientist &b) {

@@ -1,6 +1,7 @@
 #include "computer.h"
 
 Computer::Computer() {
+    id = -1;
 }
 
 bool operator ==(const Computer &a, const Computer &b) {
