@@ -35,7 +35,7 @@ void ScientistUI::remove() {
 
     scientistService.remove(sci);
 
-    cout << "The scientist " << sci.firstName << " " << sci.lastName << " was successfully removed from the list. " << endl;
+    cout << "The scientist " << sci.getFirstName() << " " << sci.getLastName() << " was successfully removed from the list. " << endl;
 }
 
 void ScientistUI::edit() {
@@ -63,32 +63,32 @@ void ScientistUI::edit() {
 
         case ScientistFields::FIRST_NAME:
             readFirstName(s);
-            cout << "Successfully changed the first name to " << s.firstName << endl;
+            cout << "Successfully changed the first name to " << s.getFirstName() << endl;
             break;
 
         case ScientistFields::LAST_NAME:
             readLastName(s);
-            cout << "Successfully changed the last name to " << s.lastName << endl;
+            cout << "Successfully changed the last name to " << s.getLastName() << endl;
             break;
 
         case ScientistFields::GENDER:
-            s.gender = s.gender ^ ( 'M' ^ 'F' );
-            cout << "Successfully changed the gender to " << s.gender << endl;
+            s.setGender(s.getGender() ^ ( 'M' ^ 'F' ));
+            cout << "Successfully changed the gender to " << s.getGender() << endl;
             break;
 
         case ScientistFields::BIRTH_DATE:
             readBirthDate(s);
-            cout << "Successfully changed the birthdate to " << s.birthdate << endl;
+            cout << "Successfully changed the birthdate to " << s.getBirthDate() << endl;
             break;
 
         case ScientistFields::DEATH_DATE:
             readDeathDate(s);
-            cout << "Successfully changed the deathdate to " << s.deathdate << endl;
+            cout << "Successfully changed the deathdate to " << s.getDeathDate() << endl;
             break;
 
         case ScientistFields::NATIONALITY:
             readNationality(s);
-            cout << "Successfully changed the nationality to " << s.nationality << endl;
+            cout << "Successfully changed the nationality to " << s.getNationality() << endl;
             break;
 
         default:
@@ -203,12 +203,12 @@ void ScientistUI::display(vector<Scientist> &vec) {
     for(size_t i = 0; i<vec.size(); i++) {
         cout << left
             << setw(4)  << (i+1)
-            << setw(12) << vec[i].firstName
-            << setw(12) << vec[i].lastName
-            << setw(8)  << vec[i].gender
-            << setw(12) << vec[i].birthdate
-            << setw(12) << vec[i].deathdate
-            << setw(12) << vec[i].nationality <<  endl;
+            << setw(12) << vec[i].getFirstName()
+            << setw(12) << vec[i].getLastName()
+            << setw(8)  << vec[i].getGender()
+            << setw(12) << vec[i].getBirthDate()
+            << setw(12) << vec[i].getDeathDate()
+            << setw(12) << vec[i].getNationality() <<  endl;
     }
 }
 
@@ -241,21 +241,22 @@ string ScientistUI::readString(string msg) {
 }
 
 void ScientistUI::readFirstName(Scientist& s) {
-    s.firstName = readString("First Name: ");
+    s.setFirstName(readString("First Name: "));
 }
 
 void ScientistUI::readLastName(Scientist& s) {
-    s.lastName = readString("Last Name: ");
+    s.setLastName(readString("Last Name: "));
 }
 
 void ScientistUI::readGender(Scientist& s) {
+    char g;
     do{
         cout << "Gender (M/F): ";
-        cin >> s.gender;
-        s.gender = toupper(s.gender);
-        if(s.gender != 'M' && s.gender != 'F')
+        cin >> g;
+        s.setGender(toupper(g));
+        if(s.getGender() != 'M' && s.getGender() != 'F')
             cout << "Invalid gender, please enter either M or F." << endl;
-    } while(s.gender != 'M' && s.gender != 'F');
+    } while(s.getGender() != 'M' && s.getGender() != 'F');
     cin.ignore();
 }
 
@@ -264,34 +265,36 @@ void ScientistUI::readBirthDate(Scientist& s) {
     do{
         cout << "Date of birth(DD.MM.YYYY): ";
         getline(cin, str);
-        s.birthdate = Date::fromString(str);
-        if (!s.birthdate.isValid())
+        s.setBirthDate(Date::fromString(str));
+        if (!s.getBirthDate().isValid())
             cout << "Invalid Date." << endl;
-        else if (s.birthdate>Date::now())
+        else if (s.getBirthDate()>Date::now())
             cout << "Date of birth cannot be in the future." << endl;
-    } while(!s.birthdate.isValid() || s.birthdate>Date::now());
+    } while(!s.getBirthDate().isValid() || s.getBirthDate()>Date::now());
 }
 
 void ScientistUI::readDeathDate(Scientist& s) {
     string str;
+    Date d;
+    d.setDate(0,1,1);
     do{
         cout << "Date of death(DD.MM.YYYY)(Leave empty for no date): ";
         getline(cin, str);
         if(str.empty()) {
-            s.deathdate.setDate(0,1,1);
+            s.setDeathDate(d);
             break;
         }
-        s.deathdate = Date::fromString(str);
-        if (!s.deathdate.isValid())
+        s.setDeathDate(Date::fromString(str));
+        if (!s.getDeathDate().isValid())
          cout << "Invalid Date." << endl;
-        else if (s.deathdate<s.birthdate)
+        else if (s.getDeathDate()<s.getBirthDate())
             cout << "Date of death needs to be after date of birth." << endl;
-        else if (s.deathdate>Date::now())
+        else if (s.getDeathDate()>Date::now())
             cout << "Date of death cannot be in the future." << endl;
-    } while(!s.deathdate.isValid()||s.deathdate<s.birthdate||s.deathdate>Date::now());
+    } while(!s.getDeathDate().isValid()||s.getDeathDate()<s.getBirthDate()||s.getDeathDate()>Date::now());
 }
 
 void ScientistUI::readNationality(Scientist& s) {
-    s.nationality = readString("Nationality: ");
+    s.setNationality(readString("Nationality: "));
 }
 

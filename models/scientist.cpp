@@ -33,3 +33,60 @@ QString ScientistFields::toField(Field f) {
             return "first_name";
     }
 }
+
+int Scientist::getID(){
+    return id;
+}
+
+string Scientist::getFirstName(){
+    return firstName;
+}
+
+string Scientist::getLastName(){
+    return lastName;
+}
+
+char Scientist::getGender(){
+    return gender;
+}
+
+Date Scientist::Scientist::getBirthDate(){
+    return birthdate;
+}
+
+Date Scientist::getDeathDate(){
+    return deathdate;
+}
+
+string Scientist::getNationality(){
+    return nationality;
+}
+
+void Scientist::setID(int ID){
+    if(id==-1)
+        id = ID;
+}
+
+void Scientist::setFirstName(string fName){
+    firstName = fName;
+}
+
+void Scientist::setLastName(string lName){
+    lastName = lName;
+}
+
+void Scientist::setGender(char g){
+    gender = g;
+}
+
+void Scientist::setBirthDate(Date bDate){
+    birthdate = bDate;
+}
+
+void Scientist::setDeathDate(Date dDate){
+    deathdate = dDate;
+}
+
+void Scientist::setNationality(string nation){
+    nationality = nation;
+}

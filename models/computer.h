@@ -11,13 +11,26 @@ using namespace std;
 class Computer {
 public:
     Computer();
+
+    int getID();
+    string getName();
+    string getType();
+    int getBuildYear();
+    bool getBuilt();
+
+    void setID(int ID);
+    void setName(string cName);
+    void setType(string cType);
+    void setBuildYear(int year);
+    void setBuilt(bool b);
+
+    friend bool operator == (const Computer &a, const Computer &b);
+private:
     int id;
     string name;
     string type;
     int buildyear;
     bool built;
-
-    friend bool operator == (const Computer &a, const Computer &b);
 };
 
 namespace ComputerFields {

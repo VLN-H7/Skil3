@@ -2,13 +2,13 @@
 
 Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query) {
     Scientist sci;
-    sci.id = query->value("id").toInt();
-    sci.firstName = query->value("first_name").toString().toStdString();
-    sci.lastName = query->value("last_name").toString().toStdString();
-    sci.gender = query->value("gender").toString().toStdString()[0];
-    sci.birthdate = query->value("birth_date").toDate();
-    sci.deathdate = query->value("death_date").toDate();
-    sci.nationality = query->value("nationality").toString().toStdString();
+    sci.setID(query->value("id").toInt());
+    sci.setFirstName(query->value("first_name").toString().toStdString());
+    sci.setLastName(query->value("last_name").toString().toStdString());
+    sci.setGender(query->value("gender").toString().toStdString()[0]);
+    sci.setBirthDate(query->value("birth_date").toDate());
+    sci.setDeathDate(query->value("death_date").toDate());
+    sci.setNationality(query->value("nationality").toString().toStdString());
     return sci;
 }
 
@@ -23,12 +23,12 @@ void ScientistRepository::add(Scientist &s) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) "
                    "VALUES (?,?,?,?,?,?)");
-    query->addBindValue(QString::fromStdString(s.firstName));
-    query->addBindValue(QString::fromStdString(s.lastName));
-    query->addBindValue(QString() + s.gender);
-    query->addBindValue(s.birthdate);
-    query->addBindValue(s.deathdate);
-    query->addBindValue(QString::fromStdString(s.nationality));
+    query->addBindValue(QString::fromStdString(s.getFirstName()));
+    query->addBindValue(QString::fromStdString(s.getLastName()));
+    query->addBindValue(QString() + s.getGender());
+    query->addBindValue(s.getBirthDate());
+    query->addBindValue(s.getDeathDate());
+    query->addBindValue(QString::fromStdString(s.getNationality()));
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -41,13 +41,13 @@ void ScientistRepository::update(Scientist &s, Scientist &replace) {
     query->prepare("UPDATE scientists "
                    "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? "
                    "WHERE id = ?");
-    query->addBindValue(QString::fromStdString(replace.firstName));
-    query->addBindValue(QString::fromStdString(replace.lastName));
-    query->addBindValue(QString() + replace.gender);
-    query->addBindValue(replace.birthdate);
-    query->addBindValue(replace.deathdate);
-    query->addBindValue(QString::fromStdString(replace.nationality));
-    query->addBindValue(s.id);
+    query->addBindValue(QString::fromStdString(replace.getFirstName()));
+    query->addBindValue(QString::fromStdString(replace.getLastName()));
+    query->addBindValue(QString() + replace.getGender());
+    query->addBindValue(replace.getBirthDate());
+    query->addBindValue(replace.getDeathDate());
+    query->addBindValue(QString::fromStdString(replace.getNationality()));
+    query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -58,7 +58,7 @@ void ScientistRepository::remove(Scientist &s) {
 
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("DELETE FROM scientists WHERE id = ?");
-    query->addBindValue(s.id);
+    query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 
@@ -66,7 +66,7 @@ void ScientistRepository::remove(Scientist &s) {
 
     // Also clean all relations to other computers
     query->prepare("DELETE FROM scientist_computer WHERE scientist_id = ?");
-    query->addBindValue(s.id);
+    query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -118,7 +118,7 @@ vector<Scientist> ScientistRepository::byComputer(Computer &c) {
     query->prepare("SELECT * FROM scientist_computer "
                    "INNER JOIN scientists ON scientists.id = scientist_computer.scientist_id "
                    "WHERE computer_id = ?");
-    query->addBindValue(c.id);
+    query->addBindValue(c.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 

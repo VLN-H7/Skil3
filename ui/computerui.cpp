@@ -24,7 +24,7 @@ void ComputerUI::remove() {
 
     computerService.remove(comp);
 
-    cout << "The computer " << comp.name << " was successfully removed from the list. " << endl;
+    cout << "The computer " << comp.getName() << " was successfully removed from the list. " << endl;
 }
 
 void ComputerUI::edit() {
@@ -49,22 +49,22 @@ void ComputerUI::edit() {
 
         case ComputerFields::NAME:
             readName(s);
-            cout << "Successfully changed the name to " << s.name << endl;
+            cout << "Successfully changed the name to " << s.getName() << endl;
             break;
 
         case ComputerFields::TYPE:
             readType(s);
-            cout << "Successfully changed the type to " << s.type << endl;
+            cout << "Successfully changed the type to " << s.getType() << endl;
             break;
 
         case ComputerFields::BUILD_YEAR:
             readBuildYear(s);
-            cout << "Successfully changed the build year to " << s.buildyear << endl;
+            cout << "Successfully changed the build year to " << s.getBuildYear() << endl;
             break;
 
         case ComputerFields::BUILT:
-            s.built = !s.built;
-            cout << "Successfully changed the built to " << (s.built ? "YES" : "NO") << endl;
+            s.setBuilt(!s.getBuilt());
+            cout << "Successfully changed the built to " << (s.getBuilt() ? "YES" : "NO") << endl;
             break;
 
         default:
@@ -174,10 +174,10 @@ void ComputerUI::display(vector<Computer> &vec) {
     for(size_t i = 0; i < vec.size(); i++) {
         cout << left
              << setw(4)  << (i+1)
-             << setw(24) << vec[i].name
-             << setw(12) << vec[i].type
-             << setw(12) << (vec[i].buildyear == 0 ? "" : to_string(vec[i].buildyear))
-             << setw(8)  << (vec[i].built ? "YES" : "NO") << endl;
+             << setw(24) << vec[i].getName()
+             << setw(12) << vec[i].getType()
+             << setw(12) << (vec[i].getBuildYear() == 0 ? "" : to_string(vec[i].getBuildYear()))
+             << setw(8)  << (vec[i].getBuilt() ? "YES" : "NO") << endl;
     }
 }
 
@@ -223,31 +223,33 @@ string ComputerUI::readString(string msg) {
 
 }
 
-void ComputerUI::readName(Computer& s) {
-    s.name = readString("Name: ");
+void ComputerUI::readName(Computer& c) {
+    c.setName(readString("Name: "));
 }
 
-void ComputerUI::readType(Computer& s) {
-    s.type = readString("Type: ");
+void ComputerUI::readType(Computer& c) {
+    c.setType(readString("Type: "));
 }
 
-void ComputerUI::readBuildYear(Computer& s) {
-    s.buildyear = 0;
+void ComputerUI::readBuildYear(Computer& c) {
+    int year;
+    c.setBuildYear(0);
     stringstream ss;
     cout << "Build Year (leave empty for no value): ";
-    Utils::readline(ss) >> s.buildyear;
+    Utils::readline(ss) >> year;
+    c.setBuildYear(year);
 }
 
-void ComputerUI::readBuilt(Computer& s) {
-    char c;
+void ComputerUI::readBuilt(Computer& c) {
+    char k;
     do{
         cout << "Built? (Y/N): ";
-        cin >> c;
-        c = toupper(c);
-        if(c != 'Y' && c != 'N')
+        cin >> k;
+        k = toupper(k);
+        if(k != 'Y' && k != 'N')
             cout << "Invalid value, please enter either Y or N." << endl;
-    } while(c != 'Y' && c != 'N');
-    s.built = (c == 'Y');
+    } while(k != 'Y' && k != 'N');
+    c.setBuilt((k == 'Y'));
     cin.ignore();
 }
 

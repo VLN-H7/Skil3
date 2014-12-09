@@ -28,3 +28,44 @@ QString ComputerFields::toField(Field f) {
             return "name";
     }
 }
+
+int Computer::getID(){
+    return id;
+}
+
+string Computer::getName(){
+    return name;
+}
+
+string Computer::getType(){
+    return type;
+}
+
+int Computer::getBuildYear(){
+    return buildyear;
+}
+
+bool Computer::getBuilt(){
+    return built;
+}
+
+void Computer::setID(int ID){
+    if(id == -1)
+        id = ID;
+}
+
+void Computer::setName(string cName){
+    name = cName;
+}
+
+void Computer::setType(string cType){
+    type = cType;
+}
+
+void Computer::setBuildYear(int year){
+    buildyear = year;
+}
+
+void Computer::setBuilt(bool b){
+    built = b;
+}

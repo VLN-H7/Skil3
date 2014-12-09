@@ -10,6 +10,26 @@ using namespace std;
 class Scientist {
 public:
     Scientist();
+
+    int getID();
+    string getFirstName();
+    string getLastName();
+    char getGender();
+    Date getBirthDate();
+    Date getDeathDate();
+    string getNationality();
+
+    void setID(int ID);
+    void setFirstName(string fName);
+    void setLastName(string lName);
+    void setGender(char g);
+    void setBirthDate(Date bDate);
+    void setDeathDate(Date dDate);
+    void setNationality(string nation);
+
+    friend bool operator ==(const Scientist &a, const Scientist &b);
+
+private:
     int id;
     string firstName;
     string lastName;
@@ -17,7 +37,6 @@ public:
     Date birthdate;
     Date deathdate;
     string nationality;
-    friend bool operator ==(const Scientist &a, const Scientist &b);
 };
 
 namespace ScientistFields {
