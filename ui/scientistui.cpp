@@ -240,15 +240,15 @@ string ScientistUI::readString(string msg) {
 
 }
 
-void ScientistUI::readFirstName(Scientist& s) {
+void ScientistUI::readFirstName(Scientist &s) {
     s.setFirstName(readString("First Name: "));
 }
 
-void ScientistUI::readLastName(Scientist& s) {
+void ScientistUI::readLastName(Scientist &s) {
     s.setLastName(readString("Last Name: "));
 }
 
-void ScientistUI::readGender(Scientist& s) {
+void ScientistUI::readGender(Scientist &s) {
     char g;
     do{
         cout << "Gender (M/F): ";
@@ -260,7 +260,7 @@ void ScientistUI::readGender(Scientist& s) {
     cin.ignore();
 }
 
-void ScientistUI::readBirthDate(Scientist& s) {
+void ScientistUI::readBirthDate(Scientist &s) {
     string str;
     do{
         cout << "Date of birth(DD.MM.YYYY): ";
@@ -273,7 +273,7 @@ void ScientistUI::readBirthDate(Scientist& s) {
     } while(!s.getBirthDate().isValid() || s.getBirthDate()>Date::now());
 }
 
-void ScientistUI::readDeathDate(Scientist& s) {
+void ScientistUI::readDeathDate(Scientist &s) {
     string str;
     Date d;
     d.setDate(0,1,1);
@@ -294,7 +294,7 @@ void ScientistUI::readDeathDate(Scientist& s) {
     } while(!s.getDeathDate().isValid()||s.getDeathDate()<s.getBirthDate()||s.getDeathDate()>Date::now());
 }
 
-void ScientistUI::readNationality(Scientist& s) {
+void ScientistUI::readNationality(Scientist &s) {
     s.setNationality(readString("Nationality: "));
 }
 

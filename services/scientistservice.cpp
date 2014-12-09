@@ -13,7 +13,7 @@ void ScientistService::remove(Scientist &s) {
     scientistRepository.remove(s);
 }
 
-void ScientistService::update(Scientist& s, Scientist& replace) {
+void ScientistService::update(Scientist &s, Scientist &replace) {
     scientistRepository.update(s, replace);
 }
 

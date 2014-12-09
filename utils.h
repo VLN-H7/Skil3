@@ -41,7 +41,7 @@ namespace Utils {
     std::string& rtrim(std::string &s);
     std::string& trim(std::string &s);
 
-    void vtrim(std::vector<std::string>& strings);
+    void vtrim(std::vector<std::string> &strings);
 
 }
 

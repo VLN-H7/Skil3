@@ -4,7 +4,7 @@ Date::Date() {
 
 }
 
-Date::Date(const QDate& D) {
+Date::Date(const QDate &D) {
     this->setDate(D.year(), D.month(), D.day());
 }
 
