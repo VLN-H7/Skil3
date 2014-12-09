@@ -12,7 +12,7 @@ INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, na
 INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Sergey','Brin','M','21.08.1973', '','American');
 
 
-INSERT INTO computers(name, build_year, type, built) VALUES('Pascaline',1,1642, 'Mechanical',1);
+INSERT INTO computers(name, build_year, type, built) VALUES('Pascaline',1642, 'Mechanical',1);
 INSERT INTO computers(name, build_year, type, built) VALUES('ABC',1942, 'Electronic',1);
 INSERT INTO computers(name, build_year, type, built) VALUES('Colossus',1943, 'Electronic',1);
 INSERT INTO computers(name, build_year, type, built) VALUES('Stepped Reckoner',1672, 'Mechanical',1);
