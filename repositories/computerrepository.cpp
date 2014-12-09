@@ -101,7 +101,8 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
 vector<Computer> ComputerRepository::byScientist(Scientist &s) {
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("SELECT * FROM scientist_computer "
+    // Select just the scientists.* to not get id conflicts. TODO: rename the id
+    query->prepare("SELECT computers.* FROM scientist_computer "
                    "INNER JOIN computers ON computers.id = scientist_computer.computer_id "
                    "WHERE scientist_id = ?");
     query->addBindValue(s.getID());
@@ -110,8 +111,6 @@ vector<Computer> ComputerRepository::byScientist(Scientist &s) {
 
     while(query->next()) {
         ret.push_back(getComputer(query));
-        // TODO: fix before skil3, the id has the possibility of being incorrect, but not especially relevant just yet, as the id is never used.
-        // Note: this could be fixed by renaming the fields, but then the database is not uniform. :(
     }
     return ret;
 }
