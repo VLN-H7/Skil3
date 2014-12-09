@@ -1,15 +1,15 @@
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Blaise','Pascal','M','19.06.1623','19.08.1662','French');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Alan','Turing','M','23.06.1912','07.06.1954','English');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Daniel','Brandur','M','23.07.1987','22.06.1987','Icelandic');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Charles','Babbage','M','26.12.1791','18.10.1871','English');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Edsger','Djikstra','M','11.05.1930','06.08.2002','Dutch');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Chuck','Norris','M','10.03.1940','','American');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Ada','Lovelace','F','10.12.1815','27.11.1852','English');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Leonhard','Euler','M','15.04.1707','18.09.1783','Swiss');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Donald','Knuth','M','10.01.1938', '','American');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Tim','Berners-Lee','M','08.06.1955', '','English');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Larry','Page','M','26.03.1973', '','American');
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Sergey','Brin','M','21.08.1973', '','American');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Blaise','Pascal','M','1623-06-19','1662-08-19','French');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Alan','Turing','M','1912-06-23','1954-06-07','English');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Daniel','Brandur','M','1987-07-23','1987-06-22','Icelandic');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Charles','Babbage','M','1791-12-26','1871-10-18','English');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Edsger','Djikstra','M','1930-05-11','2002-08-06','Dutch');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Chuck','Norris','M','1940-03-10','','American');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Ada','Lovelace','F','1815-12-10','1852-11-27','English');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Leonhard','Euler','M','1707-04-15','1783-09-18','Swiss');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Donald','Knuth','M','1938-01-10', '','American');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Tim','Berners-Lee','M','1955-06-08', '','English');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Larry','Page','M','1973-03-26', '','American');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Sergey','Brin','M','1973-08-21', '','American');
 
 
 INSERT INTO computers(name, build_year, type, built) VALUES('Pascaline',1642, 'Mechanical',1);

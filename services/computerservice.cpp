@@ -13,7 +13,7 @@ void ComputerService::remove(Computer &s) {
     computerRepository.remove(s);
 }
 
-void ComputerService::update(Computer& s, Computer& replace) {
+void ComputerService::update(Computer &s, Computer &replace) {
     computerRepository.update(s, replace);
 }
 

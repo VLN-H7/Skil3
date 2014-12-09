@@ -223,15 +223,15 @@ string ComputerUI::readString(string msg) {
 
 }
 
-void ComputerUI::readName(Computer& c) {
+void ComputerUI::readName(Computer &c) {
     c.setName(readString("Name: "));
 }
 
-void ComputerUI::readType(Computer& c) {
+void ComputerUI::readType(Computer &c) {
     c.setType(readString("Type: "));
 }
 
-void ComputerUI::readBuildYear(Computer& c) {
+void ComputerUI::readBuildYear(Computer &c) {
     int year;
     c.setBuildYear(0);
     stringstream ss;
@@ -240,7 +240,7 @@ void ComputerUI::readBuildYear(Computer& c) {
     c.setBuildYear(year);
 }
 
-void ComputerUI::readBuilt(Computer& c) {
+void ComputerUI::readBuilt(Computer &c) {
     char k;
     do{
         cout << "Built? (Y/N): ";
