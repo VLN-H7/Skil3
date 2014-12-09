@@ -63,7 +63,7 @@ string Scientist::getNationality(){
 }
 
 void Scientist::setID(int ID){
-    if(id==-1)
+    if(id==-1) // Only allow setting the id once, it is database-specific and should not be changed
         id = ID;
 }
 

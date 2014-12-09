@@ -110,8 +110,8 @@ vector<Computer> ComputerRepository::byScientist(Scientist &s) {
 
     while(query->next()) {
         ret.push_back(getComputer(query));
-        // TODO: fix this, the id has the possibility of being incorrect, although not especially relevant just yet, as the id is never used.
-        // Fix before turning in skil3
+        // TODO: fix before skil3, the id has the possibility of being incorrect, but not especially relevant just yet, as the id is never used.
+        // Note: this could be fixed by renaming the fields, but then the database is not uniform. :(
     }
     return ret;
 }

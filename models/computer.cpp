@@ -59,6 +59,8 @@ void Computer::setName(string cName){
 }
 
 void Computer::setType(string cType){
+    // TODO: make this uniform, perhaps with a table?
+    // It is not clear what types of computers should be defined, so it is left as a string for now.
     type = cType;
 }
 
