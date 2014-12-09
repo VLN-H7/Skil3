@@ -1,5 +1,6 @@
 #include "utils.h"
 
+// An awesome method to just get a line and nothing else, while still enabling the ease of cin
 std::stringstream &Utils::readline(std::stringstream &ss) {
     std::string s;
     std::getline(std::cin, s);

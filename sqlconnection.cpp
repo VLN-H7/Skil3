@@ -1,7 +1,7 @@
 #include "sqlconnection.h"
 const char* SQL_DATABASE = "database.sqlite3";
 
-// Future note: this is not thread safe at all -.-
+// TODO: Future note: this is not thread safe at all -.-
 SQLConnection* SQLConnection::_instance = NULL;
 SQLConnection* SQLConnection::getInstance() {
     if (_instance == NULL)
@@ -60,6 +60,8 @@ bool SQLConnection::exists() {
 
 
 bool SQLConnection::setup() {
+    // This will run the tables.sql file against the database, which allows us to put all the setup code in one place
+    // TODO: convert tables.sql into a resource file
     if (!db.isOpen()) return false;
     QSqlQuery query(db);
     QFile scriptFile("tables.sql");

@@ -18,6 +18,8 @@ const vector<const char*> COMMANDS = {
 
 ConsoleUI::ConsoleUI()
 {
+    // Separate the UI into parts that handle computer bits, and parts that handle scientist bits.
+    // This class also interfaces the two, for example the link function
     scientistUI = ScientistUI();
     computerUI = ComputerUI();
 }

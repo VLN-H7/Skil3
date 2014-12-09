@@ -88,7 +88,6 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     QString search_field = ComputerFields::toField(field);
-    // TODO: figure out why appending rows straight to the query does not work
     query->prepare("SELECT * FROM computers WHERE " + search_field + "  LIKE '%'|| ? ||'%' LIMIT " + QString::fromStdString(to_string(rows)));
     query->addBindValue(QString::fromStdString(search));
     if(!query->exec())
@@ -110,7 +109,9 @@ vector<Computer> ComputerRepository::byScientist(Scientist &s) {
         throw std::runtime_error(query->lastError().text().toStdString());
 
     while(query->next()) {
-        ret.push_back(getComputer(query)); // TODO: fix this, the id has the possibility of being incorrect
+        ret.push_back(getComputer(query));
+        // TODO: fix this, the id has the possibility of being incorrect, although not especially relevant just yet, as the id is never used.
+        // Fix before turning in skil3
     }
     return ret;
 }

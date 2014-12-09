@@ -19,7 +19,6 @@ ScientistRepository::ScientistRepository() {
 
 //Adds an instance of scientist to the vector and writes it to a file
 void ScientistRepository::add(Scientist &s) {
-    //scientistVector.push_back(s);
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) "
                    "VALUES (?,?,?,?,?,?)");
@@ -35,8 +34,6 @@ void ScientistRepository::add(Scientist &s) {
 
 
 void ScientistRepository::update(Scientist &s, Scientist &replace) {
-    //Searches for the name and removes it from the vector.
-    // UPDATE scientists SET ...
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("UPDATE scientists "
                    "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? "
@@ -123,7 +120,7 @@ vector<Scientist> ScientistRepository::byComputer(Computer &c) {
         throw std::runtime_error(query->lastError().text().toStdString());
 
     while(query->next()) {
-        ret.push_back(getScientist(query)); // TODO: fix same problem
+        ret.push_back(getScientist(query)); // TODO: fix same problem as in computerrepository
     }
     return ret;
 }
