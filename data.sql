@@ -23,8 +23,8 @@ INSERT INTO computers(name, build_year, type, built) VALUES ('Analytical Engine'
 INSERT INTO computers(name, build_year, type, built) VALUES ('Apple 1',1976, 'Electronic',1);
 INSERT INTO computers(name, build_year, type, built) VALUES ('ENIAC',1946, 'Electornic',1);
 
-INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (1, 1);
-INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (4, 4);
-INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (4, 5);
-INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (13, 6);
-INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (1, 1);
+INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (1, 1);
+INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (4, 4);
+INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (4, 5);
+INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (13, 6);
+INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (1, 1);
