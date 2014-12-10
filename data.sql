@@ -15,11 +15,16 @@ INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, na
 INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Tony','Hoare','M','1934-01-11', '','British');
 
 
-INSERT INTO computers(name, build_year, type, built) VALUES('Pascaline',1642, 'Mechanical',1);
-INSERT INTO computers(name, build_year, type, built) VALUES('ABC',1942, 'Electronic',1);
-INSERT INTO computers(name, build_year, type, built) VALUES('Colossus',1943, 'Electronic',1);
-INSERT INTO computers(name, build_year, type, built) VALUES('Stepped Reckoner',1672, 'Mechanical',1);
-INSERT INTO computers(name, build_year, type, built) VALUES('Difference Engine',1822, 'Mechanical',1);
-INSERT INTO computers(name, build_year, type, built) VALUES('Analytical Engine',1837, 'Mechanical',1);
-INSERT INTO computers(name, build_year, type, built) VALUES('Apple 1',1976, 'Electronic',1);
-INSERT INTO computers(name, build_year, type, built) VALUES('ENIAC',1946, 'Electornic',1);
+INSERT INTO computers(name, build_year, type, built) VALUES ('Pascaline',1642, 'Mechanical',1);
+INSERT INTO computers(name, build_year, type, built) VALUES ('ABC',1942, 'Electronic',1);
+INSERT INTO computers(name, build_year, type, built) VALUES ('Colossus',1943, 'Electronic',1);
+INSERT INTO computers(name, build_year, type, built) VALUES ('Difference Engine',1822, 'Mechanical',1);
+INSERT INTO computers(name, build_year, type, built) VALUES ('Analytical Engine',1837, 'Mechanical',1);
+INSERT INTO computers(name, build_year, type, built) VALUES ('Apple 1',1976, 'Electronic',1);
+INSERT INTO computers(name, build_year, type, built) VALUES ('ENIAC',1946, 'Electornic',1);
+
+INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (1, 1);
+INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (4, 4);
+INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (4, 5);
+INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (13, 6);
+INSERT INTO scientist_comuter(scientist_id, computer_id) VALUES (1, 1);
