@@ -3,10 +3,9 @@
 # Project created by QtCreator 2014-11-27T10:37:46
 #
 #-------------------------------------------------
+QT       += core gui
 
-QT       += core sql
-
-QT       -= gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Skil1
 CONFIG   += console
@@ -30,7 +29,8 @@ SOURCES += main.cpp \
     repositories/computerrepository.cpp \
     ui/scientistui.cpp \
     utils.cpp \
-    ui/computerui.cpp
+    ui/computerui.cpp\
+    mainwindow.cpp
 
 HEADERS += \
     ui/consoleui.h \
@@ -46,6 +46,9 @@ HEADERS += \
     sort.h \
     ui/scientistui.h \
     ui/computerui.h
+    mainwindow.h
+
+FORMS    += mainwindow.ui
 
 OTHER_FILES += data/tables.sql
 
