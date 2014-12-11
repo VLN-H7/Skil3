@@ -45,7 +45,7 @@ HEADERS += \
     repositories/computerrepository.h \
     sort.h \
     ui/scientistui.h \
-    ui/computerui.h
+    ui/computerui.h\
     mainwindow.h
 
 FORMS    += mainwindow.ui
