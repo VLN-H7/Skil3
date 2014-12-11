@@ -1,10 +1,10 @@
-#include "mainwindow.h"
+#include "welcomescreen.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    MainWindow window;
+    Welcomescreen window;
     window.show();
 
     return app.exec();

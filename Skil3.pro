@@ -30,7 +30,8 @@ SOURCES += main.cpp \
     ui/scientistui.cpp \
     utils.cpp \
     ui/computerui.cpp\
-    mainwindow.cpp
+    mainwindow.cpp \
+    welcomescreen.cpp
 
 HEADERS += \
     ui/consoleui.h \
@@ -46,11 +47,16 @@ HEADERS += \
     sort.h \
     ui/scientistui.h \
     ui/computerui.h\
-    mainwindow.h
+    mainwindow.h \
+    welcomescreen.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    mainwindow.ui \
+    welcomescreen.ui
 
-OTHER_FILES += data/tables.sql
+OTHER_FILES += \
+    data/tables.sql\
+    pictures/welcomescreen.jpg
 
 #copydata.commands = $(COPY_DIR) $$PWD/data $$OUT_PWD
 #first.depends = $(first) copydata
