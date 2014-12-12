@@ -39,11 +39,11 @@ int Scientist::getID(){
     return id;
 }
 
-string Scientist::getFirstName(){
+QString Scientist::getFirstName(){
     return firstName;
 }
 
-string Scientist::getLastName(){
+QString Scientist::getLastName(){
     return lastName;
 }
 
@@ -59,7 +59,7 @@ Date Scientist::getDeathDate(){
     return deathdate;
 }
 
-string Scientist::getNationality(){
+QString Scientist::getNationality(){
     return nationality;
 }
 
@@ -68,11 +68,11 @@ void Scientist::setID(int ID){
         id = ID;
 }
 
-void Scientist::setFirstName(string fName){
+void Scientist::setFirstName(QString fName){
     firstName = fName;
 }
 
-void Scientist::setLastName(string lName){
+void Scientist::setLastName(QString lName){
     lastName = lName;
 }
 
@@ -88,6 +88,6 @@ void Scientist::setDeathDate(Date dDate){
     deathdate = dDate;
 }
 
-void Scientist::setNationality(string nation){
+void Scientist::setNationality(QString nation){
     nationality = nation;
 }

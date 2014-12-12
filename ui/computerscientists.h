@@ -2,6 +2,7 @@
 #define COMPUTERSCIENTISTS_H
 
 #include <QMainWindow>
+#include "../services/scientistservice.h"
 
 namespace Ui {
 class ComputerScientists;
@@ -17,6 +18,7 @@ public:
 
 private:
     Ui::ComputerScientists *ui;
+    ScientistService *service;
 };
 
 #endif // COMPUTERSCIENTISTS_H

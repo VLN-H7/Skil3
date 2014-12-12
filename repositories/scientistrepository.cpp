@@ -3,12 +3,12 @@
 Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query) {
     Scientist sci;
     sci.setID(query->value("id").toInt());
-    sci.setFirstName(query->value("first_name").toString().toStdString());
-    sci.setLastName(query->value("last_name").toString().toStdString());
+    sci.setFirstName(query->value("first_name").toString());
+    sci.setLastName(query->value("last_name").toString());
     sci.setGender(query->value("gender").toString().toStdString()[0]);
     sci.setBirthDate(query->value("birth_date").toDate());
     sci.setDeathDate(query->value("death_date").toDate());
-    sci.setNationality(query->value("nationality").toString().toStdString());
+    sci.setNationality(query->value("nationality").toString());
     return sci;
 }
 
@@ -22,12 +22,12 @@ void ScientistRepository::add(Scientist &s) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) "
                    "VALUES (?,?,?,?,?,?)");
-    query->addBindValue(QString::fromStdString(s.getFirstName()));
-    query->addBindValue(QString::fromStdString(s.getLastName()));
+    query->addBindValue(s.getFirstName());
+    query->addBindValue(s.getLastName());
     query->addBindValue(QString() + s.getGender());
     query->addBindValue(s.getBirthDate());
     query->addBindValue(s.getDeathDate());
-    query->addBindValue(QString::fromStdString(s.getNationality()));
+    query->addBindValue(s.getNationality());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -38,12 +38,12 @@ void ScientistRepository::update(Scientist &s, Scientist &replace) {
     query->prepare("UPDATE scientists "
                    "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? "
                    "WHERE id = ?");
-    query->addBindValue(QString::fromStdString(replace.getFirstName()));
-    query->addBindValue(QString::fromStdString(replace.getLastName()));
+    query->addBindValue(replace.getFirstName());
+    query->addBindValue(replace.getLastName());
     query->addBindValue(QString() + replace.getGender());
     query->addBindValue(replace.getBirthDate());
     query->addBindValue(replace.getDeathDate());
-    query->addBindValue(QString::fromStdString(replace.getNationality()));
+    query->addBindValue(replace.getNationality());
     query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
@@ -89,17 +89,17 @@ vector<Scientist> ScientistRepository::list(ScientistFields::Field field, Order 
 }
 
 //Searches for default amount of Scientists (1)
-vector<Scientist> ScientistRepository::search(ScientistFields::Field field, string query) {
+vector<Scientist> ScientistRepository::search(ScientistFields::Field field, QString query) {
     return search(field, 1, query);
 }
 
 //Searches for Scientists after the parameters selected
-vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size_t rows, string search) {
+vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size_t rows, QString search) {
     vector<Scientist> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     QString search_field = ScientistFields::toField(field);
     query->prepare("SELECT * FROM scientists WHERE " + search_field + "  LIKE '%'|| ? ||'%' LIMIT " + QString::fromStdString(to_string(rows)));
-    query->addBindValue(QString::fromStdString(search));
+    query->addBindValue(search);
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 

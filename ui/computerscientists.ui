@@ -59,6 +59,11 @@
       </column>
       <column>
        <property name="text">
+        <string>Gender</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Date of birth</string>
        </property>
       </column>

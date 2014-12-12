@@ -14,7 +14,7 @@ public:
     void add(Scientist &s);
     void remove(Scientist &s);
     vector<Scientist> list(ScientistFields::Field field, Order order);
-    vector<Scientist> search(ScientistFields::Field field, int rows, string query);
+    vector<Scientist> search(ScientistFields::Field field, int rows, QString query);
     void update(Scientist &s, Scientist &replace);
     vector<Scientist> byComputer(Computer &c);
 private:

@@ -12,31 +12,31 @@ public:
     Scientist();
 
     int getID();
-    string getFirstName();
-    string getLastName();
+    QString getFirstName();
+    QString getLastName();
     char getGender();
     Date getBirthDate();
     Date getDeathDate();
-    string getNationality();
+    QString getNationality();
 
     void setID(int ID);
-    void setFirstName(string fName);
-    void setLastName(string lName);
+    void setFirstName(QString fName);
+    void setLastName(QString lName);
     void setGender(char g);
     void setBirthDate(Date bDate);
     void setDeathDate(Date dDate);
-    void setNationality(string nation);
+    void setNationality(QString nation);
 
     friend bool operator ==(const Scientist &a, const Scientist &b);
 
 private:
     int id;
-    string firstName;
-    string lastName;
+    QString firstName;
+    QString lastName;
     char gender;
     Date birthdate;
     Date deathdate;
-    string nationality;
+    QString nationality;
 };
 
 namespace ScientistFields {

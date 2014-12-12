@@ -21,7 +21,7 @@ vector<Scientist> ScientistService::list(ScientistFields::Field field, Order ord
     return scientistRepository.list(field,order);
 }
 
-vector<Scientist> ScientistService::search(ScientistFields::Field field, int rows, string query) {
+vector<Scientist> ScientistService::search(ScientistFields::Field field, int rows, QString query) {
     return scientistRepository.search(field, rows, query);
 }
 
