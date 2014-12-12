@@ -1,4 +1,4 @@
-/ifndef SQLCONNECTION_H
+#ifndef SQLCONNECTION_H
 #define SQLCONNECTION_H
 #include <QSqlDatabase>
 #include <QString>
