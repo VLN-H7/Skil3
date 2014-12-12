@@ -21,7 +21,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLineEdit" name="Search_Resault"/>
+       <widget class="QLineEdit" name="editSearch"/>
       </item>
       <item>
        <widget class="QLabel" name="label">
@@ -31,7 +31,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="Search_Button">
+       <widget class="QPushButton" name="buttonSearch">
         <property name="text">
          <string>Search!</string>
         </property>
@@ -40,7 +40,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QTableWidget" name="table_Computer_Scientists">
+     <widget class="QTableWidget" name="tableScientists">
       <attribute name="horizontalHeaderHighlightSections">
        <bool>true</bool>
       </attribute>
@@ -77,21 +77,21 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="Add_Computer_Scientist_Button">
+       <widget class="QPushButton" name="addScientist">
         <property name="text">
          <string>Add</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="Remove_Button">
+       <widget class="QPushButton" name="removeScientist">
         <property name="text">
          <string>Remove</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="Edit_Button">
+       <widget class="QPushButton" name="editScientist">
         <property name="text">
          <string>Edit</string>
         </property>
@@ -107,7 +107,7 @@
      <x>0</x>
      <y>0</y>
      <width>638</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="cursor">
