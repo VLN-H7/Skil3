@@ -8,7 +8,7 @@ QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Skil1
-CONFIG   += console
+#CONFIG   += console
 CONFIG   -= app_bundle
 CONFIG   += c++11
 
@@ -18,7 +18,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    ui/consoleui.cpp \
     services/scientistservice.cpp \
     models/scientist.cpp \
     repositories/scientistrepository.cpp \
@@ -27,14 +26,10 @@ SOURCES += main.cpp \
     models/computer.cpp \
     services/computerservice.cpp \
     repositories/computerrepository.cpp \
-    ui/scientistui.cpp \
     utils.cpp \
-    ui/computerui.cpp\
-    mainwindow.cpp \
-    welcomescreen.cpp
+    ui/computerscientists.cpp \
 
 HEADERS += \
-    ui/consoleui.h \
     services/scientistservice.h \
     models/scientist.h \
     repositories/scientistrepository.h \
@@ -45,14 +40,10 @@ HEADERS += \
     services/computerservice.h \
     repositories/computerrepository.h \
     sort.h \
-    ui/scientistui.h \
-    ui/computerui.h\
-    mainwindow.h \
-    welcomescreen.h
+    ui/computerscientists.h \
 
 FORMS    += \
-    mainwindow.ui \
-    welcomescreen.ui
+    ui/computerscientists.ui
 
 OTHER_FILES += \
     data/tables.sql\

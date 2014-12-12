@@ -1,4 +1,4 @@
-#include "ui/computerscientists.h"
+#include "computerscientists.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
