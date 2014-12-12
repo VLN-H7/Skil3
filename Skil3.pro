@@ -8,7 +8,7 @@ QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Skil1
-#CONFIG   += console
+CONFIG   += gui
 CONFIG   -= app_bundle
 CONFIG   += c++11
 
