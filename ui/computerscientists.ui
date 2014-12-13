@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ComputerScientists</string>
+   <string>An Amazing Computer Scientist Program</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../bin.qrc">
+    <normaloff>:/icons/icons/computer-icon.png</normaloff>:/icons/icons/computer-icon.png</iconset>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
@@ -41,6 +45,12 @@
     </item>
     <item>
      <widget class="QTableWidget" name="tableScientists">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
       <attribute name="horizontalHeaderHighlightSections">
        <bool>true</bool>
       </attribute>
@@ -112,7 +122,7 @@
      <x>0</x>
      <y>0</y>
      <width>638</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="cursor">
@@ -178,6 +188,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../bin.qrc"/>
+ </resources>
  <connections/>
 </ui>
