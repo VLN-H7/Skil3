@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
-    <height>333</height>
+    <width>638</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,9 +15,6 @@
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
-  </property>
-  <property name="dockOptions">
-   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -114,8 +111,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>503</width>
-     <height>21</height>
+     <width>638</width>
+     <height>22</height>
     </rect>
    </property>
    <property name="cursor">
