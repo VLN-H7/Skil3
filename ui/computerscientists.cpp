@@ -10,8 +10,11 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    loadScientistTable();
-    loadComputerTable();
+    connect(ui->editScientistSearch, SIGNAL(returnPressed()), ui->btnScientistSearch,SIGNAL(clicked()));
+    connect(ui->editComputerSearch, SIGNAL(returnPressed()),ui->btnComputerSearch,SIGNAL(clicked()));
+
+    loadScientistTable(scientistService->list(ScientistFields::FIRST_NAME, ASC));
+    loadComputerTable(computerService->list(ComputerFields::NAME, ASC));
 }
 
 ComputerScientists::~ComputerScientists()
@@ -21,8 +24,7 @@ ComputerScientists::~ComputerScientists()
     delete computerService;
 }
 
-void ComputerScientists::loadScientistTable(){
-    auto list = scientistService->list(ScientistFields::FIRST_NAME, ASC);
+void ComputerScientists::loadScientistTable(vector<Scientist> list){
     ui->tableScientists->setRowCount(list.size());
     for(size_t i = 0; i < list.size(); i++){
         int col = 0;
@@ -42,8 +44,7 @@ void ComputerScientists::loadScientistTable(){
     ui->tableScientists->sortByColumn(0, Qt::AscendingOrder);
 }
 
-void ComputerScientists::loadComputerTable(){
-    auto list = computerService->list(ComputerFields::NAME, ASC);
+void ComputerScientists::loadComputerTable(vector<Computer> list){
     ui->tableComputers->setRowCount(list.size());
     for(size_t i = 0; i < list.size(); i++){
         int col = 0;
@@ -57,4 +58,24 @@ void ComputerScientists::loadComputerTable(){
     }
     ui->tableComputers->setSortingEnabled(true);
     ui->tableComputers->sortByColumn(0, Qt::AscendingOrder);
+}
+
+void ComputerScientists::on_btnScientistSearch_clicked()
+{
+    loadScientistTable(
+                scientistService->search(
+                    static_cast<ScientistFields::Field>(ui->comboScientistSearch->currentIndex() + 1),
+                    0,
+                    ui->editScientistSearch->text()
+                ));
+}
+
+void ComputerScientists::on_btnComputerSearch_clicked()
+{
+    loadComputerTable(
+                computerService->search(
+                    static_cast<ComputerFields::Field>(ui->comboComputerSearch->currentIndex() + 1),
+                    0,
+                    ui->editComputerSearch->text()
+                ));
 }

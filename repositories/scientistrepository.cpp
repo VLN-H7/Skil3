@@ -98,7 +98,7 @@ vector<Scientist> ScientistRepository::search(ScientistFields::Field field, size
     vector<Scientist> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     QString search_field = ScientistFields::toField(field);
-    query->prepare("SELECT * FROM scientists WHERE " + search_field + "  LIKE '%'|| ? ||'%' LIMIT " + QString::fromStdString(to_string(rows)));
+    query->prepare("SELECT * FROM scientists WHERE " + search_field + "  LIKE '%'|| ? ||'%'" + (rows > 0 ? "LIMIT " + QString::number(rows) : ""));
     query->addBindValue(search);
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
