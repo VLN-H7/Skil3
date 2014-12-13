@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
+#include "../services/addscientistdialog.h"
 
 namespace Ui {
 class ComputerScientists;

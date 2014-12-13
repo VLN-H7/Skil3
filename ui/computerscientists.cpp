@@ -79,3 +79,10 @@ void ComputerScientists::on_btnComputerSearch_clicked()
                     ui->editComputerSearch->text()
                 ));
 }
+
+void ComputerScientists::on_btnAddScientist_clicked()
+{
+    addScientistDialog addS;
+    addS.setModal(true);
+    addS.exec();
+}
