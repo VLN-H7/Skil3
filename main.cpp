@@ -1,11 +1,18 @@
 #include "ui/computerscientists.h"
 #include <QApplication>
+#include <QSplashScreen>
+#include <QTimer>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    ComputerScientists w;
-    w.show();
+    QApplication app(argc, argv);
+    QSplashScreen *splash = new QSplashScreen;
+    splash->setPixmap(QPixmap(":/pictures/pictures/welcomescreen.jpg"));
+    splash->show();
+    ComputerScientists window;
+    QTimer::singleShot(5000,splash,SLOT(close()));
+    QTimer::singleShot(5000,&window,SLOT(show()));
 
-    return a.exec();
+    return app.exec();
+
 }

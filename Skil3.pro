@@ -74,3 +74,6 @@ QMAKE_EXTRA_TARGETS += copyfiles
 POST_TARGETDEPS += copyfiles
 
 #CONFIG+=static
+
+RESOURCES += \
+    bin.qrc
