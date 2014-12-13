@@ -1,4 +1,5 @@
 #include "sqlconnection.h"
+
 const char* SQL_DATABASE = "database.sqlite3";
 
 // TODO: Future note: this is not thread safe at all -.-
@@ -64,14 +65,13 @@ bool SQLConnection::setup() {
     // TODO: convert tables.sql into a resource file
     if (!db.isOpen()) return false;
     QSqlQuery query(db);
-    QFile scriptFile("tables.sql");
+    QFile scriptFile(":/db/db/tables.sql");
     // from http://stackoverflow.com/questions/3736984/multiple-sql-statements-in-qsqlquery-using-the-sqlite3-driver
     if (scriptFile.open(QIODevice::ReadOnly))
     {
         // The SQLite driver executes only a single (the first) query in the QSqlQuery
         //  if the script contains more queries, it needs to be splitted.
         QStringList scriptQueries = QTextStream(&scriptFile).readAll().split(';');
-
         foreach (QString queryTxt, scriptQueries)
         {
             if (queryTxt.trimmed().isEmpty()) {

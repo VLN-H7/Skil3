@@ -45,33 +45,6 @@ HEADERS += \
 FORMS    += \
     ui/computerscientists.ui
 
-OTHER_FILES += \
-    data/tables.sql
-
-#copydata.commands = $(COPY_DIR) $$PWD/data $$OUT_PWD
-#first.depends = $(first) copydata
-#export(first.depends)
-#export(copydata.commands)
-#QMAKE_EXTRA_TARGETS += first copydata
-
-win32 {
-    PWD_WIN = $${PWD}
-    DESTDIR_WIN = $${OUT_PWD}
-    PWD_WIN ~= s,/,\\,g
-    DESTDIR_WIN ~= s,/,\\,g
-
-    copyfiles.commands = $$quote(cmd /c xcopy /S /Q /Y /I $${PWD_WIN}\\data $${DESTDIR_WIN})
-
-}
-macx {
-    copyfiles.commands = cp -rf $$PWD/data/* $$OUT_PWD
-}
-linux {
-    copyfiles.commands = cp -rf $$PWD/data/* $$OUT_PWD
-}
-QMAKE_EXTRA_TARGETS += copyfiles
-POST_TARGETDEPS += copyfiles
-
 #CONFIG+=static
 
 RESOURCES += \
