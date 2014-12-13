@@ -5,8 +5,8 @@
 Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query) {
     Computer comp;
     comp.setID(query->value("id").toInt());
-    comp.setName(query->value("name").toString().toStdString());
-    comp.setType(query->value("type").toString().toStdString());
+    comp.setName(query->value("name").toString());
+    comp.setType(query->value("type").toString());
     comp.setBuildYear(query->value("build_year").toInt());
     comp.setBuilt(query->value("built").toBool());
     return comp;
@@ -19,8 +19,8 @@ ComputerRepository::ComputerRepository() {
 void ComputerRepository::add(Computer &comp) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("INSERT INTO computers (name, type, build_year, built) VALUES (?,?,?,?)");
-    query->addBindValue(QString::fromStdString(comp.getName()));
-    query->addBindValue(QString::fromStdString(comp.getType()));
+    query->addBindValue(comp.getName());
+    query->addBindValue(comp.getType());
     query->addBindValue(comp.getBuildYear());
     query->addBindValue(comp.getBuilt());
     if(!query->exec())
@@ -31,8 +31,8 @@ void ComputerRepository::add(Computer &comp) {
 void ComputerRepository::update(Computer &comp, Computer &replace) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("UPDATE computers SET name = ?, type = ?, build_year = ?, built = ? WHERE id = ?");
-    query->addBindValue(QString::fromStdString(replace.getName()));
-    query->addBindValue(QString::fromStdString(replace.getType()));
+    query->addBindValue(replace.getName());
+    query->addBindValue(replace.getType());
     query->addBindValue(replace.getBuildYear());
     query->addBindValue(replace.getBuilt());
     query->addBindValue(comp.getID());
@@ -79,17 +79,17 @@ vector<Computer> ComputerRepository::list(ComputerFields::Field field, Order ord
 }
 
 //Searches for default amount of Computers (1)
-vector<Computer> ComputerRepository::search(ComputerFields::Field field, string query) {
+vector<Computer> ComputerRepository::search(ComputerFields::Field field, QString query) {
     return search(field, 1, query);
 }
 
 //Searches for Computers after the parameters selected
-vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t rows, string search) {
+vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t rows, QString search) {
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     QString search_field = ComputerFields::toField(field);
     query->prepare("SELECT * FROM computers WHERE " + search_field + "  LIKE '%'|| ? ||'%' LIMIT " + QString::fromStdString(to_string(rows)));
-    query->addBindValue(QString::fromStdString(search));
+    query->addBindValue(search);
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
     while(query->next()) {

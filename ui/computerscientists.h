@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "../services/scientistservice.h"
+#include "../services/computerservice.h"
 
 namespace Ui {
 class ComputerScientists;
@@ -18,7 +19,11 @@ public:
 
 private:
     Ui::ComputerScientists *ui;
-    ScientistService *service;
+    ScientistService *scientistService;
+    ComputerService *computerService;
+
+    void loadComputerTable();
+    void loadScientistTable();
 };
 
 #endif // COMPUTERSCIENTISTS_H

@@ -21,7 +21,7 @@ vector<Computer> ComputerService::list(ComputerFields::Field field, Order order)
     return computerRepository.list(field,order);
 }
 
-vector<Computer> ComputerService::search(ComputerFields::Field field, int rows, string query) {
+vector<Computer> ComputerService::search(ComputerFields::Field field, int rows, QString query) {
     return computerRepository.search(field, rows, query);
 }
 

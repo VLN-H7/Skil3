@@ -34,11 +34,11 @@ int Computer::getID(){
     return id;
 }
 
-string Computer::getName(){
+QString Computer::getName(){
     return name;
 }
 
-string Computer::getType(){
+QString Computer::getType(){
     return type;
 }
 
@@ -55,11 +55,11 @@ void Computer::setID(int ID){
         id = ID;
 }
 
-void Computer::setName(string cName){
+void Computer::setName(QString cName){
     name = cName;
 }
 
-void Computer::setType(string cType){
+void Computer::setType(QString cType){
     // TODO: make this uniform, perhaps with a table?
     // It is not clear what types of computers should be defined, so it is left as a string for now.
     type = cType;
