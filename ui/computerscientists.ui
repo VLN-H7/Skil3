@@ -29,7 +29,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QTabWidget" name="tabMenu">
       <property name="tabPosition">
        <enum>QTabWidget::West</enum>
       </property>
@@ -76,7 +76,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QLabel" name="header_scientists">
+          <widget class="QLabel" name="lblHeaderScientists">
            <property name="text">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt;List of &lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;Computer Scientists&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
@@ -85,7 +85,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QLineEdit" name="search_bar"/>
+            <widget class="QLineEdit" name="editScientistSearch"/>
            </item>
            <item>
             <widget class="QLabel" name="label">
@@ -95,7 +95,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="search_button">
+            <widget class="QPushButton" name="btnScientistSearch">
              <property name="text">
               <string>Search!</string>
              </property>
@@ -175,7 +175,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QPushButton" name="addScientist">
+          <widget class="QPushButton" name="btnAddScientist">
            <property name="text">
             <string>Add</string>
            </property>
@@ -186,7 +186,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="removeScientist">
+          <widget class="QPushButton" name="btnRemoveScientist">
            <property name="text">
             <string>Remove</string>
            </property>
@@ -197,7 +197,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="editScientist">
+          <widget class="QPushButton" name="btnEditScientist">
            <property name="text">
             <string>Edit</string>
            </property>
@@ -224,10 +224,6 @@
          <bool>true</bool>
         </property>
        </widget>
-       <zorder>tableScientists</zorder>
-       <zorder>widget</zorder>
-       <zorder>frame</zorder>
-       <zorder>picture_scientists</zorder>
       </widget>
       <widget class="QWidget" name="Computers">
        <attribute name="icon">
@@ -257,7 +253,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
-            <widget class="QLineEdit" name="search_bar_2"/>
+            <widget class="QLineEdit" name="editComputerSearch"/>
            </item>
            <item>
             <widget class="QLabel" name="label_8">
@@ -267,7 +263,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="search_button_2">
+            <widget class="QPushButton" name="btnComputerSearch">
              <property name="text">
               <string>Search!</string>
              </property>
@@ -278,7 +274,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
            <item>
-            <widget class="QTableWidget" name="tableScientists_3">
+            <widget class="QTableWidget" name="tableComputers">
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
@@ -353,7 +349,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
-          <widget class="QPushButton" name="addScientist_3">
+          <widget class="QPushButton" name="btnAddComputer">
            <property name="text">
             <string>Add</string>
            </property>
@@ -364,7 +360,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="removeScientist_3">
+          <widget class="QPushButton" name="btnRemoveComputer">
            <property name="text">
             <string>Remove</string>
            </property>
@@ -375,7 +371,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="editScientist_3">
+          <widget class="QPushButton" name="btnEditComputer">
            <property name="text">
             <string>Edit</string>
            </property>
@@ -412,10 +408,10 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
-            <widget class="QLineEdit" name="search_bar_3"/>
+            <widget class="QLineEdit" name="editSearchComputerConnection"/>
            </item>
            <item>
-            <widget class="QPushButton" name="search_button_3">
+            <widget class="QPushButton" name="btnSearchComputerConnection">
              <property name="text">
               <string>Search!</string>
              </property>
@@ -426,7 +422,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
-            <widget class="QTableWidget" name="tableScientists_4">
+            <widget class="QTableWidget" name="tableComputerConnections">
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
@@ -486,7 +482,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
-          <widget class="QPushButton" name="addScientist_4">
+          <widget class="QPushButton" name="btnAddConnection">
            <property name="text">
             <string>Add</string>
            </property>
@@ -497,7 +493,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="removeScientist_4">
+          <widget class="QPushButton" name="btnRemoveConnection">
            <property name="text">
             <string>Remove</string>
            </property>
@@ -508,7 +504,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="editScientist_4">
+          <widget class="QPushButton" name="btnEditConnection">
            <property name="text">
             <string>Edit</string>
            </property>
@@ -549,10 +545,10 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_9">
            <item>
-            <widget class="QLineEdit" name="search_bar_4"/>
+            <widget class="QLineEdit" name="editSearchScientistConnection"/>
            </item>
            <item>
-            <widget class="QPushButton" name="search_button_4">
+            <widget class="QPushButton" name="btnSearchScientistConnection">
              <property name="text">
               <string>Search!</string>
              </property>
@@ -563,7 +559,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_10">
            <item>
-            <widget class="QTableWidget" name="tableScientists_5">
+            <widget class="QTableWidget" name="tableScientistConnections">
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
