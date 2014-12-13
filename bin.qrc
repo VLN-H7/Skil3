@@ -1,8 +1,11 @@
 <RCC>
     <qresource prefix="/pictures">
         <file>pictures/welcomescreen.jpg</file>
+        <file>pictures/computerscientist.png</file>
     </qresource>
     <qresource prefix="/icons">
         <file>icons/computer-icon.png</file>
+        <file>icons/add-icon.png</file>
+        <file>icons/remove-icon.png</file>
     </qresource>
 </RCC>

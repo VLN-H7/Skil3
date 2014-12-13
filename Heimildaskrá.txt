@@ -1,0 +1,7 @@
+Heimildaskrá
+
+Icon:
+	http://icons.iconarchive.com/icons/martz90/circle-addon2/512/computer-icon.png
+	https://cdn3.iconfinder.com/data/icons/musthave/128/Add.png
+	https://cdn1.iconfinder.com/data/icons/realistiK-new/128x128/actions/edit_remove.png
+	http://www.adsitsolutions.com/images/icons/grey/home-user-icon.png
