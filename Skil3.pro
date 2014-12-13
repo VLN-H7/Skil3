@@ -46,8 +46,7 @@ FORMS    += \
     ui/computerscientists.ui
 
 OTHER_FILES += \
-    data/tables.sql\
-    pictures/welcomescreen.jpg
+    data/tables.sql
 
 #copydata.commands = $(COPY_DIR) $$PWD/data $$OUT_PWD
 #first.depends = $(first) copydata
@@ -74,3 +73,7 @@ QMAKE_EXTRA_TARGETS += copyfiles
 POST_TARGETDEPS += copyfiles
 
 #CONFIG+=static
+
+RESOURCES += \
+    ../bin.qrc \
+    bin.qrc

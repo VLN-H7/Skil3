@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/picture">
+        <file>pictures/welcomescreen.jpg</file>
+    </qresource>
+    <qresource prefix="/icons"/>
+</RCC>
