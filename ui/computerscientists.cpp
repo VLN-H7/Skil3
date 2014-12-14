@@ -16,7 +16,7 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
     refreshScientists();
     refreshComputers();
 
-    editActive = false;
+    tableEditActive = false;
 }
 
 ComputerScientists::~ComputerScientists()
@@ -35,7 +35,7 @@ void ComputerScientists::refreshComputers(){
 }
 
 void ComputerScientists::loadScientistTable(vector<Scientist> list){
-    editActive = false;
+    tableEditActive = false;
 
     ui->tableScientists->clearContents();
     ui->tableScientists->setRowCount(list.size());
@@ -60,7 +60,7 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list){
 }
 
 void ComputerScientists::loadComputerTable(vector<Computer> list){
-    editActive = false;
+    tableEditActive = false;
 
     ui->tableComputers->clearContents();
     ui->tableComputers->setRowCount(list.size());
@@ -125,7 +125,7 @@ void ComputerScientists::on_btnRemoveComputer_clicked()
 
 void ComputerScientists::on_tableScientists_itemChanged(QTableWidgetItem *item)
 {
-    if(!editActive || static_cast<size_t>(item->row()) >= scientistList.size())
+    if(!tableEditActive || static_cast<size_t>(item->row()) >= scientistList.size())
         return;
     Scientist n = scientistList[item->row()];
     switch(static_cast<ScientistFields::Field>(item->type())){
@@ -157,12 +157,12 @@ void ComputerScientists::on_tableScientists_itemChanged(QTableWidgetItem *item)
 
 void ComputerScientists::on_tableScientists_cellDoubleClicked(int row, int column)
 {
-    editActive = true;
+    tableEditActive = true;
 }
 
 void ComputerScientists::on_tableComputers_itemChanged(QTableWidgetItem *item)
 {
-    if(!editActive || static_cast<size_t>(item->row()) >= computerList.size())
+    if(!tableEditActive || static_cast<size_t>(item->row()) >= computerList.size())
         return;
     Computer n = computerList[item->row()];
     switch(static_cast<ComputerFields::Field>(item->type())){
@@ -188,7 +188,7 @@ void ComputerScientists::on_tableComputers_itemChanged(QTableWidgetItem *item)
 
 void ComputerScientists::on_tableComputers_cellDoubleClicked(int row, int column)
 {
-    editActive = true;
+    tableEditActive = true;
 
 }
 void ComputerScientists::on_btnAddScientist_clicked()
