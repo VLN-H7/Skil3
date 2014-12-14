@@ -20,7 +20,7 @@
    <string>An Amazing Computer Scientist Program</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../bin.qrc">
     <normaloff>:/icons/icons/computer-icon.png</normaloff>:/icons/icons/computer-icon.png</iconset>
   </property>
   <property name="locale">
@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -59,7 +59,7 @@
         <bool>false</bool>
        </property>
        <attribute name="icon">
-        <iconset>
+        <iconset resource="../bin.qrc">
          <normaloff>:/pictures/pictures/computerscientist.png</normaloff>:/pictures/pictures/computerscientist.png</iconset>
        </attribute>
        <attribute name="title">
@@ -214,7 +214,7 @@
             <string>Add</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/add-icon.png</normaloff>:/icons/icons/add-icon.png</iconset>
            </property>
           </widget>
@@ -225,7 +225,7 @@
             <string>Remove</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/remove-icon.png</normaloff>:/icons/icons/remove-icon.png</iconset>
            </property>
           </widget>
@@ -245,7 +245,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/pictures/pictures/computerscientist.png</pixmap>
+         <pixmap resource="../bin.qrc">:/pictures/pictures/computerscientist.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -254,7 +254,7 @@
       </widget>
       <widget class="QWidget" name="Computers">
        <attribute name="icon">
-        <iconset>
+        <iconset resource="../bin.qrc">
          <normaloff>:/icons/icons/pc-icon.png</normaloff>:/icons/icons/pc-icon.png</iconset>
        </attribute>
        <attribute name="title">
@@ -377,7 +377,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/icons/icons/pc-icon.png</pixmap>
+         <pixmap resource="../bin.qrc">:/icons/icons/pc-icon.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -405,7 +405,7 @@
             <string>Add</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/add-icon.png</normaloff>:/icons/icons/add-icon.png</iconset>
            </property>
           </widget>
@@ -416,7 +416,7 @@
             <string>Remove</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/remove-icon.png</normaloff>:/icons/icons/remove-icon.png</iconset>
            </property>
           </widget>
@@ -426,7 +426,7 @@
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="icon">
-        <iconset>
+        <iconset resource="../bin.qrc">
          <normaloff>:/icons/icons/link-icon.png</normaloff>:/icons/icons/link-icon.png</iconset>
        </attribute>
        <attribute name="title">
@@ -503,7 +503,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>:/icons/icons/link-icon.png</pixmap>
+         <pixmap resource="../bin.qrc">:/icons/icons/link-icon.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -531,7 +531,7 @@
             <string>Add</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/add-icon.png</normaloff>:/icons/icons/add-icon.png</iconset>
            </property>
           </widget>
@@ -542,7 +542,7 @@
             <string>Remove</string>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/remove-icon.png</normaloff>:/icons/icons/remove-icon.png</iconset>
            </property>
           </widget>
@@ -664,7 +664,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAdd_Computer_Scientist">
    <property name="icon">
-    <iconset>
+    <iconset resource="../bin.qrc">
      <normaloff>:/icons/icons/add-icon.png</normaloff>:/icons/icons/add-icon.png</iconset>
    </property>
    <property name="text">
@@ -676,7 +676,7 @@
   </action>
   <action name="actionRemove_Scientist">
    <property name="icon">
-    <iconset>
+    <iconset resource="../bin.qrc">
      <normaloff>:/icons/icons/remove-icon.png</normaloff>:/icons/icons/remove-icon.png</iconset>
    </property>
    <property name="text">
@@ -695,6 +695,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../bin.qrc"/>
+ </resources>
  <connections/>
 </ui>
