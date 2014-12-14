@@ -13,8 +13,11 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
     connect(ui->editScientistSearch, SIGNAL(returnPressed()), ui->btnScientistSearch,SIGNAL(clicked()));
     connect(ui->editComputerSearch, SIGNAL(returnPressed()),ui->btnComputerSearch,SIGNAL(clicked()));
 
-    loadScientistTable(scientistService->list(ScientistFields::FIRST_NAME, ASC));
-    loadComputerTable(computerService->list(ComputerFields::NAME, ASC));
+    refreshScientists();
+    refreshComputers();
+
+    currentRow = -1;
+    currentColumn = -1;
 }
 
 ComputerScientists::~ComputerScientists()
@@ -24,40 +27,58 @@ ComputerScientists::~ComputerScientists()
     delete computerService;
 }
 
+void ComputerScientists::refreshScientists(){
+    loadScientistTable(scientistService->list(ScientistFields::FIRST_NAME, ASC));
+}
+
+void ComputerScientists::refreshComputers(){
+    loadComputerTable(computerService->list(ComputerFields::NAME, ASC));
+}
+
 void ComputerScientists::loadScientistTable(vector<Scientist> list){
+    currentRow = currentColumn = -1;
+
+    ui->tableScientists->clearContents();
     ui->tableScientists->setRowCount(list.size());
     for(size_t i = 0; i < list.size(); i++){
         int col = 0;
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getFirstName()));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getFirstName(), ScientistFields::FIRST_NAME));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getLastName()));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getLastName(), ScientistFields::LAST_NAME));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(QString() + list[i].getGender()));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(QString() + list[i].getGender(), ScientistFields::GENDER));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getBirthDate().toString("dd.MM.yyyy")));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getBirthDate().toString("dd.MM.yyyy"), ScientistFields::BIRTH_DATE));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getDeathDate().toString("dd.MM.yyyy")));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getDeathDate().toString("dd.MM.yyyy"), ScientistFields::DEATH_DATE));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getNationality()));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getNationality(), ScientistFields::NATIONALITY));
     }
     ui->tableScientists->setSortingEnabled(true);
     ui->tableScientists->sortByColumn(0, Qt::AscendingOrder);
+
+    scientistList = list;
 }
 
 void ComputerScientists::loadComputerTable(vector<Computer> list){
+    currentRow = currentColumn = -1;
+
+    ui->tableComputers->clearContents();
     ui->tableComputers->setRowCount(list.size());
     for(size_t i = 0; i < list.size(); i++){
         int col = 0;
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getName()));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getName(), ComputerFields::NAME));
 
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getType()));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getType(), ComputerFields::TYPE));
 
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(QString::number(list[i].getBuildYear())));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(QString::number(list[i].getBuildYear()), ComputerFields::BUILD_YEAR));
 
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getBuilt() ? "YES" : "NO"));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getBuilt() ? "YES" : "NO", ComputerFields::BUILT));
     }
     ui->tableComputers->setSortingEnabled(true);
     ui->tableComputers->sortByColumn(0, Qt::AscendingOrder);
+
+    computerList = list;
 }
 
 void ComputerScientists::on_btnScientistSearch_clicked()
@@ -78,4 +99,103 @@ void ComputerScientists::on_btnComputerSearch_clicked()
                     0,
                     ui->editComputerSearch->text()
                 ));
+}
+
+void ComputerScientists::on_btnRemoveScientist_clicked()
+{
+    auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
+    for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
+        scientistService->remove(scientistList[selectedIndexes.at(i).row()]);
+    }
+
+    refreshScientists(); //TODO: what if the remove came from a search?
+    //loadScientistTable(scientistList);
+}
+
+void ComputerScientists::on_btnRemoveComputer_clicked()
+{
+    auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
+    for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
+        computerService->remove(computerList[selectedIndexes.at(i).row()]);
+    }
+
+    refreshComputers(); //TODO: what if the remove came from a search?
+    //loadComputerTable(computerList);
+}
+
+void ComputerScientists::on_tableScientists_itemChanged(QTableWidgetItem *item)
+{
+    qDebug() << "edit";
+    if(item->row() != currentRow || item->column() != currentColumn || item->row() >= scientistList.size())
+        return;
+    Scientist n = scientistList[item->row()];
+    switch(static_cast<ScientistFields::Field>(item->type())){
+        case ScientistFields::FIRST_NAME:
+            n.setFirstName(item->text());
+            break;
+        case ScientistFields::LAST_NAME:
+            n.setLastName(item->text());
+            break;
+        case ScientistFields::GENDER:
+            n.setGender(item->text().toStdString()[0]);
+            break;
+        case ScientistFields::BIRTH_DATE:
+            n.setBirthDate(Date::fromString(item->text()));
+            break;
+        case ScientistFields::DEATH_DATE:
+            n.setDeathDate(Date::fromString(item->text()));
+            break;
+        case ScientistFields::NATIONALITY:
+            n.setNationality(item->text());
+            break;
+        default:
+            break;
+    }
+    scientistService->update(scientistList[item->row()], n);
+
+    currentRow = -1;
+    currentColumn = -1;
+
+    refreshScientists();
+}
+
+void ComputerScientists::on_tableScientists_cellDoubleClicked(int row, int column)
+{
+    currentRow = row;
+    currentColumn = column;
+}
+
+void ComputerScientists::on_tableComputers_itemChanged(QTableWidgetItem *item)
+{
+    if(item->row() != currentRow || item->column() != currentColumn || item->row() >= computerList.size())
+        return;
+    Computer n = computerList[item->row()];
+    switch(static_cast<ComputerFields::Field>(item->type())){
+        case ComputerFields::NAME:
+            n.setName(item->text());
+            break;
+        case ComputerFields::TYPE:
+            n.setType(item->text());
+            break;
+        case ComputerFields::BUILD_YEAR:
+            n.setBuildYear(item->text().toInt());
+            break;
+        case ComputerFields::BUILT:
+            n.setBuilt(item->text() == "YES");
+            break;
+        default:
+            break;
+    }
+    computerService->update(computerList[item->row()], n);
+
+    currentRow = -1;
+    currentColumn = -1;
+
+    refreshComputers();
+}
+
+void ComputerScientists::on_tableComputers_cellDoubleClicked(int row, int column)
+{
+    currentRow = row;
+    currentColumn = column;
 }

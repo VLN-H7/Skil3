@@ -14,6 +14,7 @@ public:
     Date();
     Date(const QDate &D);
     static Date fromString(string date);
+    static Date fromString(QString date);
     static Date now();
     friend ostream &operator<<( ostream &output, const Date &D );
     string toDateString() const;

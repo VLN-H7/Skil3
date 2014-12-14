@@ -14,7 +14,11 @@ Date Date::now() {
 
 //Converts a string to a date using QDate functions
 Date Date::fromString(string date) {
-    QDate d = QDate::fromString(QString::fromUtf8(date.c_str()), "dd.MM.yyyy");
+    return Date::fromString(QString::fromStdString(date));
+}
+
+Date Date::fromString(QString date){
+    QDate d = QDate::fromString(date, "dd.MM.yyyy");
     return d;
 }
 
