@@ -5,6 +5,7 @@
 #include <QTableWidgetItem>
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
+#include "../services/addscientistdialog.h"
 
 namespace Ui {
 class ComputerScientists;
@@ -23,6 +24,7 @@ private slots:
 
     void on_btnComputerSearch_clicked();
 
+<<<<<<< HEAD
     void on_btnRemoveScientist_clicked();
 
     void on_btnRemoveComputer_clicked();
@@ -34,7 +36,8 @@ private slots:
     void on_tableComputers_itemChanged(QTableWidgetItem *item);
 
     void on_tableComputers_cellDoubleClicked(int row, int column);
-
+    
+    void on_btnAddScientist_clicked();
 private:
     Ui::ComputerScientists *ui;
     ScientistService *scientistService;

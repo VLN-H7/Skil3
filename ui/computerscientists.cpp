@@ -101,6 +101,7 @@ void ComputerScientists::on_btnComputerSearch_clicked()
                 ));
 }
 
+
 void ComputerScientists::on_btnRemoveScientist_clicked()
 {
     auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
@@ -198,4 +199,11 @@ void ComputerScientists::on_tableComputers_cellDoubleClicked(int row, int column
 {
     currentRow = row;
     currentColumn = column;
+
+}
+void ComputerScientists::on_btnAddScientist_clicked()
+{
+    addScientistDialog addS;
+    addS.setModal(true);
+    addS.exec();
 }
