@@ -23,6 +23,7 @@ private slots:
 
     void on_btnComputerSearch_clicked();
 
+    void on_btnAddScientist_clicked();
 private:
     Ui::ComputerScientists *ui;
     ScientistService *scientistService;
