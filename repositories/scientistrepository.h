@@ -25,7 +25,6 @@ public:
 
 private:
 
-
     static Scientist getScientist(const unique_ptr<QSqlQuery> &query);
 };
 

@@ -196,4 +196,6 @@ void ComputerScientists::on_btnAddScientist_clicked()
     addScientistDialog addS;
     addS.setModal(true);
     addS.exec();
+    refreshScientists();
+
 }
