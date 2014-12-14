@@ -199,3 +199,10 @@ void ComputerScientists::on_btnAddScientist_clicked()
     refreshScientists();
 
 }
+
+void ComputerScientists::on_btnAddComputer_clicked()
+{
+    addComputerDialog addC;
+    addC.setModal(true);
+    addC.exec();
+}

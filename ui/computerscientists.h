@@ -6,6 +6,7 @@
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
 #include "addscientistdialog.h"
+#include "addcomputerdialog.h"
 
 namespace Ui {
 class ComputerScientists;
@@ -37,6 +38,8 @@ private slots:
     void on_tableComputers_cellDoubleClicked(int row, int column);
     
     void on_btnAddScientist_clicked();
+    void on_btnAddComputer_clicked();
+
 private:
     Ui::ComputerScientists *ui;
     ScientistService *scientistService;
