@@ -45,8 +45,7 @@ private:
     vector<Scientist> scientistList; // The current list backing the contents of tableScientists
     vector<Computer> computerList; // The current list backing the contents of tableComputers
 
-    int currentRow;
-    int currentColumn;
+    bool tableEditActive; // As setItem triggers an itemChanged event, and there is no event for detecting only user changes, we use a flag hack instead
 
     void loadScientistTable(vector<Scientist> list);
     void loadComputerTable(vector<Computer> list);

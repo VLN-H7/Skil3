@@ -16,8 +16,7 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
     refreshScientists();
     refreshComputers();
 
-    currentRow = -1;
-    currentColumn = -1;
+    editActive = false;
 }
 
 ComputerScientists::~ComputerScientists()
@@ -36,7 +35,7 @@ void ComputerScientists::refreshComputers(){
 }
 
 void ComputerScientists::loadScientistTable(vector<Scientist> list){
-    currentRow = currentColumn = -1;
+    editActive = false;
 
     ui->tableScientists->clearContents();
     ui->tableScientists->setRowCount(list.size());
@@ -61,7 +60,7 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list){
 }
 
 void ComputerScientists::loadComputerTable(vector<Computer> list){
-    currentRow = currentColumn = -1;
+    editActive = false;
 
     ui->tableComputers->clearContents();
     ui->tableComputers->setRowCount(list.size());
@@ -126,8 +125,7 @@ void ComputerScientists::on_btnRemoveComputer_clicked()
 
 void ComputerScientists::on_tableScientists_itemChanged(QTableWidgetItem *item)
 {
-    qDebug() << "edit";
-    if(item->row() != currentRow || item->column() != currentColumn || item->row() >= scientistList.size())
+    if(!editActive || static_cast<size_t>(item->row()) >= scientistList.size())
         return;
     Scientist n = scientistList[item->row()];
     switch(static_cast<ScientistFields::Field>(item->type())){
@@ -154,21 +152,17 @@ void ComputerScientists::on_tableScientists_itemChanged(QTableWidgetItem *item)
     }
     scientistService->update(scientistList[item->row()], n);
 
-    currentRow = -1;
-    currentColumn = -1;
-
     refreshScientists();
 }
 
 void ComputerScientists::on_tableScientists_cellDoubleClicked(int row, int column)
 {
-    currentRow = row;
-    currentColumn = column;
+    editActive = true;
 }
 
 void ComputerScientists::on_tableComputers_itemChanged(QTableWidgetItem *item)
 {
-    if(item->row() != currentRow || item->column() != currentColumn || item->row() >= computerList.size())
+    if(!editActive || static_cast<size_t>(item->row()) >= computerList.size())
         return;
     Computer n = computerList[item->row()];
     switch(static_cast<ComputerFields::Field>(item->type())){
@@ -189,16 +183,12 @@ void ComputerScientists::on_tableComputers_itemChanged(QTableWidgetItem *item)
     }
     computerService->update(computerList[item->row()], n);
 
-    currentRow = -1;
-    currentColumn = -1;
-
     refreshComputers();
 }
 
 void ComputerScientists::on_tableComputers_cellDoubleClicked(int row, int column)
 {
-    currentRow = row;
-    currentColumn = column;
+    editActive = true;
 
 }
 void ComputerScientists::on_btnAddScientist_clicked()
