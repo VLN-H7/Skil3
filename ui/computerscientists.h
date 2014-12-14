@@ -24,7 +24,6 @@ private slots:
 
     void on_btnComputerSearch_clicked();
 
-<<<<<<< HEAD
     void on_btnRemoveScientist_clicked();
 
     void on_btnRemoveComputer_clicked();
