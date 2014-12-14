@@ -28,7 +28,7 @@ SOURCES += main.cpp \
     repositories/computerrepository.cpp \
     utils.cpp \
     ui/computerscientists.cpp \
-    services/addscientistdialog.cpp
+    ui/addscientistdialog.cpp
 
 HEADERS += \
     services/scientistservice.h \
@@ -42,11 +42,11 @@ HEADERS += \
     repositories/computerrepository.h \
     sort.h \
     ui/computerscientists.h \
-    services/addscientistdialog.h
+    ui/addscientistdialog.h
 
 FORMS    += \
     ui/computerscientists.ui \
-    services/addscientistdialog.ui
+    ui/addscientistdialog.ui
 
 #CONFIG+=static
 

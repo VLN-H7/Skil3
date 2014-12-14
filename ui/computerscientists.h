@@ -5,7 +5,7 @@
 #include <QTableWidgetItem>
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
-#include "../services/addscientistdialog.h"
+#include "addscientistdialog.h"
 
 namespace Ui {
 class ComputerScientists;
