@@ -115,11 +115,11 @@ void ComputerScientists::on_btnComputerSearch_clicked()
 void ComputerScientists::on_btnRemoveScientist_clicked()
 {
     if(messageBox_are_you_sure()){
-    auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
-    for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-        auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
-        scientistService->remove(scientistList[item->type()]);
-    }
+        auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
+        for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
+            auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
+            scientistService->remove(scientistList[item->type()]);
+        }
     }
     else
         return;
@@ -131,7 +131,7 @@ void ComputerScientists::on_btnRemoveScientist_clicked()
 bool ComputerScientists::messageBox_are_you_sure()
 {
     QMessageBox msgBox;
-    msgBox.setText("Are you sure you want to remove this computer scientist?");
+    msgBox.setText("Are you sure you want to remove this from the list?");
     //msgBox.setInformativeText("");
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::Yes);
@@ -145,10 +145,12 @@ bool ComputerScientists::messageBox_are_you_sure()
 
 void ComputerScientists::on_btnRemoveComputer_clicked()
 {
-    auto selectedIndexes = ui->tableComputers->selectionModel()->selection().indexes();
-    for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-        auto item = ui->tableComputers->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
-        computerService->remove(computerList[item->type()]);
+    if(messageBox_are_you_sure()){
+        auto selectedIndexes = ui->tableComputers->selectionModel()->selection().indexes();
+        for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
+            auto item = ui->tableComputers->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
+            computerService->remove(computerList[item->type()]);
+        }
     }
 
     refreshComputers(); //TODO: what if the remove came from a search?
