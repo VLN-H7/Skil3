@@ -205,4 +205,5 @@ void ComputerScientists::on_btnAddComputer_clicked()
     addComputerDialog addC;
     addC.setModal(true);
     addC.exec();
+    refreshComputers();
 }

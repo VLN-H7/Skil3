@@ -22,7 +22,6 @@ public:
 
 private slots:
     void on_cancel_btn_clicked();
-
     void on_add_btn_clicked();
     void clearAddScientistErrors();
     bool scientistInputIsValid();

@@ -135,6 +135,13 @@
      <day>1</day>
     </date>
    </property>
+   <property name="date">
+    <date>
+     <year>2000</year>
+     <month>1</month>
+     <day>1</day>
+    </date>
+   </property>
   </widget>
   <widget class="QLabel" name="nationality_label">
    <property name="geometry">

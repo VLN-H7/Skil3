@@ -2,6 +2,10 @@
 #define ADDCOMPUTERDIALOG_H
 
 #include <QDialog>
+#include "../services/computerservice.h"
+#include "../models/computer.h"
+#include "../utils.h"
+#include "computerscientists.h"
 
 namespace Ui {
 class addComputerDialog;
@@ -16,10 +20,16 @@ public:
     ~addComputerDialog();
 
 private slots:
-    void on_btnCancel_clicked();
+    void on_pushButton_CancelAdd_clicked();
+    void on_pushButton_AddTheComputer_clicked();
+    void on_radioButtonNotBuilt_toggled(bool checked);
+    bool computerInputIsValid();
+    void clearAddComputerErrors();
 
 private:
     Ui::addComputerDialog *ui;
+    ComputerService *computerService;
+
 };
 
 #endif // ADDCOMPUTERDIALOG_H
