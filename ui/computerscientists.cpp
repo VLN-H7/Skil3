@@ -37,24 +37,28 @@ void ComputerScientists::refreshComputers(){
 void ComputerScientists::loadScientistTable(vector<Scientist> list){
     tableEditActive = false;
 
+
+    auto currentOrder = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
+    auto currentSortColumn = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
+
     ui->tableScientists->clearContents();
     ui->tableScientists->setRowCount(list.size());
     for(size_t i = 0; i < list.size(); i++){
         int col = 0;
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getFirstName(), ScientistFields::FIRST_NAME));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getFirstName(), i));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getLastName(), ScientistFields::LAST_NAME));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getLastName(), i));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(QString() + list[i].getGender(), ScientistFields::GENDER));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(QString() + list[i].getGender(), i));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getBirthDate().toString("dd.MM.yyyy"), ScientistFields::BIRTH_DATE));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getBirthDate().toString("dd.MM.yyyy"), i));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getDeathDate().toString("dd.MM.yyyy"), ScientistFields::DEATH_DATE));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getDeathDate().toString("dd.MM.yyyy"), i));
 
-        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getNationality(), ScientistFields::NATIONALITY));
+        ui->tableScientists->setItem(i, col++, new QTableWidgetItem(list[i].getNationality(), i));
     }
     ui->tableScientists->setSortingEnabled(true);
-    ui->tableScientists->sortByColumn(0, Qt::AscendingOrder);
+    ui->tableScientists->sortByColumn(currentSortColumn, currentOrder);
 
     scientistList = list;
 }
@@ -62,20 +66,24 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list){
 void ComputerScientists::loadComputerTable(vector<Computer> list){
     tableEditActive = false;
 
+    auto currentOrder = ui->tableComputers->horizontalHeader()->sortIndicatorOrder();
+    auto currentSortColumn = ui->tableComputers->horizontalHeader()->sortIndicatorOrder();
+
     ui->tableComputers->clearContents();
+    ui->tableComputers->setSortingEnabled(false);
     ui->tableComputers->setRowCount(list.size());
     for(size_t i = 0; i < list.size(); i++){
         int col = 0;
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getName(), ComputerFields::NAME));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getName(), i));
 
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getType(), ComputerFields::TYPE));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getType(), i));
 
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(QString::number(list[i].getBuildYear()), ComputerFields::BUILD_YEAR));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(QString::number(list[i].getBuildYear()), i));
 
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getBuilt() ? "YES" : "NO", ComputerFields::BUILT));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getBuilt() ? "YES" : "NO", i));
     }
     ui->tableComputers->setSortingEnabled(true);
-    ui->tableComputers->sortByColumn(0, Qt::AscendingOrder);
+    ui->tableComputers->sortByColumn(currentSortColumn, currentOrder);
 
     computerList = list;
 }
@@ -105,7 +113,8 @@ void ComputerScientists::on_btnRemoveScientist_clicked()
 {
     auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
     for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-        scientistService->remove(scientistList[selectedIndexes.at(i).row()]);
+        auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
+        scientistService->remove(scientistList[item->type()]);
     }
 
     refreshScientists(); //TODO: what if the remove came from a search?
@@ -116,7 +125,8 @@ void ComputerScientists::on_btnRemoveComputer_clicked()
 {
     auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
     for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-        computerService->remove(computerList[selectedIndexes.at(i).row()]);
+        auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
+        computerService->remove(computerList[item->type()]);
     }
 
     refreshComputers(); //TODO: what if the remove came from a search?
@@ -125,10 +135,10 @@ void ComputerScientists::on_btnRemoveComputer_clicked()
 
 void ComputerScientists::on_tableScientists_itemChanged(QTableWidgetItem *item)
 {
-    if(!tableEditActive || static_cast<size_t>(item->row()) >= scientistList.size())
+    if(!tableEditActive || static_cast<size_t>(item->type()) >= scientistList.size())
         return;
-    Scientist n = scientistList[item->row()];
-    switch(static_cast<ScientistFields::Field>(item->type())){
+    Scientist n = scientistList[item->type()];
+    switch(static_cast<ScientistFields::Field>(item->column() + 1)){
         case ScientistFields::FIRST_NAME:
             n.setFirstName(item->text());
             break;
@@ -150,7 +160,7 @@ void ComputerScientists::on_tableScientists_itemChanged(QTableWidgetItem *item)
         default:
             break;
     }
-    scientistService->update(scientistList[item->row()], n);
+    scientistService->update(scientistList[item->type()], n);
 
     refreshScientists();
 }
@@ -162,10 +172,10 @@ void ComputerScientists::on_tableScientists_cellDoubleClicked(int row, int colum
 
 void ComputerScientists::on_tableComputers_itemChanged(QTableWidgetItem *item)
 {
-    if(!tableEditActive || static_cast<size_t>(item->row()) >= computerList.size())
+    if(!tableEditActive || static_cast<size_t>(item->type()) >= computerList.size())
         return;
-    Computer n = computerList[item->row()];
-    switch(static_cast<ComputerFields::Field>(item->type())){
+    Computer n = computerList[item->type()];
+    switch(static_cast<ComputerFields::Field>(item->column() + 1)){
         case ComputerFields::NAME:
             n.setName(item->text());
             break;
@@ -181,7 +191,7 @@ void ComputerScientists::on_tableComputers_itemChanged(QTableWidgetItem *item)
         default:
             break;
     }
-    computerService->update(computerList[item->row()], n);
+    computerService->update(computerList[item->type()], n);
 
     refreshComputers();
 }
