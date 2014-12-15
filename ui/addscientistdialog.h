@@ -5,7 +5,6 @@
 #include "../services/scientistservice.h"
 #include "../models/scientist.h"
 #include "../utils.h"
-#include "addscientistdialog.h"
 #include "computerscientists.h"
 
 namespace Ui {

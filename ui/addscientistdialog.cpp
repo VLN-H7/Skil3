@@ -30,8 +30,8 @@ void AddScientistDialog::on_add_btn_clicked()
         s.setFirstName(firstName);
         QString lastName = ui->last_name_input->text();
         s.setLastName(lastName);
-        //char gender = ui->gender_input->text();
-        //s.setGender(gender);
+        char gender = ui->gender_input->currentText() == "Male" ? 'M':'F';
+        s.setGender(gender);
         QDate birthDate= ui->date_of_birth_input->date();
         s.setBirthDate(birthDate);
         QDate deathDate= ui->date_of_death_input->date();

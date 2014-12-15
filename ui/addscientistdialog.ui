@@ -135,13 +135,6 @@
      <day>1</day>
     </date>
    </property>
-   <property name="date">
-    <date>
-     <year>2000</year>
-     <month>1</month>
-     <day>1</day>
-    </date>
-   </property>
   </widget>
   <widget class="QLabel" name="nationality_label">
    <property name="geometry">
@@ -289,7 +282,7 @@
     <string>Gender</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="gender_input">
    <property name="geometry">
     <rect>
      <x>10</x>
