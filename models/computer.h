@@ -17,12 +17,14 @@ public:
     QString getType();
     int getBuildYear();
     bool getBuilt();
+    QString getImage();
 
     void setID(int ID);
     void setName(QString cName);
     void setType(QString cType);
     void setBuildYear(int year);
     void setBuilt(bool b);
+    void setImage(QString img);
 
     friend bool operator == (const Computer &a, const Computer &b);
 private:
@@ -31,6 +33,7 @@ private:
     QString type;
     int buildyear;
     bool built;
+    QString image;
 };
 
 namespace ComputerFields {

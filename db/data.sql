@@ -1,4 +1,4 @@
-INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Blaise','Pascal','M','1623-06-19','1662-08-19','French');
+INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality, image) VALUES ('Blaise','Pascal','M','1623-06-19','1662-08-19','French','http://history-computer.com/People/images/Blaise_Pascal2.jpg');
 INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Alan','Turing','M','1912-06-23','1954-06-07','English');
 INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Daniel','Brandur','M','1987-07-23','1987-06-22','Icelandic');
 INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Charles','Babbage','M','1791-12-26','1871-10-18','English');

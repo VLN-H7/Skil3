@@ -5,8 +5,6 @@
 #include <QTableWidgetItem>
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
-#include "addscientistdialog.h"
-#include "addcomputerdialog.h"
 
 namespace Ui {
 class ComputerScientists;
@@ -19,6 +17,10 @@ class ComputerScientists : public QMainWindow
 public:
     explicit ComputerScientists(QWidget *parent = 0);
     ~ComputerScientists();
+
+
+    ScientistService *scientistService;
+    ComputerService *computerService;
 
 private slots:
     void on_btnScientistSearch_clicked();
@@ -42,8 +44,6 @@ private slots:
 
 private:
     Ui::ComputerScientists *ui;
-    ScientistService *scientistService;
-    ComputerService *computerService;
 
     vector<Scientist> scientistList; // The current list backing the contents of tableScientists
     vector<Computer> computerList; // The current list backing the contents of tableComputers

@@ -1,8 +1,9 @@
 #include "AddComputerDialog.h"
 #include "ui_AddComputerDialog.h"
 
-AddComputerDialog::AddComputerDialog(QWidget *parent) :
+AddComputerDialog::AddComputerDialog(ComputerScientists *mWindow, QWidget *parent) :
     QDialog(parent),
+    mainWindow(mWindow),
     ui(new Ui::AddComputerDialog)
 {
     ui->setupUi(this);
@@ -47,7 +48,7 @@ void AddComputerDialog::on_pushButton_AddTheComputer_clicked()
         }
 
 
-        computerService->add(c);
+        mainWindow->computerService->add(c);
 
         close();
     }

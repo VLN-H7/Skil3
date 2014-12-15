@@ -18,6 +18,7 @@ public:
     Date getBirthDate();
     Date getDeathDate();
     QString getNationality();
+    QString getImage();
 
     void setID(int ID);
     void setFirstName(QString fName);
@@ -26,6 +27,7 @@ public:
     void setBirthDate(Date bDate);
     void setDeathDate(Date dDate);
     void setNationality(QString nation);
+    void setImage(QString img);
 
     friend bool operator ==(const Scientist &a, const Scientist &b);
 
@@ -37,6 +39,7 @@ private:
     Date birthdate;
     Date deathdate;
     QString nationality;
+    QString image;
 };
 
 namespace ScientistFields {

@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS scientists (
         gender varchar(1),
         birth_date date,
         death_date date,
-        nationality varchar(255)
+        nationality varchar(255),
+        image varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS computers (
@@ -13,7 +14,8 @@ CREATE TABLE IF NOT EXISTS computers (
         name varchar(255),
         build_year integer,
         type varchar(255),
-        built boolean
+        built boolean,
+        image varchar(255)
 );
 
 

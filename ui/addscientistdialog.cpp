@@ -1,8 +1,9 @@
 #include "AddScientistDialog.h"
 #include "ui_AddScientistDialog.h"
 
-AddScientistDialog::AddScientistDialog(QWidget *parent) :
+AddScientistDialog::AddScientistDialog(ComputerScientists *mWindow, QWidget *parent) :
     QDialog(parent),
+    mainWindow(mWindow),
     ui(new Ui::AddScientistDialog)
 {
     ui->setupUi(this);
@@ -13,12 +14,12 @@ AddScientistDialog::~AddScientistDialog()
     delete ui;
 }
 
-void AddScientistDialog::on_cancel_btn_clicked()
+void AddScientistDialog::on_btnCancel_clicked()
 {
         close();
 }
 
-void AddScientistDialog::on_add_btn_clicked()
+void AddScientistDialog::on_btnAdd_clicked()
 {
     Scientist s;
 
@@ -26,20 +27,21 @@ void AddScientistDialog::on_add_btn_clicked()
     {
         clearAddScientistErrors();
 
-        QString firstName = ui->first_name_input->text();
+        QString firstName = ui->inputFirstName->text();
         s.setFirstName(firstName);
-        QString lastName = ui->last_name_input->text();
+        QString lastName = ui->inputLastName->text();
         s.setLastName(lastName);
         //char gender = ui->gender_input->text();
         //s.setGender(gender);
-        QDate birthDate= ui->date_of_birth_input->date();
+        QDate birthDate= ui->inputDateOfBirth->date();
         s.setBirthDate(birthDate);
-        QDate deathDate= ui->date_of_death_input->date();
+        QDate deathDate= ui->inputDateOfDeath->date();
         s.setDeathDate(deathDate);
-        QString nationality = ui->nationality_input->text();
+        QString nationality = ui->inputNationality->text();
         s.setNationality(nationality);
+        s.setImage(ui->inputImage->text());
 
-        scientistService->add(s);
+        mainWindow->scientistService->add(s);
 
         close();
     }
@@ -61,26 +63,26 @@ bool AddScientistDialog::scientistInputIsValid()
 
     bool isValid = true;
 
-    if(ui->first_name_input->text().isEmpty())
+    if(ui->inputFirstName->text().isEmpty())
     {
         ui->label_error_first_name->setText("First name cannot be empty");
         isValid = false;
     }
 
-    if(ui->last_name_input->text().isEmpty())
+    if(ui->inputLastName->text().isEmpty())
     {
         ui->label_error_last_name->setText("Last name cannot be empty");
         isValid = false;
     }
 
     //TODO: Cant be born in future, and cant die in the future or before born..
-    if(ui->date_of_birth_input->text().isEmpty())
+    if(ui->inputDateOfBirth->text().isEmpty())
     {
         //ui->label_error_model->setText("Date of birth cannot be empty");
         isValid = false;
     }
 
-    if(ui->nationality_input->text().isEmpty())
+    if(ui->inputNationality->text().isEmpty())
     {
         ui->label_error_nationality->setText("Nationality cannot be empty");
         isValid = false;

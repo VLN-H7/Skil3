@@ -9,6 +9,7 @@ Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query) 
     sci.setBirthDate(query->value("birth_date").toDate());
     sci.setDeathDate(query->value("death_date").toDate());
     sci.setNationality(query->value("nationality").toString());
+    sci.setImage(query->value("image").toString());
     return sci;
 }
 
@@ -20,14 +21,15 @@ ScientistRepository::ScientistRepository() {
 //Adds an instance of scientist to the vector and writes it to a file
 void ScientistRepository::add(Scientist &s) {
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality) "
-                   "VALUES (?,?,?,?,?,?)");
+    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality, image) "
+                   "VALUES (?,?,?,?,?,?,?)");
     query->addBindValue(s.getFirstName());
     query->addBindValue(s.getLastName());
     query->addBindValue(QString() + s.getGender());
     query->addBindValue(s.getBirthDate());
     query->addBindValue(s.getDeathDate());
     query->addBindValue(s.getNationality());
+    query->addBindValue(s.getImage());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -36,7 +38,7 @@ void ScientistRepository::add(Scientist &s) {
 void ScientistRepository::update(Scientist &s, Scientist &replace) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("UPDATE scientists "
-                   "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ? "
+                   "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ?, image = ? "
                    "WHERE id = ?");
     query->addBindValue(replace.getFirstName());
     query->addBindValue(replace.getLastName());
@@ -44,6 +46,7 @@ void ScientistRepository::update(Scientist &s, Scientist &replace) {
     query->addBindValue(replace.getBirthDate());
     query->addBindValue(replace.getDeathDate());
     query->addBindValue(replace.getNationality());
+    query->addBindValue(replace.getImage());
     query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
@@ -120,7 +123,7 @@ vector<Scientist> ScientistRepository::byComputer(Computer &c) {
         throw std::runtime_error(query->lastError().text().toStdString());
 
     while(query->next()) {
-        ret.push_back(getScientist(query)); // TODO: fix same problem as in computerrepository
+        ret.push_back(getScientist(query));
     }
     return ret;
 }

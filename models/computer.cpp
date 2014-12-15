@@ -50,6 +50,10 @@ bool Computer::getBuilt(){
     return built;
 }
 
+QString Computer::getImage(){
+    return image;
+}
+
 void Computer::setID(int ID){
     if(id == -1)
         id = ID;
@@ -71,4 +75,8 @@ void Computer::setBuildYear(int year){
 
 void Computer::setBuilt(bool b){
     built = b;
+}
+
+void Computer::setImage(QString img){
+    image = img;
 }

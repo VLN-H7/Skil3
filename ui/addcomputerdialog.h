@@ -16,7 +16,7 @@ class AddComputerDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddComputerDialog(QWidget *parent = 0);
+    explicit AddComputerDialog(ComputerScientists *mWindow, QWidget *parent = 0);
     ~AddComputerDialog();
 
 private slots:
@@ -28,7 +28,7 @@ private slots:
 
 private:
     Ui::AddComputerDialog *ui;
-    ComputerService *computerService;
+    ComputerScientists *mainWindow;
 
 };
 

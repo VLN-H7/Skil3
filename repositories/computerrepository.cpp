@@ -9,6 +9,7 @@ Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query) {
     comp.setType(query->value("type").toString());
     comp.setBuildYear(query->value("build_year").toInt());
     comp.setBuilt(query->value("built").toBool());
+    comp.setImage(query->value("image").toString());
     return comp;
 }
 
@@ -18,11 +19,12 @@ ComputerRepository::ComputerRepository() {
 
 void ComputerRepository::add(Computer &comp) {
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("INSERT INTO computers (name, type, build_year, built) VALUES (?,?,?,?)");
+    query->prepare("INSERT INTO computers (name, type, build_year, built, image) VALUES (?,?,?,?,?)");
     query->addBindValue(comp.getName());
     query->addBindValue(comp.getType());
     query->addBindValue(comp.getBuildYear());
     query->addBindValue(comp.getBuilt());
+    query->addBindValue(comp.getImage());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -30,11 +32,12 @@ void ComputerRepository::add(Computer &comp) {
 
 void ComputerRepository::update(Computer &comp, Computer &replace) {
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("UPDATE computers SET name = ?, type = ?, build_year = ?, built = ? WHERE id = ?");
+    query->prepare("UPDATE computers SET name = ?, type = ?, build_year = ?, built = ?, image = ? WHERE id = ?");
     query->addBindValue(replace.getName());
     query->addBindValue(replace.getType());
     query->addBindValue(replace.getBuildYear());
     query->addBindValue(replace.getBuilt());
+    query->addBindValue(replace.getImage());
     query->addBindValue(comp.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
@@ -101,7 +104,7 @@ vector<Computer> ComputerRepository::search(ComputerFields::Field field, size_t 
 vector<Computer> ComputerRepository::byScientist(Scientist &s) {
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
-    // Select just the scientists.* to not get id conflicts. TODO: rename the id
+    // Select just the scientists.* to not get id conflicts.
     query->prepare("SELECT computers.* FROM scientist_computer "
                    "INNER JOIN computers ON computers.id = scientist_computer.computer_id "
                    "WHERE scientist_id = ?");

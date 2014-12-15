@@ -2,6 +2,9 @@
 #include "ui_computerscientists.h"
 #include <QDebug>
 
+#include "addscientistdialog.h"
+#include "addcomputerdialog.h"
+
 ComputerScientists::ComputerScientists(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ComputerScientists),
@@ -206,7 +209,7 @@ void ComputerScientists::on_tableComputers_cellDoubleClicked(int row, int column
 }
 void ComputerScientists::on_btnAddScientist_clicked()
 {
-    AddScientistDialog addS;
+    AddScientistDialog addS(this);
     addS.setModal(true);
     addS.exec();
     refreshScientists();
@@ -215,7 +218,7 @@ void ComputerScientists::on_btnAddScientist_clicked()
 
 void ComputerScientists::on_btnAddComputer_clicked()
 {
-    AddComputerDialog addC;
+    AddComputerDialog addC(this);
     addC.setModal(true);
     addC.exec();
     refreshComputers();

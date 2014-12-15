@@ -63,6 +63,10 @@ QString Scientist::getNationality(){
     return nationality;
 }
 
+QString Scientist::getImage(){
+    return image;
+}
+
 void Scientist::setID(int ID){
     if(id==-1) // Only allow setting the id once, it is database-specific and should not be changed
         id = ID;
@@ -90,4 +94,8 @@ void Scientist::setDeathDate(Date dDate){
 
 void Scientist::setNationality(QString nation){
     nationality = nation;
+}
+
+void Scientist::setImage(QString img){
+    image = img;
 }
