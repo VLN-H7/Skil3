@@ -142,7 +142,7 @@
            <item>
             <widget class="QTableWidget" name="tableScientists">
              <property name="editTriggers">
-              <set>QAbstractItemView::DoubleClicked</set>
+              <set>QAbstractItemView::NoEditTriggers</set>
              </property>
              <property name="selectionMode">
               <enum>QAbstractItemView::SingleSelection</enum>
@@ -327,7 +327,7 @@
            <item>
             <widget class="QTableWidget" name="tableComputers">
              <property name="editTriggers">
-              <set>QAbstractItemView::DoubleClicked</set>
+              <set>QAbstractItemView::NoEditTriggers</set>
              </property>
              <property name="selectionBehavior">
               <enum>QAbstractItemView::SelectRows</enum>

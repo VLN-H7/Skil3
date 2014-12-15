@@ -31,13 +31,9 @@ private slots:
 
     void on_btnRemoveComputer_clicked();
 
-    void on_tableScientists_itemChanged(QTableWidgetItem *item);
+    void on_tableScientists_itemDoubleClicked(QTableWidgetItem *item);
 
-    void on_tableScientists_cellDoubleClicked(int row, int column);
-
-    void on_tableComputers_itemChanged(QTableWidgetItem *item);
-
-    void on_tableComputers_cellDoubleClicked(int row, int column);
+    void on_tableComputers_itemDoubleClicked(QTableWidgetItem *item);
     
     void on_btnAddScientist_clicked();
     void on_btnAddComputer_clicked();

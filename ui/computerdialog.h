@@ -8,27 +8,30 @@
 #include "computerscientists.h"
 
 namespace Ui {
-class AddComputerDialog;
+class ComputerDialog;
 }
 
-class AddComputerDialog : public QDialog
+class ComputerDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit AddComputerDialog(ComputerScientists *mWindow, QWidget *parent = 0);
-    ~AddComputerDialog();
+    explicit ComputerDialog(ComputerScientists *mWindow, QWidget *parent = 0);
+    explicit ComputerDialog(ComputerScientists *mWindow, Computer edit, QWidget *parent = 0);
+    ~ComputerDialog();
 
 private slots:
     void on_pushButton_CancelAdd_clicked();
     void on_pushButton_AddTheComputer_clicked();
     void on_radioButtonNotBuilt_toggled(bool checked);
-    bool computerInputIsValid();
-    void clearAddComputerErrors();
 
 private:
-    Ui::AddComputerDialog *ui;
+    Ui::ComputerDialog *ui;
     ComputerScientists *mainWindow;
+    Computer comp;
+    bool editing;
+    bool computerInputIsValid();
+    void clearAddComputerErrors();
 
 };
 

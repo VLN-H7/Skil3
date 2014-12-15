@@ -2,8 +2,8 @@
 #include "ui_computerscientists.h"
 #include <QDebug>
 
-#include "addscientistdialog.h"
-#include "addcomputerdialog.h"
+#include "scientistdialog.h"
+#include "computerdialog.h"
 
 ComputerScientists::ComputerScientists(QWidget *parent) :
     QMainWindow(parent),
@@ -139,77 +139,25 @@ void ComputerScientists::on_btnRemoveComputer_clicked()
     //loadComputerTable(computerList);
 }
 
-void ComputerScientists::on_tableScientists_itemChanged(QTableWidgetItem *item)
+void ComputerScientists::on_tableScientists_itemDoubleClicked(QTableWidgetItem *item)
 {
-    if(!tableEditActive || static_cast<size_t>(item->type()) >= scientistList.size())
-        return;
-    Scientist n = scientistList[item->type()];
-    switch(static_cast<ScientistFields::Field>(item->column() + 1)){
-        case ScientistFields::FIRST_NAME:
-            n.setFirstName(item->text());
-            break;
-        case ScientistFields::LAST_NAME:
-            n.setLastName(item->text());
-            break;
-        case ScientistFields::GENDER:
-            n.setGender(item->text().toStdString()[0]);
-            break;
-        case ScientistFields::BIRTH_DATE:
-            n.setBirthDate(Date::fromString(item->text()));
-            break;
-        case ScientistFields::DEATH_DATE:
-            n.setDeathDate(Date::fromString(item->text()));
-            break;
-        case ScientistFields::NATIONALITY:
-            n.setNationality(item->text());
-            break;
-        default:
-            break;
-    }
-    scientistService->update(scientistList[item->type()], n);
-
+    ScientistDialog addS(this, scientistList[item->type()]);
+    addS.setModal(true);
+    addS.exec();
     refreshScientists();
 }
 
-void ComputerScientists::on_tableScientists_cellDoubleClicked(int row, int column)
+void ComputerScientists::on_tableComputers_itemDoubleClicked(QTableWidgetItem *item)
 {
-    tableEditActive = true;
-}
-
-void ComputerScientists::on_tableComputers_itemChanged(QTableWidgetItem *item)
-{
-    if(!tableEditActive || static_cast<size_t>(item->type()) >= computerList.size())
-        return;
-    Computer n = computerList[item->type()];
-    switch(static_cast<ComputerFields::Field>(item->column() + 1)){
-        case ComputerFields::NAME:
-            n.setName(item->text());
-            break;
-        case ComputerFields::TYPE:
-            n.setType(item->text());
-            break;
-        case ComputerFields::BUILD_YEAR:
-            n.setBuildYear(item->text().toInt());
-            break;
-        case ComputerFields::BUILT:
-            n.setBuilt(item->text() == "YES");
-            break;
-        default:
-            break;
-    }
-    computerService->update(computerList[item->type()], n);
-
+    ComputerDialog addC(this, computerList[item->type()]);
+    addC.setModal(true);
+    addC.exec();
     refreshComputers();
 }
 
-void ComputerScientists::on_tableComputers_cellDoubleClicked(int row, int column)
-{
-    tableEditActive = true;
-
-}
 void ComputerScientists::on_btnAddScientist_clicked()
 {
-    AddScientistDialog addS(this);
+    ScientistDialog addS(this);
     addS.setModal(true);
     addS.exec();
     refreshScientists();
@@ -218,8 +166,9 @@ void ComputerScientists::on_btnAddScientist_clicked()
 
 void ComputerScientists::on_btnAddComputer_clicked()
 {
-    AddComputerDialog addC(this);
+    ComputerDialog addC(this);
     addC.setModal(true);
     addC.exec();
     refreshComputers();
 }
+

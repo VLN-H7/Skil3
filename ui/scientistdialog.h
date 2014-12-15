@@ -9,24 +9,27 @@
 #include "../utils.h"
 
 namespace Ui {
-class AddScientistDialog;
+class ScientistDialog;
 }
 
-class AddScientistDialog : public QDialog
+class ScientistDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit AddScientistDialog(ComputerScientists *mWindow, QWidget *parent = 0);
-    ~AddScientistDialog();
+    explicit ScientistDialog(ComputerScientists *mWindow, QWidget *parent = 0);
+    explicit ScientistDialog(ComputerScientists *mWindow, Scientist edit, QWidget *parent = 0);
+    ~ScientistDialog();
 
 private slots:
     void on_btnCancel_clicked();
     void on_btnAdd_clicked();
 
 private:
-    Ui::AddScientistDialog *ui;
+    Ui::ScientistDialog *ui;
     ComputerScientists *mainWindow;
+    Scientist sci;
+    bool editing;
     void clearAddScientistErrors();
     bool scientistInputIsValid();
 };
