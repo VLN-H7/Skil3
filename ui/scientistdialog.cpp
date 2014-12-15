@@ -115,6 +115,10 @@ bool ScientistDialog::scientistInputIsValid()
         isValid = false;
     }
 
+    if(!ui->inputImage->text().isEmpty() && !QUrl(ui->inputImage->text()).isValid()){
+        isValid = false;
+    }
+
     return isValid;
 }
 

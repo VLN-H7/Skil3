@@ -195,15 +195,15 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 {
     auto items = ui->tableScientists->selectedItems();
     ui->tblScientistConnections->clearContents();
+    ui->lblScientistImage->clear();
     if (items.isEmpty()){
-        ui->lblScientistImage->clear();
         return;
     }
     auto item = items.first();
     Scientist s = scientistList[item->type()];
 
-
-    ImageLoader::getInstance()->load(QUrl(s.getImage()), ui->lblScientistImage);
+    if(QUrl(s.getImage()).isValid())
+        ImageLoader::getInstance()->load(QUrl(s.getImage()), ui->lblScientistImage);
 
     auto computers = computerService->byScientist(s);
 

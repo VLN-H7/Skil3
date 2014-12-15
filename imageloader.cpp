@@ -38,10 +38,8 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
     // Or the target URL if it was a redirect:
     QVariant redirectionTargetUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 
-    // no error received?
     if (reply->error() == QNetworkReply::NoError)
     {
-        // read data from QNetworkReply here
         QByteArray bytes = reply->readAll();
         QPixmap pixmap;
         pixmap.loadFromData(bytes);
@@ -53,13 +51,10 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
             label->setPixmap(pixmap);
         }
     }
-    // Some http error received
     else
     {
-        // handle errors here
+        qDebug() << reply->errorString();
     }
 
-    // We receive ownership of the reply object
-    // and therefore need to handle deletion.
     delete reply;
 }
