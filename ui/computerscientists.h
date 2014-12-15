@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTableWidgetItem>
+#include <QMessageBox>
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
 #include "addscientistdialog.h"
@@ -39,7 +40,6 @@ private slots:
     
     void on_btnAddScientist_clicked();
     void on_btnAddComputer_clicked();
-
 private:
     Ui::ComputerScientists *ui;
     ScientistService *scientistService;
@@ -49,7 +49,7 @@ private:
     vector<Computer> computerList; // The current list backing the contents of tableComputers
 
     bool tableEditActive; // As setItem triggers an itemChanged event, and there is no event for detecting only user changes, we use a flag hack instead
-
+    bool messageBox_are_you_sure();
     void loadScientistTable(vector<Scientist> list);
     void loadComputerTable(vector<Computer> list);
     void refreshScientists();
