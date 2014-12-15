@@ -119,7 +119,7 @@ void ComputerScientists::on_btnComputerSearch_clicked()
 void ComputerScientists::on_btnRemoveScientist_clicked()
 {
     auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
-    if(selectedIndexes.size() == 0 || messageBox_are_you_sure())
+    if(selectedIndexes.size() == 0 || !messageBox_are_you_sure())
         return;
     for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
         auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
@@ -148,7 +148,7 @@ bool ComputerScientists::messageBox_are_you_sure()
 void ComputerScientists::on_btnRemoveComputer_clicked()
 {
     auto selectedIndexes = ui->tableComputers->selectionModel()->selection().indexes();
-    if(selectedIndexes.size() == 0 || messageBox_are_you_sure())
+    if(selectedIndexes.size() == 0 || !messageBox_are_you_sure())
         return;
 
     for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
