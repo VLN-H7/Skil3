@@ -13,6 +13,9 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
     connect(ui->editScientistSearch, SIGNAL(returnPressed()), ui->btnScientistSearch,SIGNAL(clicked()));
     connect(ui->editComputerSearch, SIGNAL(returnPressed()),ui->btnComputerSearch,SIGNAL(clicked()));
 
+    ui->tableScientists->sortByColumn(0, Qt::AscendingOrder);
+    ui->tableComputers->sortByColumn(0, Qt::AscendingOrder);
+
     refreshScientists();
     refreshComputers();
 
@@ -125,7 +128,7 @@ void ComputerScientists::on_btnRemoveComputer_clicked()
 {
     auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
     for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-        auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
+        auto item = ui->tableComputers->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
         computerService->remove(computerList[item->type()]);
     }
 
