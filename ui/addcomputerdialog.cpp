@@ -7,6 +7,7 @@ addComputerDialog::addComputerDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->radioButtonWasBuilt->setChecked(true);
+    ui->computerBuildYear->setMinimumDate(QDate(1000,1,1));
 }
 
 addComputerDialog::~addComputerDialog()
