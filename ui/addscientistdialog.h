@@ -9,16 +9,16 @@
 #include "computerscientists.h"
 
 namespace Ui {
-class addScientistDialog;
+class AddScientistDialog;
 }
 
-class addScientistDialog : public QDialog
+class AddScientistDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit addScientistDialog(QWidget *parent = 0);
-    ~addScientistDialog();
+    explicit AddScientistDialog(QWidget *parent = 0);
+    ~AddScientistDialog();
 
 private slots:
     void on_cancel_btn_clicked();
@@ -27,7 +27,7 @@ private slots:
     bool scientistInputIsValid();
 
 private:
-    Ui::addScientistDialog *ui;
+    Ui::AddScientistDialog *ui;
     ScientistService *scientistService;
 };
 

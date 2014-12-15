@@ -8,16 +8,16 @@
 #include "computerscientists.h"
 
 namespace Ui {
-class addComputerDialog;
+class AddComputerDialog;
 }
 
-class addComputerDialog : public QDialog
+class AddComputerDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit addComputerDialog(QWidget *parent = 0);
-    ~addComputerDialog();
+    explicit AddComputerDialog(QWidget *parent = 0);
+    ~AddComputerDialog();
 
 private slots:
     void on_pushButton_CancelAdd_clicked();
@@ -27,7 +27,7 @@ private slots:
     void clearAddComputerErrors();
 
 private:
-    Ui::addComputerDialog *ui;
+    Ui::AddComputerDialog *ui;
     ComputerService *computerService;
 
 };

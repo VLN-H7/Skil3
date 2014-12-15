@@ -206,7 +206,7 @@ void ComputerScientists::on_tableComputers_cellDoubleClicked(int row, int column
 }
 void ComputerScientists::on_btnAddScientist_clicked()
 {
-    addScientistDialog addS;
+    AddScientistDialog addS;
     addS.setModal(true);
     addS.exec();
     refreshScientists();
@@ -215,7 +215,7 @@ void ComputerScientists::on_btnAddScientist_clicked()
 
 void ComputerScientists::on_btnAddComputer_clicked()
 {
-    addComputerDialog addC;
+    AddComputerDialog addC;
     addC.setModal(true);
     addC.exec();
     refreshComputers();

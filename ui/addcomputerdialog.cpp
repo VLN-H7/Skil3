@@ -1,26 +1,26 @@
-#include "addcomputerdialog.h"
-#include "ui_addcomputerdialog.h"
+#include "AddComputerDialog.h"
+#include "ui_AddComputerDialog.h"
 
-addComputerDialog::addComputerDialog(QWidget *parent) :
+AddComputerDialog::AddComputerDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::addComputerDialog)
+    ui(new Ui::AddComputerDialog)
 {
     ui->setupUi(this);
     ui->radioButtonWasBuilt->setChecked(true);
     ui->computerBuildYear->setMinimumDate(QDate(1000,1,1));
 }
 
-addComputerDialog::~addComputerDialog()
+AddComputerDialog::~AddComputerDialog()
 {
     delete ui;
 }
 
-void addComputerDialog::on_pushButton_CancelAdd_clicked()
+void AddComputerDialog::on_pushButton_CancelAdd_clicked()
 {
     close();
 }
 
-void addComputerDialog::on_pushButton_AddTheComputer_clicked()
+void AddComputerDialog::on_pushButton_AddTheComputer_clicked()
 {
     Computer c;
 
@@ -53,13 +53,13 @@ void addComputerDialog::on_pushButton_AddTheComputer_clicked()
     }
 }
 
-void addComputerDialog::clearAddComputerErrors()
+void AddComputerDialog::clearAddComputerErrors()
 {
     ui->label_NameError->setText("");
     ui->label_TypeError->setText("");
 }
 
-bool addComputerDialog::computerInputIsValid()
+bool AddComputerDialog::computerInputIsValid()
 {
     clearAddComputerErrors();
 
@@ -80,7 +80,7 @@ bool addComputerDialog::computerInputIsValid()
     return isValid;
 }
 
-void addComputerDialog::on_radioButtonNotBuilt_toggled(bool checked)
+void AddComputerDialog::on_radioButtonNotBuilt_toggled(bool checked)
 {
     if(checked)
     {

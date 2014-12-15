@@ -1,24 +1,24 @@
-#include "addscientistdialog.h"
-#include "ui_addscientistdialog.h"
+#include "AddScientistDialog.h"
+#include "ui_AddScientistDialog.h"
 
-addScientistDialog::addScientistDialog(QWidget *parent) :
+AddScientistDialog::AddScientistDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::addScientistDialog)
+    ui(new Ui::AddScientistDialog)
 {
     ui->setupUi(this);
 }
 
-addScientistDialog::~addScientistDialog()
+AddScientistDialog::~AddScientistDialog()
 {
     delete ui;
 }
 
-void addScientistDialog::on_cancel_btn_clicked()
+void AddScientistDialog::on_cancel_btn_clicked()
 {
         close();
 }
 
-void addScientistDialog::on_add_btn_clicked()
+void AddScientistDialog::on_add_btn_clicked()
 {
     Scientist s;
 
@@ -46,7 +46,7 @@ void addScientistDialog::on_add_btn_clicked()
 }
 
 
-void addScientistDialog::clearAddScientistErrors()
+void AddScientistDialog::clearAddScientistErrors()
 {
     ui->label_error_first_name->setText("");
     ui->label_error_last_name->setText("");
@@ -55,7 +55,7 @@ void addScientistDialog::clearAddScientistErrors()
     ui->label_error_nationality->setText("");
 }
 
-bool addScientistDialog::scientistInputIsValid()
+bool AddScientistDialog::scientistInputIsValid()
 {
     clearAddScientistErrors();
 
