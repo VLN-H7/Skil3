@@ -22,7 +22,7 @@ protected:
 public:
     static ImageLoader* getInstance();
     void load(QUrl url, QLabel* label);
-
+    void cancel(QLabel *label);
 private slots:
     void loadFinished(QNetworkReply *reply);
 

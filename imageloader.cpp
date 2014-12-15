@@ -21,6 +21,15 @@ ImageLoader::~ImageLoader(){
     delete networkMgr;
 }
 
+void ImageLoader::cancel(QLabel* label){
+    foreach(QUrl url, dict.keys()){
+        if(dict[url] == label){
+            dict.remove(url);
+            break;
+        };
+    }
+}
+
 void ImageLoader::load(QUrl url, QLabel* label){
     if(!url.isValid())
         return;

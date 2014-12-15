@@ -28,6 +28,7 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit, QW
 
 ScientistDialog::~ScientistDialog()
 {
+    ImageLoader::getInstance()->cancel(ui->lblScientistImage);
     delete ui;
 }
 
