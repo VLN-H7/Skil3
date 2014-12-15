@@ -146,6 +146,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>inputComputerName</tabstop>
+  <tabstop>inputComputerType</tabstop>
+  <tabstop>radioButtonWasBuilt</tabstop>
+  <tabstop>radioButtonNotBuilt</tabstop>
+  <tabstop>computerBuildYear</tabstop>
+  <tabstop>pushButton_AddTheComputer</tabstop>
+  <tabstop>pushButton_CancelAdd</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

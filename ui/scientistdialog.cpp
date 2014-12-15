@@ -47,7 +47,7 @@ void ScientistDialog::on_btnAdd_clicked()
     s.setFirstName(firstName);
     QString lastName = ui->inputLastName->text();
     s.setLastName(lastName);
-    s.setGender(ui->comboGender->currentIndex() == 0 ? 'M' : 'F');
+    s.setGender(ui->comboGender->currentText() == "Male" ? 'M':'F');
     QDate birthDate= ui->inputDateOfBirth->date();
     s.setBirthDate(birthDate);
     QDate deathDate= ui->inputDateOfDeath->date();

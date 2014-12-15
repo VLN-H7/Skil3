@@ -238,6 +238,16 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>inputFirstName</tabstop>
+  <tabstop>inputLastName</tabstop>
+  <tabstop>inputGender</tabstop>
+  <tabstop>inputDateOfBirth</tabstop>
+  <tabstop>inputDateOfDeath</tabstop>
+  <tabstop>inputNationality</tabstop>
+  <tabstop>btnAdd</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
