@@ -303,6 +303,16 @@
    </item>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>first_name_input</tabstop>
+  <tabstop>last_name_input</tabstop>
+  <tabstop>gender_input</tabstop>
+  <tabstop>date_of_birth_input</tabstop>
+  <tabstop>date_of_death_input</tabstop>
+  <tabstop>nationality_input</tabstop>
+  <tabstop>add_btn</tabstop>
+  <tabstop>cancel_btn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

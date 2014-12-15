@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -695,6 +695,30 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>editComputerSearch</tabstop>
+  <tabstop>comboComputerSearch</tabstop>
+  <tabstop>btnComputerSearch</tabstop>
+  <tabstop>btnAddComputer</tabstop>
+  <tabstop>btnRemoveComputer</tabstop>
+  <tabstop>tableComputers</tabstop>
+  <tabstop>tabMenu</tabstop>
+  <tabstop>editScientistSearch</tabstop>
+  <tabstop>comboScientistSearch</tabstop>
+  <tabstop>btnScientistSearch</tabstop>
+  <tabstop>btnAddScientist</tabstop>
+  <tabstop>btnRemoveScientist</tabstop>
+  <tabstop>tableScientists</tabstop>
+  <tabstop>editSearchScientistConnection</tabstop>
+  <tabstop>btnSearchScientistConnection</tabstop>
+  <tabstop>editSearchComputerConnection</tabstop>
+  <tabstop>btnSearchComputerConnection</tabstop>
+  <tabstop>btnAddConnection</tabstop>
+  <tabstop>btnRemoveConnection</tabstop>
+  <tabstop>btnEditConnection</tabstop>
+  <tabstop>tableScientistConnections</tabstop>
+  <tabstop>tableComputerConnections</tabstop>
+ </tabstops>
  <resources>
   <include location="../bin.qrc"/>
  </resources>
