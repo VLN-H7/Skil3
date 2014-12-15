@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QTableWidgetItem>
 #include <QMessageBox>
+#include <QNetworkAccessManager>
+#include "../imageloader.h"
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
 
@@ -38,6 +40,8 @@ private slots:
     
     void on_btnAddScientist_clicked();
     void on_btnAddComputer_clicked();
+    void on_tableScientists_itemSelectionChanged();
+
 private:
     Ui::ComputerScientists *ui;
 

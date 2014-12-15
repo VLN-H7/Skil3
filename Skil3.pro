@@ -3,7 +3,7 @@
 # Project created by QtCreator 2014-11-27T10:37:46
 #
 #-------------------------------------------------
-QT       += core gui sql
+QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,7 +29,8 @@ SOURCES += main.cpp \
     utils.cpp \
     ui/computerscientists.cpp \
     ui/computerdialog.cpp \
-    ui/scientistdialog.cpp
+    ui/scientistdialog.cpp \
+    imageloader.cpp
 
 HEADERS += \
     services/scientistservice.h \
@@ -44,7 +45,8 @@ HEADERS += \
     sort.h \
     ui/computerscientists.h \
     ui/computerdialog.h \
-    ui/scientistdialog.h
+    ui/scientistdialog.h \
+    imageloader.h
 
 FORMS    += \
     ui/computerscientists.ui \

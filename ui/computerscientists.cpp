@@ -192,3 +192,15 @@ void ComputerScientists::on_btnAddComputer_clicked()
     refreshComputers();
 }
 
+
+void ComputerScientists::on_tableScientists_itemSelectionChanged()
+{
+    auto index = ui->tableScientists->selectionModel()->selection().indexes().at(0);
+    auto item = ui->tableScientists->item(index.row(), index.column());
+    Scientist s = scientistList[item->type()];
+
+
+    ImageLoader::getInstance()->load(QUrl(s.getImage()), ui->lblScientistImage);
+
+
+}
