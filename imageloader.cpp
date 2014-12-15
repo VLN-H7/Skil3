@@ -22,6 +22,8 @@ ImageLoader::~ImageLoader(){
 }
 
 void ImageLoader::load(QUrl url, QLabel* label){
+    if(!url.isValid())
+        return;
     if(url.scheme() == "file"){
         loadLabel(label, QPixmap(url.toLocalFile() ));
         return;
