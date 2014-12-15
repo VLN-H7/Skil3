@@ -7,63 +7,18 @@
     <x>0</x>
     <y>0</y>
     <width>747</width>
-    <height>392</height>
+    <height>412</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>400</width>
-    <height>300</height>
+    <height>320</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>ScientistDialog</string>
   </property>
-  <widget class="QPushButton" name="btnAdd">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>320</y>
-     <width>351</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Add</string>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnCancel">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>350</y>
-     <width>351</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="sci_pic">
-   <property name="geometry">
-    <rect>
-     <x>414</x>
-     <y>100</y>
-     <width>321</width>
-     <height>68</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;mynd&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="add_scientist_title">
    <property name="geometry">
     <rect>
@@ -77,26 +32,13 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Add &lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#0000ff;&quot;&gt;Scientist&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="inputImage">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>240</y>
-     <width>341</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>Yo fat mama</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>50</y>
      <width>391</width>
-     <height>331</height>
+     <height>351</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -235,6 +177,71 @@
     <item row="12" column="0" colspan="4">
      <widget class="QLineEdit" name="inputNationality"/>
     </item>
+    <item row="9" column="3">
+     <widget class="QCheckBox" name="checkBox_Alive">
+      <property name="text">
+       <string>Alive?</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>370</y>
+     <width>221</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="btnAdd">
+      <property name="text">
+       <string>Add</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnCancel">
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>417</x>
+     <y>50</y>
+     <width>251</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QLabel" name="sci_pic">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;mynd&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLineEdit" name="inputImage">
+      <property name="placeholderText">
+       <string>Yo fat mama</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
@@ -246,8 +253,6 @@
   <tabstop>inputDateOfDeath</tabstop>
   <tabstop>inputNationality</tabstop>
   <tabstop>inputImage</tabstop>
-  <tabstop>btnAdd</tabstop>
-  <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources/>
  <connections/>

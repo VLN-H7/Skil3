@@ -50,8 +50,19 @@ void ScientistDialog::on_btnAdd_clicked()
     s.setGender(ui->comboGender->currentText() == "Male" ? 'M':'F');
     QDate birthDate= ui->inputDateOfBirth->date();
     s.setBirthDate(birthDate);
-    QDate deathDate= ui->inputDateOfDeath->date();
-    s.setDeathDate(deathDate);
+
+    if(ui->checkBox_Alive->isChecked())
+    {
+        Date d;
+        d.setDate(0,1,1);
+        s.setDeathDate(d);
+    }
+    else
+    {
+        QDate deathDate= ui->inputDateOfDeath->date();
+        s.setDeathDate(deathDate);
+    }
+
     QString nationality = ui->inputNationality->text();
     s.setNationality(nationality);
     s.setImage(ui->inputImage->text());
@@ -105,4 +116,17 @@ bool ScientistDialog::scientistInputIsValid()
     }
 
     return isValid;
+}
+
+void ScientistDialog::on_checkBox_Alive_toggled(bool checked)
+{
+    if(checked)
+    {
+        ui->inputDateOfDeath->setEnabled(false);
+
+    }
+    else
+    {
+        ui->inputDateOfDeath->setEnabled(true);
+    }
 }

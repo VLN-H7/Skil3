@@ -25,6 +25,8 @@ private slots:
     void on_btnCancel_clicked();
     void on_btnAdd_clicked();
 
+    void on_checkBox_Alive_toggled(bool checked);
+
 private:
     Ui::ScientistDialog *ui;
     ComputerScientists *mainWindow;
