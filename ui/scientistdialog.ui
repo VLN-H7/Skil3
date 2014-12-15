@@ -23,7 +23,7 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>350</y>
+     <y>320</y>
      <width>351</width>
      <height>32</height>
     </rect>
@@ -39,7 +39,7 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>320</y>
+     <y>350</y>
      <width>351</width>
      <height>32</height>
     </rect>
@@ -90,7 +90,7 @@
     <string>Yo fat mama</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -241,10 +241,11 @@
  <tabstops>
   <tabstop>inputFirstName</tabstop>
   <tabstop>inputLastName</tabstop>
-  <tabstop>inputGender</tabstop>
+  <tabstop>comboGender</tabstop>
   <tabstop>inputDateOfBirth</tabstop>
   <tabstop>inputDateOfDeath</tabstop>
   <tabstop>inputNationality</tabstop>
+  <tabstop>inputImage</tabstop>
   <tabstop>btnAdd</tabstop>
   <tabstop>btnCancel</tabstop>
  </tabstops>
