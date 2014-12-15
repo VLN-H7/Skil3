@@ -27,6 +27,8 @@ private slots:
 
     void on_checkBox_Alive_toggled(bool checked);
 
+    void on_inputImage_editingFinished();
+
 private:
     Ui::ScientistDialog *ui;
     ComputerScientists *mainWindow;

@@ -134,3 +134,10 @@ void ScientistDialog::on_checkBox_Alive_toggled(bool checked)
         ui->inputDateOfDeath->setEnabled(true);
     }
 }
+
+void ScientistDialog::on_inputImage_editingFinished()
+{
+    QUrl url(ui->inputImage->text());
+    if(url.isValid())
+        ImageLoader::getInstance()->load(url,ui->lblScientistImage);
+}
