@@ -7,6 +7,8 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow, QWidget *parent) :
     ui(new Ui::ScientistDialog)
 {
     ui->setupUi(this);
+    ui->inputDateOfBirth->setMinimumDate(QDate(100,1,1));
+    ui->inputDateOfDeath->setMinimumDate(QDate(100,1,1));
     editing = false;
 }
 
@@ -20,7 +22,7 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit, QW
     ui->inputDateOfBirth->setDate(sci.getBirthDate());
     ui->inputDateOfDeath->setDate(sci.getDeathDate());
     ui->inputNationality->setText(sci.getNationality());
-    ui->inputImage->setText(sci.getImage());
+    ui->inputImage->setText(sci.getImage().toString());
     editing = true;
 }
 
@@ -65,7 +67,7 @@ void ScientistDialog::on_btnAdd_clicked()
 
     QString nationality = ui->inputNationality->text();
     s.setNationality(nationality);
-    s.setImage(ui->inputImage->text());
+    s.setImage(QUrl::fromUserInput(ui->inputImage->text()));
     if(editing)
         mainWindow->scientistService->update(sci,s);
     else
@@ -115,7 +117,7 @@ bool ScientistDialog::scientistInputIsValid()
         isValid = false;
     }
 
-    if(!ui->inputImage->text().isEmpty() && !QUrl(ui->inputImage->text()).isValid()){
+    if(!ui->inputImage->text().isEmpty() && !QUrl::fromUserInput(ui->inputImage->text()).isValid()){
         isValid = false;
     }
 
@@ -137,7 +139,7 @@ void ScientistDialog::on_checkBox_Alive_toggled(bool checked)
 
 void ScientistDialog::on_inputImage_editingFinished()
 {
-    QUrl url(ui->inputImage->text());
+    QUrl url = QUrl::fromImage(ui->inputImage->text());
     if(url.isValid())
         ImageLoader::getInstance()->load(url,ui->lblScientistImage);
 }

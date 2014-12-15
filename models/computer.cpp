@@ -50,7 +50,7 @@ bool Computer::getBuilt(){
     return built;
 }
 
-QString Computer::getImage(){
+QUrl Computer::getImage(){
     return image;
 }
 
@@ -77,6 +77,6 @@ void Computer::setBuilt(bool b){
     built = b;
 }
 
-void Computer::setImage(QString img){
+void Computer::setImage(QUrl img){
     image = img;
 }

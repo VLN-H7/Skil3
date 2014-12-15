@@ -2,6 +2,7 @@
 #define SCIENTIST_H
 
 #include <QString>
+#include <QUrl>
 #include "../date.h"
 #include "../sort.h"
 
@@ -18,7 +19,7 @@ public:
     Date getBirthDate();
     Date getDeathDate();
     QString getNationality();
-    QString getImage();
+    QUrl getImage();
 
     void setID(int ID);
     void setFirstName(QString fName);
@@ -27,7 +28,7 @@ public:
     void setBirthDate(Date bDate);
     void setDeathDate(Date dDate);
     void setNationality(QString nation);
-    void setImage(QString img);
+    void setImage(QUrl img);
 
     friend bool operator ==(const Scientist &a, const Scientist &b);
 
@@ -39,7 +40,7 @@ private:
     Date birthdate;
     Date deathdate;
     QString nationality;
-    QString image;
+    QUrl image;
 };
 
 namespace ScientistFields {

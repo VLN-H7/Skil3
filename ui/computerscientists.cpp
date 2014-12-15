@@ -203,7 +203,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
     Scientist s = scientistList[item->type()];
 
     if(QUrl(s.getImage()).isValid())
-        ImageLoader::getInstance()->load(QUrl(s.getImage()), ui->lblScientistImage);
+        ImageLoader::getInstance()->load(s.getImage(), ui->lblScientistImage);
 
     auto computers = computerService->byScientist(s);
 

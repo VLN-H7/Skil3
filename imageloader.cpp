@@ -22,6 +22,10 @@ ImageLoader::~ImageLoader(){
 }
 
 void ImageLoader::load(QUrl url, QLabel* label){
+    if(url.scheme() == "file"){
+        loadLabel(label, QPixmap(url.fileName() ));
+        return;
+    }
     dict.insert(url, label);
     QNetworkRequest request(url);
     networkMgr->get(request);
@@ -43,13 +47,7 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
         QByteArray bytes = reply->readAll();
         QPixmap pixmap;
         pixmap.loadFromData(bytes);
-        int imageLabelWidth = label->width();
-        if(pixmap.width() > imageLabelWidth){
-            QPixmap scaledPixMap = pixmap.scaledToWidth(imageLabelWidth);
-            label->setPixmap(scaledPixMap);
-        } else {
-            label->setPixmap(pixmap);
-        }
+        loadLabel(label, pixmap);
     }
     else
     {
@@ -57,4 +55,14 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
     }
 
     delete reply;
+}
+
+void ImageLoader::loadLabel(QLabel* label, QPixmap pixmap){
+    int imageLabelWidth = label->width();
+    if(pixmap.width() > imageLabelWidth){
+        QPixmap scaledPixMap = pixmap.scaledToWidth(imageLabelWidth);
+        label->setPixmap(scaledPixMap);
+    } else {
+        label->setPixmap(pixmap);
+    }
 }

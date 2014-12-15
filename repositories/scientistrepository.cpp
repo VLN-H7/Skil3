@@ -9,7 +9,7 @@ Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query) 
     sci.setBirthDate(query->value("birth_date").toDate());
     sci.setDeathDate(query->value("death_date").toDate());
     sci.setNationality(query->value("nationality").toString());
-    sci.setImage(query->value("image").toString());
+    sci.setImage(query->value("image").toUrl());
     return sci;
 }
 
@@ -29,7 +29,7 @@ void ScientistRepository::add(Scientist &s) {
     query->addBindValue(s.getBirthDate());
     query->addBindValue(s.getDeathDate());
     query->addBindValue(s.getNationality());
-    query->addBindValue(s.getImage());
+    query->addBindValue(s.getImage().toString());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -46,7 +46,7 @@ void ScientistRepository::update(Scientist &s, Scientist &replace) {
     query->addBindValue(replace.getBirthDate());
     query->addBindValue(replace.getDeathDate());
     query->addBindValue(replace.getNationality());
-    query->addBindValue(replace.getImage());
+    query->addBindValue(replace.getImage().toString());
     query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());

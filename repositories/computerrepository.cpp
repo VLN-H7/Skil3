@@ -9,7 +9,7 @@ Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query) {
     comp.setType(query->value("type").toString());
     comp.setBuildYear(query->value("build_year").toInt());
     comp.setBuilt(query->value("built").toBool());
-    comp.setImage(query->value("image").toString());
+    comp.setImage(query->value("image").toUrl());
     return comp;
 }
 
@@ -24,7 +24,7 @@ void ComputerRepository::add(Computer &comp) {
     query->addBindValue(comp.getType());
     query->addBindValue(comp.getBuildYear());
     query->addBindValue(comp.getBuilt());
-    query->addBindValue(comp.getImage());
+    query->addBindValue(comp.getImage().toString());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -37,7 +37,7 @@ void ComputerRepository::update(Computer &comp, Computer &replace) {
     query->addBindValue(replace.getType());
     query->addBindValue(replace.getBuildYear());
     query->addBindValue(replace.getBuilt());
-    query->addBindValue(replace.getImage());
+    query->addBindValue(replace.getImage().toString());
     query->addBindValue(comp.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());

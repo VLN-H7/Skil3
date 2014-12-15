@@ -63,7 +63,7 @@ QString Scientist::getNationality(){
     return nationality;
 }
 
-QString Scientist::getImage(){
+QUrl Scientist::getImage(){
     return image;
 }
 
@@ -96,6 +96,6 @@ void Scientist::setNationality(QString nation){
     nationality = nation;
 }
 
-void Scientist::setImage(QString img){
+void Scientist::setImage(QUrl img){
     image = img;
 }

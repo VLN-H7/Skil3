@@ -30,6 +30,7 @@ private:
     QNetworkAccessManager* networkMgr;
     QHash<QUrl,QLabel*> dict;
 
+    void loadLabel(QLabel *label, QPixmap pixmap);
 };
 
 #endif // IMAGELOADER_H

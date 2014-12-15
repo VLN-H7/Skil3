@@ -3,6 +3,7 @@
 
 #include <string>
 #include <QString>
+#include <QUrl>
 
 #include "../sort.h"
 
@@ -17,14 +18,14 @@ public:
     QString getType();
     int getBuildYear();
     bool getBuilt();
-    QString getImage();
+    QUrl getImage();
 
     void setID(int ID);
     void setName(QString cName);
     void setType(QString cType);
     void setBuildYear(int year);
     void setBuilt(bool b);
-    void setImage(QString img);
+    void setImage(QUrl img);
 
     friend bool operator == (const Computer &a, const Computer &b);
 private:
