@@ -48,7 +48,7 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list){
     auto currentSortColumn = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
 
     ui->tableScientists->clearContents();
-    ui->tableComputers->setSortingEnabled(false);
+    ui->tableScientists->setSortingEnabled(false);
     ui->tableScientists->setRowCount(list.size());
     for(size_t i = 0; i < list.size(); i++){
         int col = 0;
@@ -201,6 +201,14 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
 
     ImageLoader::getInstance()->load(QUrl(s.getImage()), ui->lblScientistImage);
+
+    auto computers = computerService->byScientist(s);
+
+    ui->tblScientistConnections->clearContents();
+    ui->tblScientistConnections->setRowCount(computers.size());
+
+    for(int i = 0; i < computers.size(); i++)
+        ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName()) );
 
 
 }
