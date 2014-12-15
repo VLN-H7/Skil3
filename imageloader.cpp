@@ -23,7 +23,7 @@ ImageLoader::~ImageLoader(){
 
 void ImageLoader::load(QUrl url, QLabel* label){
     if(url.scheme() == "file"){
-        loadLabel(label, QPixmap(url.fileName() ));
+        loadLabel(label, QPixmap(url.toLocalFile() ));
         return;
     }
     dict.insert(url, label);
