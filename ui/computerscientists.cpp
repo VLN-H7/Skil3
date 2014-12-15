@@ -126,7 +126,7 @@ void ComputerScientists::on_btnRemoveScientist_clicked()
 
 void ComputerScientists::on_btnRemoveComputer_clicked()
 {
-    auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
+    auto selectedIndexes = ui->tableComputers->selectionModel()->selection().indexes();
     for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
         auto item = ui->tableComputers->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
         computerService->remove(computerList[item->type()]);
