@@ -139,7 +139,7 @@ void ScientistDialog::on_checkBox_Alive_toggled(bool checked)
 
 void ScientistDialog::on_inputImage_editingFinished()
 {
-    QUrl url = QUrl::fromImage(ui->inputImage->text());
+    QUrl url = QUrl::fromUserInput(ui->inputImage->text());
     if(url.isValid())
         ImageLoader::getInstance()->load(url,ui->lblScientistImage);
 }

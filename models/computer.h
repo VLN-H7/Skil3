@@ -34,7 +34,7 @@ private:
     QString type;
     int buildyear;
     bool built;
-    QString image;
+    QUrl image;
 };
 
 namespace ComputerFields {
