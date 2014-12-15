@@ -48,6 +48,7 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list){
     auto currentSortColumn = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
 
     ui->tableScientists->clearContents();
+    ui->tableComputers->setSortingEnabled(false);
     ui->tableScientists->setRowCount(list.size());
     for(size_t i = 0; i < list.size(); i++){
         int col = 0;
@@ -117,15 +118,13 @@ void ComputerScientists::on_btnComputerSearch_clicked()
 
 void ComputerScientists::on_btnRemoveScientist_clicked()
 {
-    if(messageBox_are_you_sure()){
-        auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
-        for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-            auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
-            scientistService->remove(scientistList[item->type()]);
-        }
-    }
-    else
+    auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
+    if(selectedIndexes.size() == 0 || messageBox_are_you_sure())
         return;
+    for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
+        auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
+        scientistService->remove(scientistList[item->type()]);
+    }
 
     refreshScientists(); //TODO: what if the remove came from a search?
     //loadScientistTable(scientistList);
@@ -139,7 +138,7 @@ bool ComputerScientists::messageBox_are_you_sure()
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::Yes);
     int ret = msgBox.exec();
-    if(ret == 0x00010000) //0x00010000 value of "No"
+    if(ret == QMessageBox::No)
         return false;
     else
         return true;
@@ -148,12 +147,13 @@ bool ComputerScientists::messageBox_are_you_sure()
 
 void ComputerScientists::on_btnRemoveComputer_clicked()
 {
-    if(messageBox_are_you_sure()){
-        auto selectedIndexes = ui->tableComputers->selectionModel()->selection().indexes();
-        for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-            auto item = ui->tableComputers->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
-            computerService->remove(computerList[item->type()]);
-        }
+    auto selectedIndexes = ui->tableComputers->selectionModel()->selection().indexes();
+    if(selectedIndexes.size() == 0 || messageBox_are_you_sure())
+        return;
+
+    for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
+        auto item = ui->tableComputers->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
+        computerService->remove(computerList[item->type()]);
     }
 
     refreshComputers(); //TODO: what if the remove came from a search?
