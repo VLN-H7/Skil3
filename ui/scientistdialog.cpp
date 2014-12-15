@@ -143,3 +143,12 @@ void ScientistDialog::on_inputImage_editingFinished()
     if(url.isValid())
         ImageLoader::getInstance()->load(url,ui->lblScientistImage);
 }
+
+void ScientistDialog::on_btnImageBrowse_clicked()
+{
+    QUrl file = QFileDialog::getOpenFileUrl(this,"Open Image", QDir::homePath(),"Images (*.png *.xpm *.jpg)");
+
+    if (!file.isEmpty() && file.isValid()) {
+        ui->inputImage->setText(file.toDisplayString());
+    }
+}

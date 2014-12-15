@@ -2,6 +2,7 @@
 #define ADDSCIENTISTDIALOG_H
 
 #include <QDialog>
+#include <QFileDialog>
 
 #include "computerscientists.h"
 #include "../services/scientistservice.h"
@@ -28,6 +29,8 @@ private slots:
     void on_checkBox_Alive_toggled(bool checked);
 
     void on_inputImage_editingFinished();
+
+    void on_btnImageBrowse_clicked();
 
 private:
     Ui::ScientistDialog *ui;
