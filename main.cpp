@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
     splash->setPixmap(QPixmap(":/pictures/pictures/welcomescreen.jpg"));
     splash->show();
     ComputerScientists window;
-    QTimer::singleShot(5000,splash,SLOT(close()));
-    QTimer::singleShot(5000,&window,SLOT(show()));
+    QTimer::singleShot(1000,splash,SLOT(close()));
+    QTimer::singleShot(1000,&window,SLOT(show()));
 
     return app.exec();
 
