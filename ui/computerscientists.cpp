@@ -195,7 +195,10 @@ void ComputerScientists::on_btnAddComputer_clicked()
 
 void ComputerScientists::on_tableScientists_itemSelectionChanged()
 {
-    auto index = ui->tableScientists->selectionModel()->selection().indexes().at(0);
+    auto indexes = ui->tableScientists->selectionModel()->selection().indexes();
+    if (indexes.size() == 0)
+        return;
+    auto index = indexes.at(0);
     auto item = ui->tableScientists->item(index.row(), index.column());
     Scientist s = scientistList[item->type()];
 
@@ -209,6 +212,9 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
     for(int i = 0; i < computers.size(); i++)
         ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName()) );
+
+
+
 
 
 }
