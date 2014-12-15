@@ -27,4 +27,3 @@ INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (1, 1);
 INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (4, 4);
 INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (4, 5);
 INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (13, 6);
-INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (1, 1);
