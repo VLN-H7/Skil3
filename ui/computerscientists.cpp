@@ -107,12 +107,11 @@ void ComputerScientists::on_btnScientistSearch_clicked()
 
 void ComputerScientists::on_btnComputerSearch_clicked()
 {
-    loadComputerTable(
-                computerService->search(
-                    static_cast<ComputerFields::Field>(ui->comboComputerSearch->currentIndex() + 1),
-                    0,
-                    ui->editComputerSearch->text()
-                ));
+    auto field = static_cast<ComputerFields::Field>(ui->comboComputerSearch->currentIndex() + 1);
+    auto query = ui->editComputerSearch->text();
+    if (field == ComputerFields::BUILT)
+        query = (query == "YES" ? "1" : "0"); // Fix bool queries
+    loadComputerTable(computerService->search(field,0,query));
 }
 
 
