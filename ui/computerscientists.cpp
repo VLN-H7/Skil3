@@ -117,12 +117,11 @@ void ComputerScientists::on_btnComputerSearch_clicked()
 
 void ComputerScientists::on_btnRemoveScientist_clicked()
 {
-    auto selectedIndexes = ui->tableScientists->selectionModel()->selection().indexes();
-    if(selectedIndexes.size() == 0 || !messageBox_are_you_sure())
+    auto items = ui->tableScientists->selectedItems();
+    if(items.isEmpty() || !messageBox_are_you_sure())
         return;
-    for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-        auto item = ui->tableScientists->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
-        scientistService->remove(scientistList[item->type()]);
+    for(int i = 0; i < items.size(); i+=6){ // += 6 to skip duplicate rows
+        scientistService->remove(scientistList[items[i]->type()]);
     }
 
     refreshScientists(); //TODO: what if the remove came from a search?
@@ -146,13 +145,12 @@ bool ComputerScientists::messageBox_are_you_sure()
 
 void ComputerScientists::on_btnRemoveComputer_clicked()
 {
-    auto selectedIndexes = ui->tableComputers->selectionModel()->selection().indexes();
-    if(selectedIndexes.size() == 0 || !messageBox_are_you_sure())
+    auto items = ui->tableComputers->selectedItems();
+    if(items.isEmpty() || !messageBox_are_you_sure())
         return;
 
-    for(int i = 0; i < selectedIndexes.size(); i+=6){ // += 6 to skip duplicate rows
-        auto item = ui->tableComputers->item(selectedIndexes.at(i).row(), selectedIndexes.at(i).column());
-        computerService->remove(computerList[item->type()]);
+    for(int i = 0; i < items.size(); i+=6){ // += 6 to skip duplicate rows
+        computerService->remove(computerList[items[i]->type()]);
     }
 
     refreshComputers(); //TODO: what if the remove came from a search?
@@ -195,11 +193,13 @@ void ComputerScientists::on_btnAddComputer_clicked()
 
 void ComputerScientists::on_tableScientists_itemSelectionChanged()
 {
-    auto indexes = ui->tableScientists->selectionModel()->selection().indexes();
-    if (indexes.size() == 0)
+    auto items = ui->tableScientists->selectedItems();
+    ui->tblScientistConnections->clearContents();
+    if (items.isEmpty()){
+        ui->lblScientistImage->clear();
         return;
-    auto index = indexes.at(0);
-    auto item = ui->tableScientists->item(index.row(), index.column());
+    }
+    auto item = items.first();
     Scientist s = scientistList[item->type()];
 
 
@@ -207,7 +207,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
     auto computers = computerService->byScientist(s);
 
-    ui->tblScientistConnections->clearContents();
+
     ui->tblScientistConnections->setRowCount(computers.size());
 
     for(int i = 0; i < computers.size(); i++)

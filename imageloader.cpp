@@ -42,10 +42,16 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
     if (reply->error() == QNetworkReply::NoError)
     {
         // read data from QNetworkReply here
-        QByteArray bytes = reply->readAll();  // bytes
+        QByteArray bytes = reply->readAll();
         QPixmap pixmap;
         pixmap.loadFromData(bytes);
-        label->setPixmap(pixmap);
+        int imageLabelWidth = label->width();
+        if(pixmap.width() > imageLabelWidth){
+            QPixmap scaledPixMap = pixmap.scaledToWidth(imageLabelWidth);
+            label->setPixmap(scaledPixMap);
+        } else {
+            label->setPixmap(pixmap);
+        }
     }
     // Some http error received
     else
