@@ -9,6 +9,7 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, QWidget *parent) :
     ui->setupUi(this);
     ui->radioButtonWasBuilt->setChecked(true);
     ui->computerBuildYear->setMinimumDate(QDate(1000,1,1));
+    editing = false;
 }
 
 ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit, QWidget *parent) :
@@ -20,6 +21,7 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit, QWidg
     ui->radioButtonWasBuilt->setChecked(comp.getBuilt());
     ui->radioButtonNotBuilt->setChecked(!comp.getBuilt());
     ui->computerBuildYear->setDate(QDate(comp.getBuildYear(), 0, 0));
+    editing = true;
 }
 
 ComputerDialog::~ComputerDialog()
