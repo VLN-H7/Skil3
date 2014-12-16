@@ -36,7 +36,7 @@ private:
     bool editing;
     bool computerInputIsValid();
     void clearAddComputerErrors();
-    QStringList computerTypes;
+    vector<Type> computerTypes;
 
 };
 

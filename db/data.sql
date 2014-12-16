@@ -14,14 +14,17 @@ INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, na
 INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('John','Backus','M','1924-12-03', '2007-03-17','American');
 INSERT INTO scientists(first_name, last_name, gender, birth_date, death_date, nationality) VALUES ('Tony','Hoare','M','1934-01-11', '','British');
 
+INSERT INTO types(type) VALUES ('Mechanical');
+INSERT INTO types(type) VALUES ('Electronic');
+INSERT INTO types(type) VALUES ('Transistor');
 
-INSERT INTO computers(name, build_year, type, built) VALUES ('Pascaline',1642, 'Mechanical',1);
-INSERT INTO computers(name, build_year, type, built) VALUES ('ABC',1942, 'Electronic',1);
-INSERT INTO computers(name, build_year, type, built) VALUES ('Colossus',1943, 'Electronic',1);
-INSERT INTO computers(name, build_year, type, built) VALUES ('Difference Engine',1822, 'Mechanical',1);
-INSERT INTO computers(name, build_year, type, built) VALUES ('Analytical Engine',1837, 'Mechanical',1);
-INSERT INTO computers(name, build_year, type, built) VALUES ('Apple 1',1976, 'Electronic',1);
-INSERT INTO computers(name, build_year, type, built) VALUES ('ENIAC',1946, 'Electornic',1);
+INSERT INTO computers(name, build_year, type_id, built) VALUES ('Pascaline',1642, 1,1);
+INSERT INTO computers(name, build_year, type_id, built) VALUES ('ABC',1942, 2,1);
+INSERT INTO computers(name, build_year, type_id, built) VALUES ('Colossus',1943, 2,1);
+INSERT INTO computers(name, build_year, type_id, built) VALUES ('Difference Engine',1822, 1,1);
+INSERT INTO computers(name, build_year, type_id, built) VALUES ('Analytical Engine',1837, 1,1);
+INSERT INTO computers(name, build_year, type_id, built) VALUES ('Apple 1',1976, 2,1);
+INSERT INTO computers(name, build_year, type_id, built) VALUES ('ENIAC',1946, 2,1);
 
 INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (1, 1);
 INSERT INTO scientist_computer(scientist_id, computer_id) VALUES (4, 4);

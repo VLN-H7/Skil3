@@ -9,7 +9,9 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow) :
     ui->setupUi(this);
     ui->radioButtonWasBuilt->setChecked(true);
     ui->computerBuildYear->setMinimumDate(QDate(1000,1,1));
-    ui->comboType->addItems(computerTypes);
+    computerTypes = mainWindow->computerService->listTypes();
+    for(size_t i = 0; i < computerTypes.size(); i++)
+        ui->comboType->addItem(computerTypes[i].getType(),QVariant::fromValue(i));
     editing = false;
 }
 
@@ -18,10 +20,12 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
 {
     comp = edit;
     ui->inputComputerName->setText(comp.getName());
-    ui->comboType->addItems(computerTypes);
-    for(int i = 0; i < ui->comboType->count(); i++)
-        if(ui->comboType->currentText() == comp.getType())
+    for(int i = 0; i < ui->comboType->count(); i++){
+        if(computerTypes[ui->comboType->itemData(i).value<size_t>()].getID() == comp.getType().getID()){
             ui->comboType->setCurrentIndex(i);
+            break;
+        }
+    }
     ui->radioButtonWasBuilt->setChecked(comp.getBuilt());
     ui->radioButtonNotBuilt->setChecked(!comp.getBuilt());
     ui->computerBuildYear->setDate(QDate(comp.getBuildYear(), 0, 0));
@@ -51,8 +55,8 @@ void ComputerDialog::on_btnAdd_clicked()
 
     QString name = ui->inputComputerName->text();
     c.setName(name);
-    QString type = ui->comboType->currentText();
-    c.setType(type);
+    //QString type = ui->comboType->currentText();
+    c.setType(computerTypes[ui->comboType->currentData().value<size_t>()]);
 
     if(ui->radioButtonWasBuilt->isChecked())
     {
@@ -94,7 +98,6 @@ bool ComputerDialog::computerInputIsValid()
         ui->label_NameError->setText("<span style='color: red'>Computer name cannot be empty</span>");
         isValid = false;
     }
-
     if(ui->comboType->currentText().isEmpty())
     {
         ui->label_TypeError->setText("<span style='color: red'>Computer type cannot be empty</span>");

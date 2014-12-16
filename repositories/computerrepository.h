@@ -27,6 +27,9 @@ public:
     void link(Computer &c, Scientist &s);
     void unlink(Computer &c, Scientist &s);
     vector<Computer> notByScientist(Scientist &s);
+    vector<Type> listTypes();
+    void addType(Type &t);
+    void deleteType(Type &t);
 private:
     static Computer getComputer(const unique_ptr<QSqlQuery> &query);
 };

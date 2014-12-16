@@ -40,3 +40,15 @@ void ComputerService::link(Computer &c, Scientist &s) {
 void ComputerService::unlink(Computer &c, Scientist &s) {
     computerRepository.unlink(c,s);
 }
+
+vector<Type> ComputerService::listTypes(){
+    return computerRepository.listTypes();
+}
+
+void ComputerService::addType(Type &t){
+    computerRepository.addType(t);
+}
+
+void ComputerService::deleteType(Type &t){
+    computerRepository.deleteType(t);
+}

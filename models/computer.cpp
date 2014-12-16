@@ -6,7 +6,7 @@ Computer::Computer() {
 
 bool operator ==(const Computer &a, const Computer &b) {
     if(a.name != b.name) return false;
-    else if (a.type != b.type) return false;
+    else if (!(a.type == b.type)) return false;
     else if (a.buildyear != b.buildyear) return false;
     else if (a.built != b.built) return false;
 
@@ -38,11 +38,7 @@ QString Computer::getName(){
     return name;
 }
 
-int Computer::getTypeID(){
-    return type_id;
-}
-
-QString Computer::getType(){
+Type Computer::getType(){
     return type;
 }
 
@@ -67,13 +63,7 @@ void Computer::setName(QString cName){
     name = cName;
 }
 
-void Computer::setTypeID(int cID){
-    type_id = cID;
-}
-
-void Computer::setType(QString cType){
-    // TODO: make this uniform, perhaps with a table?
-    // It is not clear what types of computers should be defined, so it is left as a string for now.
+void Computer::setType(Type cType){
     type = cType;
 }
 

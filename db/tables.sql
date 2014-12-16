@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS scientists (
 
 CREATE TABLE IF NOT EXISTS types (
     id integer primary key,
-    name varchar(255)
+    type varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS computers (
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS computers (
         built boolean,
         image varchar(255),
 
-        FOREIGN KEY(type_id) REFERENCES types(id),
+        FOREIGN KEY(type_id) REFERENCES types(id)
 );
 
 

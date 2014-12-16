@@ -5,6 +5,7 @@
 #include <QString>
 #include <QUrl>
 
+#include "type.h"
 #include "../sort.h"
 
 using namespace std;
@@ -15,16 +16,14 @@ public:
 
     int getID();
     QString getName();
-    int getTypeID();
-    QString getType();
+    Type getType();
     int getBuildYear();
     bool getBuilt();
     QUrl getImage();
 
     void setID(int ID);
     void setName(QString cName);
-    void setTypeID(int cID);
-    void setType(QString cType);
+    void setType(Type cType);
     void setBuildYear(int year);
     void setBuilt(bool b);
     void setImage(QUrl img);
@@ -33,8 +32,7 @@ public:
 private:
     int id;
     QString name;
-    int type_id;
-    QString type;
+    Type type;
     int buildyear;
     bool built;
     QUrl image;
