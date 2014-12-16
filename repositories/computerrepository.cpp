@@ -50,15 +50,15 @@ void ComputerRepository::update(Computer &comp, Computer &replace) {
 void ComputerRepository::remove(Computer &comp) {
 
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("DELETE FROM computers WHERE id = ?");
+
+    // clean all relations to other scientists
+    query->prepare("DELETE FROM scientist_computer WHERE computer_id = ?");
     query->addBindValue(comp.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 
     query->clear();
-
-    // Also clean all relations to other computers
-    query->prepare("DELETE FROM scientist_computer WHERE computer_id = ?");
+    query->prepare("DELETE FROM computers WHERE id = ?");
     query->addBindValue(comp.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
@@ -178,7 +178,7 @@ vector<Type> ComputerRepository::listTypes(){
 
 void ComputerRepository::addType(Type &t){
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("INSERT INTO types (name) VALUES (?)");
+    query->prepare("INSERT INTO types (type) VALUES ( ? )");
     query->addBindValue(t.getType());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
@@ -186,6 +186,13 @@ void ComputerRepository::addType(Type &t){
 
 void ComputerRepository::removeType(Type &t){
     auto query = SQLConnection::getInstance()->getQuery();
+    query->prepare("UPDATE computers SET type_id = NULL WHERE type_id = ?");
+    query->addBindValue(t.getID());
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
+
+    query->clear();
+
     query->prepare("DELETE FROM types WHERE id = ?");
     query->addBindValue(t.getID());
     if(!query->exec())

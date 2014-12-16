@@ -57,15 +57,16 @@ void ScientistRepository::remove(Scientist &s) {
     // DELETE FROM ... WHERE
 
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("DELETE FROM scientists WHERE id = ?");
+
+    // Clean all relations to other computers
+    query->prepare("DELETE FROM scientist_computer WHERE scientist_id = ?");
     query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 
     query->clear();
 
-    // Also clean all relations to other computers
-    query->prepare("DELETE FROM scientist_computer WHERE scientist_id = ?");
+    query->prepare("DELETE FROM scientists WHERE id = ?");
     query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
