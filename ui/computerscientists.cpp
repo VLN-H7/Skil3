@@ -204,7 +204,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
     auto item = items.first();
     Scientist s = scientistList[item->type()];
 
-    if(QUrl(s.getImage()).isValid())
+    if(s.getImage().isValid())
         ImageLoader::getInstance()->load(s.getImage(), ui->lblScientistImage);
 
     auto computers = computerService->byScientist(s);
@@ -214,11 +214,29 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
     for(size_t i = 0; i < computers.size(); i++)
         ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName()) );
+}
+
+void ComputerScientists::on_tableComputers_itemSelectionChanged()
+{
+    auto items = ui->tableComputers->selectedItems();
+    ui->tblComputerConnections->clearContents();
+    ui->lblComputerImage->clear();
+    if (items.isEmpty()){
+        return;
+    }
+    auto item = items.first();
+    Computer c = computerList[item->type()];
+
+    if(c.getImage().isValid())
+        ImageLoader::getInstance()->load(c.getImage(), ui->lblComputerImage);
+
+    auto scientists = scientistService->byComputer(c);
 
 
+    ui->tblComputerConnections->setRowCount(scientists.size());
 
-
-
+    for(size_t i = 0; i < scientists.size(); i++)
+        ui->tblComputerConnections->setItem(i,0,new QTableWidgetItem(scientists[i].getFirstName() + " " + scientists[i].getLastName()) );
 }
 
 void ComputerScientists::on_btnScientistConnect_clicked()

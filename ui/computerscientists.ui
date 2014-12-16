@@ -518,7 +518,7 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
-              <widget class="QLabel" name="label_12">
+              <widget class="QLabel" name="lblComputerImage">
                <property name="minimumSize">
                 <size>
                  <width>179</width>
@@ -540,7 +540,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QTableWidget" name="tableWidget_3">
+            <widget class="QTableWidget" name="tblComputerConnections">
              <attribute name="horizontalHeaderStretchLastSection">
               <bool>true</bool>
              </attribute>
