@@ -9,33 +9,14 @@ ComputerConnectDialog::ComputerConnectDialog(ComputerScientists *mWindow, Scient
 {
     ui->setupUi(this);
 
-    connect(ui->tblConnectedComputers, SIGNAL(dropped(int, int, const QMimeData *)), this, SLOT(connectedDropped(int, int, const QMimeData *)));
-    connect(ui->tblConnectedComputers, SIGNAL(changed(const QMimeData *)), this, SLOT(connectedChanged(const QMimeData *)));
+    connect(ui->tblConnectedComputers, SIGNAL(dropped(const DropMimeData *)), this, SLOT(connectedDropped(const DropMimeData *)));
+    connect(ui->tblConnectedComputers, SIGNAL(changed(const DropMimeData *)), this, SLOT(connectedChanged(const DropMimeData *)));
 
 
-    connect(ui->tblUnconnectedComputers, SIGNAL(dropped(int, int, const QMimeData *)), this, SLOT(unConnectedDropped(int, int, const QMimeData *)));
-    connect(ui->tblUnconnectedComputers, SIGNAL(changed(const QMimeData *)), this, SLOT(unConnectedChanged(const QMimeData *)));
+    connect(ui->tblUnconnectedComputers, SIGNAL(dropped(const DropMimeData *)), this, SLOT(unConnectedDropped(const DropMimeData *)));
+    connect(ui->tblUnconnectedComputers, SIGNAL(changed(const DropMimeData *)), this, SLOT(unConnectedChanged(const DropMimeData *)));
+    refreshTables();
 
-    auto computers = mainWindow->computerService->byScientist(scientist);
-
-    ui->tblConnectedComputers->clearContents();
-    ui->tblConnectedComputers->setRowCount(computers.size());
-    ui->tblConnectedComputers->setColumnHidden(0,true);
-    for(int i = 0; i < computers.size(); i++){
-        ui->tblConnectedComputers->setItem(i,0,new QTableWidgetItem(QString::number(computers[i].getID()), computers[i].getID()) );
-        ui->tblConnectedComputers->setItem(i,1,new QTableWidgetItem(computers[i].getName(), computers[i].getID()) );
-    }
-
-    computers = mainWindow->computerService->notByScientist(scientist);
-
-    ui->tblUnconnectedComputers->clearContents();
-    ui->tblUnconnectedComputers->setRowCount(computers.size());
-
-    ui->tblUnconnectedComputers->setColumnHidden(0,true);
-    for(int i = 0; i < computers.size(); i++){
-         ui->tblUnconnectedComputers->setItem(i,0,new QTableWidgetItem(QString::number(computers[i].getID()), computers[i].getID()) );
-        ui->tblUnconnectedComputers->setItem(i,1,new QTableWidgetItem(computers[i].getName(), computers[i].getID()) );
-    }
 }
 
 ComputerConnectDialog::~ComputerConnectDialog()
@@ -43,20 +24,39 @@ ComputerConnectDialog::~ComputerConnectDialog()
     delete ui;
 }
 
-void ComputerConnectDialog::connectedDropped(int row, int column, const QMimeData *data){
-    qDebug() << "Dropped";
-    qDebug() << row << column;
-    qDebug() << ui->tblConnectedComputers->item(row, 0)->text();
+void ComputerConnectDialog::refreshTables(){
+    connectedList = mainWindow->computerService->byScientist(scientist);
+
+    ui->tblConnectedComputers->clearContents();
+    ui->tblConnectedComputers->setRowCount(connectedList.size());
+    for(int i = 0; i < connectedList.size(); i++){
+        ui->tblConnectedComputers->setItem(i,0,new QTableWidgetItem(connectedList[i].getName(), i) );
+    }
+
+    unconnectedList = mainWindow->computerService->notByScientist(scientist);
+
+    ui->tblUnconnectedComputers->clearContents();
+    ui->tblUnconnectedComputers->setRowCount(unconnectedList.size());
+
+    for(int i = 0; i < unconnectedList.size(); i++){
+        ui->tblUnconnectedComputers->setItem(i,0,new QTableWidgetItem(unconnectedList[i].getName(), i) );
+    }
 }
 
-void ComputerConnectDialog::connectedChanged(const QMimeData *data){
-    qDebug() << "Changed";
+void ComputerConnectDialog::connectedDropped(const DropMimeData *data){
+    qDebug() << unconnectedList[data->type].getName();
+    mainWindow->computerService->link(unconnectedList[data->type], scientist);
+    refreshTables();
 }
 
-void ComputerConnectDialog::unConnectedDropped(int row, int column, const QMimeData *data){
-    qDebug() << "UnDropped";
+void ComputerConnectDialog::connectedChanged(const DropMimeData *data){
 }
 
-void ComputerConnectDialog::unConnectedChanged(const QMimeData *data){
-    qDebug() << "UnChanged";
+void ComputerConnectDialog::unConnectedDropped(const DropMimeData *data){
+    qDebug() << connectedList[data->type].getName();
+    mainWindow->computerService->unlink(connectedList[data->type], scientist);
+    refreshTables();
+}
+
+void ComputerConnectDialog::unConnectedChanged(const DropMimeData *data){
 }

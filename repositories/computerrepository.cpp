@@ -122,8 +122,8 @@ vector<Computer> ComputerRepository::notByScientist(Scientist &s) {
     vector<Computer> ret;
     auto query = SQLConnection::getInstance()->getQuery();
     // Select just the scientists.* to not get id conflicts.
-    query->prepare("SELECT computers.* FROM computers "
-                   "WHERE id NOT IN (SELECT id FROM scientist_computer WHERE scientist_id = ? )");
+    query->prepare("SELECT * FROM computers "
+                   "WHERE computers.id NOT IN (SELECT computer_id FROM scientist_computer WHERE scientist_id = ? )");
     query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());

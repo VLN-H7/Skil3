@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMimeData>
 #include "computerscientists.h"
+#include "../widgets/dropmimedata.h"
 
 namespace Ui {
 class ComputerConnectDialog;
@@ -18,14 +19,17 @@ public:
     ~ComputerConnectDialog();
 
 private slots:
-    void connectedDropped(int row, int column, const QMimeData *data);
-    void connectedChanged(const QMimeData *data);
-    void unConnectedDropped(int row, int column, const QMimeData *data);
-    void unConnectedChanged(const QMimeData *data);
+    void connectedDropped(const DropMimeData *);
+    void connectedChanged(const DropMimeData *);
+    void unConnectedDropped(const DropMimeData *);
+    void unConnectedChanged(const DropMimeData *);
 private:
     Ui::ComputerConnectDialog *ui;
     ComputerScientists *mainWindow;
     Scientist scientist;
+    vector<Computer> connectedList;
+    vector<Computer> unconnectedList;
+    void refreshTables();
 };
 
 #endif // COMPUTERCONNECTDIALOG_H

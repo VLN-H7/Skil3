@@ -9,25 +9,21 @@ class DropTableWidget : public QTableWidget {
 	Q_OBJECT
 
  	public:
- 		DropTableWidget(QWidget *parent = 0);
+        DropTableWidget(QWidget *parent = 0);
 
-	public slots:
-		void clear();
+    signals:
+        void changed(const DropMimeData *mimeData = 0);
+        void dropped(const DropMimeData *mimeData = 0);
 
-	signals:
-		void changed(const QMimeData *mimeData = 0);
-        void dropped(int row, int column, const QMimeData *mimeData = 0);
+    public slots:
+        void clear();
 
-	protected:
-		void dragEnterEvent(QDragEnterEvent *event);
-		void dragMoveEvent(QDragMoveEvent *event);
-		void dragLeaveEvent(QDragLeaveEvent *event);
-		void dropEvent(QDropEvent *event);
-
-        bool dropMimeData(int row, int column, const QMimeData *data, Qt::DropAction action);
+    protected:
+            void dragEnterEvent(QDragEnterEvent *event);
+            void dragMoveEvent(QDragMoveEvent *event);
+            void dragLeaveEvent(QDragLeaveEvent *event);
+            void dropEvent(QDropEvent *event);
         QMimeData *mimeData(const QList<QTableWidgetItem *> items) const;
-private:
-		QTableWidget *tablewidget;
 };
 
 #endif

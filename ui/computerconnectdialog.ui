@@ -67,13 +67,8 @@
        <number>0</number>
       </property>
       <property name="columnCount">
-       <number>2</number>
+       <number>1</number>
       </property>
-      <column>
-       <property name="text">
-        <string>ID</string>
-       </property>
-      </column>
       <column>
        <property name="text">
         <string>Name</string>
@@ -98,11 +93,6 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
-      <column>
-       <property name="text">
-        <string>ID</string>
-       </property>
-      </column>
       <column>
        <property name="text">
         <string>Name</string>
