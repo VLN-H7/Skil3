@@ -85,6 +85,7 @@ void ScientistDialog::clearAddScientistErrors()
     //ui->label_error_birth->setText("");
     //ui->label_error_death->setText("");
     ui->label_error_nationality->setText("");
+    ui->label_age_error->setText("");
 }
 
 bool ScientistDialog::scientistInputIsValid()
@@ -106,9 +107,25 @@ bool ScientistDialog::scientistInputIsValid()
     }
 
     //TODO: Cant be born in future, and cant die in the future or before born..
+    if(ui->inputDateOfBirth->date() > ui->inputDateOfDeath->date())
+    {
+        ui->label_age_error->setText("<span style='color: red'>A person cannot die before they are born</span>");
+        isValid = false;
+    }
+    if(ui->inputDateOfDeath->date() > QDate::currentDate())
+    {
+        ui->label_age_error->setText("<span style='color: red'>A person cannot die in the future</span>");
+        isValid = false;
+    }
+    if(ui->inputDateOfBirth->date() > QDate::currentDate())
+    {
+        ui->label_age_error->setText("<span style='color: red'>A person cannot be born in the future</span>");
+        isValid = false;
+    }
+
     if(ui->inputDateOfBirth->text().isEmpty())
     {
-        //ui->label_error_model->setText("<span style='color: red'>Date of birth cannot be empty</span>");
+        ui->label_age_error->setText("<span style='color: red'>Date of birth cannot be empty</span>");
         isValid = false;
     }
 
