@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -60,7 +60,7 @@
        </property>
        <attribute name="icon">
         <iconset resource="../bin.qrc">
-         <normaloff>:/pictures/pictures/computerscientist.png</normaloff>:/pictures/pictures/computerscientist.png</iconset>
+         <normaloff>:/pictures/pictures/computerscientist-copy.png</normaloff>:/pictures/pictures/computerscientist-copy.png</iconset>
        </attribute>
        <attribute name="title">
         <string/>
@@ -324,7 +324,7 @@
       <widget class="QWidget" name="Computers">
        <attribute name="icon">
         <iconset resource="../bin.qrc">
-         <normaloff>:/icons/icons/pc-icon.png</normaloff>:/icons/icons/pc-icon.png</iconset>
+         <normaloff>:/icons/icons/pc-side-icon.png</normaloff>:/icons/icons/pc-side-icon.png</iconset>
        </attribute>
        <attribute name="title">
         <string/>
