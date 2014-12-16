@@ -6,6 +6,8 @@
 #include "computerdialog.h"
 #include "computerconnectdialog.h"
 #include "scientistconnectdialog.h"
+#include "aboutdialog.h"
+
 
 ComputerScientists::ComputerScientists(QWidget *parent) :
     QMainWindow(parent),
@@ -25,6 +27,11 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
     refreshComputers();
 
     tableEditActive = false;
+
+    if(!SQLConnection::getInstance()->connected())
+        ui->connectionStatus->setText("Failed to open the database");
+    else
+        ui->connectionStatus->setText("Connected...");
 }
 
 ComputerScientists::~ComputerScientists()
@@ -259,4 +266,16 @@ void ComputerScientists::on_btnComputerConnect_clicked()
     dialog.setModal(true);
     dialog.exec();
 
+}
+
+void ComputerScientists::on_btnAbout_clicked()
+{
+    aboutDialog addD(this);
+    addD.setModal(true);
+    addD.exec();
+}
+
+void ComputerScientists::on_btnAbout_2_clicked()
+{
+    ComputerScientists:on_btnAbout_clicked();
 }

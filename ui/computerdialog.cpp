@@ -13,6 +13,7 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow) :
     for(size_t i = 0; i < computerTypes.size(); i++)
         ui->comboType->addItem(computerTypes[i].getType(),QVariant::fromValue(i));
     editing = false;
+
 }
 
 ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :

@@ -36,6 +36,7 @@ SQLConnection::SQLConnection(const char* dbName) {
    {
        setup();
    }
+
 }
 
 unique_ptr<QSqlQuery> SQLConnection::getQuery() {

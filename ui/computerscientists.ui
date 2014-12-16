@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>600</height>
+    <height>620</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>1000</width>
-    <height>600</height>
+    <height>620</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -135,7 +135,7 @@
            <item>
             <widget class="QPushButton" name="btnScientistSearch">
              <property name="text">
-              <string>Search!</string>
+              <string>Search</string>
              </property>
             </widget>
            </item>
@@ -214,6 +214,9 @@
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <widget class="QPushButton" name="btnAddScientist">
+           <property name="toolTip">
+            <string>Add a scientist to the list</string>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -225,6 +228,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="btnRemoveScientist">
+           <property name="toolTip">
+            <string>Remove a scientist from the list</string>
+           </property>
            <property name="text">
             <string>Remove</string>
            </property>
@@ -236,6 +242,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="btnScientistConnect">
+           <property name="toolTip">
+            <string>Connect selected scientist to a computer</string>
+           </property>
            <property name="text">
             <string>Connect</string>
            </property>
@@ -324,6 +333,25 @@
          </item>
         </layout>
        </widget>
+       <widget class="QPushButton" name="btnAbout_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>520</y>
+          <width>51</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>About</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="Computers">
        <attribute name="icon">
@@ -393,7 +421,7 @@
            <item>
             <widget class="QPushButton" name="btnComputerSearch">
              <property name="text">
-              <string>Search!</string>
+              <string>Search</string>
              </property>
             </widget>
            </item>
@@ -478,6 +506,9 @@
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
           <widget class="QPushButton" name="btnAddComputer">
+           <property name="toolTip">
+            <string>Add a computer to the list</string>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -489,6 +520,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="btnRemoveComputer">
+           <property name="toolTip">
+            <string>Remove computer from the list</string>
+           </property>
            <property name="text">
             <string>Remove</string>
            </property>
@@ -500,6 +534,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="btnComputerConnect">
+           <property name="toolTip">
+            <string>Connect selected computer to a scientist</string>
+           </property>
            <property name="text">
             <string>Connect</string>
            </property>
@@ -569,7 +606,39 @@
          </item>
         </layout>
        </widget>
+       <widget class="QPushButton" name="btnAbout">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>520</y>
+          <width>51</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>About</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <zorder>widget_3</zorder>
+       <zorder>picture_computers</zorder>
+       <zorder>frame_3</zorder>
+       <zorder>widget_7</zorder>
+       <zorder>btnAbout</zorder>
+       <zorder>btnAbout</zorder>
       </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="connectionStatus">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;[+]Status&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
      </widget>
     </item>
    </layout>
@@ -628,7 +697,6 @@
   <tabstop>btnScientistSearch</tabstop>
   <tabstop>btnAddScientist</tabstop>
   <tabstop>btnRemoveScientist</tabstop>
-  <tabstop>tableScientists</tabstop>
  </tabstops>
  <resources>
   <include location="../bin.qrc"/>
