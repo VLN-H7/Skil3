@@ -68,7 +68,6 @@ private:
     vector<Scientist> scientistList; // The current list backing the contents of tableScientists
     vector<Computer> computerList; // The current list backing the contents of tableComputers
 
-    bool tableEditActive; // As setItem triggers an itemChanged event, and there is no event for detecting only user changes, we use a flag hack instead
     bool messageBox_are_you_sure();
     void loadScientistTable(vector<Scientist> list);
     void loadComputerTable(vector<Computer> list);

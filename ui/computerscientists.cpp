@@ -53,8 +53,6 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
 
     ui->editComputerSearch->setCompleter(compNameCompleter);
 
-    tableEditActive = false;
-
     if(!SQLConnection::getInstance()->connected())
         ui->connectionStatus->setText("Failed to open the database");
     else
@@ -77,9 +75,6 @@ void ComputerScientists::refreshComputers(){
 }
 
 void ComputerScientists::loadScientistTable(vector<Scientist> list){
-    tableEditActive = false;
-
-
     auto currentOrder = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
     auto currentSortColumn = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
 
@@ -107,7 +102,6 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list){
 }
 
 void ComputerScientists::loadComputerTable(vector<Computer> list){
-    tableEditActive = false;
 
     auto currentOrder = ui->tableComputers->horizontalHeader()->sortIndicatorOrder();
     auto currentSortColumn = ui->tableComputers->horizontalHeader()->sortIndicatorOrder();
