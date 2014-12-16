@@ -23,6 +23,7 @@ public:
     void update(Scientist &s, Scientist &replace);
     vector<Scientist> byComputer(Computer &c);
 
+    vector<Scientist> notByComputer(Computer &c);
 private:
 
     static Scientist getScientist(const unique_ptr<QSqlQuery> &query);

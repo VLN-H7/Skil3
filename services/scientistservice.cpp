@@ -28,3 +28,7 @@ vector<Scientist> ScientistService::search(ScientistFields::Field field, int row
 vector<Scientist> ScientistService::byComputer(Computer &c) {
     return scientistRepository.byComputer(c);
 }
+
+vector<Scientist> ScientistService::notByComputer(Computer &c) {
+    return scientistRepository.notByComputer(c);
+}

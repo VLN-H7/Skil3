@@ -32,6 +32,7 @@ SOURCES += main.cpp \
     ui/scientistdialog.cpp \
     imageloader.cpp \
     ui/computerconnectdialog.cpp \
+    ui/scientistconnectdialog.cpp \
     widgets/droptablewidget.cpp
 
 HEADERS += \
@@ -50,6 +51,7 @@ HEADERS += \
     ui/scientistdialog.h \
     imageloader.h \
     ui/computerconnectdialog.h \
+    ui/scientistconnectdialog.h \
     widgets/droptablewidget.h \
     widgets/dropmimedata.h
 
@@ -57,7 +59,8 @@ FORMS    += \
     ui/computerscientists.ui \
     ui/scientistdialog.ui \
     ui/computerdialog.ui \
-    ui/computerconnectdialog.ui
+    ui/computerconnectdialog.ui \
+    ui/scientistconnectdialog.ui
 
 #CONFIG+=static
 

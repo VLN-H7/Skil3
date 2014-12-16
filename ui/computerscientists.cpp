@@ -5,6 +5,7 @@
 #include "scientistdialog.h"
 #include "computerdialog.h"
 #include "computerconnectdialog.h"
+#include "scientistconnectdialog.h"
 
 ComputerScientists::ComputerScientists(QWidget *parent) :
     QMainWindow(parent),
@@ -211,7 +212,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
     ui->tblScientistConnections->setRowCount(computers.size());
 
-    for(int i = 0; i < computers.size(); i++)
+    for(size_t i = 0; i < computers.size(); i++)
         ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName()) );
 
 
@@ -220,7 +221,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
 }
 
-void ComputerScientists::on_pushButton_clicked()
+void ComputerScientists::on_btnScientistConnect_clicked()
 {
     auto items = ui->tableScientists->selectedItems();
     if (items.isEmpty()){
@@ -229,6 +230,20 @@ void ComputerScientists::on_pushButton_clicked()
     auto item = items.first();
     Scientist s = scientistList[item->type()];
     ComputerConnectDialog dialog(this, s);
+    dialog.setModal(true);
+    dialog.exec();
+
+}
+
+void ComputerScientists::on_btnComputerConnect_clicked()
+{
+    auto items = ui->tableComputers->selectedItems();
+    if (items.isEmpty()){
+        return;
+    }
+    auto item = items.first();
+    Computer c = computerList[item->type()];
+    ScientistConnectDialog dialog(this, c);
     dialog.setModal(true);
     dialog.exec();
 

@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -231,7 +231,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="btnScientistConnect">
            <property name="text">
             <string>Connect</string>
            </property>
@@ -455,7 +455,7 @@
           <x>10</x>
           <y>120</y>
           <width>101</width>
-          <height>103</height>
+          <height>131</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -484,6 +484,13 @@
            <property name="icon">
             <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/remove-icon.png</normaloff>:/icons/icons/remove-icon.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnComputerConnect">
+           <property name="text">
+            <string>Connect</string>
            </property>
           </widget>
          </item>

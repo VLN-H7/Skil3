@@ -29,7 +29,7 @@ void ComputerConnectDialog::refreshTables(){
 
     ui->tblConnectedComputers->clearContents();
     ui->tblConnectedComputers->setRowCount(connectedList.size());
-    for(int i = 0; i < connectedList.size(); i++){
+    for(size_t i = 0; i < connectedList.size(); i++){
         ui->tblConnectedComputers->setItem(i,0,new QTableWidgetItem(connectedList[i].getName(), i) );
     }
 
@@ -38,7 +38,7 @@ void ComputerConnectDialog::refreshTables(){
     ui->tblUnconnectedComputers->clearContents();
     ui->tblUnconnectedComputers->setRowCount(unconnectedList.size());
 
-    for(int i = 0; i < unconnectedList.size(); i++){
+    for(size_t i = 0; i < unconnectedList.size(); i++){
         ui->tblUnconnectedComputers->setItem(i,0,new QTableWidgetItem(unconnectedList[i].getName(), i) );
     }
 }
@@ -65,3 +65,4 @@ void ComputerConnectDialog::on_OK_btn_accepted()
 {
     close();
 }
+

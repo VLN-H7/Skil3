@@ -17,6 +17,7 @@ public:
     vector<Scientist> search(ScientistFields::Field field, int rows, QString query);
     void update(Scientist &s, Scientist &replace);
     vector<Scientist> byComputer(Computer &c);
+    vector<Scientist> notByComputer(Computer &c);
 private:
     ScientistRepository scientistRepository;
 };

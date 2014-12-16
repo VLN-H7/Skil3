@@ -128,3 +128,18 @@ vector<Scientist> ScientistRepository::byComputer(Computer &c) {
     return ret;
 }
 
+vector<Scientist> ScientistRepository::notByComputer(Computer &c) {
+    vector<Scientist> ret;
+    auto query = SQLConnection::getInstance()->getQuery();
+    query->prepare("SELECT * FROM scientists "
+                   "WHERE scientists.id NOT IN (SELECT scientist_id FROM scientist_computer WHERE computer_id = ? )");
+    query->addBindValue(c.getID());
+    if(!query->exec())
+        throw std::runtime_error(query->lastError().text().toStdString());
+
+    while(query->next()) {
+        ret.push_back(getScientist(query));
+    }
+    return ret;
+}
+
