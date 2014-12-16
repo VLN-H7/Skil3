@@ -41,6 +41,7 @@ void ImageLoader::load(QUrl url, QLabel* label){
     networkMgr->get(request);
 }
 
+//some code from here: http://www.qtcentre.org/threads/1483-Qt4-How-to-load-Url-image-into-QImage
 void ImageLoader::loadFinished(QNetworkReply *reply){
     if(!dict.contains(reply->url()))
         return;

@@ -1,18 +1,11 @@
 #include <QtGui>
 #include "droptablewidget.h"
-
+//mostly from https://github.com/imatefx/auto-file-backup/blob/master/droptablewidget.cpp
 DropTableWidget::DropTableWidget(QWidget *parent) : QTableWidget(parent) {
-    //set widget default properties:
-    //setFrameStyle(QFrame::Sunken | QFrame::StyledPanel);
-    //setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //setAlternatingRowColors(true);
     setSelectionMode(QAbstractItemView::ExtendedSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
-    //setShowGrid(false);
-    //setWordWrap(false);
     setDragDropMode(QAbstractItemView::DragDrop);
-    //setDefaultDropAction(Qt::MoveAction);
 
     setDragEnabled(true);
     setAcceptDrops(true);
