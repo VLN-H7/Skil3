@@ -201,46 +201,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QComboBox" name="comboGender">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>380</y>
-     <width>93</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Male</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Female</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="comboGender_2">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>380</y>
-     <width>93</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Male</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Female</string>
-    </property>
-   </item>
-  </widget>
  </widget>
  <resources/>
  <connections/>
