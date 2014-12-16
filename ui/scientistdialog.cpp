@@ -24,13 +24,18 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow) :
 
 ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit) :
     ScientistDialog(mWindow)
-{
+{   Date d;
+    d.setDate(0,1,1); //Default deathdate
+
+    this->setWindowTitle("Edit scientist dialog");
     sci = edit;
     ui->inputFirstName->setText(sci.getFirstName());
     ui->inputLastName->setText(sci.getLastName());
     ui->comboGender->setCurrentIndex(sci.getGender() == 'M' ? 0 : 1);
     ui->inputDateOfBirth->setDate(sci.getBirthDate());
     ui->inputDateOfDeath->setDate(sci.getDeathDate());
+    if((sci.getDeathDate()) == d)
+         ui->checkBox_Alive->setChecked(1);
     ui->inputNationality->setText(sci.getNationality());
     ui->inputImage->setText(sci.getImage().toString());
     editing = true;
@@ -120,7 +125,7 @@ bool ScientistDialog::scientistInputIsValid()
         isValid = false;
     }
 
-    if(ui->inputDateOfBirth->date() > ui->inputDateOfDeath->date())
+    if((ui->inputDateOfBirth->date() > ui->inputDateOfDeath->date()) && (!ui->checkBox_Alive->isChecked()))
     {
         ui->label_age_error->setText("<span style='color: red'>A person cannot die before they are born</span>");
         isValid = false;
