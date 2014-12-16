@@ -291,7 +291,6 @@ void ComputerScientists::on_btnComputerConnect_clicked()
 
 void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QString currentText)
 {
-    qDebug() << currentText;
     QCompleter *nullpointer = 0;
     if(currentText == "First Name")
         ui->editScientistSearch->setCompleter(firstNameCompleter);
@@ -302,6 +301,8 @@ void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QStrin
     else
         ui->editScientistSearch->setCompleter(nullpointer);
 }
+
+
 void ComputerScientists::on_tblScientistConnections_itemDoubleClicked(QTableWidgetItem *item)
 {
     // First search for the index of the current item inside the computerList
@@ -343,4 +344,15 @@ void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidge
 
     ui->tabMenu->setCurrentIndex(0);
     ui->tableScientists->selectRow(row);
+}
+
+void ComputerScientists::on_comboComputerSearch_currentTextChanged(const QString currentText)
+{
+    QCompleter *nullpointer = 0;
+    if(currentText == "Name")
+        ui->editComputerSearch->setCompleter(compNameCompleter);
+    else if(currentText == "Type")
+        ui->editComputerSearch->setCompleter(typeCompleter);
+    else
+        ui->editComputerSearch->setCompleter(nullpointer);
 }
