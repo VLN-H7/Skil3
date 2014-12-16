@@ -95,26 +95,26 @@ bool ScientistDialog::scientistInputIsValid()
 
     if(ui->inputFirstName->text().isEmpty())
     {
-        ui->label_error_first_name->setText("First name cannot be empty");
+        ui->label_error_first_name->setText("<span style='color: red'>First name cannot be empty</span>");
         isValid = false;
     }
 
     if(ui->inputLastName->text().isEmpty())
     {
-        ui->label_error_last_name->setText("Last name cannot be empty");
+        ui->label_error_last_name->setText("<span style='color: red'>Last name cannot be empty</span>");
         isValid = false;
     }
 
     //TODO: Cant be born in future, and cant die in the future or before born..
     if(ui->inputDateOfBirth->text().isEmpty())
     {
-        //ui->label_error_model->setText("Date of birth cannot be empty");
+        //ui->label_error_model->setText("<span style='color: red'>Date of birth cannot be empty</span>");
         isValid = false;
     }
 
     if(ui->inputNationality->text().isEmpty())
     {
-        ui->label_error_nationality->setText("Nationality cannot be empty");
+        ui->label_error_nationality->setText("<span style='color: red'>Nationality cannot be empty</span>");
         isValid = false;
     }
 

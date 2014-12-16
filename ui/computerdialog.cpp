@@ -83,13 +83,13 @@ bool ComputerDialog::computerInputIsValid()
 
     if(ui->inputComputerName->text().isEmpty())
     {
-        ui->label_NameError->setText("Computer name cannot be empty");
+        ui->label_NameError->setText("<span style='color: red'>Computer name cannot be empty</span>");
         isValid = false;
     }
 
     if(ui->inputComputerType->text().isEmpty())
     {
-        ui->label_TypeError->setText("Computer type cannot be empty");
+        ui->label_TypeError->setText("<span style='color: red'>Computer type cannot be empty</span>");
         isValid = false;
     }
 
