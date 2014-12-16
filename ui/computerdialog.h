@@ -41,6 +41,7 @@ private:
     void clearAddComputerErrors();
     vector<Type> computerTypes;
 
+    void loadTypes();
 };
 
 #endif // ADDCOMPUTERDIALOG_H

@@ -9,10 +9,9 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow) :
     ui->setupUi(this);
     ui->radioButtonWasBuilt->setChecked(true);
     ui->computerBuildYear->setMinimumDate(QDate(1000,1,1));
-    computerTypes = mainWindow->computerService->listTypes();
-    for(size_t i = 0; i < computerTypes.size(); i++)
-        ui->comboType->addItem(computerTypes[i].getType(),QVariant::fromValue(i));
     editing = false;
+
+    loadTypes();
 }
 
 ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
@@ -31,6 +30,13 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
     ui->computerBuildYear->setDate(QDate(comp.getBuildYear(), 0, 0));
     ui->inputImage->setText(comp.getImage().toString());
     editing = true;
+}
+
+void ComputerDialog::loadTypes(){
+    ui->comboType->clear();
+    computerTypes = mainWindow->computerService->listTypes();
+    for(size_t i = 0; i < computerTypes.size(); i++)
+        ui->comboType->addItem(computerTypes[i].getType(),QVariant::fromValue(i));
 }
 
 ComputerDialog::~ComputerDialog()
@@ -149,7 +155,9 @@ void ComputerDialog::on_btnImageBrowse_clicked()
 
 void ComputerDialog::on_btnAddRemoveType_clicked()
 {
-    ComputerTypeDialog typeC(this->mainWindow);
+    ComputerTypeDialog typeC(this->mainWindow, this);
     typeC.setModal(true);
     typeC.exec();
+
+    loadTypes();
 }

@@ -14,13 +14,15 @@ class ComputerTypeDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ComputerTypeDialog(ComputerScientists *parent = 0);
+    explicit ComputerTypeDialog(ComputerScientists *mWindow, QWidget* parent = 0);
     ~ComputerTypeDialog();
 
 private slots:
     void on_btnCancel_clicked();
 
     void on_btnAdd_clicked();
+
+    void on_btnRemove_clicked();
 
 private:
     vector<Type> computerTypes;
