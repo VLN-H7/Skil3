@@ -9,13 +9,12 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow) :
     ui->setupUi(this);
     ui->radioButtonWasBuilt->setChecked(true);
     ui->computerBuildYear->setMinimumDate(QDate(1000,1,1));
-    computerTypes = mainWindow->computerService->listTypes();
-    for(size_t i = 0; i < computerTypes.size(); i++)
-        ui->comboType->addItem(computerTypes[i].getType(),QVariant::fromValue(i));
 
     connect(ui->inputComputerName, SIGNAL(editingFinished()), this, SLOT(computerInputIsValid()));
     connect(ui->inputImage, SIGNAL(editingFinished()), this, SLOT(computerInputIsValid()));
     editing = false;
+
+    loadTypes();
 }
 
 ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
@@ -35,6 +34,13 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
                                         "<span style=\" font-size:18pt;\">Edit </span>"
                                         "<span style=\" font-size:18pt; font-style:italic; color:#377bce;\">Computer</span>"
                                         "</p></body></html>");
+}
+
+void ComputerDialog::loadTypes(){
+    ui->comboType->clear();
+    computerTypes = mainWindow->computerService->listTypes();
+    for(size_t i = 0; i < computerTypes.size(); i++)
+        ui->comboType->addItem(computerTypes[i].getType(),QVariant::fromValue(i));
 }
 
 ComputerDialog::~ComputerDialog()
@@ -142,4 +148,13 @@ void ComputerDialog::on_btnImageBrowse_clicked()
     if (!file.isEmpty() && file.isValid()) {
         ui->inputImage->setText(file.toDisplayString());
     }
+}
+
+void ComputerDialog::on_btnAddRemoveType_clicked()
+{
+    ComputerTypeDialog typeC(this->mainWindow, this);
+    typeC.setModal(true);
+    typeC.exec();
+
+    loadTypes();
 }
