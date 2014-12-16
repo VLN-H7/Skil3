@@ -8,6 +8,7 @@
 #include "../models/computer.h"
 #include "../utils.h"
 #include "computerscientists.h"
+#include "../ui/computertypedialog.h"
 
 namespace Ui {
 class ComputerDialog;
@@ -29,15 +30,17 @@ private slots:
     void on_btnAdd_clicked();
     void on_btnImageBrowse_clicked();
     void on_inputImage_editingFinished();
+    bool computerInputIsValid();
+    void on_btnAddRemoveType_clicked();
 private:
     Ui::ComputerDialog *ui;
     ComputerScientists *mainWindow;
     Computer comp;
     bool editing;
-    bool computerInputIsValid();
     void clearAddComputerErrors();
     vector<Type> computerTypes;
 
+    void loadTypes();
 };
 
 #endif // ADDCOMPUTERDIALOG_H

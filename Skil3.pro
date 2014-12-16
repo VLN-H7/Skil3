@@ -37,6 +37,7 @@ SOURCES += main.cpp \
     widgets/droptablewidget.cpp \
     models/type.cpp \
     ui/aboutdialog.cpp
+    ui/computertypedialog.cpp
 
 HEADERS += \
     services/scientistservice.h \
@@ -59,6 +60,7 @@ HEADERS += \
     widgets/dropmimedata.h \
     models/type.h \
     ui/aboutdialog.h
+    ui/computertypedialog.h
 
 FORMS    += \
     ui/computerscientists.ui \
@@ -67,6 +69,7 @@ FORMS    += \
     ui/computerconnectdialog.ui \
     ui/scientistconnectdialog.ui \
     ui/aboutdialog.ui
+    ui/computertypedialog.ui
 
 #CONFIG+=static
 

@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Add Scientist Dialog</string>
   </property>
-  <widget class="QLabel" name="add_scientist_title">
+  <widget class="QLabel" name="label_addScientistTitle">
    <property name="geometry">
     <rect>
      <x>14</x>

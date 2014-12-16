@@ -26,6 +26,33 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
     refreshScientists();
     refreshComputers();
 
+    for(size_t i = 0; i < scientistList.size(); i++){
+        firstNameList.insert(scientistList[i].getFirstName());
+        lastNameList.insert(scientistList[i].getLastName());
+        nationalityList.insert(scientistList[i].getNationality());
+    }
+
+    firstNameCompleter = new QCompleter(firstNameList.toList());
+    firstNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    lastNameCompleter = new QCompleter(lastNameList.toList());
+    lastNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    nationalityCompleter = new QCompleter(nationalityList.toList());
+    nationalityCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
+    ui->editScientistSearch->setCompleter(firstNameCompleter);
+
+    for(size_t i = 0; i < computerList.size(); i++){
+        compNameList.insert(computerList[i].getName());
+        typeList.insert(computerList[i].getType().getType());
+    }
+
+    compNameCompleter = new QCompleter(compNameList.toList());
+    compNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    typeCompleter = new QCompleter(typeList.toList());
+    typeCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
+    ui->editComputerSearch->setCompleter(compNameCompleter);
+
     tableEditActive = false;
 
     if(!SQLConnection::getInstance()->connected())
@@ -107,7 +134,7 @@ void ComputerScientists::loadComputerTable(vector<Computer> list){
 void ComputerScientists::on_btnScientistSearch_clicked()
 {
     auto field = static_cast<ScientistFields::Field>(ui->comboScientistSearch->currentIndex() + 1);
-    auto query = ui->editComputerSearch->text();
+    auto query = ui->editScientistSearch->text();
     loadScientistTable(scientistService->search(field, 0, query));
 }
 
@@ -214,7 +241,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
     ui->tblScientistConnections->setRowCount(computers.size());
 
     for(size_t i = 0; i < computers.size(); i++)
-        ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName()) );
+        ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName(), computers[i].getID()) );
 }
 
 void ComputerScientists::on_tableComputers_itemSelectionChanged()
@@ -237,7 +264,7 @@ void ComputerScientists::on_tableComputers_itemSelectionChanged()
     ui->tblComputerConnections->setRowCount(scientists.size());
 
     for(size_t i = 0; i < scientists.size(); i++)
-        ui->tblComputerConnections->setItem(i,0,new QTableWidgetItem(scientists[i].getFirstName() + " " + scientists[i].getLastName()) );
+        ui->tblComputerConnections->setItem(i,0,new QTableWidgetItem(scientists[i].getFirstName() + " " + scientists[i].getLastName(), scientists[i].getID()) );
 }
 
 void ComputerScientists::on_btnScientistConnect_clicked()
@@ -268,6 +295,7 @@ void ComputerScientists::on_btnComputerConnect_clicked()
 
 }
 
+
 void ComputerScientists::on_btnAbout_clicked()
 {
     aboutDialog addD(this);
@@ -278,4 +306,72 @@ void ComputerScientists::on_btnAbout_clicked()
 void ComputerScientists::on_btnAbout_2_clicked()
 {
     ComputerScientists:on_btnAbout_clicked();
+}
+
+void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QString currentText)
+{
+    QCompleter *nullpointer = 0;
+    if(currentText == "First Name")
+        ui->editScientistSearch->setCompleter(firstNameCompleter);
+    else if(currentText == "Last Name")
+        ui->editScientistSearch->setCompleter(lastNameCompleter);
+    else if(currentText == "Nationality")
+        ui->editScientistSearch->setCompleter(nationalityCompleter);
+    else
+        ui->editScientistSearch->setCompleter(nullpointer);
+}
+
+
+void ComputerScientists::on_tblScientistConnections_itemDoubleClicked(QTableWidgetItem *item)
+{
+    // First search for the index of the current item inside the computerList
+    int i;
+    for(i=0; i < (int)computerList.size(); i++){
+        if(computerList[i].getID() == item->type()){
+            break;
+        }
+    }
+
+    // Now search for the row that points to this index.
+    int row;
+    for(row = 0; row < ui->tableComputers->rowCount(); row++){
+        if(ui->tableComputers->item(row,0)->type() == i){
+            break;
+        }
+    }
+    ui->tabMenu->setCurrentIndex(1);
+    ui->tableComputers->selectRow(row);
+}
+
+void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidgetItem *item)
+{
+    // First search for the index of the current item inside the scientistList
+    int i;
+    for(i=0; i < scientistList.size(); i++){
+        if(scientistList[i].getID() == item->type()){
+            break;
+        }
+    }
+
+    // Now search for the row that points to this index.
+    int row;
+    for(row = 0; row < ui->tableScientists->rowCount(); row++){
+        if(ui->tableScientists->item(row,0)->type() == i){
+            break;
+        }
+    }
+
+    ui->tabMenu->setCurrentIndex(0);
+    ui->tableScientists->selectRow(row);
+}
+
+void ComputerScientists::on_comboComputerSearch_currentTextChanged(const QString currentText)
+{
+    QCompleter *nullpointer = 0;
+    if(currentText == "Name")
+        ui->editComputerSearch->setCompleter(compNameCompleter);
+    else if(currentText == "Type")
+        ui->editComputerSearch->setCompleter(typeCompleter);
+    else
+        ui->editComputerSearch->setCompleter(nullpointer);
 }

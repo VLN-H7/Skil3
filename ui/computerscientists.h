@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QImageWriter>
+#include <QCompleter>
+#include <QSet>
 #include "../imageloader.h"
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
@@ -51,6 +53,12 @@ private slots:
 
     void on_btnAbout_2_clicked();
 
+    void on_comboScientistSearch_currentTextChanged(const QString currentText);
+    void on_tblScientistConnections_itemDoubleClicked(QTableWidgetItem *item);
+    void on_tblComputerConnections_itemDoubleClicked(QTableWidgetItem *item);
+
+    void on_comboComputerSearch_currentTextChanged(const QString currentText);
+
 private:
     Ui::ComputerScientists *ui;
 
@@ -63,6 +71,15 @@ private:
     void loadComputerTable(vector<Computer> list);
     void refreshScientists();
     void refreshComputers();
+
+    QCompleter *firstNameCompleter;
+    QCompleter *lastNameCompleter;
+    QCompleter *nationalityCompleter;
+
+    QCompleter *compNameCompleter;
+    QCompleter *typeCompleter;
+
+    QSet<QString> firstNameList, lastNameList, nationalityList, compNameList, typeList;
 };
 
 #endif // COMPUTERSCIENTISTS_H
