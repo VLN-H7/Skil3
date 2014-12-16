@@ -127,7 +127,7 @@ void ComputerScientists::loadComputerTable(vector<Computer> list){
 void ComputerScientists::on_btnScientistSearch_clicked()
 {
     auto field = static_cast<ScientistFields::Field>(ui->comboScientistSearch->currentIndex() + 1);
-    auto query = ui->editComputerSearch->text();
+    auto query = ui->editScientistSearch->text();
     loadScientistTable(scientistService->search(field, 0, query));
 }
 
@@ -234,7 +234,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
     ui->tblScientistConnections->setRowCount(computers.size());
 
     for(size_t i = 0; i < computers.size(); i++)
-        ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName()) );
+        ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName(), computers[i].getID()) );
 }
 
 void ComputerScientists::on_tableComputers_itemSelectionChanged()
@@ -257,7 +257,7 @@ void ComputerScientists::on_tableComputers_itemSelectionChanged()
     ui->tblComputerConnections->setRowCount(scientists.size());
 
     for(size_t i = 0; i < scientists.size(); i++)
-        ui->tblComputerConnections->setItem(i,0,new QTableWidgetItem(scientists[i].getFirstName() + " " + scientists[i].getLastName()) );
+        ui->tblComputerConnections->setItem(i,0,new QTableWidgetItem(scientists[i].getFirstName() + " " + scientists[i].getLastName(), scientists[i].getID()) );
 }
 
 void ComputerScientists::on_btnScientistConnect_clicked()
@@ -288,6 +288,7 @@ void ComputerScientists::on_btnComputerConnect_clicked()
 
 }
 
+
 void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QString currentText)
 {
     qDebug() << currentText;
@@ -300,4 +301,46 @@ void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QStrin
         ui->editScientistSearch->setCompleter(nationalityCompleter);
     else
         ui->editScientistSearch->setCompleter(nullpointer);
+}
+void ComputerScientists::on_tblScientistConnections_itemDoubleClicked(QTableWidgetItem *item)
+{
+    // First search for the index of the current item inside the computerList
+    int i;
+    for(i=0; i < (int)computerList.size(); i++){
+        if(computerList[i].getID() == item->type()){
+            break;
+        }
+    }
+
+    // Now search for the row that points to this index.
+    int row;
+    for(row = 0; row < ui->tableComputers->rowCount(); row++){
+        if(ui->tableComputers->item(row,0)->type() == i){
+            break;
+        }
+    }
+    ui->tabMenu->setCurrentIndex(1);
+    ui->tableComputers->selectRow(row);
+}
+
+void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidgetItem *item)
+{
+    // First search for the index of the current item inside the scientistList
+    int i;
+    for(i=0; i < scientistList.size(); i++){
+        if(scientistList[i].getID() == item->type()){
+            break;
+        }
+    }
+
+    // Now search for the row that points to this index.
+    int row;
+    for(row = 0; row < ui->tableScientists->rowCount(); row++){
+        if(ui->tableScientists->item(row,0)->type() == i){
+            break;
+        }
+    }
+
+    ui->tabMenu->setCurrentIndex(0);
+    ui->tableScientists->selectRow(row);
 }

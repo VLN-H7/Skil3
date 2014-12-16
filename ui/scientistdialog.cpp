@@ -9,6 +9,16 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow) :
     ui->setupUi(this);
     ui->inputDateOfBirth->setMinimumDate(QDate(100,1,1));
     ui->inputDateOfDeath->setMinimumDate(QDate(100,1,1));
+    ui->inputDateOfBirth->setMaximumDate(QDate::currentDate());
+    ui->inputDateOfDeath->setMaximumDate(QDate::currentDate());
+
+    connect(ui->inputFirstName, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
+    connect(ui->inputLastName, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
+    connect(ui->inputDateOfBirth, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
+    connect(ui->inputDateOfDeath, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
+    connect(ui->inputNationality, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
+    connect(ui->inputImage, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
+
     editing = false;
 }
 
@@ -24,6 +34,12 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit) :
     ui->inputNationality->setText(sci.getNationality());
     ui->inputImage->setText(sci.getImage().toString());
     editing = true;
+
+    ui->btnAdd->setText("Edit");
+    ui->label_addScientistTitle->setText("<html><head/><body><p>"
+                                        "<span style=\" font-size:18pt;\">Edit </span>"
+                                        "<span style=\" font-size:18pt; font-style:italic; color:#377bce;\">Scientist</span>"
+                                        "</p></body></html>");
 }
 
 ScientistDialog::~ScientistDialog()
@@ -82,8 +98,6 @@ void ScientistDialog::clearAddScientistErrors()
 {
     ui->label_error_first_name->setText("");
     ui->label_error_last_name->setText("");
-    //ui->label_error_birth->setText("");
-    //ui->label_error_death->setText("");
     ui->label_error_nationality->setText("");
     ui->label_age_error->setText("");
 }
@@ -106,7 +120,6 @@ bool ScientistDialog::scientistInputIsValid()
         isValid = false;
     }
 
-    //TODO: Cant be born in future, and cant die in the future or before born..
     if(ui->inputDateOfBirth->date() > ui->inputDateOfDeath->date())
     {
         ui->label_age_error->setText("<span style='color: red'>A person cannot die before they are born</span>");

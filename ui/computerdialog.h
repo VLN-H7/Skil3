@@ -29,12 +29,12 @@ private slots:
     void on_btnAdd_clicked();
     void on_btnImageBrowse_clicked();
     void on_inputImage_editingFinished();
+    bool computerInputIsValid();
 private:
     Ui::ComputerDialog *ui;
     ComputerScientists *mainWindow;
     Computer comp;
     bool editing;
-    bool computerInputIsValid();
     void clearAddComputerErrors();
     vector<Type> computerTypes;
 

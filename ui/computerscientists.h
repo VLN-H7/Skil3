@@ -51,6 +51,8 @@ private slots:
     void on_tableComputers_itemSelectionChanged();
 
     void on_comboScientistSearch_currentTextChanged(const QString currentText);
+    void on_tblScientistConnections_itemDoubleClicked(QTableWidgetItem *item);
+    void on_tblComputerConnections_itemDoubleClicked(QTableWidgetItem *item);
 
 private:
     Ui::ComputerScientists *ui;

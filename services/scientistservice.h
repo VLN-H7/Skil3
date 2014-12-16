@@ -2,6 +2,7 @@
 #define SCIENTISTSERVICE_H
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "../repositories/scientistrepository.h"
 #include "../models/scientist.h"
 

@@ -22,6 +22,11 @@ vector<Scientist> ScientistService::list(ScientistFields::Field field, Order ord
 }
 
 vector<Scientist> ScientistService::search(ScientistFields::Field field, int rows, QString query) {
+    if(field == ScientistFields::BIRTH_DATE || field == ScientistFields::DEATH_DATE){
+        QStringList split = query.split(".");
+        std::reverse(std::begin(split),std::end(split));
+        query = split.join("-");
+    }
     return scientistRepository.search(field, rows, query);
 }
 
