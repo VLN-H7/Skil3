@@ -23,6 +23,8 @@ private slots:
     void connectedChanged(const DropMimeData *);
     void unConnectedDropped(const DropMimeData *);
     void unConnectedChanged(const DropMimeData *);
+    void on_OK_btn_accepted();
+
 private:
     Ui::ComputerConnectDialog *ui;
     ComputerScientists *mainWindow;
