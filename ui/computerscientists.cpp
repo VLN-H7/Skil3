@@ -99,12 +99,9 @@ void ComputerScientists::loadComputerTable(vector<Computer> list){
 
 void ComputerScientists::on_btnScientistSearch_clicked()
 {
-    loadScientistTable(
-                scientistService->search(
-                    static_cast<ScientistFields::Field>(ui->comboScientistSearch->currentIndex() + 1),
-                    0,
-                    ui->editScientistSearch->text()
-                ));
+    auto field = static_cast<ScientistFields::Field>(ui->comboScientistSearch->currentIndex() + 1);
+    auto query = ui->editComputerSearch->text();
+    loadScientistTable(scientistService->search(field, 0, query));
 }
 
 void ComputerScientists::on_btnComputerSearch_clicked()
@@ -126,15 +123,13 @@ void ComputerScientists::on_btnRemoveScientist_clicked()
         scientistService->remove(scientistList[items[i]->type()]);
     }
 
-    refreshScientists(); //TODO: what if the remove came from a search?
-    //loadScientistTable(scientistList);
+    refreshScientists();
 }
 
 bool ComputerScientists::messageBox_are_you_sure()
 {
     QMessageBox msgBox;
     msgBox.setText("Are you sure you want to remove this from the list?");
-    //msgBox.setInformativeText("");
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::Yes);
     int ret = msgBox.exec();
@@ -155,8 +150,7 @@ void ComputerScientists::on_btnRemoveComputer_clicked()
         computerService->remove(computerList[items[i]->type()]);
     }
 
-    refreshComputers(); //TODO: what if the remove came from a search?
-    //loadComputerTable(computerList);
+    refreshComputers();
 }
 
 void ComputerScientists::on_tableScientists_itemDoubleClicked(QTableWidgetItem *item)

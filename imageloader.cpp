@@ -48,6 +48,8 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
     auto label = dict[reply->url()];
     dict.remove(reply->url());
 
+
+
     QVariant statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
 
     // Or the target URL if it was a redirect:

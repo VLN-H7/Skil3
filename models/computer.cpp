@@ -38,6 +38,10 @@ QString Computer::getName(){
     return name;
 }
 
+int Computer::getTypeID(){
+    return type_id;
+}
+
 QString Computer::getType(){
     return type;
 }
@@ -61,6 +65,10 @@ void Computer::setID(int ID){
 
 void Computer::setName(QString cName){
     name = cName;
+}
+
+void Computer::setTypeID(int cID){
+    type_id = cID;
 }
 
 void Computer::setType(QString cType){

@@ -15,6 +15,7 @@ public:
 
     int getID();
     QString getName();
+    int getTypeID();
     QString getType();
     int getBuildYear();
     bool getBuilt();
@@ -22,6 +23,7 @@ public:
 
     void setID(int ID);
     void setName(QString cName);
+    void setTypeID(int cID);
     void setType(QString cType);
     void setBuildYear(int year);
     void setBuilt(bool b);
@@ -31,6 +33,7 @@ public:
 private:
     int id;
     QString name;
+    int type_id;
     QString type;
     int buildyear;
     bool built;

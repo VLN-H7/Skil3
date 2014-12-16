@@ -6,7 +6,7 @@ Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query) {
     Computer comp;
     comp.setID(query->value("id").toInt());
     comp.setName(query->value("name").toString());
-    comp.setType(query->value("type").toString());
+    comp.setTypeID(query->value("type_id").toString());
     comp.setBuildYear(query->value("build_year").toInt());
     comp.setBuilt(query->value("built").toBool());
     comp.setImage(query->value("image").toUrl());
@@ -19,9 +19,9 @@ ComputerRepository::ComputerRepository() {
 
 void ComputerRepository::add(Computer &comp) {
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("INSERT INTO computers (name, type, build_year, built, image) VALUES (?,?,?,?,?)");
+    query->prepare("INSERT INTO computers (name, type_id, build_year, built, image) VALUES (?,?,?,?,?)");
     query->addBindValue(comp.getName());
-    query->addBindValue(comp.getType());
+    query->addBindValue(comp.getTypeID());
     query->addBindValue(comp.getBuildYear());
     query->addBindValue(comp.getBuilt());
     query->addBindValue(comp.getImage().toString());
@@ -32,9 +32,9 @@ void ComputerRepository::add(Computer &comp) {
 
 void ComputerRepository::update(Computer &comp, Computer &replace) {
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("UPDATE computers SET name = ?, type = ?, build_year = ?, built = ?, image = ? WHERE id = ?");
+    query->prepare("UPDATE computers SET name = ?, type_id = ?, build_year = ?, built = ?, image = ? WHERE id = ?");
     query->addBindValue(replace.getName());
-    query->addBindValue(replace.getType());
+    query->addBindValue(replace.getTypeID());
     query->addBindValue(replace.getBuildYear());
     query->addBindValue(replace.getBuilt());
     query->addBindValue(replace.getImage().toString());
