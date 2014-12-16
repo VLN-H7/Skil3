@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>computertypedialog</class>
- <widget class="QDialog" name="computertypedialog">
+ <class>ComputerTypeDialog</class>
+ <widget class="QDialog" name="ComputerTypeDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,7 +29,7 @@
     <enum>QFrame::Raised</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="cancel_btn">
+  <widget class="QPushButton" name="btnCancel">
    <property name="geometry">
     <rect>
      <x>370</x>
@@ -76,10 +76,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="remove_type_comboBox"/>
+     <widget class="QComboBox" name="comboRemoveType"/>
     </item>
     <item>
-     <widget class="QPushButton" name="remove_btn">
+     <widget class="QPushButton" name="btnRemove">
       <property name="text">
        <string>Remove type</string>
       </property>
@@ -105,10 +105,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="input_type"/>
+     <widget class="QLineEdit" name="inputType"/>
     </item>
     <item>
-     <widget class="QPushButton" name="add_btn">
+     <widget class="QPushButton" name="btnAdd">
       <property name="text">
        <string>Add type</string>
       </property>

@@ -30,7 +30,7 @@ private slots:
     void on_btnAdd_clicked();
     void on_btnImageBrowse_clicked();
     void on_inputImage_editingFinished();
-    void on_add_remove_type_btn_clicked();
+    void on_btnAddRemoveType_clicked();
 
 private:
     Ui::ComputerDialog *ui;

@@ -147,9 +147,9 @@ void ComputerDialog::on_btnImageBrowse_clicked()
     }
 }
 
-void ComputerDialog::on_add_remove_type_btn_clicked()
+void ComputerDialog::on_btnAddRemoveType_clicked()
 {
-    computertypedialog typeC(this);
+    ComputerTypeDialog typeC(this->mainWindow);
     typeC.setModal(true);
     typeC.exec();
 }

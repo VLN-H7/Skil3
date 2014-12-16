@@ -1,29 +1,30 @@
 #include "computertypedialog.h"
 #include "ui_computertypedialog.h"
 
-computertypedialog::computertypedialog(QWidget *mWindow) :
+ComputerTypeDialog::ComputerTypeDialog(ComputerScientists *mWindow) :
     QDialog(mWindow),
     mainWindow(mWindow),
-    ui(new Ui::computertypedialog)
+    ui(new Ui::ComputerTypeDialog)
 {
     ui->setupUi(this);
     computerTypes = mainWindow->computerService->listTypes();
     for(size_t i = 0; i < computerTypes.size(); i++)
-        ui->remove_type_comboBox->addItem(computerTypes[i].getType(),QVariant::fromValue(i));
+        ui->comboRemoveType->addItem(computerTypes[i].getType(),QVariant::fromValue(i));
 }
 
-computertypedialog::~computertypedialog()
+ComputerTypeDialog::~ComputerTypeDialog()
 {
     delete ui;
 }
 
-void computertypedialog::on_cancel_btn_clicked()
+void ComputerTypeDialog::on_btnCancel_clicked()
 {
     close();
 }
 
-void computertypedialog::on_add_btn_clicked()
+void ComputerTypeDialog::on_btnAdd_clicked()
 {
-    QString type = ui->input_type->text();
-    mainWindow->computerService.addType(type);
+    Type type;
+    type.setType(ui->inputType->text());
+    mainWindow->computerService->addType(type);
 }
