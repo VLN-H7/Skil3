@@ -238,7 +238,7 @@
     <item row="1" column="0">
      <widget class="QLineEdit" name="inputImage">
       <property name="placeholderText">
-       <string>http://imgur.com/gHvKXOL</string>
+       <string>http://i.imgur.com/gHvKXOL.jpg</string>
       </property>
      </widget>
     </item>
