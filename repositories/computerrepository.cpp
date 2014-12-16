@@ -184,7 +184,7 @@ void ComputerRepository::addType(Type &t){
         throw std::runtime_error(query->lastError().text().toStdString());
 }
 
-void ComputerRepository::deleteType(Type &t){
+void ComputerRepository::removeType(Type &t){
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("DELETE FROM types WHERE id = ?");
     query->addBindValue(t.getID());

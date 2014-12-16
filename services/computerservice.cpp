@@ -49,6 +49,6 @@ void ComputerService::addType(Type &t){
     computerRepository.addType(t);
 }
 
-void ComputerService::deleteType(Type &t){
-    computerRepository.deleteType(t);
+void ComputerService::removeType(Type &t){
+    computerRepository.removeType(t);
 }

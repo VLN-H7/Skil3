@@ -23,7 +23,7 @@ public:
     vector<Computer> notByScientist(Scientist &s);
     vector<Type> listTypes();
     void addType(Type &t);
-    void deleteType(Type &t);
+    void removeType(Type &t);
 private:
     ComputerRepository computerRepository;
 };

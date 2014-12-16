@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -85,7 +85,11 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QLineEdit" name="editScientistSearch"/>
+            <widget class="QLineEdit" name="editScientistSearch">
+             <property name="placeholderText">
+              <string>Search...</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QComboBox" name="comboScientistSearch">
@@ -349,7 +353,11 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
-            <widget class="QLineEdit" name="editComputerSearch"/>
+            <widget class="QLineEdit" name="editComputerSearch">
+             <property name="placeholderText">
+              <string>Search...</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QComboBox" name="comboComputerSearch">
