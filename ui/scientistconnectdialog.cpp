@@ -54,10 +54,6 @@ void ScientistConnectDialog::connectedDropped(const DropMimeData *data){
     refreshTables();
 }
 
-void ScientistConnectDialog::connectedChanged(const DropMimeData *data){
-    qDebug() << data->type;
-}
-
 void ScientistConnectDialog::unConnectedDropped(const DropMimeData *data){
     if(data->type < 0){ // check if the type is negative, meaning it came from this table.
         refreshTables();
@@ -67,9 +63,6 @@ void ScientistConnectDialog::unConnectedDropped(const DropMimeData *data){
     qDebug() << connectedList[type].getFirstName();
     mainWindow->computerService->unlink(computer, connectedList[type]);
     refreshTables();
-}
-
-void ScientistConnectDialog::unConnectedChanged(const DropMimeData *data){
 }
 
 void ScientistConnectDialog::on_pushButton_Ok_clicked()

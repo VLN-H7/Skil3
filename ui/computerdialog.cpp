@@ -29,6 +29,7 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
     ui->inputImage->setText(comp.getImage().toString());
     editing = true;
 
+    this->setWindowTitle("Edit computer dialog");
     ui->btnAdd->setText("Edit");
     ui->label_addComputerTitle->setText("<html><head/><body><p>"
                                         "<span style=\" font-size:18pt;\">Edit </span>"

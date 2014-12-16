@@ -20,9 +20,7 @@ public:
 
 private slots:
     void connectedDropped(const DropMimeData *);
-    void connectedChanged(const DropMimeData *);
     void unConnectedDropped(const DropMimeData *);
-    void unConnectedChanged(const DropMimeData *);
     void on_pushButton_Ok_clicked();
 
 private:

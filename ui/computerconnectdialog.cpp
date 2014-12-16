@@ -53,9 +53,6 @@ void ComputerConnectDialog::connectedDropped(const DropMimeData *data){
     refreshTables();
 }
 
-void ComputerConnectDialog::connectedChanged(const DropMimeData *data){
-}
-
 void ComputerConnectDialog::unConnectedDropped(const DropMimeData *data){
     if(data->type < 0){ // check if the type is negative, meaning it came from this table.
         refreshTables();
@@ -66,8 +63,6 @@ void ComputerConnectDialog::unConnectedDropped(const DropMimeData *data){
     refreshTables();
 }
 
-void ComputerConnectDialog::unConnectedChanged(const DropMimeData *data){
-}
 
 void ComputerConnectDialog::on_pushButton_Ok_clicked()
 {
