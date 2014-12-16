@@ -24,6 +24,33 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
     refreshScientists();
     refreshComputers();
 
+    for(size_t i = 0; i < scientistList.size(); i++){
+        firstNameList.insert(scientistList[i].getFirstName());
+        lastNameList.insert(scientistList[i].getLastName());
+        nationalityList.insert(scientistList[i].getNationality());
+    }
+
+    firstNameCompleter = new QCompleter(firstNameList.toList());
+    firstNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    lastNameCompleter = new QCompleter(lastNameList.toList());
+    lastNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    nationalityCompleter = new QCompleter(nationalityList.toList());
+    nationalityCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
+    ui->editScientistSearch->setCompleter(firstNameCompleter);
+
+    for(size_t i = 0; i < computerList.size(); i++){
+        compNameList.insert(computerList[i].getName());
+        typeList.insert(computerList[i].getType().getType());
+    }
+
+    compNameCompleter = new QCompleter(compNameList.toList());
+    compNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    typeCompleter = new QCompleter(typeList.toList());
+    typeCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
+    ui->editComputerSearch->setCompleter(compNameCompleter);
+
     tableEditActive = false;
 }
 
@@ -259,4 +286,18 @@ void ComputerScientists::on_btnComputerConnect_clicked()
     dialog.setModal(true);
     dialog.exec();
 
+}
+
+void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QString currentText)
+{
+    qDebug() << currentText;
+    QCompleter *nullpointer = 0;
+    if(currentText == "First Name")
+        ui->editScientistSearch->setCompleter(firstNameCompleter);
+    else if(currentText == "Last Name")
+        ui->editScientistSearch->setCompleter(lastNameCompleter);
+    else if(currentText == "Nationality")
+        ui->editScientistSearch->setCompleter(nationalityCompleter);
+    else
+        ui->editScientistSearch->setCompleter(nullpointer);
 }
