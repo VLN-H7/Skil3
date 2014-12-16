@@ -82,6 +82,8 @@ private:
     QCompleter *typeCompleter;
 
     QSet<QString> firstNameList, lastNameList, nationalityList, compNameList, typeList;
+    void setupScientistCompleters();
+    void setupComputerCompleters();
 };
 
 #endif // COMPUTERSCIENTISTS_H

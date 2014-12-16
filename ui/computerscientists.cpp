@@ -23,40 +23,13 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
     ui->tableScientists->sortByColumn(0, Qt::AscendingOrder);
     ui->tableComputers->sortByColumn(0, Qt::AscendingOrder);
 
+    firstNameCompleter = lastNameCompleter = nationalityCompleter = NULL;
+    compNameCompleter = typeCompleter = NULL;
+
     refreshScientists();
     refreshComputers();
 
-    for(size_t i = 0; i < scientistList.size(); i++){
-        firstNameList.insert(scientistList[i].getFirstName());
-        lastNameList.insert(scientistList[i].getLastName());
-        nationalityList.insert(scientistList[i].getNationality());
-    }
 
-    firstNameCompleter = new QCompleter(firstNameList.toList());
-    firstNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    lastNameCompleter = new QCompleter(lastNameList.toList());
-    lastNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    nationalityCompleter = new QCompleter(nationalityList.toList());
-    nationalityCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-
-    ui->editScientistSearch->setCompleter(firstNameCompleter);
-
-    for(size_t i = 0; i < computerList.size(); i++){
-        compNameList.insert(computerList[i].getName());
-        typeList.insert(computerList[i].getType().getType());
-    }
-
-    compNameCompleter = new QCompleter(compNameList.toList());
-    compNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    typeCompleter = new QCompleter(typeList.toList());
-    typeCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-
-    ui->editComputerSearch->setCompleter(compNameCompleter);
-
-    if(!SQLConnection::getInstance()->connected())
-        ui->connectionStatus->setText("Failed to open the database");
-    else
-        ui->connectionStatus->setText("Connected...");
 }
 
 ComputerScientists::~ComputerScientists()
@@ -99,6 +72,8 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list){
     ui->tableScientists->sortByColumn(currentSortColumn, currentOrder);
 
     scientistList = list;
+
+    setupScientistCompleters();
 }
 
 void ComputerScientists::loadComputerTable(vector<Computer> list){
@@ -123,6 +98,55 @@ void ComputerScientists::loadComputerTable(vector<Computer> list){
     ui->tableComputers->sortByColumn(currentSortColumn, currentOrder);
 
     computerList = list;
+
+    setupComputerCompleters();
+
+}
+
+void ComputerScientists::setupScientistCompleters(){
+    firstNameList.clear();
+    lastNameList.clear();
+    nationalityList.clear();
+    for(size_t i = 0; i < scientistList.size(); i++){
+        firstNameList.insert(scientistList[i].getFirstName());
+        lastNameList.insert(scientistList[i].getLastName());
+        nationalityList.insert(scientistList[i].getNationality());
+    }
+
+    if(firstNameCompleter != NULL)
+        delete firstNameCompleter;
+    firstNameCompleter = new QCompleter(firstNameList.toList());
+    firstNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    if(lastNameCompleter != NULL)
+        delete lastNameCompleter;
+    lastNameCompleter = new QCompleter(lastNameList.toList());
+    lastNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    if(nationalityCompleter != NULL)
+        delete nationalityCompleter;
+    nationalityCompleter = new QCompleter(nationalityList.toList());
+    nationalityCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
+    ui->editScientistSearch->setCompleter(firstNameCompleter);
+}
+
+void ComputerScientists::setupComputerCompleters(){
+    compNameList.clear();
+    typeList.clear();
+    for(size_t i = 0; i < computerList.size(); i++){
+        compNameList.insert(computerList[i].getName());
+        typeList.insert(computerList[i].getType().getType());
+    }
+
+    if(compNameCompleter != NULL)
+        delete compNameCompleter;
+    compNameCompleter = new QCompleter(compNameList.toList());
+    compNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    if(typeCompleter != NULL)
+        delete typeCompleter;
+    typeCompleter = new QCompleter(typeList.toList());
+    typeCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
+    ui->editComputerSearch->setCompleter(compNameCompleter);
 }
 
 void ComputerScientists::on_btnScientistSearch_clicked()
