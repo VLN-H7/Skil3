@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QFileDialog>
-#include <QImageWriter>
+
 
 #include "computerscientists.h"
 #include "../services/scientistservice.h"

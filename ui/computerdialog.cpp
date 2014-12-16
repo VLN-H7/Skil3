@@ -125,7 +125,15 @@ void ComputerDialog::on_inputImage_editingFinished()
 
 void ComputerDialog::on_btnImageBrowse_clicked()
 {
-    QUrl file = QFileDialog::getOpenFileUrl(this,"Open Image", QDir::homePath(),"Images (*.png *.xpm *.jpg)");
+    auto supportedFormatsList = QImageWriter::supportedImageFormats();
+    QString supportedFormats = "(";
+    for(int i = 0; i < supportedFormatsList.size(); i++){
+        if(i+1 == supportedFormatsList.size())
+            supportedFormats += "*." +QString(supportedFormatsList[i]) +")";
+        else
+            supportedFormats += "*." +QString(supportedFormatsList[i]) +" ";
+    }
+    QUrl file = QFileDialog::getOpenFileUrl(this,"Open Image", QDir::homePath(),"Images "+supportedFormats);
 
     if (!file.isEmpty() && file.isValid()) {
         ui->inputImage->setText(file.toDisplayString());

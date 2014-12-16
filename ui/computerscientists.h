@@ -5,6 +5,7 @@
 #include <QTableWidgetItem>
 #include <QMessageBox>
 #include <QNetworkAccessManager>
+#include <QImageWriter>
 #include "../imageloader.h"
 #include "../services/scientistservice.h"
 #include "../services/computerservice.h"
