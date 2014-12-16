@@ -59,11 +59,8 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
-      <attribute name="horizontalHeaderCascadingSectionResizes">
+      <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>230</number>
       </attribute>
       <column>
        <property name="text">
@@ -108,14 +105,8 @@
       <property name="columnCount">
        <number>1</number>
       </property>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>230</number>
-      </attribute>
-      <attribute name="verticalHeaderCascadingSectionResizes">
+      <attribute name="horizontalHeaderStretchLastSection">
        <bool>true</bool>
-      </attribute>
-      <attribute name="verticalHeaderStretchLastSection">
-       <bool>false</bool>
       </attribute>
       <column>
        <property name="text">
