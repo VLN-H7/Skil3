@@ -100,7 +100,7 @@ void ComputerScientists::loadComputerTable(vector<Computer> list){
 void ComputerScientists::on_btnScientistSearch_clicked()
 {
     auto field = static_cast<ScientistFields::Field>(ui->comboScientistSearch->currentIndex() + 1);
-    auto query = ui->editComputerSearch->text();
+    auto query = ui->editScientistSearch->text();
     loadScientistTable(scientistService->search(field, 0, query));
 }
 
