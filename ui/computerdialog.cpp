@@ -21,20 +21,22 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
     ui->radioButtonWasBuilt->setChecked(comp.getBuilt());
     ui->radioButtonNotBuilt->setChecked(!comp.getBuilt());
     ui->computerBuildYear->setDate(QDate(comp.getBuildYear(), 0, 0));
+    ui->inputImage->setText(comp.getImage().toString());
     editing = true;
 }
 
 ComputerDialog::~ComputerDialog()
 {
+    ImageLoader::getInstance()->cancel(ui->lblComputerImage); // otherwise the imageloader attempts to use a pointer that no longer points anywhere
     delete ui;
 }
 
-void ComputerDialog::on_pushButton_CancelAdd_clicked()
+void ComputerDialog::on_btnCancel_clicked()
 {
     close();
 }
 
-void ComputerDialog::on_pushButton_AddTheComputer_clicked()
+void ComputerDialog::on_btnAdd_clicked()
 {
     Computer c;
 
@@ -60,6 +62,8 @@ void ComputerDialog::on_pushButton_AddTheComputer_clicked()
         c.setBuilt(false);
         c.setBuildYear(0);
     }
+
+    c.setImage(QUrl::fromUserInput(ui->inputImage->text()));
 
     if(editing)
         mainWindow->computerService->update(comp, c);
@@ -93,6 +97,10 @@ bool ComputerDialog::computerInputIsValid()
         isValid = false;
     }
 
+    if(!ui->inputImage->text().isEmpty() && !QUrl::fromUserInput(ui->inputImage->text()).isValid()){
+        isValid = false;
+    }
+
     return isValid;
 }
 
@@ -105,5 +113,21 @@ void ComputerDialog::on_radioButtonNotBuilt_toggled(bool checked)
     else
     {
         ui->computerBuildYear->setEnabled(true);
+    }
+}
+
+void ComputerDialog::on_inputImage_editingFinished()
+{
+    QUrl url = QUrl::fromUserInput(ui->inputImage->text());
+    if(url.isValid())
+        ImageLoader::getInstance()->load(url,ui->lblComputerImage);
+}
+
+void ComputerDialog::on_btnImageBrowse_clicked()
+{
+    QUrl file = QFileDialog::getOpenFileUrl(this,"Open Image", QDir::homePath(),"Images (*.png *.xpm *.jpg)");
+
+    if (!file.isEmpty() && file.isValid()) {
+        ui->inputImage->setText(file.toDisplayString());
     }
 }

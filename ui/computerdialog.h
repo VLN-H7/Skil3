@@ -2,6 +2,7 @@
 #define ADDCOMPUTERDIALOG_H
 
 #include <QDialog>
+#include <QFileDialog>
 #include "../services/computerservice.h"
 #include "../models/computer.h"
 #include "../utils.h"
@@ -21,10 +22,12 @@ public:
     ~ComputerDialog();
 
 private slots:
-    void on_pushButton_CancelAdd_clicked();
-    void on_pushButton_AddTheComputer_clicked();
     void on_radioButtonNotBuilt_toggled(bool checked);
 
+    void on_btnCancel_clicked();
+    void on_btnAdd_clicked();
+    void on_btnImageBrowse_clicked();
+    void on_inputImage_editingFinished();
 private:
     Ui::ComputerDialog *ui;
     ComputerScientists *mainWindow;

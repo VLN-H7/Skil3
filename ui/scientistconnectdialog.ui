@@ -44,6 +44,9 @@
       <property name="acceptDrops">
        <bool>true</bool>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
       <property name="dragEnabled">
        <bool>true</bool>
       </property>
@@ -51,7 +54,7 @@
        <enum>QAbstractItemView::DragDrop</enum>
       </property>
       <property name="defaultDropAction">
-       <enum>Qt::CopyAction</enum>
+       <enum>Qt::IgnoreAction</enum>
       </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
@@ -84,6 +87,9 @@
       <property name="acceptDrops">
        <bool>true</bool>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
       <property name="dragEnabled">
        <bool>true</bool>
       </property>
@@ -91,7 +97,7 @@
        <enum>QAbstractItemView::DragDrop</enum>
       </property>
       <property name="defaultDropAction">
-       <enum>Qt::MoveAction</enum>
+       <enum>Qt::IgnoreAction</enum>
       </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>

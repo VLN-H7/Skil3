@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -303,6 +303,9 @@
            </item>
            <item>
             <widget class="QTableWidget" name="tblScientistConnections">
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
              <attribute name="horizontalHeaderStretchLastSection">
               <bool>true</bool>
              </attribute>
@@ -541,6 +544,9 @@
            </item>
            <item>
             <widget class="QTableWidget" name="tblComputerConnections">
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
              <attribute name="horizontalHeaderStretchLastSection">
               <bool>true</bool>
              </attribute>
