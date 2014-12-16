@@ -32,6 +32,7 @@ private slots:
     void on_inputImage_editingFinished();
 
     void on_btnImageBrowse_clicked();
+    bool scientistInputIsValid();
 
 private:
     Ui::ScientistDialog *ui;
@@ -39,7 +40,6 @@ private:
     Scientist sci;
     bool editing;
     void clearAddScientistErrors();
-    bool scientistInputIsValid();
 };
 
 #endif // ADDSCIENTISTDIALOG_H
