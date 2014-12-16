@@ -7,3 +7,4 @@ Icon:
 	http://www.adsitsolutions.com/images/icons/grey/home-user-icon.png
 	http://simpleicon.com/wp-content/uploads/pc.png
 	http://www.nsdizajn.com/images/ikonice/sajt1.png
+	https://cdn1.iconfinder.com/data/icons/touch-gestures-2/24/Drag-Right-512.png

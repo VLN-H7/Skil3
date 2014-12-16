@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Add Computer Dialog</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -131,13 +131,13 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>20</y>
+     <y>0</y>
      <width>381</width>
-     <height>22</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Add &lt;/span&gt;&lt;span style=&quot; font-size:18pt; color:#377BCE;&quot;&gt;Computer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Add &lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-style:italic; color:#377bce;&quot;&gt;Computer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -193,6 +193,9 @@
      <widget class="QPushButton" name="btnImageBrowse">
       <property name="text">
        <string>Browse</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
       </property>
      </widget>
     </item>

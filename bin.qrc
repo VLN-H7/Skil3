@@ -3,6 +3,7 @@
         <file>pictures/welcomescreen.jpg</file>
         <file>pictures/computerscientist.png</file>
         <file>pictures/computerscientist-copy.png</file>
+        <file>pictures/Drag-Right-512.png</file>
     </qresource>
     <qresource prefix="/icons">
         <file>icons/computer-icon.png</file>
