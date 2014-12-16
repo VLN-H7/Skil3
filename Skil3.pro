@@ -4,6 +4,7 @@
 #
 #-------------------------------------------------
 QT       += core gui sql network
+QTPLUGIN += qjpeg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
