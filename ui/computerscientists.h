@@ -59,6 +59,9 @@ private slots:
 
     void on_comboComputerSearch_currentTextChanged(const QString currentText);
 
+    void on_editScientistButton_clicked();
+
+    void on_editComputerButton_clicked();
 private:
     Ui::ComputerScientists *ui;
 

@@ -375,3 +375,21 @@ void ComputerScientists::on_comboComputerSearch_currentTextChanged(const QString
     else
         ui->editComputerSearch->setCompleter(nullpointer);
 }
+
+void ComputerScientists::on_editScientistButton_clicked()
+{
+    auto items = ui->tableScientists->selectedItems();
+    if (items.isEmpty()){
+        return;
+    }
+    on_tableScientists_itemDoubleClicked(items.first());
+}
+
+void ComputerScientists::on_editComputerButton_clicked()
+{
+    auto items = ui->tableComputers->selectedItems();
+    if (items.isEmpty()){
+        return;
+    }
+    on_tableComputers_itemDoubleClicked(items.first());
+}

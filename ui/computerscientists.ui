@@ -37,7 +37,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -202,7 +202,7 @@
           <x>10</x>
           <y>120</y>
           <width>101</width>
-          <height>131</height>
+          <height>161</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -237,6 +237,16 @@
            <property name="icon">
             <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/remove-icon.png</normaloff>:/icons/icons/remove-icon.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="editScientistButton">
+           <property name="contextMenuPolicy">
+            <enum>Qt::PreventContextMenu</enum>
+           </property>
+           <property name="text">
+            <string>Edit</string>
            </property>
           </widget>
          </item>
@@ -494,7 +504,7 @@
           <x>10</x>
           <y>120</y>
           <width>101</width>
-          <height>131</height>
+          <height>161</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -529,6 +539,13 @@
            <property name="icon">
             <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/remove-icon.png</normaloff>:/icons/icons/remove-icon.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="editComputerButton">
+           <property name="text">
+            <string>Edit</string>
            </property>
           </widget>
          </item>
@@ -625,12 +642,6 @@
          <bool>true</bool>
         </property>
        </widget>
-       <zorder>widget_3</zorder>
-       <zorder>picture_computers</zorder>
-       <zorder>frame_3</zorder>
-       <zorder>widget_7</zorder>
-       <zorder>btnAbout</zorder>
-       <zorder>btnAbout</zorder>
       </widget>
      </widget>
     </item>
