@@ -72,8 +72,7 @@ void ScientistConnectDialog::unConnectedDropped(const DropMimeData *data){
 void ScientistConnectDialog::unConnectedChanged(const DropMimeData *data){
 }
 
-void ScientistConnectDialog::on_OK_btn_accepted()
+void ScientistConnectDialog::on_pushButton_Ok_clicked()
 {
     close();
 }
-

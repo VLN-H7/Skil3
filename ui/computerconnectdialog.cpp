@@ -69,8 +69,7 @@ void ComputerConnectDialog::unConnectedDropped(const DropMimeData *data){
 void ComputerConnectDialog::unConnectedChanged(const DropMimeData *data){
 }
 
-void ComputerConnectDialog::on_OK_btn_accepted()
+void ComputerConnectDialog::on_pushButton_Ok_clicked()
 {
     close();
 }
-
