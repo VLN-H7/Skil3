@@ -1,8 +1,8 @@
 #include "computerdialog.h"
 #include "ui_computerdialog.h"
 
-ComputerDialog::ComputerDialog(ComputerScientists *mWindow, QWidget *parent) :
-    QDialog(parent),
+ComputerDialog::ComputerDialog(ComputerScientists *mWindow) :
+    QDialog(mWindow),
     mainWindow(mWindow),
     ui(new Ui::ComputerDialog)
 {
@@ -12,8 +12,8 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, QWidget *parent) :
     editing = false;
 }
 
-ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit, QWidget *parent) :
-    ComputerDialog(mWindow, parent)
+ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
+    ComputerDialog(mWindow)
 {
     comp = edit;
     ui->inputComputerName->setText(comp.getName());

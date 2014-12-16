@@ -18,8 +18,8 @@ class ScientistDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ScientistDialog(ComputerScientists *mWindow, QWidget *parent = 0);
-    explicit ScientistDialog(ComputerScientists *mWindow, Scientist edit, QWidget *parent = 0);
+    explicit ScientistDialog(ComputerScientists *mWindow);
+    explicit ScientistDialog(ComputerScientists *mWindow, Scientist edit);
     ~ScientistDialog();
 
 private slots:

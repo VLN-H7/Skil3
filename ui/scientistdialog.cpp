@@ -1,8 +1,8 @@
 #include "scientistdialog.h"
 #include "ui_scientistdialog.h"
 
-ScientistDialog::ScientistDialog(ComputerScientists *mWindow, QWidget *parent) :
-    QDialog(parent),
+ScientistDialog::ScientistDialog(ComputerScientists *mWindow) :
+    QDialog(mWindow),
     mainWindow(mWindow),
     ui(new Ui::ScientistDialog)
 {
@@ -12,8 +12,8 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow, QWidget *parent) :
     editing = false;
 }
 
-ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit, QWidget *parent) :
-    ScientistDialog(mWindow, parent)
+ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit) :
+    ScientistDialog(mWindow)
 {
     sci = edit;
     ui->inputFirstName->setText(sci.getFirstName());
@@ -28,7 +28,7 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit, QW
 
 ScientistDialog::~ScientistDialog()
 {
-    ImageLoader::getInstance()->cancel(ui->lblScientistImage);
+    ImageLoader::getInstance()->cancel(ui->lblScientistImage); // otherwise the imageloader attempts to use a pointer that no longer points anywhere
     delete ui;
 }
 

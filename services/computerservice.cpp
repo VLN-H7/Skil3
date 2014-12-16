@@ -29,6 +29,10 @@ vector<Computer> ComputerService::byScientist(Scientist &s) {
     return computerRepository.byScientist(s);
 }
 
+vector<Computer> ComputerService::notByScientist(Scientist &s) {
+    return computerRepository.notByScientist(s);
+}
+
 void ComputerService::link(Computer &c, Scientist &s) {
     computerRepository.link(c,s);
 }

@@ -198,7 +198,7 @@
           <x>10</x>
           <y>120</y>
           <width>101</width>
-          <height>103</height>
+          <height>131</height>
          </rect>
         </property>
         <property name="frameShape">
@@ -227,6 +227,13 @@
            <property name="icon">
             <iconset resource="../bin.qrc">
              <normaloff>:/icons/icons/remove-icon.png</normaloff>:/icons/icons/remove-icon.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>Connect</string>
            </property>
           </widget>
          </item>

@@ -25,7 +25,6 @@ void ImageLoader::cancel(QLabel* label){
     foreach(QUrl url, dict.keys()){
         if(dict[url] == label){
             dict.remove(url);
-            break;
         };
     }
 }

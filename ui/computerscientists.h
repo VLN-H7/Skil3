@@ -42,6 +42,8 @@ private slots:
     void on_btnAddComputer_clicked();
     void on_tableScientists_itemSelectionChanged();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::ComputerScientists *ui;
 

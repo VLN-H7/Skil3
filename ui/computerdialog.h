@@ -16,8 +16,8 @@ class ComputerDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ComputerDialog(ComputerScientists *mWindow, QWidget *parent = 0);
-    explicit ComputerDialog(ComputerScientists *mWindow, Computer edit, QWidget *parent = 0);
+    explicit ComputerDialog(ComputerScientists *mWindow);
+    explicit ComputerDialog(ComputerScientists *mWindow, Computer edit);
     ~ComputerDialog();
 
 private slots:

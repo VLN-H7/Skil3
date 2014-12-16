@@ -4,6 +4,7 @@
 
 #include "scientistdialog.h"
 #include "computerdialog.h"
+#include "computerconnectdialog.h"
 
 ComputerScientists::ComputerScientists(QWidget *parent) :
     QMainWindow(parent),
@@ -216,5 +217,19 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
 
 
+
+}
+
+void ComputerScientists::on_pushButton_clicked()
+{
+    auto items = ui->tableScientists->selectedItems();
+    if (items.isEmpty()){
+        return;
+    }
+    auto item = items.first();
+    Scientist s = scientistList[item->type()];
+    ComputerConnectDialog dialog(this, s);
+    dialog.setModal(true);
+    dialog.exec();
 
 }

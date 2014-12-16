@@ -20,6 +20,7 @@ public:
     vector<Computer> byScientist(Scientist &s);
     void unlink(Computer &c, Scientist &s);
     void link(Computer &c, Scientist &s);
+    vector<Computer> notByScientist(Scientist &s);
 private:
     ComputerRepository computerRepository;
 };
