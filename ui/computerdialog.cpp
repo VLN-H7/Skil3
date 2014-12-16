@@ -146,3 +146,10 @@ void ComputerDialog::on_btnImageBrowse_clicked()
         ui->inputImage->setText(file.toDisplayString());
     }
 }
+
+void ComputerDialog::on_add_remove_type_btn_clicked()
+{
+    computertypedialog typeC(this);
+    typeC.setModal(true);
+    typeC.exec();
+}
