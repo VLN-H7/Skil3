@@ -29,7 +29,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Add &lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#0000ff;&quot;&gt;Scientist&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Add &lt;/span&gt;&lt;span style=&quot; font-size:18pt; color:#377BCE;&quot;&gt;Scientist&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -38,113 +38,10 @@
      <x>10</x>
      <y>50</y>
      <width>391</width>
-     <height>351</height>
+     <height>341</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="7" column="0" colspan="2">
-     <widget class="QLabel" name="birth_label">
-      <property name="text">
-       <string>Date of Birth</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="2" colspan="2">
-     <widget class="QLabel" name="label_error_nationality">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0" colspan="4">
-     <widget class="QLabel" name="gender_label">
-      <property name="text">
-       <string>Gender</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QLabel" name="last_name_label">
-      <property name="text">
-       <string>Last Name</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="0" colspan="4">
-     <widget class="QDateEdit" name="inputDateOfDeath">
-      <property name="locale">
-       <locale language="English" country="UnitedStates"/>
-      </property>
-      <property name="displayFormat">
-       <string>dd.MM.yyyy</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-      <property name="date">
-       <date>
-        <year>2000</year>
-        <month>1</month>
-        <day>2</day>
-       </date>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="0" colspan="2">
-     <widget class="QLabel" name="nationality_label">
-      <property name="text">
-       <string>Nationality</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2" colspan="2">
-     <widget class="QLabel" name="label_error_first_name">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputFirstName"/>
-    </item>
-    <item row="2" column="2" colspan="2">
-     <widget class="QLabel" name="label_error_last_name">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QComboBox" name="comboGender">
-      <item>
-       <property name="text">
-        <string>Male</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Female</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="9" column="0" colspan="2">
-     <widget class="QLabel" name="death_label">
-      <property name="text">
-       <string>Date of death</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" colspan="2">
-     <widget class="QLabel" name="first_name_label">
-      <property name="text">
-       <string>First Name</string>
-      </property>
-     </widget>
-    </item>
     <item row="8" column="0" colspan="4">
      <widget class="QDateEdit" name="inputDateOfBirth">
       <property name="focusPolicy">
@@ -171,11 +68,39 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputLastName"/>
+    <item row="11" column="0" colspan="2">
+     <widget class="QLabel" name="nationality_label">
+      <property name="text">
+       <string>Nationality</string>
+      </property>
+     </widget>
     </item>
-    <item row="12" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputNationality"/>
+    <item row="10" column="0" colspan="4">
+     <widget class="QDateEdit" name="inputDateOfDeath">
+      <property name="locale">
+       <locale language="English" country="UnitedStates"/>
+      </property>
+      <property name="displayFormat">
+       <string>dd.MM.yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="date">
+       <date>
+        <year>2000</year>
+        <month>1</month>
+        <day>2</day>
+       </date>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0" colspan="2">
+     <widget class="QLabel" name="death_label">
+      <property name="text">
+       <string>Date of death</string>
+      </property>
+     </widget>
     </item>
     <item row="9" column="3">
      <widget class="QCheckBox" name="checkBox_Alive">
@@ -184,13 +109,88 @@
       </property>
      </widget>
     </item>
+    <item row="11" column="2" colspan="2">
+     <widget class="QLabel" name="label_error_nationality">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputNationality"/>
+    </item>
+    <item row="3" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputLastName"/>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="first_name_label">
+      <property name="text">
+       <string>First Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QComboBox" name="comboGender">
+      <item>
+       <property name="text">
+        <string>Male</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Female</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="2" column="2" colspan="2">
+     <widget class="QLabel" name="label_error_last_name">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputFirstName"/>
+    </item>
+    <item row="0" column="2" colspan="2">
+     <widget class="QLabel" name="label_error_first_name">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="last_name_label">
+      <property name="text">
+       <string>Last Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="4">
+     <widget class="QLabel" name="gender_label">
+      <property name="text">
+       <string>Gender</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0" colspan="2">
+     <widget class="QLabel" name="birth_label">
+      <property name="text">
+       <string>Date of Birth</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>370</y>
+     <x>460</x>
+     <y>360</y>
      <width>221</width>
      <height>32</height>
     </rect>
@@ -224,7 +224,7 @@
      <x>417</x>
      <y>50</y>
      <width>311</width>
-     <height>311</height>
+     <height>301</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
