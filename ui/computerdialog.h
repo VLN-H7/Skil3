@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QFileDialog>
+#include <QStringList>
 #include "../services/computerservice.h"
 #include "../models/computer.h"
 #include "../utils.h"
@@ -35,6 +36,7 @@ private:
     bool editing;
     bool computerInputIsValid();
     void clearAddComputerErrors();
+    QStringList computerTypes;
 
 };
 
