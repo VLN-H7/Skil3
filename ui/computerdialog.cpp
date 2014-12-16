@@ -20,12 +20,7 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
 {
     comp = edit;
     ui->inputComputerName->setText(comp.getName());
-    for(int i = 0; i < ui->comboType->count(); i++){
-        if(computerTypes[ui->comboType->itemData(i).value<size_t>()].getID() == comp.getType().getID()){
-            ui->comboType->setCurrentIndex(i);
-            break;
-        }
-    }
+    ui->comboType->setCurrentIndex(ui->comboType->findText(comp.getType().getType()));
     ui->radioButtonWasBuilt->setChecked(comp.getBuilt());
     ui->radioButtonNotBuilt->setChecked(!comp.getBuilt());
     ui->computerBuildYear->setDate(QDate(comp.getBuildYear(), 0, 0));
