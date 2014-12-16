@@ -47,6 +47,9 @@ private slots:
 
     void on_btnComputerConnect_clicked();
     void on_tableComputers_itemSelectionChanged();
+    void on_tblScientistConnections_itemDoubleClicked(QTableWidgetItem *item);
+    void on_tblComputerConnections_itemDoubleClicked(QTableWidgetItem *item);
+
 private:
     Ui::ComputerScientists *ui;
 

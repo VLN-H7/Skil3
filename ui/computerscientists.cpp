@@ -207,7 +207,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
     ui->tblScientistConnections->setRowCount(computers.size());
 
     for(size_t i = 0; i < computers.size(); i++)
-        ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName()) );
+        ui->tblScientistConnections->setItem(i,0,new QTableWidgetItem(computers[i].getName(), computers[i].getID()) );
 }
 
 void ComputerScientists::on_tableComputers_itemSelectionChanged()
@@ -230,7 +230,7 @@ void ComputerScientists::on_tableComputers_itemSelectionChanged()
     ui->tblComputerConnections->setRowCount(scientists.size());
 
     for(size_t i = 0; i < scientists.size(); i++)
-        ui->tblComputerConnections->setItem(i,0,new QTableWidgetItem(scientists[i].getFirstName() + " " + scientists[i].getLastName()) );
+        ui->tblComputerConnections->setItem(i,0,new QTableWidgetItem(scientists[i].getFirstName() + " " + scientists[i].getLastName(), scientists[i].getID()) );
 }
 
 void ComputerScientists::on_btnScientistConnect_clicked()
@@ -259,4 +259,42 @@ void ComputerScientists::on_btnComputerConnect_clicked()
     dialog.setModal(true);
     dialog.exec();
 
+}
+
+void ComputerScientists::on_tblScientistConnections_itemDoubleClicked(QTableWidgetItem *item)
+{
+    int i;
+    for(i=0; i < computerList.size(); i++){
+        if(computerList[i].getID() == item->type()){
+            break;
+        }
+    }
+    ui->tabMenu->setCurrentIndex(1);
+    int row;
+    for(row = 0; row < ui->tableComputers->rowCount(); row++){
+        if(ui->tableComputers->item(row,0)->type() == i){
+            break;
+        }
+    }
+
+    ui->tableComputers->selectRow(row);
+}
+
+void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidgetItem *item)
+{
+    int i;
+    for(i=0; i < scientistList.size(); i++){
+        if(scientistList[i].getID() == item->type()){
+            break;
+        }
+    }
+    ui->tabMenu->setCurrentIndex(0);
+    int row;
+    for(row = 0; row < ui->tableScientists->rowCount(); row++){
+        if(ui->tableScientists->item(row,0)->type() == i){
+            break;
+        }
+    }
+
+    ui->tableScientists->selectRow(row);
 }
