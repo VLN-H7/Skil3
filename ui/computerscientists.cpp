@@ -263,32 +263,36 @@ void ComputerScientists::on_btnComputerConnect_clicked()
 
 void ComputerScientists::on_tblScientistConnections_itemDoubleClicked(QTableWidgetItem *item)
 {
+    // First search for the index of the current item inside the computerList
     int i;
-    for(i=0; i < computerList.size(); i++){
+    for(i=0; i < (int)computerList.size(); i++){
         if(computerList[i].getID() == item->type()){
             break;
         }
     }
-    ui->tabMenu->setCurrentIndex(1);
+
+    // Now search for the row that points to this index.
     int row;
     for(row = 0; row < ui->tableComputers->rowCount(); row++){
         if(ui->tableComputers->item(row,0)->type() == i){
             break;
         }
     }
-
+    ui->tabMenu->setCurrentIndex(1);
     ui->tableComputers->selectRow(row);
 }
 
 void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidgetItem *item)
 {
+    // First search for the index of the current item inside the scientistList
     int i;
     for(i=0; i < scientistList.size(); i++){
         if(scientistList[i].getID() == item->type()){
             break;
         }
     }
-    ui->tabMenu->setCurrentIndex(0);
+
+    // Now search for the row that points to this index.
     int row;
     for(row = 0; row < ui->tableScientists->rowCount(); row++){
         if(ui->tableScientists->item(row,0)->type() == i){
@@ -296,5 +300,6 @@ void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidge
         }
     }
 
+    ui->tabMenu->setCurrentIndex(0);
     ui->tableScientists->selectRow(row);
 }
