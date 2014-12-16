@@ -6,7 +6,7 @@ DropTableWidget::DropTableWidget(QWidget *parent) : QTableWidget(parent) {
     setSelectionMode(QAbstractItemView::ExtendedSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setDragDropMode(QAbstractItemView::DragDrop);
-
+    setDefaultDropAction(Qt::IgnoreAction);
     setDragEnabled(true);
     setAcceptDrops(true);
 
@@ -15,7 +15,8 @@ DropTableWidget::DropTableWidget(QWidget *parent) : QTableWidget(parent) {
 void DropTableWidget::dropEvent(QDropEvent *event) {
     event->acceptProposedAction();
     const DropMimeData *myData = qobject_cast<const DropMimeData *>(event->mimeData());
-    emit dropped(myData);
+    if(myData)
+        emit dropped(myData);
 }
 
 QMimeData *DropTableWidget::mimeData(const QList<QTableWidgetItem*> items) const
@@ -27,9 +28,11 @@ QMimeData *DropTableWidget::mimeData(const QList<QTableWidgetItem*> items) const
 }
 
 void DropTableWidget::dragEnterEvent(QDragEnterEvent *event) {
-    event->acceptProposedAction();
     const DropMimeData *myData = qobject_cast<const DropMimeData *>(event->mimeData());
-    emit changed(myData);
+    if(myData){
+        event->acceptProposedAction();
+        emit changed(myData);
+    }
 }
 
 void DropTableWidget::dragMoveEvent(QDragMoveEvent *event) {

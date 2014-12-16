@@ -39,13 +39,17 @@ void ComputerConnectDialog::refreshTables(){
     ui->tblUnconnectedComputers->setRowCount(unconnectedList.size());
 
     for(size_t i = 0; i < unconnectedList.size(); i++){
-        ui->tblUnconnectedComputers->setItem(i,0,new QTableWidgetItem(unconnectedList[i].getName(), i) );
+        ui->tblUnconnectedComputers->setItem(i,0,new QTableWidgetItem(unconnectedList[i].getName(), ~i) ); // store the 1-s complement as a marker
     }
 }
 
 void ComputerConnectDialog::connectedDropped(const DropMimeData *data){
-    qDebug() << unconnectedList[data->type].getName();
-    mainWindow->computerService->link(unconnectedList[data->type], scientist);
+    if(data->type >= 0){ // check if the type is positive, meaning it came from this table.
+        refreshTables();
+        return;
+    }
+    int type = ~(data->type);
+    mainWindow->computerService->link(unconnectedList[type], scientist);
     refreshTables();
 }
 
@@ -53,8 +57,12 @@ void ComputerConnectDialog::connectedChanged(const DropMimeData *data){
 }
 
 void ComputerConnectDialog::unConnectedDropped(const DropMimeData *data){
-    qDebug() << connectedList[data->type].getName();
-    mainWindow->computerService->unlink(connectedList[data->type], scientist);
+    if(data->type < 0){ // check if the type is negative, meaning it came from this table.
+        refreshTables();
+        return;
+    }
+    int type = data->type;
+    mainWindow->computerService->unlink(connectedList[type], scientist);
     refreshTables();
 }
 

@@ -7,7 +7,12 @@ class DropMimeData : public QMimeData
     Q_OBJECT
 
 public:
+    DropMimeData():
+        QMimeData()
+    {
+        type = -1;
+    }
+
     int type;
-    QMimeData* realData;
 };
 #endif // DROPMIMEDATA_H

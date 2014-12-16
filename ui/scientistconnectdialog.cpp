@@ -39,22 +39,33 @@ void ScientistConnectDialog::refreshTables(){
     ui->tblUnconnectedScientists->setRowCount(unconnectedList.size());
 
     for(size_t i = 0; i < unconnectedList.size(); i++){
-        ui->tblUnconnectedScientists->setItem(i,0,new QTableWidgetItem(unconnectedList[i].getFirstName() + " " + unconnectedList[i].getLastName(), i) );
+        ui->tblUnconnectedScientists->setItem(i,0,new QTableWidgetItem(unconnectedList[i].getFirstName() + " " + unconnectedList[i].getLastName(), ~i) );
     }
 }
 
 void ScientistConnectDialog::connectedDropped(const DropMimeData *data){
-    qDebug() << unconnectedList[data->type].getFirstName();
-    mainWindow->computerService->link(computer, unconnectedList[data->type]);
+    if(data->type >= 0) { // if the type is positive, it came from this table
+        refreshTables(); // fixes an annoying bug with stuff disappearing :/
+        return;
+    }
+    int type = ~(data->type);
+    qDebug() << unconnectedList[type].getFirstName();
+    mainWindow->computerService->link(computer, unconnectedList[type]);
     refreshTables();
 }
 
 void ScientistConnectDialog::connectedChanged(const DropMimeData *data){
+    qDebug() << data->type;
 }
 
 void ScientistConnectDialog::unConnectedDropped(const DropMimeData *data){
-    qDebug() << connectedList[data->type].getFirstName();
-    mainWindow->computerService->unlink(computer, connectedList[data->type]);
+    if(data->type < 0){ // check if the type is negative, meaning it came from this table.
+        refreshTables();
+        return;
+    }
+    int type = data->type;
+    qDebug() << connectedList[type].getFirstName();
+    mainWindow->computerService->unlink(computer, connectedList[type]);
     refreshTables();
 }
 
