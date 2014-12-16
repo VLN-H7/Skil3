@@ -227,6 +227,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
     ui->tblScientistConnections->clearContents();
     ui->lblScientistImage->clear();
     if (items.isEmpty()){
+        ui->tblScientistConnections->setRowCount(0);
         return;
     }
     auto item = items.first();
@@ -250,6 +251,7 @@ void ComputerScientists::on_tableComputers_itemSelectionChanged()
     ui->tblComputerConnections->clearContents();
     ui->lblComputerImage->clear();
     if (items.isEmpty()){
+        ui->tblComputerConnections->setRowCount(0);
         return;
     }
     auto item = items.first();
@@ -305,7 +307,7 @@ void ComputerScientists::on_btnAbout_clicked()
 
 void ComputerScientists::on_btnAbout_2_clicked()
 {
-    ComputerScientists:on_btnAbout_clicked();
+    on_btnAbout_clicked();
 }
 
 void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QString currentText)
