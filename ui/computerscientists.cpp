@@ -129,7 +129,20 @@ void ComputerScientists::setupScientistCompleters(){
     nationalityCompleter = new QCompleter(nationalityList.toList());
     nationalityCompleter->setCaseSensitivity(Qt::CaseInsensitive);
 
-    ui->editScientistSearch->setCompleter(firstNameCompleter);
+    setScientistCompleter();
+}
+
+void ComputerScientists::setScientistCompleter(){
+    //Sets the completer based on combobox text
+    QCompleter *nullpointer = 0;
+    if(ui->comboScientistSearch->currentText()=="First Name")
+        ui->editScientistSearch->setCompleter(firstNameCompleter);
+    else if(ui->comboScientistSearch->currentText()=="Last Name")
+        ui->editScientistSearch->setCompleter(lastNameCompleter);
+    else if(ui->comboScientistSearch->currentText()=="Nationality")
+        ui->editScientistSearch->setCompleter(nationalityCompleter);
+    else
+        ui->editScientistSearch->setCompleter(nullpointer);
 }
 
 void ComputerScientists::setupComputerCompleters(){
@@ -151,7 +164,20 @@ void ComputerScientists::setupComputerCompleters(){
     typeCompleter = new QCompleter(typeList.toList());
     typeCompleter->setCaseSensitivity(Qt::CaseInsensitive);
 
-    ui->editComputerSearch->setCompleter(compNameCompleter);
+    setComputerCompleter();
+
+}
+
+
+void ComputerScientists::setComputerCompleter(){
+    //Sets the completer based on combobox text
+    QCompleter *nullpointer = 0;
+    if(ui->comboComputerSearch->currentText() == "Name")
+        ui->editComputerSearch->setCompleter(compNameCompleter);
+    else if(ui->comboComputerSearch->currentText() == "Type")
+        ui->editComputerSearch->setCompleter(typeCompleter);
+    else
+        ui->editComputerSearch->setCompleter(nullpointer);
 }
 
 void ComputerScientists::on_btnScientistSearch_clicked()
@@ -377,11 +403,11 @@ void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QStrin
 {
     // Update completer on combo change
     QCompleter *nullpointer = 0;
-    if(currentText == "First Name")
+    if(ui->comboScientistSearch->currentText()=="First Name")
         ui->editScientistSearch->setCompleter(firstNameCompleter);
-    else if(currentText == "Last Name")
+    else if(ui->comboScientistSearch->currentText()=="Last Name")
         ui->editScientistSearch->setCompleter(lastNameCompleter);
-    else if(currentText == "Nationality")
+    else if(ui->comboScientistSearch->currentText()=="Nationality")
         ui->editScientistSearch->setCompleter(nationalityCompleter);
     else
         ui->editScientistSearch->setCompleter(nullpointer);
@@ -434,11 +460,5 @@ void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidge
 void ComputerScientists::on_comboComputerSearch_currentTextChanged(const QString currentText)
 {
     // Update completer on combo change
-    QCompleter *nullpointer = 0;
-    if(currentText == "Name")
-        ui->editComputerSearch->setCompleter(compNameCompleter);
-    else if(currentText == "Type")
-        ui->editComputerSearch->setCompleter(typeCompleter);
-    else
-        ui->editComputerSearch->setCompleter(nullpointer);
+    setComputerCompleter();
 }
