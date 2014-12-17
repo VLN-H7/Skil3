@@ -32,6 +32,7 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
     editing = true;
 
     ui->btnAdd->setText("Update");
+    this->setWindowTitle("Edit computer dialog");
     ui->label_addComputerTitle->setText("<html><head/><body><p>"
                                         "<span style=\" font-size:18pt;\">Edit </span>"
                                         "<span style=\" font-size:18pt; font-style:italic; color:#377bce;\">Computer</span>"

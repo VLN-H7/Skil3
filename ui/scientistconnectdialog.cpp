@@ -49,13 +49,8 @@ void ScientistConnectDialog::connectedDropped(const DropMimeData *data){
         return;
     }
     int type = ~(data->type);
-    qDebug() << unconnectedList[type].getFirstName();
     mainWindow->computerService->link(computer, unconnectedList[type]);
     refreshTables();
-}
-
-void ScientistConnectDialog::connectedChanged(const DropMimeData *data){
-    qDebug() << data->type;
 }
 
 void ScientistConnectDialog::unConnectedDropped(const DropMimeData *data){
@@ -64,12 +59,8 @@ void ScientistConnectDialog::unConnectedDropped(const DropMimeData *data){
         return;
     }
     int type = data->type;
-    qDebug() << connectedList[type].getFirstName();
     mainWindow->computerService->unlink(computer, connectedList[type]);
     refreshTables();
-}
-
-void ScientistConnectDialog::unConnectedChanged(const DropMimeData *data){
 }
 
 void ScientistConnectDialog::on_pushButton_Ok_clicked()

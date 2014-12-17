@@ -139,6 +139,13 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="btnScientistReset">
+             <property name="text">
+              <string>Reset</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
@@ -432,6 +439,13 @@
             <widget class="QPushButton" name="btnComputerSearch">
              <property name="text">
               <string>Search</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnComputerReset">
+             <property name="text">
+              <string>Reset</string>
              </property>
             </widget>
            </item>

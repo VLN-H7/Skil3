@@ -64,7 +64,7 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
     }
     else
     {
-        qDebug() << reply->errorString();
+        label->setText(reply->errorString());
     }
 
     delete reply;
