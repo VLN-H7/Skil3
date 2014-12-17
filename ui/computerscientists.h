@@ -72,7 +72,7 @@ private:
     vector<Scientist> scientistList; // The current list backing the contents of tableScientists
     vector<Computer> computerList; // The current list backing the contents of tableComputers
 
-    bool messageBox_are_you_sure();
+    bool msgBoxConfirm();
     void loadScientistTable(vector<Scientist> list);
     void loadComputerTable(vector<Computer> list);
     void refreshScientists();

@@ -25,8 +25,6 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
 
     refreshScientists();
     refreshComputers();
-
-
 }
 
 ComputerScientists::~ComputerScientists()
@@ -46,9 +44,11 @@ void ComputerScientists::refreshComputers(){
 
 void ComputerScientists::loadScientistTable(vector<Scientist> list)
 {
+    // Save the current order, to restore later
     auto currentOrder = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
     auto currentSortColumn = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
 
+    // Load the list into the table
     ui->tableScientists->clearContents();
     ui->tableScientists->setSortingEnabled(false);
     ui->tableScientists->setRowCount(list.size());
@@ -76,9 +76,11 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list)
 
 void ComputerScientists::loadComputerTable(vector<Computer> list){
 
+    // Save the current order, to restore later
     auto currentOrder = ui->tableComputers->horizontalHeader()->sortIndicatorOrder();
     auto currentSortColumn = ui->tableComputers->horizontalHeader()->sortIndicatorOrder();
 
+    // Load the list into the table
     ui->tableComputers->clearContents();
     ui->tableComputers->setSortingEnabled(false);
     ui->tableComputers->setRowCount(list.size());
@@ -105,6 +107,7 @@ void ComputerScientists::setupScientistCompleters(){
     firstNameList.clear();
     lastNameList.clear();
     nationalityList.clear();
+
     for(size_t i = 0; i < scientistList.size(); i++){
         firstNameList.insert(scientistList[i].getFirstName());
         lastNameList.insert(scientistList[i].getLastName());
@@ -115,10 +118,12 @@ void ComputerScientists::setupScientistCompleters(){
         delete firstNameCompleter;
     firstNameCompleter = new QCompleter(firstNameList.toList());
     firstNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
     if(lastNameCompleter != NULL)
         delete lastNameCompleter;
     lastNameCompleter = new QCompleter(lastNameList.toList());
     lastNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
     if(nationalityCompleter != NULL)
         delete nationalityCompleter;
     nationalityCompleter = new QCompleter(nationalityList.toList());
@@ -130,6 +135,7 @@ void ComputerScientists::setupScientistCompleters(){
 void ComputerScientists::setupComputerCompleters(){
     compNameList.clear();
     typeList.clear();
+
     for(size_t i = 0; i < computerList.size(); i++){
         compNameList.insert(computerList[i].getName());
         typeList.insert(computerList[i].getType().getType());
@@ -139,6 +145,7 @@ void ComputerScientists::setupComputerCompleters(){
         delete compNameCompleter;
     compNameCompleter = new QCompleter(compNameList.toList());
     compNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+
     if(typeCompleter != NULL)
         delete typeCompleter;
     typeCompleter = new QCompleter(typeList.toList());
@@ -159,7 +166,7 @@ void ComputerScientists::on_btnComputerSearch_clicked()
     auto field = static_cast<ComputerFields::Field>(ui->comboComputerSearch->currentIndex() + 1);
     auto query = ui->editComputerSearch->text();
     if (field == ComputerFields::BUILT)
-        query = (query == "YES" ? "1" : "0"); // Fix bool queries
+        query = (query.toUpper() == "YES" ? "1" : "0"); // Convert our ui to search for bool
     loadComputerTable(computerService->search(field,0,query));
 }
 
@@ -167,7 +174,7 @@ void ComputerScientists::on_btnComputerSearch_clicked()
 void ComputerScientists::on_btnRemoveScientist_clicked()
 {
     auto items = ui->tableScientists->selectedItems();
-    if(items.isEmpty() || !messageBox_are_you_sure())
+    if(items.isEmpty() || !msgBoxConfirm())
         return;
     for(int i = 0; i < items.size(); i+=6){ // += 6 to skip duplicate rows
         scientistService->remove(scientistList[items[i]->type()]);
@@ -176,7 +183,23 @@ void ComputerScientists::on_btnRemoveScientist_clicked()
     refreshScientists();
 }
 
-bool ComputerScientists::messageBox_are_you_sure()
+
+void ComputerScientists::on_btnRemoveComputer_clicked()
+{
+    auto items = ui->tableComputers->selectedItems();
+    if(items.isEmpty() || !msgBoxConfirm())
+        return;
+
+    for(int i = 0; i < items.size(); i+=6){ // += 6 to skip duplicate rows
+        computerService->remove(computerList[items[i]->type()]);
+    }
+
+    refreshComputers();
+}
+
+
+
+bool ComputerScientists::msgBoxConfirm()
 {
     QMessageBox msgBox;
     msgBox.setText("Are you sure you want to remove this from the list?");
@@ -187,20 +210,6 @@ bool ComputerScientists::messageBox_are_you_sure()
         return false;
     else
         return true;
-}
-
-
-void ComputerScientists::on_btnRemoveComputer_clicked()
-{
-    auto items = ui->tableComputers->selectedItems();
-    if(items.isEmpty() || !messageBox_are_you_sure())
-        return;
-
-    for(int i = 0; i < items.size(); i+=6){ // += 6 to skip duplicate rows
-        computerService->remove(computerList[items[i]->type()]);
-    }
-
-    refreshComputers();
 }
 
 void ComputerScientists::on_tableScientists_itemDoubleClicked(QTableWidgetItem *item)
@@ -239,6 +248,7 @@ void ComputerScientists::on_btnAddComputer_clicked()
 
 void ComputerScientists::on_tableScientists_itemSelectionChanged()
 {
+    // Load into the side menu on select
     auto items = ui->tableScientists->selectedItems();
     ui->tblScientistConnections->clearContents();
     ui->lblScientistImage->clear();
@@ -266,6 +276,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
 void ComputerScientists::on_tableComputers_itemSelectionChanged()
 {
+    // Load into the side menu on select
     auto items = ui->tableComputers->selectedItems();
     ui->tblComputerConnections->clearContents();
     ui->lblComputerImage->clear();
@@ -319,6 +330,36 @@ void ComputerScientists::on_btnComputerConnect_clicked()
 
 }
 
+void ComputerScientists::on_editScientistButton_clicked()
+{
+    auto items = ui->tableScientists->selectedItems();
+    if (items.isEmpty()){
+        return;
+    }
+    on_tableScientists_itemDoubleClicked(items.first());
+}
+
+void ComputerScientists::on_editComputerButton_clicked()
+{
+    auto items = ui->tableComputers->selectedItems();
+    if (items.isEmpty()){
+        return;
+    }
+    on_tableComputers_itemDoubleClicked(items.first());
+}
+
+void ComputerScientists::on_btnScientistReset_clicked()
+{
+    refreshScientists();
+    ui->editScientistSearch->clear();
+}
+
+void ComputerScientists::on_btnComputerReset_clicked()
+{
+    refreshComputers();
+    ui->editComputerSearch->clear();
+}
+
 
 void ComputerScientists::on_btnAbout_clicked()
 {
@@ -334,6 +375,7 @@ void ComputerScientists::on_btnAbout_2_clicked()
 
 void ComputerScientists::on_comboScientistSearch_currentTextChanged(const QString currentText)
 {
+    // Update completer on combo change
     QCompleter *nullpointer = 0;
     if(currentText == "First Name")
         ui->editScientistSearch->setCompleter(firstNameCompleter);
@@ -371,7 +413,7 @@ void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidge
 {
     // First search for the index of the current item inside the scientistList
     int i;
-    for(i=0; i < scientistList.size(); i++){
+    for(i=0; i < (int)scientistList.size(); i++){
         if(scientistList[i].getID() == item->type()){
             break;
         }
@@ -391,6 +433,7 @@ void ComputerScientists::on_tblComputerConnections_itemDoubleClicked(QTableWidge
 
 void ComputerScientists::on_comboComputerSearch_currentTextChanged(const QString currentText)
 {
+    // Update completer on combo change
     QCompleter *nullpointer = 0;
     if(currentText == "Name")
         ui->editComputerSearch->setCompleter(compNameCompleter);
@@ -398,34 +441,4 @@ void ComputerScientists::on_comboComputerSearch_currentTextChanged(const QString
         ui->editComputerSearch->setCompleter(typeCompleter);
     else
         ui->editComputerSearch->setCompleter(nullpointer);
-}
-
-void ComputerScientists::on_editScientistButton_clicked()
-{
-    auto items = ui->tableScientists->selectedItems();
-    if (items.isEmpty()){
-        return;
-    }
-    on_tableScientists_itemDoubleClicked(items.first());
-}
-
-void ComputerScientists::on_editComputerButton_clicked()
-{
-    auto items = ui->tableComputers->selectedItems();
-    if (items.isEmpty()){
-        return;
-    }
-    on_tableComputers_itemDoubleClicked(items.first());
-}
-
-void ComputerScientists::on_btnScientistReset_clicked()
-{
-    refreshScientists();
-    ui->editScientistSearch->clear();
-}
-
-void ComputerScientists::on_btnComputerReset_clicked()
-{
-    refreshComputers();
-    ui->editComputerSearch->clear();
 }
