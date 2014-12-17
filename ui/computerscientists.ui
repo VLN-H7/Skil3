@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>620</height>
+    <height>633</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -71,7 +71,7 @@
           <x>110</x>
           <y>0</y>
           <width>631</width>
-          <height>541</height>
+          <height>561</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -294,7 +294,7 @@
           <x>740</x>
           <y>40</y>
           <width>201</width>
-          <height>501</height>
+          <height>521</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -323,6 +323,16 @@
               </widget>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblScientistWiki">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_10">
@@ -354,7 +364,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>520</y>
+          <y>530</y>
           <width>51</width>
           <height>23</height>
          </rect>
@@ -384,7 +394,7 @@
           <x>110</x>
           <y>0</y>
           <width>631</width>
-          <height>541</height>
+          <height>571</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -581,7 +591,7 @@
           <x>740</x>
           <y>40</y>
           <width>201</width>
-          <height>501</height>
+          <height>521</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -610,6 +620,16 @@
               </widget>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblComputerWiki">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_13">
@@ -641,7 +661,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>520</y>
+          <y>530</y>
           <width>51</width>
           <height>23</height>
          </rect>

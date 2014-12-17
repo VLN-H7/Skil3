@@ -244,6 +244,7 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
     auto items = ui->tableScientists->selectedItems();
     ui->tblScientistConnections->clearContents();
     ui->lblScientistImage->clear();
+    ui->lblScientistWiki->clear();
     if (items.isEmpty()){
         ui->tblScientistConnections->setRowCount(0);
         return;
@@ -253,6 +254,8 @@ void ComputerScientists::on_tableScientists_itemSelectionChanged()
 
     if(s.getImage().isValid())
         ImageLoader::getInstance()->load(s.getImage(), ui->lblScientistImage);
+
+    ui->lblScientistWiki->setText("<a href=\"" + s.getWikipedia().toString() + "\">" + s.getWikipedia().toDisplayString() + "</a>");
 
     auto computers = computerService->byScientist(s);
 
@@ -268,6 +271,7 @@ void ComputerScientists::on_tableComputers_itemSelectionChanged()
     auto items = ui->tableComputers->selectedItems();
     ui->tblComputerConnections->clearContents();
     ui->lblComputerImage->clear();
+    ui->lblComputerWiki->clear();
     if (items.isEmpty()){
         ui->tblComputerConnections->setRowCount(0);
         return;
@@ -277,6 +281,8 @@ void ComputerScientists::on_tableComputers_itemSelectionChanged()
 
     if(c.getImage().isValid())
         ImageLoader::getInstance()->load(c.getImage(), ui->lblComputerImage);
+
+    ui->lblComputerWiki->setText("<a href=\"" + c.getWikipedia().toString() + "\">" + c.getWikipedia().toDisplayString() + "</a>");
 
     auto scientists = scientistService->byComputer(c);
 
