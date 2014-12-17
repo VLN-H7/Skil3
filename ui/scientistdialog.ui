@@ -218,7 +218,11 @@
      </widget>
     </item>
     <item row="14" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputWikipedia"/>
+     <widget class="QLineEdit" name="inputWikipedia">
+      <property name="placeholderText">
+       <string>http://wikipedia.org/...</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -306,21 +310,20 @@
     <enum>QFrame::Raised</enum>
    </property>
   </widget>
-  <zorder>label_addScientistTitle</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>frame</zorder>
-  <zorder>btnCancel</zorder>
  </widget>
  <tabstops>
   <tabstop>inputFirstName</tabstop>
   <tabstop>inputLastName</tabstop>
   <tabstop>comboGender</tabstop>
   <tabstop>inputDateOfBirth</tabstop>
+  <tabstop>checkBox_Alive</tabstop>
   <tabstop>inputDateOfDeath</tabstop>
   <tabstop>inputNationality</tabstop>
+  <tabstop>inputWikipedia</tabstop>
   <tabstop>inputImage</tabstop>
+  <tabstop>btnImageBrowse</tabstop>
+  <tabstop>btnAdd</tabstop>
+  <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources/>
  <connections/>

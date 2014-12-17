@@ -130,6 +130,13 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>inputType</tabstop>
+  <tabstop>btnAdd</tabstop>
+  <tabstop>comboRemoveType</tabstop>
+  <tabstop>btnRemove</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

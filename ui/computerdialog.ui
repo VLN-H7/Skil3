@@ -140,7 +140,11 @@
      </widget>
     </item>
     <item row="12" column="0" colspan="2">
-     <widget class="QLineEdit" name="inputWikipedia"/>
+     <widget class="QLineEdit" name="inputWikipedia">
+      <property name="placeholderText">
+       <string>http://wikipedia.org/...</string>
+      </property>
+     </widget>
     </item>
     <item row="11" column="1">
      <widget class="QLabel" name="label_WikipediaError">
@@ -249,6 +253,19 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>inputComputerName</tabstop>
+  <tabstop>comboType</tabstop>
+  <tabstop>btnAddRemoveType</tabstop>
+  <tabstop>radioButtonWasBuilt</tabstop>
+  <tabstop>radioButtonNotBuilt</tabstop>
+  <tabstop>computerBuildYear</tabstop>
+  <tabstop>inputWikipedia</tabstop>
+  <tabstop>inputImage</tabstop>
+  <tabstop>btnImageBrowse</tabstop>
+  <tabstop>btnAdd</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

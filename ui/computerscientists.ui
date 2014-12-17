@@ -730,17 +730,29 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>editComputerSearch</tabstop>
-  <tabstop>comboComputerSearch</tabstop>
-  <tabstop>btnComputerSearch</tabstop>
-  <tabstop>btnAddComputer</tabstop>
-  <tabstop>btnRemoveComputer</tabstop>
-  <tabstop>tableComputers</tabstop>
   <tabstop>editScientistSearch</tabstop>
   <tabstop>comboScientistSearch</tabstop>
   <tabstop>btnScientistSearch</tabstop>
+  <tabstop>btnScientistReset</tabstop>
   <tabstop>btnAddScientist</tabstop>
   <tabstop>btnRemoveScientist</tabstop>
+  <tabstop>editScientistButton</tabstop>
+  <tabstop>btnScientistConnect</tabstop>
+  <tabstop>tableScientists</tabstop>
+  <tabstop>tblScientistConnections</tabstop>
+  <tabstop>btnAbout_2</tabstop>
+  <tabstop>tabMenu</tabstop>
+  <tabstop>editComputerSearch</tabstop>
+  <tabstop>comboComputerSearch</tabstop>
+  <tabstop>btnComputerSearch</tabstop>
+  <tabstop>btnComputerReset</tabstop>
+  <tabstop>btnAddComputer</tabstop>
+  <tabstop>btnRemoveComputer</tabstop>
+  <tabstop>editComputerButton</tabstop>
+  <tabstop>btnComputerConnect</tabstop>
+  <tabstop>tableComputers</tabstop>
+  <tabstop>tblComputerConnections</tabstop>
+  <tabstop>btnAbout</tabstop>
  </tabstops>
  <resources>
   <include location="../bin.qrc"/>
