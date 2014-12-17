@@ -30,6 +30,18 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QTabWidget" name="tabMenu">
+      <property name="cursor">
+       <cursorShape>CrossCursor</cursorShape>
+      </property>
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="toolTipDuration">
+       <number>-1</number>
+      </property>
+      <property name="statusTip">
+       <string/>
+      </property>
       <property name="tabPosition">
        <enum>QTabWidget::West</enum>
       </property>
@@ -141,6 +153,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="btnScientistReset">
+             <property name="toolTip">
+              <string>Lists all scientists</string>
+             </property>
              <property name="text">
               <string>Reset</string>
              </property>
@@ -152,6 +167,9 @@
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QTableWidget" name="tableScientists">
+             <property name="toolTipDuration">
+              <number>14</number>
+             </property>
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
@@ -224,6 +242,9 @@
            <property name="toolTip">
             <string>Add a scientist to the list</string>
            </property>
+           <property name="toolTipDuration">
+            <number>-1</number>
+           </property>
            <property name="text">
             <string>Add</string>
            </property>
@@ -251,6 +272,9 @@
           <widget class="QPushButton" name="editScientistButton">
            <property name="contextMenuPolicy">
             <enum>Qt::PreventContextMenu</enum>
+           </property>
+           <property name="toolTip">
+            <string>Edit selected scientist</string>
            </property>
            <property name="text">
             <string>Edit</string>
@@ -457,6 +481,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="btnComputerReset">
+             <property name="toolTip">
+              <string>Lists all computers</string>
+             </property>
              <property name="text">
               <string>Reset</string>
              </property>
@@ -468,6 +495,9 @@
           <layout class="QHBoxLayout" name="horizontalLayout_6">
            <item>
             <widget class="QTableWidget" name="tableComputers">
+             <property name="toolTip">
+              <string/>
+             </property>
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
@@ -571,6 +601,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="editComputerButton">
+           <property name="toolTip">
+            <string>Edit selected scientist</string>
+           </property>
            <property name="text">
             <string>Edit</string>
            </property>
