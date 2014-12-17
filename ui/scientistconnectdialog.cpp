@@ -3,9 +3,9 @@
 
 ScientistConnectDialog::ScientistConnectDialog(ComputerScientists *mWindow, Computer comp) :
     QDialog(mWindow),
+    ui(new Ui::ScientistConnectDialog),
     mainWindow(mWindow),
-    computer(comp),
-    ui(new Ui::ScientistConnectDialog)
+    computer(comp)
 {
     ui->setupUi(this);
 

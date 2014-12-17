@@ -3,8 +3,8 @@
 
 ComputerTypeDialog::ComputerTypeDialog(ComputerScientists *mWindow, QWidget *parent) :
     QDialog(parent),
-    mainWindow(mWindow),
-    ui(new Ui::ComputerTypeDialog)
+    ui(new Ui::ComputerTypeDialog),
+    mainWindow(mWindow)
 {
     ui->setupUi(this);
     computerTypes = mainWindow->computerService->listTypes();
