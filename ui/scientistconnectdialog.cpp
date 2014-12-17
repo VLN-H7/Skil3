@@ -10,11 +10,7 @@ ScientistConnectDialog::ScientistConnectDialog(ComputerScientists *mWindow, Comp
     ui->setupUi(this);
 
     connect(ui->tblConnectedScientists, SIGNAL(dropped(const DropMimeData *)), this, SLOT(connectedDropped(const DropMimeData *)));
-    connect(ui->tblConnectedScientists, SIGNAL(changed(const DropMimeData *)), this, SLOT(connectedChanged(const DropMimeData *)));
-
-
     connect(ui->tblUnconnectedScientists, SIGNAL(dropped(const DropMimeData *)), this, SLOT(unConnectedDropped(const DropMimeData *)));
-    connect(ui->tblUnconnectedScientists, SIGNAL(changed(const DropMimeData *)), this, SLOT(unConnectedChanged(const DropMimeData *)));
     refreshTables();
 
 }

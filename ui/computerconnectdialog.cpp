@@ -10,11 +10,7 @@ ComputerConnectDialog::ComputerConnectDialog(ComputerScientists *mWindow, Scient
     ui->setupUi(this);
 
     connect(ui->tblConnectedComputers, SIGNAL(dropped(const DropMimeData *)), this, SLOT(connectedDropped(const DropMimeData *)));
-    connect(ui->tblConnectedComputers, SIGNAL(changed(const DropMimeData *)), this, SLOT(connectedChanged(const DropMimeData *)));
-
-
     connect(ui->tblUnconnectedComputers, SIGNAL(dropped(const DropMimeData *)), this, SLOT(unConnectedDropped(const DropMimeData *)));
-    connect(ui->tblUnconnectedComputers, SIGNAL(changed(const DropMimeData *)), this, SLOT(unConnectedChanged(const DropMimeData *)));
     refreshTables();
 
 }
