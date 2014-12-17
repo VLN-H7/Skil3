@@ -420,10 +420,11 @@ void ComputerScientists::on_editComputerButton_clicked()
 void ComputerScientists::on_btnScientistReset_clicked()
 {
     refreshScientists();
-
+    ui->editScientistSearch->clear();
 }
 
 void ComputerScientists::on_btnComputerReset_clicked()
 {
     refreshComputers();
+    ui->editComputerSearch->clear();
 }
