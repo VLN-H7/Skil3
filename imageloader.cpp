@@ -37,6 +37,7 @@ void ImageLoader::load(QUrl url, QLabel* label){
         return;
     }
     dict.insert(url, label);
+    label->setText("Loading...");
     QNetworkRequest request(url);
     networkMgr->get(request);
 }
@@ -47,6 +48,7 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
         return;
     auto label = dict[reply->url()];
     dict.remove(reply->url());
+    label->clear();
 
     if (reply->error() == QNetworkReply::NoError)
     {
