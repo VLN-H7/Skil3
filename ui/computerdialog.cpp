@@ -114,6 +114,7 @@ bool ComputerDialog::computerInputIsValid()
     }
 
     if(!ui->inputImage->text().isEmpty() && !QUrl::fromUserInput(ui->inputImage->text()).isValid()){
+        ui->label_imageError->setText("<span style='color: red'>Invalid URL</span>");
         isValid = false;
     }
 

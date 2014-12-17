@@ -251,6 +251,19 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
+   <widget class="QLabel" name="label_imageError">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>237</y>
+      <width>301</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <tabstops>

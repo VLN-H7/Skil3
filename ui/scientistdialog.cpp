@@ -158,6 +158,7 @@ bool ScientistDialog::scientistInputIsValid()
     }
 
     if(!ui->inputImage->text().isEmpty() && !QUrl::fromUserInput(ui->inputImage->text()).isValid()){
+        ui->label_error_image->setText("<span style='color: red'>Invalid URL</span>");
         isValid = false;
     }
 
