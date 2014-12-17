@@ -36,10 +36,14 @@ ComputerScientists::~ComputerScientists()
 
 void ComputerScientists::refreshScientists(){
     loadScientistTable(scientistService->list(ScientistFields::FIRST_NAME, ASC));
+
+    setupScientistCompleters();
 }
 
 void ComputerScientists::refreshComputers(){
     loadComputerTable(computerService->list(ComputerFields::NAME, ASC));
+
+    setupComputerCompleters();
 }
 
 void ComputerScientists::loadScientistTable(vector<Scientist> list)
@@ -70,8 +74,6 @@ void ComputerScientists::loadScientistTable(vector<Scientist> list)
     ui->tableScientists->sortByColumn(currentSortColumn, currentOrder);
 
     scientistList = list;
-
-    setupScientistCompleters();
 }
 
 void ComputerScientists::loadComputerTable(vector<Computer> list){
@@ -98,8 +100,6 @@ void ComputerScientists::loadComputerTable(vector<Computer> list){
     ui->tableComputers->sortByColumn(currentSortColumn, currentOrder);
 
     computerList = list;
-
-    setupComputerCompleters();
 
 }
 
