@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>560</width>
-    <height>380</height>
+    <height>387</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -132,7 +132,7 @@
      <x>20</x>
      <y>50</y>
      <width>521</width>
-     <height>71</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="html">
@@ -146,7 +146,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_addComputerTitle_2">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>100</x>
      <y>120</y>
      <width>141</width>
      <height>22</height>
@@ -159,7 +159,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_addComputerTitle_3">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>380</x>
      <y>120</y>
      <width>141</width>
      <height>22</height>
@@ -167,22 +167,6 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:15pt; color:#367bd9;&quot;&gt;Connected&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_Ok">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>350</y>
-     <width>101</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Ok</string>
-   </property>
-   <property name="autoDefault">
-    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -214,7 +198,20 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#377bce;&quot;&gt;Drag Right&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#377bce;&quot;&gt;Drag&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_Ok">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>350</y>
+     <width>113</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
    </property>
   </widget>
  </widget>
