@@ -90,7 +90,7 @@ void ComputerScientists::loadComputerTable(vector<Computer> list){
 
         ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getType().getType(), i));
 
-        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(QString::number(list[i].getBuildYear()), i));
+        ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getBuildYear() == 0 ? "" : QString::number(list[i].getBuildYear()), i));
 
         ui->tableComputers->setItem(i, col++, new QTableWidgetItem(list[i].getBuilt() ? "YES" : "NO", i));
     }
