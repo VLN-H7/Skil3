@@ -17,9 +17,6 @@ ComputerScientists::ComputerScientists(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->editScientistSearch, SIGNAL(returnPressed()), ui->btnScientistSearch,SIGNAL(clicked()));
-    connect(ui->editComputerSearch, SIGNAL(returnPressed()),ui->btnComputerSearch,SIGNAL(clicked()));
-
     ui->tableScientists->sortByColumn(0, Qt::AscendingOrder);
     ui->tableComputers->sortByColumn(0, Qt::AscendingOrder);
 
