@@ -3,8 +3,8 @@
 
 ScientistDialog::ScientistDialog(ComputerScientists *mWindow) :
     QDialog(mWindow),
-    mainWindow(mWindow),
-    ui(new Ui::ScientistDialog)
+    ui(new Ui::ScientistDialog),
+    mainWindow(mWindow)
 {
     ui->setupUi(this);
     ui->inputDateOfBirth->setMinimumDate(QDate(100,1,1));
@@ -69,30 +69,23 @@ void ScientistDialog::on_btnAdd_clicked()
 
     clearAddScientistErrors();
 
-    QString firstName = ui->inputFirstName->text();
-    s.setFirstName(firstName);
-    QString lastName = ui->inputLastName->text();
-    s.setLastName(lastName);
-    s.setGender(ui->comboGender->currentText() == "Male" ? 'M':'F');
-    QDate birthDate= ui->inputDateOfBirth->date();
-    s.setBirthDate(birthDate);
 
-    if(ui->checkBox_Alive->isChecked())
-    {
+    s.setFirstName(ui->inputFirstName->text());
+    s.setLastName(ui->inputLastName->text());
+    s.setGender(ui->comboGender->currentText() == "Male" ? 'M':'F');
+    s.setBirthDate(ui->inputDateOfBirth->date());
+
+    if(ui->checkBox_Alive->isChecked()) {
         Date d;
         d.setDate(0,1,1);
         s.setDeathDate(d);
+    } else {
+        s.setDeathDate(ui->inputDateOfDeath->date());
     }
-    else
-    {
-        QDate deathDate= ui->inputDateOfDeath->date();
-        s.setDeathDate(deathDate);
-    }
-
-    QString nationality = ui->inputNationality->text();
-    s.setNationality(nationality);
+    s.setNationality(ui->inputNationality->text());
     s.setImage(QUrl::fromUserInput(ui->inputImage->text()));
     s.setWikipedia(QUrl::fromUserInput(ui->inputWikipedia->text()));
+
     if(editing)
         mainWindow->scientistService->update(sci,s);
     else
@@ -117,42 +110,35 @@ bool ScientistDialog::scientistInputIsValid()
 
     bool isValid = true;
 
-    if(ui->inputFirstName->text().isEmpty())
-    {
+    if(ui->inputFirstName->text().isEmpty()) {
         ui->label_error_first_name->setText("<span style='color: red'>First name cannot be empty</span>");
         isValid = false;
     }
 
-    if(ui->inputLastName->text().isEmpty())
-    {
+    if(ui->inputLastName->text().isEmpty()) {
         ui->label_error_last_name->setText("<span style='color: red'>Last name cannot be empty</span>");
         isValid = false;
     }
 
-    if((ui->inputDateOfBirth->date() > ui->inputDateOfDeath->date()) && (!ui->checkBox_Alive->isChecked()))
-    {
+    if((ui->inputDateOfBirth->date() > ui->inputDateOfDeath->date()) && (!ui->checkBox_Alive->isChecked())) {
         ui->label_age_error->setText("<span style='color: red'>A person cannot die before they are born</span>");
         isValid = false;
     }
-    if(ui->inputDateOfDeath->date() > QDate::currentDate())
-    {
+    if(ui->inputDateOfDeath->date() > QDate::currentDate()) {
         ui->label_age_error->setText("<span style='color: red'>A person cannot die in the future</span>");
         isValid = false;
     }
-    if(ui->inputDateOfBirth->date() > QDate::currentDate())
-    {
+    if(ui->inputDateOfBirth->date() > QDate::currentDate()) {
         ui->label_age_error->setText("<span style='color: red'>A person cannot be born in the future</span>");
         isValid = false;
     }
 
-    if(ui->inputDateOfBirth->text().isEmpty())
-    {
+    if(ui->inputDateOfBirth->text().isEmpty()) {
         ui->label_age_error->setText("<span style='color: red'>Date of birth cannot be empty</span>");
         isValid = false;
     }
 
-    if(ui->inputNationality->text().isEmpty())
-    {
+    if(ui->inputNationality->text().isEmpty()) {
         ui->label_error_nationality->setText("<span style='color: red'>Nationality cannot be empty</span>");
         isValid = false;
     }
@@ -172,13 +158,10 @@ bool ScientistDialog::scientistInputIsValid()
 
 void ScientistDialog::on_checkBox_Alive_toggled(bool checked)
 {
-    if(checked)
-    {
+    if(checked) {
         ui->inputDateOfDeath->setEnabled(false);
 
-    }
-    else
-    {
+    } else {
         ui->inputDateOfDeath->setEnabled(true);
     }
 }
@@ -194,7 +177,7 @@ void ScientistDialog::on_btnImageBrowse_clicked()
 {
     auto supportedFormatsList = QImageWriter::supportedImageFormats();
     QString supportedFormats = "(";
-    for(int i = 0; i < supportedFormatsList.size(); i++){
+    for(int i = 0; i < supportedFormatsList.size(); i++) {
         if(i+1 == supportedFormatsList.size())
             supportedFormats += "*." +QString(supportedFormatsList[i]) +")";
         else

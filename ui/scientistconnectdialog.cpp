@@ -20,7 +20,9 @@ ScientistConnectDialog::~ScientistConnectDialog()
     delete ui;
 }
 
-void ScientistConnectDialog::refreshTables(){
+void ScientistConnectDialog::refreshTables()
+{
+    // Populate the connected table
     connectedList = mainWindow->scientistService->byComputer(computer);
 
     ui->tblConnectedScientists->clearContents();
@@ -29,6 +31,7 @@ void ScientistConnectDialog::refreshTables(){
         ui->tblConnectedScientists->setItem(i,0,new QTableWidgetItem(connectedList[i].getFirstName() + " " + connectedList[i].getLastName(), i) );
     }
 
+    // Populate the table with everything that is not connnected
     unconnectedList = mainWindow->scientistService->notByComputer(computer);
 
     ui->tblUnconnectedScientists->clearContents();
@@ -39,7 +42,8 @@ void ScientistConnectDialog::refreshTables(){
     }
 }
 
-void ScientistConnectDialog::connectedDropped(const DropMimeData *data){
+void ScientistConnectDialog::connectedDropped(const DropMimeData *data)
+{
     if(data->type >= 0) { // if the type is positive, it came from this table
         refreshTables(); // fixes an annoying bug with stuff disappearing :/
         return;
@@ -49,7 +53,8 @@ void ScientistConnectDialog::connectedDropped(const DropMimeData *data){
     refreshTables();
 }
 
-void ScientistConnectDialog::unConnectedDropped(const DropMimeData *data){
+void ScientistConnectDialog::unConnectedDropped(const DropMimeData *data)
+{
     if(data->type < 0){ // check if the type is negative, meaning it came from this table.
         refreshTables();
         return;

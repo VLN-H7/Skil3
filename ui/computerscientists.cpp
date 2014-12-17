@@ -44,7 +44,8 @@ void ComputerScientists::refreshComputers(){
     loadComputerTable(computerService->list(ComputerFields::NAME, ASC));
 }
 
-void ComputerScientists::loadScientistTable(vector<Scientist> list){
+void ComputerScientists::loadScientistTable(vector<Scientist> list)
+{
     auto currentOrder = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
     auto currentSortColumn = ui->tableScientists->horizontalHeader()->sortIndicatorOrder();
 

@@ -21,6 +21,7 @@ ComputerConnectDialog::~ComputerConnectDialog()
 }
 
 void ComputerConnectDialog::refreshTables(){
+    // Populate the connected table
     connectedList = mainWindow->computerService->byScientist(scientist);
 
     ui->tblConnectedComputers->clearContents();
@@ -29,6 +30,7 @@ void ComputerConnectDialog::refreshTables(){
         ui->tblConnectedComputers->setItem(i,0,new QTableWidgetItem(connectedList[i].getName(), i) );
     }
 
+    // Populate the table with computers not connected to the current scientist
     unconnectedList = mainWindow->computerService->notByScientist(scientist);
 
     ui->tblUnconnectedComputers->clearContents();

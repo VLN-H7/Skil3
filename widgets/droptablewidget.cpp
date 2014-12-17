@@ -2,6 +2,7 @@
 #include "droptablewidget.h"
 //mostly from https://github.com/imatefx/auto-file-backup/blob/master/droptablewidget.cpp
 DropTableWidget::DropTableWidget(QWidget *parent) : QTableWidget(parent) {
+    // Set default behavior
     setEditTriggers(QAbstractItemView::NoEditTriggers);
     setSelectionMode(QAbstractItemView::ExtendedSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -21,6 +22,7 @@ void DropTableWidget::dropEvent(QDropEvent *event) {
 
 QMimeData *DropTableWidget::mimeData(const QList<QTableWidgetItem*> items) const
 {
+    // Only store the type, only data we need to figure out the list
     DropMimeData *data = new DropMimeData;
     if(!items.isEmpty())
         data->type = items.first()->type();
