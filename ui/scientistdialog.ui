@@ -38,10 +38,17 @@
      <x>10</x>
      <y>50</y>
      <width>391</width>
-     <height>404</height>
+     <height>371</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="13" column="2" colspan="2">
+     <widget class="QLabel" name="label_error_wikipedia">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
     <item row="9" column="3">
      <widget class="QCheckBox" name="checkBox_Alive">
       <property name="text">
@@ -49,30 +56,59 @@
       </property>
      </widget>
     </item>
-    <item row="11" column="0" colspan="2">
-     <widget class="QLabel" name="nationality_label">
+    <item row="14" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputWikipedia">
+      <property name="placeholderText">
+       <string>http://wikipedia.org/...</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QComboBox" name="comboGender">
+      <item>
+       <property name="text">
+        <string>Male</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Female</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="7" column="2" colspan="2">
+     <widget class="QLabel" name="label_age_error">
       <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0" colspan="2">
+     <widget class="QLabel" name="label_wikipedia">
+      <property name="text">
+       <string>Wikipedia</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputNationality">
+      <property name="placeholderText">
        <string>Nationality</string>
       </property>
      </widget>
     </item>
-    <item row="10" column="0" colspan="4">
-     <widget class="QDateEdit" name="inputDateOfDeath">
-      <property name="locale">
-       <locale language="English" country="UnitedStates"/>
+    <item row="7" column="0" colspan="2">
+     <widget class="QLabel" name="birth_label">
+      <property name="text">
+       <string>Date of Birth</string>
       </property>
-      <property name="displayFormat">
-       <string>dd.MM.yyyy</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-      <property name="date">
-       <date>
-        <year>2000</year>
-        <month>1</month>
-        <day>2</day>
-       </date>
+     </widget>
+    </item>
+    <item row="11" column="2" colspan="2">
+     <widget class="QLabel" name="label_error_nationality">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>
@@ -102,45 +138,10 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="0" colspan="2">
-     <widget class="QLabel" name="birth_label">
-      <property name="text">
-       <string>Date of Birth</string>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="0" colspan="2">
-     <widget class="QLabel" name="label_wikipedia">
-      <property name="text">
-       <string>Wikipedia</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="2" colspan="2">
-     <widget class="QLabel" name="label_error_nationality">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputNationality">
-      <property name="placeholderText">
-       <string>Nationality</string>
-      </property>
-     </widget>
-    </item>
     <item row="9" column="0" colspan="2">
      <widget class="QLabel" name="death_label">
       <property name="text">
        <string>Date of death</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="2" colspan="2">
-     <widget class="QLabel" name="label_age_error">
-      <property name="text">
-       <string/>
       </property>
      </widget>
     </item>
@@ -149,27 +150,6 @@
       <property name="text">
        <string>First Name</string>
       </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputFirstName">
-      <property name="placeholderText">
-       <string>First Name</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QComboBox" name="comboGender">
-      <item>
-       <property name="text">
-        <string>Male</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Female</string>
-       </property>
-      </item>
      </widget>
     </item>
     <item row="0" column="2" colspan="2">
@@ -183,16 +163,6 @@
      <widget class="QLineEdit" name="inputLastName">
       <property name="placeholderText">
        <string>Last Name</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0" colspan="4">
-     <widget class="QLabel" name="gender_label">
-      <property name="text">
-       <string>Gender</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>
@@ -210,17 +180,47 @@
       </property>
      </widget>
     </item>
-    <item row="13" column="2" colspan="2">
-     <widget class="QLabel" name="label_error_wikipedia">
+    <item row="4" column="0" colspan="4">
+     <widget class="QLabel" name="gender_label">
       <property name="text">
-       <string/>
+       <string>Gender</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>
-    <item row="14" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputWikipedia">
+    <item row="1" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputFirstName">
       <property name="placeholderText">
-       <string>http://wikipedia.org/...</string>
+       <string>First Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0" colspan="4">
+     <widget class="QDateEdit" name="inputDateOfDeath">
+      <property name="locale">
+       <locale language="English" country="UnitedStates"/>
+      </property>
+      <property name="displayFormat">
+       <string>dd.MM.yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="date">
+       <date>
+        <year>2000</year>
+        <month>1</month>
+        <day>2</day>
+       </date>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0" colspan="2">
+     <widget class="QLabel" name="nationality_label">
+      <property name="text">
+       <string>Nationality</string>
       </property>
      </widget>
     </item>
