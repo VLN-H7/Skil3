@@ -3,8 +3,8 @@
 
 ComputerDialog::ComputerDialog(ComputerScientists *mWindow) :
     QDialog(mWindow),
-    mainWindow(mWindow),
-    ui(new Ui::ComputerDialog)
+    ui(new Ui::ComputerDialog),
+    mainWindow(mWindow)
 {
     ui->setupUi(this);
     ui->radioButtonWasBuilt->setChecked(true);

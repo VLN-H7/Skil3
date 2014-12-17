@@ -11,9 +11,9 @@
 
 ComputerScientists::ComputerScientists(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::ComputerScientists),
     scientistService(new ScientistService),
-    computerService(new ComputerService)
+    computerService(new ComputerService),
+    ui(new Ui::ComputerScientists)
 {
     ui->setupUi(this);
 
