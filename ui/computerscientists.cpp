@@ -363,7 +363,7 @@ void ComputerScientists::on_btnComputerReset_clicked()
 
 void ComputerScientists::on_btnAbout_clicked()
 {
-    aboutDialog addD(this);
+    AboutDialog addD(this);
     addD.setModal(true);
     addD.exec();
 }
