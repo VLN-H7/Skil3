@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>747</width>
-    <height>412</height>
+    <height>472</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -38,33 +38,14 @@
      <x>10</x>
      <y>50</y>
      <width>391</width>
-     <height>351</height>
+     <height>404</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="8" column="0" colspan="4">
-     <widget class="QDateEdit" name="inputDateOfBirth">
-      <property name="focusPolicy">
-       <enum>Qt::WheelFocus</enum>
-      </property>
-      <property name="locale">
-       <locale language="English" country="UnitedStates"/>
-      </property>
-      <property name="currentSection">
-       <enum>QDateTimeEdit::DaySection</enum>
-      </property>
-      <property name="displayFormat">
-       <string>dd.MM.yyyy</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-      <property name="date">
-       <date>
-        <year>2000</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
+    <item row="9" column="3">
+     <widget class="QCheckBox" name="checkBox_Alive">
+      <property name="text">
+       <string>Alive?</string>
       </property>
      </widget>
     </item>
@@ -95,17 +76,43 @@
       </property>
      </widget>
     </item>
-    <item row="9" column="0" colspan="2">
-     <widget class="QLabel" name="death_label">
-      <property name="text">
-       <string>Date of death</string>
+    <item row="8" column="0" colspan="4">
+     <widget class="QDateEdit" name="inputDateOfBirth">
+      <property name="focusPolicy">
+       <enum>Qt::WheelFocus</enum>
+      </property>
+      <property name="locale">
+       <locale language="English" country="UnitedStates"/>
+      </property>
+      <property name="currentSection">
+       <enum>QDateTimeEdit::DaySection</enum>
+      </property>
+      <property name="displayFormat">
+       <string>dd.MM.yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="date">
+       <date>
+        <year>2000</year>
+        <month>1</month>
+        <day>1</day>
+       </date>
       </property>
      </widget>
     </item>
-    <item row="9" column="3">
-     <widget class="QCheckBox" name="checkBox_Alive">
+    <item row="7" column="0" colspan="2">
+     <widget class="QLabel" name="birth_label">
       <property name="text">
-       <string>Alive?</string>
+       <string>Date of Birth</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0" colspan="2">
+     <widget class="QLabel" name="label_wikipedia">
+      <property name="text">
+       <string>Wikipedia</string>
       </property>
      </widget>
     </item>
@@ -123,16 +130,30 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputLastName">
-      <property name="placeholderText">
-       <string>Last Name</string>
+    <item row="9" column="0" colspan="2">
+     <widget class="QLabel" name="death_label">
+      <property name="text">
+       <string>Date of death</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="2" colspan="2">
+     <widget class="QLabel" name="label_age_error">
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </item>
     <item row="0" column="0" colspan="2">
      <widget class="QLabel" name="first_name_label">
       <property name="text">
+       <string>First Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputFirstName">
+      <property name="placeholderText">
        <string>First Name</string>
       </property>
      </widget>
@@ -151,20 +172,6 @@
       </item>
      </widget>
     </item>
-    <item row="2" column="2" colspan="2">
-     <widget class="QLabel" name="label_error_last_name">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputFirstName">
-      <property name="placeholderText">
-       <string>First Name</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="2" colspan="2">
      <widget class="QLabel" name="label_error_first_name">
       <property name="text">
@@ -172,9 +179,9 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QLabel" name="last_name_label">
-      <property name="text">
+    <item row="3" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputLastName">
+      <property name="placeholderText">
        <string>Last Name</string>
       </property>
      </widget>
@@ -189,19 +196,29 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="0" colspan="2">
-     <widget class="QLabel" name="birth_label">
-      <property name="text">
-       <string>Date of Birth</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="2" colspan="2">
-     <widget class="QLabel" name="label_age_error">
+    <item row="2" column="2" colspan="2">
+     <widget class="QLabel" name="label_error_last_name">
       <property name="text">
        <string/>
       </property>
      </widget>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="last_name_label">
+      <property name="text">
+       <string>Last Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="2" colspan="2">
+     <widget class="QLabel" name="label_error_wikipedia">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputWikipedia"/>
     </item>
    </layout>
   </widget>

@@ -20,6 +20,7 @@ public:
     int getBuildYear();
     bool getBuilt();
     QUrl getImage();
+    QUrl getWikipedia();
 
     void setID(int ID);
     void setName(QString cName);
@@ -27,6 +28,7 @@ public:
     void setBuildYear(int year);
     void setBuilt(bool b);
     void setImage(QUrl img);
+    void setWikipedia(QUrl wiki);
 
     friend bool operator == (const Computer &a, const Computer &b);
 private:
@@ -36,6 +38,7 @@ private:
     int buildyear;
     bool built;
     QUrl image;
+    QUrl wikipedia;
 };
 
 namespace ComputerFields {

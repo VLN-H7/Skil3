@@ -10,6 +10,7 @@ Scientist ScientistRepository::getScientist(const unique_ptr<QSqlQuery> &query) 
     sci.setDeathDate(query->value("death_date").toDate());
     sci.setNationality(query->value("nationality").toString());
     sci.setImage(query->value("image").toUrl());
+    sci.setWikipedia(query->value("wiki").toUrl());
     return sci;
 }
 
@@ -21,8 +22,8 @@ ScientistRepository::ScientistRepository() {
 //Adds an instance of scientist to the vector and writes it to a file
 void ScientistRepository::add(Scientist &s) {
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality, image) "
-                   "VALUES (?,?,?,?,?,?,?)");
+    query->prepare("INSERT INTO scientists (first_name, last_name, gender, birth_date, death_date, nationality, image, wiki) "
+                   "VALUES (?,?,?,?,?,?,?,?)");
     query->addBindValue(s.getFirstName());
     query->addBindValue(s.getLastName());
     query->addBindValue(QString() + s.getGender());
@@ -30,6 +31,7 @@ void ScientistRepository::add(Scientist &s) {
     query->addBindValue(s.getDeathDate());
     query->addBindValue(s.getNationality());
     query->addBindValue(s.getImage().toString());
+    query->addBindValue(s.getWikipedia().toString());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -38,7 +40,7 @@ void ScientistRepository::add(Scientist &s) {
 void ScientistRepository::update(Scientist &s, Scientist &replace) {
     auto query = SQLConnection::getInstance()->getQuery();
     query->prepare("UPDATE scientists "
-                   "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ?, image = ? "
+                   "SET first_name = ?, last_name = ?, gender = ?, birth_date = ?, death_date = ?, nationality = ?, image = ?, wiki = ? "
                    "WHERE id = ?");
     query->addBindValue(replace.getFirstName());
     query->addBindValue(replace.getLastName());
@@ -47,6 +49,7 @@ void ScientistRepository::update(Scientist &s, Scientist &replace) {
     query->addBindValue(replace.getDeathDate());
     query->addBindValue(replace.getNationality());
     query->addBindValue(replace.getImage().toString());
+    query->addBindValue(replace.getWikipedia().toString());
     query->addBindValue(s.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());

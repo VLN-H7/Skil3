@@ -20,6 +20,7 @@ public:
     Date getDeathDate();
     QString getNationality();
     QUrl getImage();
+    QUrl getWikipedia();
 
     void setID(int ID);
     void setFirstName(QString fName);
@@ -29,6 +30,7 @@ public:
     void setDeathDate(Date dDate);
     void setNationality(QString nation);
     void setImage(QUrl img);
+    void setWikipedia(QUrl wiki);
 
     friend bool operator ==(const Scientist &a, const Scientist &b);
 
@@ -41,6 +43,7 @@ private:
     Date deathdate;
     QString nationality;
     QUrl image;
+    QUrl wikipedia;
 };
 
 namespace ScientistFields {

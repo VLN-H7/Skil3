@@ -54,6 +54,10 @@ QUrl Computer::getImage(){
     return image;
 }
 
+QUrl Computer::getWikipedia(){
+    return wikipedia;
+}
+
 void Computer::setID(int ID){
     if(id == -1)
         id = ID;
@@ -77,4 +81,8 @@ void Computer::setBuilt(bool b){
 
 void Computer::setImage(QUrl img){
     image = img;
+}
+
+void Computer::setWikipedia(QUrl wiki){
+    wikipedia = wiki;
 }

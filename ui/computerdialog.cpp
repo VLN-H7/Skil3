@@ -12,6 +12,7 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow) :
 
     connect(ui->inputComputerName, SIGNAL(editingFinished()), this, SLOT(computerInputIsValid()));
     connect(ui->inputImage, SIGNAL(editingFinished()), this, SLOT(computerInputIsValid()));
+    connect(ui->inputWikipedia, SIGNAL(editingFinished()), this, SLOT(computerInputIsValid()));
     editing = false;
 
     loadTypes();
@@ -27,9 +28,10 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
     ui->radioButtonNotBuilt->setChecked(!comp.getBuilt());
     ui->computerBuildYear->setDate(QDate(comp.getBuildYear(), 0, 0));
     ui->inputImage->setText(comp.getImage().toString());
+    ui->inputWikipedia->setText(comp.getWikipedia().toString());
     editing = true;
 
-    ui->btnAdd->setText("Edit");
+    ui->btnAdd->setText("Update");
     ui->label_addComputerTitle->setText("<html><head/><body><p>"
                                         "<span style=\" font-size:18pt;\">Edit </span>"
                                         "<span style=\" font-size:18pt; font-style:italic; color:#377bce;\">Computer</span>"
@@ -81,6 +83,8 @@ void ComputerDialog::on_btnAdd_clicked()
 
     c.setImage(QUrl::fromUserInput(ui->inputImage->text()));
 
+    c.setWikipedia(QUrl::fromUserInput(ui->inputWikipedia->text()));
+
     if(editing)
         mainWindow->computerService->update(comp, c);
     else
@@ -93,6 +97,7 @@ void ComputerDialog::clearAddComputerErrors()
 {
     ui->label_NameError->setText("");
     ui->label_TypeError->setText("");
+    ui->label_WikipediaError->setText("");
 }
 
 bool ComputerDialog::computerInputIsValid()
@@ -108,6 +113,11 @@ bool ComputerDialog::computerInputIsValid()
     }
 
     if(!ui->inputImage->text().isEmpty() && !QUrl::fromUserInput(ui->inputImage->text()).isValid()){
+        isValid = false;
+    }
+
+    if(!ui->inputWikipedia->text().isEmpty() && (!QUrl::fromUserInput(ui->inputWikipedia->text()).isValid() )){
+        ui->label_WikipediaError->setText("<span style='color: red'>Invalid URL</span>");
         isValid = false;
     }
 

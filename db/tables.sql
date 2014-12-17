@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS scientists (
         birth_date date,
         death_date date,
         nationality varchar(255),
-        image varchar(255)
+        image varchar(255),
+        wiki varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS types (
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS computers (
         type_id integer,
         built boolean,
         image varchar(255),
+        wiki varchar(255),
 
         FOREIGN KEY(type_id) REFERENCES types(id)
 );

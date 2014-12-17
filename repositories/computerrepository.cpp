@@ -13,6 +13,7 @@ Computer ComputerRepository::getComputer(const unique_ptr<QSqlQuery> &query) {
     comp.setBuildYear(query->value("build_year").toInt());
     comp.setBuilt(query->value("built").toBool());
     comp.setImage(query->value("image").toUrl());
+    comp.setWikipedia(query->value("wiki").toUrl());
     return comp;
 }
 
@@ -22,12 +23,13 @@ ComputerRepository::ComputerRepository() {
 
 void ComputerRepository::add(Computer &comp) {
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("INSERT INTO computers (name, type_id, build_year, built, image) VALUES (?,?,?,?,?)");
+    query->prepare("INSERT INTO computers (name, type_id, build_year, built, image, wiki) VALUES (?,?,?,?,?,?)");
     query->addBindValue(comp.getName());
     query->addBindValue(comp.getType().getID());
     query->addBindValue(comp.getBuildYear());
     query->addBindValue(comp.getBuilt());
     query->addBindValue(comp.getImage().toString());
+    query->addBindValue(comp.getWikipedia().toString());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());
 }
@@ -35,12 +37,13 @@ void ComputerRepository::add(Computer &comp) {
 
 void ComputerRepository::update(Computer &comp, Computer &replace) {
     auto query = SQLConnection::getInstance()->getQuery();
-    query->prepare("UPDATE computers SET name = ?, type_id = ?, build_year = ?, built = ?, image = ? WHERE id = ?");
+    query->prepare("UPDATE computers SET name = ?, type_id = ?, build_year = ?, built = ?, image = ?, wiki = ? WHERE id = ?");
     query->addBindValue(replace.getName());
     query->addBindValue(replace.getType().getID());
     query->addBindValue(replace.getBuildYear());
     query->addBindValue(replace.getBuilt());
     query->addBindValue(replace.getImage().toString());
+    query->addBindValue(replace.getWikipedia().toString());
     query->addBindValue(comp.getID());
     if(!query->exec())
         throw std::runtime_error(query->lastError().text().toStdString());

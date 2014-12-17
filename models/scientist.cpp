@@ -67,6 +67,10 @@ QUrl Scientist::getImage(){
     return image;
 }
 
+QUrl Scientist::getWikipedia(){
+    return wikipedia;
+}
+
 void Scientist::setID(int ID){
     if(id==-1) // Only allow setting the id once, it is database-specific and should not be changed
         id = ID;
@@ -98,4 +102,8 @@ void Scientist::setNationality(QString nation){
 
 void Scientist::setImage(QUrl img){
     image = img;
+}
+
+void Scientist::setWikipedia(QUrl wiki){
+    wikipedia = wiki;
 }

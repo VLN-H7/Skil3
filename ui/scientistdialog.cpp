@@ -18,6 +18,7 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow) :
     connect(ui->inputDateOfDeath, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
     connect(ui->inputNationality, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
     connect(ui->inputImage, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
+    connect(ui->inputWikipedia, SIGNAL(editingFinished()), this, SLOT(scientistInputIsValid()));
 
     editing = false;
 }
@@ -38,9 +39,10 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit) :
          ui->checkBox_Alive->setChecked(1);
     ui->inputNationality->setText(sci.getNationality());
     ui->inputImage->setText(sci.getImage().toString());
+    ui->inputWikipedia->setText(sci.getWikipedia().toString());
     editing = true;
 
-    ui->btnAdd->setText("Edit");
+    ui->btnAdd->setText("Update");
     ui->label_addScientistTitle->setText("<html><head/><body><p>"
                                         "<span style=\" font-size:18pt;\">Edit </span>"
                                         "<span style=\" font-size:18pt; font-style:italic; color:#377bce;\">Scientist</span>"
@@ -90,6 +92,7 @@ void ScientistDialog::on_btnAdd_clicked()
     QString nationality = ui->inputNationality->text();
     s.setNationality(nationality);
     s.setImage(QUrl::fromUserInput(ui->inputImage->text()));
+    s.setWikipedia(QUrl::fromUserInput(ui->inputWikipedia->text()));
     if(editing)
         mainWindow->scientistService->update(sci,s);
     else
@@ -105,6 +108,7 @@ void ScientistDialog::clearAddScientistErrors()
     ui->label_error_last_name->setText("");
     ui->label_error_nationality->setText("");
     ui->label_age_error->setText("");
+    ui->label_error_wikipedia->setText("");
 }
 
 bool ScientistDialog::scientistInputIsValid()
@@ -154,6 +158,11 @@ bool ScientistDialog::scientistInputIsValid()
     }
 
     if(!ui->inputImage->text().isEmpty() && !QUrl::fromUserInput(ui->inputImage->text()).isValid()){
+        isValid = false;
+    }
+
+    if(!ui->inputWikipedia->text().isEmpty() && (!QUrl::fromUserInput(ui->inputWikipedia->text()).isValid() )){
+        ui->label_error_wikipedia->setText("<span style='color: red'>Invalid URL</span>");
         isValid = false;
     }
 
