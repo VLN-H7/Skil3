@@ -413,3 +413,14 @@ void ComputerScientists::on_editComputerButton_clicked()
     }
     on_tableComputers_itemDoubleClicked(items.first());
 }
+
+void ComputerScientists::on_btnScientistReset_clicked()
+{
+    refreshScientists();
+
+}
+
+void ComputerScientists::on_btnComputerReset_clicked()
+{
+    refreshComputers();
+}

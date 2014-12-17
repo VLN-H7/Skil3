@@ -38,7 +38,7 @@
      <x>10</x>
      <y>50</y>
      <width>391</width>
-     <height>351</height>
+     <height>331</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -113,13 +113,6 @@
      <widget class="QLabel" name="label_error_nationality">
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="0" colspan="4">
-     <widget class="QLineEdit" name="inputNationality">
-      <property name="placeholderText">
-       <string>Nationality</string>
       </property>
      </widget>
     </item>
@@ -203,12 +196,19 @@
       </property>
      </widget>
     </item>
+    <item row="12" column="0" colspan="4">
+     <widget class="QLineEdit" name="inputNationality">
+      <property name="placeholderText">
+       <string>Nationality</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>463</x>
      <y>360</y>
      <width>221</width>
      <height>32</height>
@@ -240,17 +240,17 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>417</x>
+     <x>420</x>
      <y>50</y>
      <width>311</width>
      <height>291</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="1" column="0">
-     <widget class="QLineEdit" name="inputImage">
-      <property name="placeholderText">
-       <string>http://i.imgur.com/gHvKXOL.jpg</string>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="lblScientistImage">
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </item>
@@ -264,15 +264,37 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0" colspan="2">
-     <widget class="QLabel" name="lblScientistImage">
-      <property name="text">
-       <string/>
+    <item row="1" column="0">
+     <widget class="QLineEdit" name="inputImage">
+      <property name="placeholderText">
+       <string>http://i.imgur.com/gHvKXOL.jpg</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>50</y>
+     <width>311</width>
+     <height>251</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+  </widget>
+  <zorder>label_addScientistTitle</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>frame</zorder>
+  <zorder>btnCancel</zorder>
  </widget>
  <tabstops>
   <tabstop>inputFirstName</tabstop>

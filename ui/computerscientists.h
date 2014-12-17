@@ -62,6 +62,10 @@ private slots:
     void on_editScientistButton_clicked();
 
     void on_editComputerButton_clicked();
+    void on_btnScientistReset_clicked();
+
+    void on_btnComputerReset_clicked();
+
 private:
     Ui::ComputerScientists *ui;
 
