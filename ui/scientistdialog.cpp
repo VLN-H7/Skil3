@@ -40,6 +40,7 @@ ScientistDialog::ScientistDialog(ComputerScientists *mWindow, Scientist edit) :
     ui->inputNationality->setText(sci.getNationality());
     ui->inputImage->setText(sci.getImage().toString());
     ui->inputWikipedia->setText(sci.getWikipedia().toString());
+    on_inputImage_editingFinished(); // Load the image
     editing = true;
 
     ui->btnAdd->setText("Update");
@@ -175,6 +176,7 @@ void ScientistDialog::on_inputImage_editingFinished()
 
 void ScientistDialog::on_btnImageBrowse_clicked()
 {
+    // Make sure that the user can only select supported formats. This is because jpg isnt always supported on windows.
     auto supportedFormatsList = QImageWriter::supportedImageFormats();
     QString supportedFormats = "(";
     for(int i = 0; i < supportedFormatsList.size(); i++) {

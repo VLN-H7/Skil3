@@ -32,7 +32,7 @@ void ImageLoader::cancel(QLabel* label){
 void ImageLoader::load(QUrl url, QLabel* label){
     if(!url.isValid())
         return;
-    if(url.scheme() == "file"){
+    if(url.scheme() == "file"){ // pass straight to load if we have a file
         loadLabel(label, QPixmap(url.toLocalFile() ));
         return;
     }
@@ -47,13 +47,6 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
         return;
     auto label = dict[reply->url()];
     dict.remove(reply->url());
-
-
-
-    QVariant statusCodeV = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-
-    // Or the target URL if it was a redirect:
-    QVariant redirectionTargetUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 
     if (reply->error() == QNetworkReply::NoError)
     {
@@ -72,6 +65,7 @@ void ImageLoader::loadFinished(QNetworkReply *reply){
 
 void ImageLoader::loadLabel(QLabel* label, QPixmap pixmap){
     int imageLabelWidth = label->width();
+    //let's not upscale the image, ugly
     if(pixmap.width() > imageLabelWidth){
         QPixmap scaledPixMap = pixmap.scaledToWidth(imageLabelWidth);
         label->setPixmap(scaledPixMap);

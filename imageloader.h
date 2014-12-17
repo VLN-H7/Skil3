@@ -8,7 +8,8 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
-
+// An imageloader singleton to handle loading images.
+// This is because loading network images requires alot of code, which is better kept in one place
 class ImageLoader: private QObject
 {
     Q_OBJECT

@@ -29,6 +29,7 @@ ComputerDialog::ComputerDialog(ComputerScientists *mWindow, Computer edit) :
     ui->computerBuildYear->setDate(QDate(comp.getBuildYear(), 0, 0));
     ui->inputImage->setText(comp.getImage().toString());
     ui->inputWikipedia->setText(comp.getWikipedia().toString());
+    on_inputImage_editingFinished(); // load the image
     editing = true;
 
     ui->btnAdd->setText("Update");
@@ -147,6 +148,7 @@ void ComputerDialog::on_inputImage_editingFinished()
 
 void ComputerDialog::on_btnImageBrowse_clicked()
 {
+    // Make sure that the user can only select supported formats. This is because jpg isnt always supported on windows.
     auto supportedFormatsList = QImageWriter::supportedImageFormats();
     QString supportedFormats = "(";
     for(int i = 0; i < supportedFormatsList.size(); i++){

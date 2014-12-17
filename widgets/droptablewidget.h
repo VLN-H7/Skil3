@@ -19,10 +19,10 @@ class DropTableWidget : public QTableWidget {
         void clear();
 
     protected:
-            void dragEnterEvent(QDragEnterEvent *event);
-            void dragMoveEvent(QDragMoveEvent *event);
-            void dragLeaveEvent(QDragLeaveEvent *event);
-            void dropEvent(QDropEvent *event);
+        void dragEnterEvent(QDragEnterEvent *event);
+        void dragMoveEvent(QDragMoveEvent *event);
+        void dragLeaveEvent(QDragLeaveEvent *event);
+        void dropEvent(QDropEvent *event);
         QMimeData *mimeData(const QList<QTableWidgetItem *> items) const;
 };
 
